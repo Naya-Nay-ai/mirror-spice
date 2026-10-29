@@ -4,7 +4,13 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="color-scheme" content="light dark" />
-<link rel="icon" href="data:," />
+<link rel="icon" href="assets/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFF6E9" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#211511" />
 <title>スパイス図鑑 | MIRROR SPICE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -128,6 +134,11 @@ h1,h2,h3{font-family:"Kaisei Decol","Zen Maru Gothic",serif; line-height:1.35; m
   font-size:clamp(30px,6.4vw,52px); font-weight:800; letter-spacing:.22em;
   text-align:center; line-height:1.3; margin:6px 0 2px; color:var(--ink);
 }
+.map-andherb{
+  font-family:"Cinzel","Times New Roman",serif; font-synthesis:none;
+  text-align:center; font-size:clamp(13px,2.2vw,17px); font-weight:600;
+  letter-spacing:.5em; text-indent:.5em; color:var(--ink2); margin:3px 0 0; line-height:1.4;
+}
 .map-sub{text-align:center; color:var(--ink2); font-size:13px; font-weight:900; letter-spacing:.14em; margin:0}
 .font-note{
   max-width:640px; margin:12px auto 0; text-align:center; font-size:12px; line-height:1.7;
@@ -143,6 +154,7 @@ h1,h2,h3{font-family:"Kaisei Decol","Zen Maru Gothic",serif; line-height:1.35; m
 .map-node .halo{transition:all .15s ease}
 .map-node:hover .halo, .map-node:focus .halo{stroke:var(--red); stroke-width:3.5}
 .map-node:hover .pin, .map-node:focus .pin{stroke-width:3}
+.map-node .pin-emoji{font-size:37px; pointer-events:none}
 .map-legend{display:flex; flex-wrap:wrap; gap:7px; justify-content:center; padding:13px 14px; border-top:1.5px dashed var(--line2); background:var(--paper2)}
 .map-legend span{font-size:12px; font-weight:900; color:var(--ink2)}
 .dest-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:20px}
@@ -154,7 +166,7 @@ h1,h2,h3{font-family:"Kaisei Decol","Zen Maru Gothic",serif; line-height:1.35; m
 .dest-card:hover{transform:translateY(-3px); border-color:var(--ink)}
 .dest-card .d-no{font-family:"Caveat",cursive; font-size:19px; color:var(--pink); line-height:1}
 .dest-card .d-icon{width:46px; height:46px; border-radius:50%; border:1.5px solid var(--ink); display:grid; place-items:center}
-.dest-card .d-icon svg{width:23px; height:23px}
+.dest-card .d-icon{font-size:25px; line-height:1}
 .dest-card h3{font-size:19px}
 .dest-card h3 .en{font-size:16px; color:var(--ink3); margin-left:5px}
 .dest-card p{margin:0; font-size:13px; color:var(--ink2); line-height:1.65; flex:1}
@@ -230,7 +242,7 @@ section{padding:44px 0 6px}
   flex:1 1 240px; display:flex; align-items:center; gap:9px;
   background:var(--bg); border:1.5px solid var(--line2); border-radius:999px; padding:9px 16px;
 }
-.search-box svg{width:19px;height:19px;color:var(--ink3);flex:none}
+.search-box .search-emoji{font-size:18px;line-height:1;flex:none}
 .search-box input{
   border:none; background:transparent; outline:none; width:100%;
   font-family:inherit; font-size:15px; font-weight:700; color:var(--ink);
@@ -261,6 +273,12 @@ section{padding:44px 0 6px}
   position:absolute; top:10px; left:10px; background:var(--paper); color:var(--ink);
   border:1.5px solid var(--ink); border-radius:999px; font-family:"Caveat",cursive;
   font-size:17px; font-weight:700; padding:1px 11px; line-height:1.5; box-shadow:2px 2px 0 var(--ink);
+}
+.card .name-tag{
+  position:absolute; left:10px; bottom:10px; z-index:2; max-width:88%;
+  background:var(--paper); color:var(--ink); border:1.5px solid var(--ink); border-radius:999px;
+  font-family:"Kaisei Decol",serif; font-weight:700; font-size:14.5px; line-height:1.35;
+  padding:3px 13px; box-shadow:2px 2px 0 var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 .card .cat{
   font-size:11.5px; font-weight:900; white-space:nowrap; flex:none;
@@ -300,7 +318,7 @@ section{padding:44px 0 6px}
   opacity:.85;
 }
 .lab-card h3{font-size:19px; margin-top:6px; display:flex; align-items:center; gap:9px; flex-wrap:wrap; overflow-wrap:anywhere}
-.lab-card h3 svg{width:21px;height:21px;flex:none}
+.lab-card h3 .h-emoji{font-size:21px;line-height:1;flex:none}
 .lab-card p{color:var(--ink2); font-size:14px; margin:8px 0 0}
 .lab-card p strong, .lab-card li strong{color:var(--ink)}
 .lab-card ul{margin:10px 0 0; padding-left:1.2em; color:var(--ink2); font-size:14px}
@@ -366,7 +384,7 @@ section{padding:44px 0 6px}
   border:1.5px solid var(--line2); background:var(--bg); color:var(--ink2);
   display:inline-flex; align-items:center; gap:5px;
 }
-.chip svg{width:13px;height:13px}
+.chip .time-emoji{font-size:13px;line-height:1}
 .chip.spice{background:var(--yellow-soft); border-color:var(--yellow); color:var(--ink); cursor:pointer}
 .chip.spice:hover{border-color:var(--ink)}
 .recipe p.intro{color:var(--ink2); font-size:14px; margin:0 0 6px}
@@ -503,7 +521,7 @@ section{padding:44px 0 6px}
 .heat-types{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:14px}
 .heat-type{border:1.5px solid var(--line2); border-radius:16px; padding:14px; text-align:center; background:var(--bg)}
 .heat-type .ht-icon{width:44px;height:44px;margin:0 auto 8px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--ink)}
-.heat-type .ht-icon svg{width:23px;height:23px}
+.heat-type .ht-icon{font-size:24px; line-height:1}
 .heat-type b.name{display:block; font-family:"Kaisei Decol",serif; font-size:16.5px}
 .heat-type .comp{display:inline-block; margin:5px 0 8px; font-size:11.5px; font-weight:900; border-radius:999px; padding:2px 10px; border:1.5px solid var(--ink)}
 .heat-type p{font-size:12.3px; color:var(--ink2); margin:6px 0 0; line-height:1.6; text-align:left}
@@ -640,6 +658,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
 .modal h3{font-size:29px}
 .modal h3 .en{font-size:23px; color:var(--pink); margin-left:8px}
 .modal .latin{font-style:italic; color:var(--ink3); font-size:13.5px; margin-top:2px}
+.modal .herb-note{background:var(--green-soft); border-radius:10px; padding:9px 13px; font-size:13.5px; color:var(--ink2); margin:10px 0 2px}
 .spec-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:18px 0}
 .spec{background:var(--bg); border:1.5px solid var(--line); border-radius:14px; padding:10px 13px}
 .spec span{display:block; font-size:11px; font-weight:900; color:var(--ink3); letter-spacing:.05em}
@@ -692,11 +711,11 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
   <nav class="page-nav" aria-label="ページを選ぶ">
     <span class="page-nav-label">まずは入口マップから ― 行きたい場所をタップすると、そのページに飛びます</span>
     <button class="page-btn on" type="button" data-page="gate" aria-current="page"><span class="pb-no">MAP</span>入口マップ</button>
-    <button class="page-btn" type="button" data-page="zukan"><span class="pb-no">No.01</span>スパイス図鑑<span class="pb-count">51種</span></button>
+    <button class="page-btn" type="button" data-page="zukan"><span class="pb-no">No.01</span>スパイス図鑑<span class="pb-count">全85種</span></button>
     <button class="page-btn" type="button" data-page="charts"><span class="pb-no">No.02</span>マニア図解<span class="pb-count">8点</span></button>
     <button class="page-btn" type="button" data-page="lab"><span class="pb-no">No.03</span>実験ノート</button>
-    <button class="page-btn" type="button" data-page="blend"><span class="pb-no">No.04</span>ブレンド<span class="pb-count">4種</span></button>
-    <button class="page-btn" type="button" data-page="recipes"><span class="pb-no">No.05</span>レシピ<span class="pb-count">18品＋ちょい足し</span></button>
+    <button class="page-btn" type="button" data-page="blend"><span class="pb-no">No.04</span>ブレンド<span class="pb-count">10種</span></button>
+    <button class="page-btn" type="button" data-page="recipes"><span class="pb-no">No.05</span>レシピ<span class="pb-count">33品＋ちょい足し</span></button>
   </nav>
   <p class="page-hint">1ページ目は入口です。中身はマップの行き先にあります ― 気になる場所をタップしてね。</p>
 
@@ -710,6 +729,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
     </div>
 
     <p class="map-title cinzel">MIRROR SPICE</p>
+    <p class="map-andherb cinzel">＆HERB</p>
     <p class="map-sub">WORLD MAP ― 5つの行き先</p>
     <p class="font-note" id="fontNote" hidden>お知らせ：この端末ではオンラインの CINZEL フォントを読み込めなかったため、いま「MIRROR SPICE」は明朝系の代替書体で表示されています。CINZEL は英字専用フォントで、通信が回復した状態で開くと本来の彫刻のような大文字で表示されます。</p>
 
@@ -747,15 +767,15 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <g class="map-node" data-goto="zukan" tabindex="0" role="link" aria-label="スパイス図鑑へ行く">
           <circle class="halo" cx="150" cy="138" r="47" fill="var(--paper)" stroke="var(--yellow)" stroke-width="2.5"/>
           <circle class="pin" cx="150" cy="138" r="33" fill="var(--yellow-soft)" stroke="var(--ink)" stroke-width="1.8"/>
-          <path d="M136 124 h22 a5 5 0 0 1 5 5 v20 h-32 v-20 a5 5 0 0 1 5-5z M147 124 v25" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>
+          <text class="pin-emoji" x="150" y="151" text-anchor="middle" aria-hidden="true">📖</text>
           <text x="150" y="204" text-anchor="middle" font-size="16" font-weight="900" fill="var(--ink)">スパイス図鑑の森</text>
-          <text x="150" y="222" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink2)">51種 ・ No.01</text>
+          <text x="150" y="222" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink2)">全85種 ・ No.01</text>
         </g>
         <!-- Charts -->
         <g class="map-node" data-goto="charts" tabindex="0" role="link" aria-label="マニア図解へ行く">
           <circle class="halo" cx="566" cy="138" r="47" fill="var(--paper)" stroke="var(--purple)" stroke-width="2.5"/>
           <circle class="pin" cx="566" cy="138" r="33" fill="var(--purple-soft)" stroke="var(--ink)" stroke-width="1.8"/>
-          <path d="M548 154 v-18 l10 8 8-12 10 10" fill="none" stroke="var(--ink)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <text class="pin-emoji" x="566" y="151" text-anchor="middle" aria-hidden="true">📊</text>
           <text x="566" y="204" text-anchor="middle" font-size="16" font-weight="900" fill="var(--ink)">図解の丘</text>
           <text x="566" y="222" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink2)">マップと図 ・ No.02</text>
         </g>
@@ -763,7 +783,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <g class="map-node" data-goto="lab" tabindex="0" role="link" aria-label="実験ノートへ行く">
           <circle class="halo" cx="360" cy="248" r="47" fill="var(--paper)" stroke="var(--pink)" stroke-width="2.5"/>
           <circle class="pin" cx="360" cy="248" r="33" fill="var(--pink-soft)" stroke="var(--ink)" stroke-width="1.8"/>
-          <path d="M354 232 h12 M357 232 v9 l-8 14 a4 4 0 0 0 3.5 6 h15 a4 4 0 0 0 3.5-6 l-8-14 v-9" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <text class="pin-emoji" x="360" y="261" text-anchor="middle" aria-hidden="true">🧪</text>
           <text x="360" y="314" text-anchor="middle" font-size="16" font-weight="900" fill="var(--ink)">実験キッチン</text>
           <text x="360" y="332" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink2)">使い分け ・ No.03</text>
         </g>
@@ -771,17 +791,17 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <g class="map-node" data-goto="blend" tabindex="0" role="link" aria-label="ブレンドへ行く">
           <circle class="halo" cx="150" cy="392" r="47" fill="var(--paper)" stroke="var(--teal)" stroke-width="2.5"/>
           <circle class="pin" cx="150" cy="392" r="33" fill="var(--teal-soft)" stroke="var(--ink)" stroke-width="1.8"/>
-          <path d="M134 386 h32 M138 386 a12 10 0 0 0 24 0 M143 372 q7-6 14 0 M150 366 v4" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round"/>
+          <text class="pin-emoji" x="150" y="405" text-anchor="middle" aria-hidden="true">🥣</text>
           <text x="150" y="458" text-anchor="middle" font-size="16" font-weight="900" fill="var(--ink)">ブレンド市場</text>
-          <text x="150" y="476" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink2)">黄金比 4種 ・ No.04</text>
+          <text x="150" y="476" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink2)">黄金比 10種 ・ No.04</text>
         </g>
         <!-- Recipes -->
         <g class="map-node" data-goto="recipes" tabindex="0" role="link" aria-label="レシピへ行く">
           <circle class="halo" cx="566" cy="392" r="47" fill="var(--paper)" stroke="var(--green)" stroke-width="2.5"/>
           <circle class="pin" cx="566" cy="392" r="33" fill="var(--green-soft)" stroke="var(--ink)" stroke-width="1.8"/>
-          <circle cx="566" cy="392" r="14" fill="none" stroke="var(--ink)" stroke-width="2.2"/><circle cx="566" cy="392" r="5.5" fill="var(--red)"/>
+          <text class="pin-emoji" x="566" y="405" text-anchor="middle" aria-hidden="true">🍛</text>
           <text x="566" y="458" text-anchor="middle" font-size="16" font-weight="900" fill="var(--ink)">レシピ食堂</text>
-          <text x="566" y="476" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink2)">完成料理 18品 ・ No.05</text>
+          <text x="566" y="476" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink2)">完成料理 33品 ・ No.05</text>
         </g>
       </svg>
       <div class="map-legend"><span>点線はおすすめの歩き方：</span><span>入口 → 図鑑の森 → 実験キッチン → 図解の丘／市場／食堂へ</span></div>
@@ -790,45 +810,45 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
     <div class="dest-grid" aria-label="行き先の一覧">
       <button class="dest-card" type="button" data-goto="zukan">
         <span class="d-no">No.01 ― Forest</span>
-        <span class="d-icon" style="background:var(--yellow-soft)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg></span>
+        <span class="d-icon" style="background:var(--yellow-soft)" aria-hidden="true">📖</span>
         <h3>スパイス図鑑<span class="en">Library</span></h3>
-        <p>51種を1種ずつ観察。検索とカテゴリ絞り込み、カードタップで学名・成分・使い分けまで開けます。</p>
-        <span class="d-count">51種収録</span><span class="d-go">図鑑の森へ行く →</span>
+        <p>スパイス、🌿ハーブ、和スパイスを1種ずつ観察。検索とカテゴリ絞り込み、カードタップで学名・成分・使い分けまで開けます。</p>
+        <span class="d-count">85種収録（No.01〜69＋🌿H1〜H16）</span><span class="d-go">図鑑の森へ行く →</span>
       </button>
       <button class="dest-card" type="button" data-goto="charts">
         <span class="d-no">No.02 ― Hill</span>
-        <span class="d-icon" style="background:var(--purple-soft)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></span>
+        <span class="d-icon" style="background:var(--purple-soft)" aria-hidden="true">📊</span>
         <h3>マニア図解<span class="en">Charts</span></h3>
         <p>辛さ×香りマップ、相性マップ、スコヴィル値、そっくりさん見分け図鑑、世界のカレーの地方比べなど、眺める図解が8点。</p>
         <span class="d-count">図解 8点</span><span class="d-go">図解の丘へ行く →</span>
       </button>
       <button class="dest-card" type="button" data-goto="lab">
         <span class="d-no">No.03 ― Kitchen</span>
-        <span class="d-icon" style="background:var(--pink-soft)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4.5 18a2.4 2.4 0 0 0 2.1 3.5h10.8a2.4 2.4 0 0 0 2.1-3.5L14 9V3"/></svg></span>
+        <span class="d-icon" style="background:var(--pink-soft)" aria-hidden="true">🧪</span>
         <h3>実験ノート<span class="en">Lab Notes</span></h3>
         <p>テンパリング、入れる順番、シードとパウダーの違い、焦がしすぎの境界線。作るときの実験メモ。</p>
         <span class="d-count">実験 4テーマ</span><span class="d-go">実験キッチンへ行く →</span>
       </button>
       <button class="dest-card" type="button" data-goto="blend">
         <span class="d-no">No.04 ― Market</span>
-        <span class="d-icon" style="background:var(--teal-soft)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16M5 10l1.5-5h11L19 10M6 10v9h12v-9"/></svg></span>
+        <span class="d-icon" style="background:var(--teal-soft)" aria-hidden="true">🥣</span>
         <h3>ブレンド<span class="en">Blends</span></h3>
-        <p>ガラムマサラ、カレー粉ベース、チャイマサラ。自家製ブレンドの黄金比をバーで一目で。</p>
-        <span class="d-count">ブレンド 4種</span><span class="d-go">ブレンド市場へ行く →</span>
+        <p>ガラムマサラ、カレー粉ベース、チャイマサラ、五香粉、七味唐辛子、ベルベレ、ミトゥミッタ、ザアタル、デュカ、チャットマサラの10種。自家製ブレンドの黄金比をバーで一目で。</p>
+        <span class="d-count">ブレンド 10種</span><span class="d-go">ブレンド市場へ行く →</span>
       </button>
       <button class="dest-card" type="button" data-goto="recipes">
         <span class="d-no">No.05 ― Diner</span>
-        <span class="d-icon" style="background:var(--green-soft)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></span>
+        <span class="d-icon" style="background:var(--green-soft)" aria-hidden="true">🍛</span>
         <h3>レシピ<span class="en">Recipes</span></h3>
-        <p>ひよこ豆カレー、麻婆豆腐、ルーローハン風、グリーンカレー、ビリヤニ、チャイなど。図鑑のスパイスで作る完成料理18品と、ちょい足しミニコーナー。デザート3品も仲間入りしました。「ティムールのポークソテー」も収録。</p>
-        <span class="d-count">レシピ 18品 ＋ ちょい足し6</span><span class="d-go">レシピ食堂へ行く →</span>
+        <p>ひよこ豆カレー、麻婆豆腐、ルーローハン風、グリーンカレー、ビリヤニ、チャイなど。図鑑のスパイスで作る完成料理33品と、ちょい足しミニコーナー。<br>主菜、スープ、ごはんもの、パン、デザートまでそろいます。「ティムールのポークソテー」も収録。</p>
+        <span class="d-count">レシピ 33品 ＋ ちょい足し11</span><span class="d-go">レシピ食堂へ行く →</span>
       </button>
       <button class="dest-card" type="button" id="gateGachaBtn">
         <span class="d-no">Extra ― Surprise</span>
-        <span class="d-icon" style="background:var(--red-soft)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></span>
+        <span class="d-icon" style="background:var(--red-soft)" aria-hidden="true">✨</span>
         <h3>今日のスパイス<span class="en">Random</span></h3>
         <p>行き先に迷ったら、ランダムで1種引くおみくじ。知らないスパイスとの出会いがここから始まります。</p>
-        <span class="d-count">51種から1種</span><span class="d-go">今日のスパイスを引く →</span>
+        <span class="d-count">85種から1種</span><span class="d-go">今日のスパイスを引く →</span>
       </button>
     </div>
   </section>
@@ -839,13 +859,13 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
       <span class="no">No.01</span>
       <h2>スパイス図鑑</h2>
       <svg class="squig" width="180" height="10" viewBox="0 0 180 10" fill="none"><path d="M2 6 Q 14 1, 26 6 T 50 6 T 74 6 T 98 6 T 122 6 T 146 6 T 170 6" stroke="var(--yellow)" stroke-width="3.4" stroke-linecap="round"/></svg>
-      <p>カードをタップすると詳細ページが開きます。学名・原産地などの基本情報に加えて、香りの主成分や使い分けのコツまで載せています。辛さと香りの強さは5段階の目安です。今回は世界一周編として11種が増え、ついに50種に到達。さらに、レシピで大活躍の生姜が51種目として仲間入りしました（マダガスカルのバニラ、中東のスマック、南米のアナトー、台湾のマーガオまで）。各スパイスの詳細には「入手のしやすさ」と「ないときの代用案」も載せています。</p>
+      <p>カードをタップすると詳細ページが開きます。学名・原産地などの基本情報に加えて、香りの主成分や使い分けのコツまで載せています。<br>辛さと香りの強さは5段階の目安です。各スパイスの詳細には「入手のしやすさ」と「ないときの代用案」も載せています。<br>葉を使うものは「ハーブ」として🌿マーク付きで収録しています。ベイリーフ、カレーリーフ、こぶみかんの葉、レモングラスも葉っぱ組です。<br>厳密にはスパイスとは別物ですが、料理では欠かせない香りづけの仲間です。上の絞り込みボタン「🌿 ハーブ」で、葉っぱ組だけを集めて眺めることもできます。<br>木の芽は山椒の若葉です。ベルベレやザアタルなどの合わせ調味料は、単体ではなく「ブレンド」のページに収録しています。</p>
     </div>
 
     <div class="toolbar">
       <div class="search-row">
         <label class="search-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <span class="search-emoji" aria-hidden="true">🔍</span>
           <input id="search" type="search" placeholder="名前・香り・料理でさがす（例：クミン、柑橘、チャイ）" aria-label="スパイスを検索" />
         </label>
       </div>
@@ -857,6 +877,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <button class="pill" data-cat="hot" type="button">辛い系</button>
         <button class="pill" data-cat="sweet" type="button">甘い香り</button>
         <button class="pill" data-cat="curry" type="button">カレーの主役</button>
+        <button class="pill" data-cat="herb" type="button">🌿 ハーブ</button>
       </div>
     </div>
 
@@ -886,7 +907,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
 
       <article class="fig-card wide">
         <h3>① 辛さ × 香り ポジショニングマップ <span class="en">Heat × Aroma Map</span></h3>
-        <svg class="chart" viewBox="0 0 720 470" role="img" aria-label="51種のスパイスを辛さと香りの強さで配置した散布図">
+        <svg class="chart" viewBox="0 0 720 470" role="img" aria-label="スパイス・ハーブ・和スパイス全85種を辛さと香りの強さで配置した散布図">
           <rect x="90" y="30" width="550" height="185" fill="var(--pink-soft)" opacity=".55"/>
           <rect x="90" y="215" width="275" height="185" fill="var(--yellow-soft)" opacity=".5"/>
           <text class="quadrant" x="628" y="52" text-anchor="end">辛くて、香りも主役級</text>
@@ -958,13 +979,47 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
           <g class="plot-dot" data-plot="lemongrass"><circle cx="225" cy="195" r="17" fill="var(--teal)"/><text x="225" y="200" text-anchor="middle" font-size="11.5" font-weight="900" fill="#FFFDF8">49</text></g>
           <g class="plot-dot" data-plot="magao"><circle cx="215" cy="45" r="17" fill="var(--purple)"/><text x="215" y="50" text-anchor="middle" font-size="11.5" font-weight="900" fill="#FFFDF8">50</text></g>
           <g class="plot-dot" data-plot="ginger"><circle cx="295" cy="130" r="17" fill="var(--yellow)"/><text x="295" y="135" text-anchor="middle" font-size="11.5" font-weight="900" fill="var(--ink)">51</text></g>
+          <g class="plot-dot" data-plot="basil"><circle cx="100" cy="140" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="100" y="144" text-anchor="middle" font-size="10" font-weight="900" fill="#FFFDF8">H1</text><text x="113" y="130" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="pakuchi"><circle cx="155" cy="170" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="155" y="174" text-anchor="middle" font-size="10" font-weight="900" fill="#FFFDF8">H2</text><text x="168" y="160" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="mint"><circle cx="172" cy="132" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="172" y="136" text-anchor="middle" font-size="10" font-weight="900" fill="#FFFDF8">H3</text><text x="185" y="122" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="oregano"><circle cx="122" cy="250" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="122" y="254" text-anchor="middle" font-size="10" font-weight="900" fill="#FFFDF8">H4</text><text x="135" y="240" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="thyme"><circle cx="182" cy="222" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="182" y="226" text-anchor="middle" font-size="10" font-weight="900" fill="#FFFDF8">H5</text><text x="195" y="212" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="rosemary"><circle cx="215" cy="150" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="215" y="154" text-anchor="middle" font-size="10" font-weight="900" fill="#FFFDF8">H6</text><text x="228" y="140" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="dillweed"><circle cx="258" cy="246" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="258" y="250" text-anchor="middle" font-size="10" font-weight="900" fill="#FFFDF8">H7</text><text x="271" y="236" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="parsley"><circle cx="160" cy="292" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="160" y="296" text-anchor="middle" font-size="10" font-weight="900" fill="#FFFDF8">H8</text><text x="173" y="282" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="sage"><circle cx="298" cy="258" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="298" y="262" text-anchor="middle" font-size="10" font-weight="900" fill="#FFFDF8">H9</text><text x="311" y="248" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="shiso"><circle cx="356" cy="246" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="356" y="250" text-anchor="middle" font-size="9.5" font-weight="900" fill="#FFFDF8">H10</text><text x="369" y="236" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="wasabi"><circle cx="452" cy="118" r="15" fill="var(--green)"/><text x="452" y="123" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">52</text></g>
+          <g class="plot-dot" data-plot="myoga"><circle cx="128" cy="208" r="15" fill="var(--pink)"/><text x="128" y="213" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">53</text></g>
+          <g class="plot-dot" data-plot="yuzu"><circle cx="168" cy="70" r="15" fill="var(--yellow)"/><text x="168" y="75" text-anchor="middle" font-size="10.5" font-weight="900" fill="var(--ink)">54</text></g>
+          <g class="plot-dot" data-plot="wakarashi"><circle cx="420" cy="234" r="15" fill="var(--yellow)"/><text x="420" y="239" text-anchor="middle" font-size="10.5" font-weight="900" fill="var(--ink)">55</text></g>
+          <g class="plot-dot" data-plot="egoma"><circle cx="235" cy="368" r="15" fill="var(--brown)"/><text x="235" y="373" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">56</text></g>
+          <g class="plot-dot" data-plot="goma"><circle cx="175" cy="285" r="15" fill="var(--brown)"/><text x="175" y="290" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">57</text></g>
+          <g class="plot-dot" data-plot="getto"><circle cx="232" cy="168" r="15" fill="var(--teal)"/><text x="232" y="173" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">58</text></g>
+          <g class="plot-dot" data-plot="pipachi"><circle cx="498" cy="152" r="15" fill="var(--red)"/><text x="498" y="157" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">59</text></g>
+          <g class="plot-dot" data-plot="greenpepper"><circle cx="345" cy="268" r="15" fill="var(--green)"/><text x="345" y="273" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">60</text></g>
+          <g class="plot-dot" data-plot="caper"><circle cx="268" cy="288" r="15" fill="var(--teal)"/><text x="268" y="293" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">61</text></g>
+          <g class="plot-dot" data-plot="gochukaru"><circle cx="452" cy="285" r="15" fill="var(--red)"/><text x="452" y="290" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">62</text></g>
+          <g class="plot-dot" data-plot="hibiscus"><circle cx="118" cy="292" r="15" fill="var(--pink)"/><text x="118" y="297" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">63</text></g>
+          <g class="plot-dot" data-plot="tarragon"><circle cx="196" cy="112" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="196" y="116" text-anchor="middle" font-size="9.5" font-weight="900" fill="#FFFDF8">H11</text><text x="209" y="102" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="marjoram"><circle cx="285" cy="232" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="285" y="236" text-anchor="middle" font-size="9.5" font-weight="900" fill="#FFFDF8">H12</text><text x="298" y="222" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="pandan"><circle cx="175" cy="208" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="175" y="212" text-anchor="middle" font-size="9.5" font-weight="900" fill="#FFFDF8">H13</text><text x="188" y="198" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="mitsuba"><circle cx="330" cy="300" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="330" y="304" text-anchor="middle" font-size="9.5" font-weight="900" fill="#FFFDF8">H14</text><text x="343" y="290" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="konome"><circle cx="272" cy="160" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="272" y="164" text-anchor="middle" font-size="9.5" font-weight="900" fill="#FFFDF8">H15</text><text x="285" y="150" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="thaibasil"><circle cx="132" cy="118" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="132" y="122" text-anchor="middle" font-size="9.5" font-weight="900" fill="#FFFDF8">H16</text><text x="145" y="108" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="mahleb"><circle cx="238" cy="76" r="15" fill="var(--pink)"/><text x="238" y="81" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">64</text></g>
+          <g class="plot-dot" data-plot="anardana"><circle cx="132" cy="300" r="15" fill="var(--red)"/><text x="132" y="305" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">65</text></g>
+          <g class="plot-dot" data-plot="kasurimethi"><circle cx="135" cy="270" r="15" fill="var(--green)"/><text x="135" y="275" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">66</text></g>
+          <g class="plot-dot" data-plot="garlic"><circle cx="228" cy="100" r="15" fill="var(--yellow)"/><text x="228" y="105" text-anchor="middle" font-size="10.5" font-weight="900" fill="var(--ink)">67</text></g>
+          <g class="plot-dot" data-plot="urfa"><circle cx="505" cy="212" r="15" fill="var(--red)"/><text x="505" y="217" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">68</text></g>
+          <g class="plot-dot" data-plot="tasmanian"><circle cx="592" cy="130" r="15" fill="var(--purple)"/><text x="592" y="135" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">69</text></g>
         </svg>
-        <p class="fig-note">番号は図鑑カードの No. と同じ。点の位置は目安です。左上に集まるのは「辛くないけど香りで主役を張る」組、右端の 02 チリだけが辛さ突出型。今回の世界一周編も続々と：40 バニラと 47 トンカビーンは左上の「甘い香り最強」ゾーン、41 スマックと 44 アナトーは辛さゼロの色・酸味チーム、46 アレッポペッパーは中辛ゾーン、そして記念すべき 50 マーガオは 39 ティムールの近くで柑橘組に合流。新入りの 51 生姜は、辛さ控えめ・香りしっかりの真ん中あたりに着地しました。全51種が勢ぞろいです。</p>
+        <p class="fig-note">番号は図鑑カードの No. と同じ。点の位置は目安です。<br>左上に集まるのは「辛くないけど香りで主役を張る」組、右端の 02 チリだけが辛さ突出型です。<br>40 バニラと 47 トンカビーンは左上の「甘い香り最強」ゾーン、41 スマックと 44 アナトーは辛さゼロの色・酸味チーム、46 アレッポペッパーは中辛ゾーン、50 マーガオは 39 ティムールの近くで柑橘組にいます。51 生姜は、辛さ控えめ・香りしっかりの真ん中あたりです。<br>🌿マークのハーブ（H1〜H16）はどれも辛さゼロなので左側に集まり、H1 バジルと H2 パクチーは香りの主役ゾーン、H8 パセリは控えめな土台ゾーンにいます。<br>52 わさびと55 和からしは「鼻に抜ける辛さ」組として右寄り、59 ピパーチは31 ヒハツの近く、54 ゆずと58 月桃は柑橘と清涼感の香り組にいます。60 グリーンペッパーは08 ブラックペッパーと同系の中段に、62 コチュカルは中辛ゾーンに、61 ケッパーと63 ハイビスカスは辛さゼロの酸味組にいます。H16 タイバジルは H1 スイートバジルの近くでアニス系の香り組に、64 マハレブは甘い香りのゾーンに、65 アナルダナは 41 スマックや 25 タマリンドと並ぶ酸味組にいます。66 カスリメティは 11 フェヌグリーク（種）と同じ植物の葉の乾燥品で、辛さゼロ・香り中くらいの左側にいます。<br>なお、ペッパーの話をひとつ：08 ブラックペッパー／35 ホワイトペッパー／60 グリーンペッパーは、全部おなじ植物 Piper nigrum の実で、収穫時期と加工の違いだけの三兄弟です（マップでも中段に並んでいます）。一方 52 わさびはアブラナ科の別植物で、辛さの成分もピペリンではなくアリルイソチオシアネート——「ペッパー」ではありません。</p>
       </article>
 
       <article class="fig-card wide">
         <h3>② 相性マップ <span class="en">Pairing Map</span></h3>
-        <svg class="chart" viewBox="0 0 720 430" role="img" aria-label="スパイス同士の相性を線で結んだマップ">
+        <svg class="chart" viewBox="0 0 720 430" role="img" aria-label="スパイス同士の相性を線で結んだマップ。定番10種に、痺れ系・甘い系・酸味系の7種を加えた、代表的な相性の抜粋">
           <g stroke="var(--line2)" stroke-width="2">
             <line x1="360" y1="215" x2="150" y2="95"/><line x1="360" y1="215" x2="360" y2="60"/>
             <line x1="360" y1="215" x2="572" y2="95"/><line x1="360" y1="215" x2="618" y2="225"/>
@@ -978,6 +1033,17 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <line x1="572" y1="95" x2="492" y2="140"/>
             <line x1="492" y1="140" x2="618" y2="225"/>
           </g>
+          <g stroke="var(--teal)" stroke-width="1.8" opacity=".55">
+            <line x1="458" y1="36" x2="572" y2="95"/>
+            <line x1="458" y1="36" x2="560" y2="28"/>
+            <path d="M560 28 Q 652 62 668 150" fill="none"/>
+            <line x1="618" y1="225" x2="640" y2="300"/>
+            <line x1="640" y1="300" x2="520" y2="352"/>
+            <line x1="520" y1="352" x2="462" y2="402"/>
+            <line x1="82" y1="318" x2="360" y2="215"/>
+            <line x1="82" y1="318" x2="48" y2="130"/>
+            <line x1="48" y1="130" x2="360" y2="215"/>
+          </g>
           <text x="252" y="212" font-size="11.5" font-weight="900" fill="var(--pink)" transform="rotate(58 252 212)">相乗効果コンビ</text>
           <g class="node" data-plot="cumin"><circle cx="360" cy="215" r="40" fill="var(--yellow-soft)" stroke="var(--ink)" stroke-width="1.8"/><text x="360" y="211" text-anchor="middle" font-size="14.5" font-weight="900" fill="var(--ink)">クミン</text><text x="360" y="230" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--ink2)">中心の土台</text></g>
           <g class="node" data-plot="coriander"><circle cx="150" cy="95" r="33" fill="var(--yellow-soft)" stroke="var(--ink)" stroke-width="1.6"/><text x="150" y="100" text-anchor="middle" font-size="12" font-weight="900" fill="var(--ink)">コリアンダー</text></g>
@@ -989,15 +1055,23 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
           <g class="node" data-plot="clove"><circle cx="360" cy="368" r="30" fill="var(--purple-soft)" stroke="var(--ink)" stroke-width="1.6"/><text x="360" y="373" text-anchor="middle" font-size="12.5" font-weight="900" fill="var(--ink)">クローブ</text></g>
           <g class="node" data-plot="pepper"><circle cx="198" cy="352" r="33" fill="var(--brown-soft)" stroke="var(--ink)" stroke-width="1.6"/><text x="198" y="357" text-anchor="middle" font-size="11.5" font-weight="900" fill="var(--ink)">ブラックペッパー</text></g>
           <g class="node" data-plot="fennel"><circle cx="100" cy="225" r="32" fill="var(--teal-soft)" stroke="var(--ink)" stroke-width="1.6"/><text x="100" y="230" text-anchor="middle" font-size="12.5" font-weight="900" fill="var(--ink)">フェンネル</text></g>
+          <g class="node" data-plot="sichuan"><circle cx="458" cy="36" r="25" fill="var(--pink-soft)" stroke="var(--ink)" stroke-width="1.6"/><text x="458" y="41" text-anchor="middle" font-size="12.5" font-weight="900" fill="var(--ink)">花椒</text></g>
+          <g class="node" data-plot="timut"><circle cx="560" cy="28" r="26" fill="var(--purple-soft)" stroke="var(--ink)" stroke-width="1.6"/><text x="560" y="32" text-anchor="middle" font-size="10" font-weight="900" fill="var(--ink)">ティムール</text></g>
+          <g class="node" data-plot="sansho"><circle cx="668" cy="150" r="25" fill="var(--green-soft)" stroke="var(--ink)" stroke-width="1.6"/><text x="668" y="155" text-anchor="middle" font-size="12.5" font-weight="900" fill="var(--ink)">山椒</text></g>
+          <g class="node" data-plot="vanilla"><circle cx="640" cy="300" r="25" fill="var(--brown-soft)" stroke="var(--ink)" stroke-width="1.6"/><text x="640" y="305" text-anchor="middle" font-size="12" font-weight="900" fill="var(--ink)">バニラ</text></g>
+          <g class="node" data-plot="tonka"><circle cx="462" cy="402" r="26" fill="var(--yellow-soft)" stroke="var(--ink)" stroke-width="1.6"/><text x="462" y="406" text-anchor="middle" font-size="9.5" font-weight="900" fill="var(--ink)">トンカビーン</text></g>
+          <g class="node" data-plot="sumac"><circle cx="82" cy="318" r="25" fill="var(--red-soft)" stroke="var(--ink)" stroke-width="1.6"/><text x="82" y="323" text-anchor="middle" font-size="11" font-weight="900" fill="var(--ink)">スマック</text></g>
+          <g class="node" data-plot="tamarind"><circle cx="48" cy="130" r="25" fill="var(--pink-soft)" stroke="var(--ink)" stroke-width="1.6"/><text x="48" y="134" text-anchor="middle" font-size="10.5" font-weight="900" fill="var(--ink)">タマリンド</text></g>
+          <text x="14" y="422" font-size="11" font-weight="700" fill="var(--ink3)">※代表的な相性の抜粋です（全85種の全組み合わせではありません）</text>
         </svg>
-        <p class="fig-note">実線はクミンを中心とした定番の組み合わせ、ピンクの破線は特別な関係：ターメリック×ペッパーは吸収率の相乗効果コンビ、チリ×スターアニスとスターアニス×カルダモンは煮込みとチャイで重なる甘い香りのライン、カルダモン×シナモンは甘い香り同士の鉄板ペアです。</p>
+        <p class="fig-note">実線はクミンを中心とした定番の組み合わせ、ピンクの破線は特別な関係：ターメリック×ペッパーは吸収率の相乗効果コンビ、チリ×スターアニスとスターアニス×カルダモンは煮込みとチャイで重なる甘い香りのライン、カルダモン×シナモンは甘い香り同士の鉄板ペアです。緑の細線は、痺れ・甘い香り・酸味の相性です：花椒・ティムール・山椒の「痺れ三兄弟」はチリと組んで麻×辣に、バニラとトンカビーンはカルダモンやシナモンと重なる甘い香りのライン、スマックとタマリンドはクミンにつながる酸味のラインです。<br>このマップは85種すべての組み合わせではなく、代表的な相性を抜粋したものです。丸をタップすると、そのスパイスの図鑑詳細が開きます。</p>
       </article>
 
       <article class="fig-card wide">
         <h3>③ 「辛い」は4種類ある <span class="en">Four Kinds of Hot</span></h3>
         <div class="heat-types">
           <div class="heat-type">
-            <span class="ht-icon" style="background:var(--red-soft)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4 0 6.5-2.8 6.5-6.2 0-2.6-1.7-4.4-2.9-6C14.2 7.9 13 6 13 3c-3 1.8-4.5 4-4.6 6.4 0 1 .3 2 .8 2.9-.8-.3-1.5-.9-2-1.7C6.2 12 5.5 13.9 5.5 15.8 5.5 19.2 8 22 12 22z"/></svg></span>
+            <span class="ht-icon" style="background:var(--red-soft)" aria-hidden="true">🔥</span>
             <b class="name">焼ける辛さ</b>
             <span class="comp" style="background:var(--red-soft)">カプサイシン</span>
             <div class="ht-meter">強さ<span class="bar"><i style="width:100%;background:var(--red)"></i></span></div>
@@ -1005,7 +1079,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <p>チリ・パプリカの辛さ。脂溶性で油に広がり、長く残る。水では落ちにくい。</p>
           </div>
           <div class="heat-type">
-            <span class="ht-icon" style="background:var(--brown-soft)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--brown)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5H11L9.5 22 19 10h-6.5z"/></svg></span>
+            <span class="ht-icon" style="background:var(--brown-soft)" aria-hidden="true">⚡</span>
             <b class="name">弾ける辛さ</b>
             <span class="comp" style="background:var(--brown-soft)">ピペリン</span>
             <div class="ht-meter">強さ<span class="bar"><i style="width:55%;background:var(--brown)"></i></span></div>
@@ -1013,7 +1087,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <p>ブラックペッパーの辛さ。カプサイシンより穏やかで、香りと一緒にすっと消える。</p>
           </div>
           <div class="heat-type">
-            <span class="ht-icon" style="background:var(--pink-soft)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="2.2" stroke-linecap="round"><path d="M2 12c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2M2 18c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2M2 6c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/></svg></span>
+            <span class="ht-icon" style="background:var(--pink-soft)" aria-hidden="true">🌊</span>
             <b class="name">痺れる辛さ</b>
             <span class="comp" style="background:var(--pink-soft)">サンショオール</span>
             <div class="ht-meter">強さ<span class="bar"><i style="width:65%;background:var(--pink)"></i></span></div>
@@ -1021,7 +1095,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <p>花椒・山椒の「麻」。味覚というより触覚に近い、舌のビリビリ感。</p>
           </div>
           <div class="heat-type">
-            <span class="ht-icon" style="background:var(--yellow-soft)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2.2" stroke-linecap="round"><path d="M3 8h9a3 3 0 1 0-3-3M3 12h13a3 3 0 1 1-3 3M3 16h6"/></svg></span>
+            <span class="ht-icon" style="background:var(--yellow-soft)" aria-hidden="true">💨</span>
             <b class="name">鼻に抜ける辛さ</b>
             <span class="comp" style="background:var(--yellow-soft)">イソチオシアネート</span>
             <div class="ht-meter">強さ<span class="bar"><i style="width:70%;background:var(--yellow)"></i></span></div>
@@ -1029,7 +1103,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <p>マスタード・わさびのツン。揮発性で一瞬強く、すぐ消える。加熱で香ばしさに変化。</p>
           </div>
         </div>
-        <p class="fig-note">だから「辛さレベル」だけでは比べられません。麻婆豆腐の美味しさは、カプサイシンの「辣」とサンショオールの「麻」の重ねがけです。従兄弟のティムール（No.39）も同じ痺れ系で、グレープフルーツ級の柑橘感が乗ります。花椒・山椒・ティムールの「痺れ三兄弟」は⑥でも食べ比べできます。</p>
+        <p class="fig-note">だから「辛さレベル」だけでは比べられません。麻婆豆腐の美味しさは、カプサイシンの「辣」とサンショオールの「麻」の重ねがけです。<br>従兄弟のティムール（No.39）も同じ痺れ系で、グレープフルーツ級の柑橘感が乗ります。花椒・山椒・ティムールの「痺れ三兄弟」は⑥でも食べ比べできます。<br>ついでにペッパー家の整理も：ブラックペッパー（No.08）・ホワイトペッパー（No.35）・グリーンペッパー（No.60）は同じ Piper nigrum の実の加工違いで、辛さはすべてピペリン（「弾ける辛さ」の組）。そして、わさび（No.52）はペッパーとは完全に別物——アブラナ科の植物で、辛さはこちらの表の「鼻に抜ける辛さ」（アリルイソチオシアネート）です。<br>唐辛子のカプサイシンとも違います。名前が似ても、中身は三者三様。</p>
       </article>
 
       <article class="fig-card">
@@ -1246,7 +1320,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
 
           <div class="region">
             <div class="region-head"><span class="r-dot" style="background:#9A6B23"></span><b>欧風<span class="r-en">Europe</span></b><span class="r-dish">代表：欧風ビーフカレー ／ 英国風チキンカレー</span></div>
-            <p class="r-taste"><b>所属はヨーロッパで育ったカレー。</b>インドのカレーが英国へ渡り、フランス料理のルゥやデミグラス、ワイン、バターと出会った系統です。日本で「欧風」と呼ばれる濃厚なビーフカレーは、その流れを受けて日本で磨かれた洋食版と置くと分かりやすいです。</p>
+            <p class="r-taste"><b>所属はヨーロッパで育ったカレー。</b>インドのカレーが英国へ渡り、フランス料理のルゥやデミグラス、ワイン、バターと出会った系統です。<br>日本で「欧風」と呼ばれる濃厚なビーフカレーは、その流れを受けて日本で磨かれた洋食版と置くと分かりやすいです。</p>
             <dl style="margin:0">
               <div class="rrow"><dt>ベース</dt><dd><b>小麦粉のルゥ＋ブイヨン／デミグラス＋赤ワイン</b>。バターでコクを足し、しっかり濃厚に</dd></div>
               <div class="rrow"><dt>入ってるもの</dt><dd><b>牛肉と玉ねぎ</b>が主役。きのこなどを合わせ、ごはんにもパンにも寄せられる</dd></div>
@@ -1290,7 +1364,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
           <div class="q"><b>ポイント2　酸味と深みはどこから？</b>タマリンドは南インド、ビネガーはゴア、ゴラカはスリランカ、ヨーグルトは北インドとパキスタン。欧風は赤ワインとデミグラスの深み、ネパールはトマトの穏やかな酸味が顔を出します。</div>
           <div class="q"><b>ポイント3　油と仕上げの香りは？</b>ギーは北インド、たっぷりの油と生姜はパキスタン、マスタード油はベンガルとネパール、バターは欧風、ココナッツオイルは南インドとスリランカ。ネパールではティムールの柑橘っぽい痺れも目印になります。</div>
         </div>
-        <p class="fig-note">欧風と日本はどちらもルゥ文化ですが、欧風はデミグラスやワインで洋食寄り、日本は家庭の甘みと具材の顔ぶれが個性です。パキスタンは北インドの隣で肉と油が主役、ネパールはダルバートの中で軽やかに。そう置くと、インドの中の違いも、その外へ広がったカレーの地図も読みやすくなります。</p>
+        <p class="fig-note">欧風と日本はどちらもルゥ文化ですが、欧風はデミグラスやワインで洋食寄り、日本は家庭の甘みと具材の顔ぶれが個性です。パキスタンは北インドの隣で肉と油が主役、ネパールはダルバートの中で軽やかに。<br>そう置くと、インドの中の違いも、その外へ広がったカレーの地図も読みやすくなります。</p>
       </article>
 
     </div>
@@ -1320,7 +1394,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
 
     <div class="lab-grid">
       <article class="lab-card">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4 0 6.5-2.8 6.5-6.2 0-2.6-1.7-4.4-2.9-6C14.2 7.9 13 6 13 3c-3 1.8-4.5 4-4.6 6.4 0 1 .3 2 .8 2.9-.8-.3-1.5-.9-2-1.7C6.2 12 5.5 13.9 5.5 15.8 5.5 19.2 8 22 12 22z"/></svg>テンパリング（油に香りを移す）</h3>
+        <h3><span class="h-emoji" aria-hidden="true">🔥</span>テンパリング（油に香りを移す）</h3>
         <p>ホールスパイスの香り成分の多くは<strong>脂溶性</strong>。水ではなく油に溶け出して、料理全体へ広がります。だからカレーは「油＋ホールスパイス」から始めるのが基本形です。</p>
         <ul>
           <li>油は<strong>煙が出るほど熱くしない</strong>。高温すぎると香りが飛び、苦みが出ます</li>
@@ -1331,7 +1405,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
       </article>
 
       <article class="lab-card">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>入れるタイミング早見表</h3>
+        <h3><span class="h-emoji" aria-hidden="true">⏰</span>入れるタイミング早見表</h3>
         <div class="timing">
           <div class="timing-row"><span class="when" style="background:var(--yellow-soft)">最初</span><p><strong>ホールスパイス</strong>（クミンシード、カルダモン、クローブなど）。油に香りを移す“香りの土台”づくり。</p></div>
           <div class="timing-row"><span class="when" style="background:var(--green-soft)">中盤</span><p><strong>パウダースパイス</strong>（ターメリック、コリアンダー、クミンパウダー）。玉ねぎ・トマトの水分があるうちに入れると焦げにくい。</p></div>
@@ -1342,7 +1416,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
       </article>
 
       <article class="lab-card">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.2 5.3L20 9l-4.2 3.9L17 18.5 12 15.7 7 18.5 8.2 12.9 4 9l5.8-.7z"/></svg>シード vs パウダー、どっちを買う？</h3>
+        <h3><span class="h-emoji" aria-hidden="true">⭐</span>シード vs パウダー、どっちを買う？</h3>
         <p>クミンのように両方の形があるスパイスは、役割がまったく違います。</p>
         <ul>
           <li><strong>シード（ホール）</strong>：香りが長持ちし、テンパリングで“立ち上がる香り”を担当。買ってから<strong>1年</strong>ほど楽しめます</li>
@@ -1353,7 +1427,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
       </article>
 
       <article class="lab-card">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4.5 18a2.4 2.4 0 0 0 2.1 3.5h10.8a2.4 2.4 0 0 0 2.1-3.5L14 9V3"/><path d="M7.5 15h9"/></svg>焦がすとどうなる？ 苦みの境界線</h3>
+        <h3><span class="h-emoji" aria-hidden="true">🧪</span>焦がすとどうなる？ 苦みの境界線</h3>
         <p>スパイスの「香ばしさ」と「苦み」は紙一重。種類ごとに焦げやすさが違います。</p>
         <ul>
           <li><strong>フェヌグリーク</strong>は最要注意。炒りすぎると一気に強い苦みへ。色づいたらすぐ引き上げます</li>
@@ -1371,7 +1445,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
       <span class="no">No.04</span>
       <h2>自家製ブレンドの黄金比</h2>
       <svg class="squig" width="180" height="10" viewBox="0 0 180 10" fill="none"><path d="M2 6 Q 14 1, 26 6 T 50 6 T 74 6 T 98 6 T 122 6 T 146 6 T 170 6" stroke="var(--teal)" stroke-width="3.4" stroke-linecap="round"/></svg>
-      <p>市販品も便利ですが、自分で合わせると香りの鮮度が段違い。まずはこの比率から始めて、好みに寄せていくのがおすすめです（小さじ換算）。スパイス名をタップすると、そのスパイスの詳細が開きます。</p>
+      <p>市販品も便利ですが、自分で合わせると香りの鮮度が段違い。まずはこの比率から始めて、好みに寄せていくのがおすすめです（小さじ換算）。<br>スパイス名をタップすると、そのスパイスの詳細が開きます。ベルベレ、ミトゥミッタ、ザアタル、デュカ、チャットマサラは、単体ではなく「ブレンド」として収録しています。<br>各カードには入手のしやすさと、ないときの再現ヒントも添えました。</p>
     </div>
 
     <div class="blend-grid">
@@ -1422,6 +1496,82 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="bar-row"><button class="bar-link" type="button" data-open="clove">クローブ</button><span class="bar"><i style="width:17%;background:var(--purple)"></i></span><span class="amt">0.5</span></div>
         <p class="tip">市販の五香粉はスーパーでも買えますが、自家製は香りの立ち方が別格。角煮・ルーローハン・煮卵に。小さじ1で料理全体の「中華度」が決まります。花椒の代わりに山椒でもOK。</p>
       </article>
+      <article class="blend" id="blend-shichimi">
+        <span class="en">Shichimi Togarashi</span>
+        <h3>七味唐辛子</h3>
+        <p class="desc">江戸時代、両国の薬研堀で生まれたと伝わる日本のブレンド。辛さ・柑橘・痺れ・香ばしさが小さな瓶の中で重なります。配合は店と家庭で少しずつ違うので、これは目安の比率です（小さじ換算）。</p>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="chili">唐辛子</button><span class="bar"><i style="width:100%;background:var(--red)"></i></span><span class="amt">3</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="chenpi">陳皮（みかんの皮）</button><span class="bar"><i style="width:33%;background:var(--yellow)"></i></span><span class="amt">1</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="sansho">山椒</button><span class="bar"><i style="width:33%;background:var(--green)"></i></span><span class="amt">1</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="goma">ごま</button><span class="bar"><i style="width:33%;background:var(--brown)"></i></span><span class="amt">1</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="poppyseed">けしの実</button><span class="bar"><i style="width:17%;background:var(--ink)"></i></span><span class="amt">0.5</span></div>
+        <div class="bar-row"><span>麻の実</span><span class="bar"><i style="width:17%;background:var(--teal)"></i></span><span class="amt">0.5</span></div>
+        <div class="bar-row"><span>青のり</span><span class="bar"><i style="width:17%;background:var(--green)"></i></span><span class="amt">0.5</span></div>
+        <p class="tip">陳皮について：七味の陳皮は主に温州みかんの皮を干した日本のもの。図鑑の陳皮（No.29）は中国で長く寝かせて育てる「新会陳皮」が主役で、同じ乾燥みかん皮でも熟成の考え方が違います。<br>うどん・そば、豚汁、焼き鳥に。山椒多めの「山椒七味」、ゆず皮入りの「ゆず七味」など、家ごとに寄せていくのが楽しいブレンドです。</p>
+      </article>
+      <article class="blend" id="blend-berbere">
+        <span class="en">Berbere</span>
+        <h3>ベルベレ（エチオピア）</h3>
+        <p class="desc">エチオピア料理の心臓部。唐辛子をベースに10種前後を重ねた複合スパイスで、深い赤色と、辛さの奥に甘みと香ばしさが折り重なります。<br>煮込み（ワット）の土台として「炒めて使う」のが基本形。家庭ごとに配合が違うので、これは目安の比率です。</p>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="chili">唐辛子（チリ）</button><span class="bar"><i style="width:100%;background:var(--red)"></i></span><span class="amt">4</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="coriander">コリアンダー</button><span class="bar"><i style="width:38%;background:var(--yellow)"></i></span><span class="amt">1.5</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="fenugreek">フェヌグリーク</button><span class="bar"><i style="width:25%;background:var(--green)"></i></span><span class="amt">1</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="cardamom">カルダモン</button><span class="bar"><i style="width:18%;background:var(--teal)"></i></span><span class="amt">0.7</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="ginger">生姜（乾燥粉）</button><span class="bar"><i style="width:13%;background:var(--brown)"></i></span><span class="amt">0.5</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="pepper">ブラックペッパー</button><span class="bar"><i style="width:13%;background:var(--ink)"></i></span><span class="amt">0.5</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="clove">クローブ</button><span class="bar"><i style="width:8%;background:var(--purple)"></i></span><span class="amt">0.3</span></div>
+        <p class="tip">入手：エチオピア食材店・輸入食材のネット通販で市販品が買えます（スーパーではまず見かけません）。再現のヒント：ホールを乾煎りしてから挽くのが香りの決め手。<br>ない材料は「チリ多め＋フェヌグリーク＋カルダモン」の3点が揃うだけでもベルベレらしさの核になります。この図鑑のレシピ「ドロ・ワット風チキン煮込み」で使います。</p>
+      </article>
+      <article class="blend" id="blend-mitmita">
+        <span class="en">Mitmita</span>
+        <h3>ミトゥミッタ（エチオピア）</h3>
+        <p class="desc">ベルベレと同じエチオピア生まれでも、役割は真逆の「仕上げ専用」。配合はずっとシンプルで、その分ダイレクトに辛い。加熱せず、食卓でふりかけて使うのが本場流です。</p>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="chili">唐辛子（チリ）</button><span class="bar"><i style="width:100%;background:var(--red)"></i></span><span class="amt">5</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="cardamom">カルダモン</button><span class="bar"><i style="width:20%;background:var(--teal)"></i></span><span class="amt">1</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="clove">クローブ</button><span class="bar"><i style="width:10%;background:var(--purple)"></i></span><span class="amt">0.5</span></div>
+        <div class="bar-row"><span>塩</span><span class="bar"><i style="width:10%;background:var(--ink3)"></i></span><span class="amt">0.5</span></div>
+        <p class="tip">ベルベレとの違い：ベルベレ＝種類が多く複雑で、煮込みの土台として炒めて使う／ミトゥミッタ＝種類が少なくより辛く、仕上げに生のままふる。エチオピアでは生肉料理（キトフォなど）やレンテルの煮込みの仕上げに。<br>入手：市販品はエチオピア食材店・ネット通販向き。再現は「チリ＋カルダモン＋クローブ＋塩」だけでかなり寄せられます。<br>辛さは本気なので、最初は爪の先ほどから。</p>
+      </article>
+      <article class="blend" id="blend-zaatar">
+        <span class="en">Za'atar</span>
+        <h3>ザアタル（レバント地方）</h3>
+        <p class="desc">レバノン、シリア、パレスチナなどレバント地方の朝ごはんの顔。ハーブの青い香り＋スマックの酸味＋ごまの香ばしさ＋塩。オリーブオイルと混ぜてパンにつけるのが定番の食べ方です。</p>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="thyme">タイム（乾燥）</button><span class="bar"><i style="width:50%;background:var(--green)"></i></span><span class="amt">1.5</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="oregano">オレガノ（乾燥）</button><span class="bar"><i style="width:33%;background:var(--teal)"></i></span><span class="amt">1</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="marjoram">マージョラム（乾燥）</button><span class="bar"><i style="width:17%;background:var(--green)"></i></span><span class="amt">0.5</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="sumac">スマック</button><span class="bar"><i style="width:66%;background:var(--red)"></i></span><span class="amt">2</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="goma">ごま（炒り）</button><span class="bar"><i style="width:50%;background:var(--brown)"></i></span><span class="amt">1.5</span></div>
+        <div class="bar-row"><span>塩</span><span class="bar"><i style="width:17%;background:var(--ink3)"></i></span><span class="amt">0.5</span></div>
+        <p class="tip">名前の両義性：現地語の「ザアタル」は、もともと野生ハーブそのもの（シリアンオレガノ／ヒソプとされる植物）の名前でもあります。一般に商品として売られる「ザアタル」は、そのハーブを中心にスマック・ごま・塩を合わせたブレンドの方。<br>入手：中東食材店・輸入食品店・ネット通販で市販品あり。再現のヒント：乾燥ハーブは手で揉んで香りを立て、ごまは炒りたてを。<br>スマックがない日はレモンの皮のすりおろし＋塩で酸味の方向だけ寄せられます。この図鑑のレシピ「ザアタルのフラットブレッド（マヌーシェ風）」で使います。</p>
+      </article>
+      <article class="blend" id="blend-dukkah">
+        <span class="en">Dukkah</span>
+        <h3>デュカ（エジプト）</h3>
+        <p class="desc">ナッツと種とスパイスを粗く砕いた、ドライで香ばしいエジプトのブレンド。粉ではなく「粒感のあるふりかけ」で、パンをオリーブオイルに浸してからデュカをつけて食べるのが本場の作法です。</p>
+        <div class="bar-row"><span>ヘーゼルナッツ（粗く砕く）</span><span class="bar"><i style="width:100%;background:var(--brown)"></i></span><span class="amt">3</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="goma">ごま</button><span class="bar"><i style="width:66%;background:var(--yellow)"></i></span><span class="amt">2</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="coriander">コリアンダーシード</button><span class="bar"><i style="width:50%;background:var(--green)"></i></span><span class="amt">1.5</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="cumin">クミンシード</button><span class="bar"><i style="width:33%;background:var(--purple)"></i></span><span class="amt">1</span></div>
+        <div class="bar-row"><span>塩</span><span class="bar"><i style="width:17%;background:var(--ink3)"></i></span><span class="amt">0.5</span></div>
+        <p class="tip">作り方のコツ：種ものは乾煎りして香りを立て、ナッツと一緒に「砕きすぎない」のが命（ペーストになったら別物）。サラダ、ゆで卵、アボカドトーストの仕上げにも。<br>入手：市販品は輸入食品店・ネット通販にありますが、材料が全部そろうので自家製が一番現実的で香りも上。ナッツはアーモンドやピスタチオ、カシューでも家庭ごとにアレンジOKです。</p>
+      </article>
+      <article class="blend" id="blend-chaat">
+        <span class="en">Chaat Masala</span>
+        <h3>チャットマサラ（インド）</h3>
+        <p class="desc">インドの屋台おやつ「チャット」にかける、酸っぱくて香ばしい仕上げ専用マサラ。決め手はアムチュール（未熟マンゴーの粉）のフルーティーな酸味と、黒塩のほのかな硫黄の香り。加熱せず、食べる直前にふるのがルールです。</p>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="amchur">アムチュール</button><span class="bar"><i style="width:100%;background:var(--pink)"></i></span><span class="amt">3</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="cumin">クミン（煎って挽く）</button><span class="bar"><i style="width:66%;background:var(--brown)"></i></span><span class="amt">2</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="coriander">コリアンダー</button><span class="bar"><i style="width:33%;background:var(--yellow)"></i></span><span class="amt">1</span></div>
+        <div class="bar-row"><span>黒塩（カラナマック）</span><span class="bar"><i style="width:33%;background:var(--ink3)"></i></span><span class="amt">1</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="pepper">ブラックペッパー</button><span class="bar"><i style="width:17%;background:var(--ink)"></i></span><span class="amt">0.5</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="chili">チリ</button><span class="bar"><i style="width:17%;background:var(--red)"></i></span><span class="amt">0.5</span></div>
+        <p class="tip">使いみち：揚げたてパコラやサモサ、フルーツ（グアバやパイナップル）、きゅうり、レモネードにまで。酸味が主役なので「塩＋レモン」では届かない立体感があります。<br>入手：インド食材店・ネット通販で市販品が買えます。再現のヒント：アムチュールさえあれば、あとは家にあるものでかなり本格派に。<br>黒塩がなければ岩塩で代用できますが、あの硫黄の香りは黒塩だけのもの。見かけたらぜひ本物を試してみてください。</p>
+      </article>
+    </div>
+    <div class="choi" id="yuzukosho-note">
+      <h3>日本の合わせ調味料メモ：ゆず胡椒 <span class="en">Yuzu Kosho</span></h3>
+      <p>ブレンドとして独立させるほど配合が決まっていない、九州生まれの合わせ調味料も紹介します。ゆずの皮と青唐辛子と塩をすり合わせたペーストで、「胡椒」は唐辛子の古い呼び名。<br>鍋物、焼き鳥、刺身、汁物に小さじ少しで、柑橘の香りとキレのある辛さが同時に立ちます。材料の名前をタップすると図鑑の詳細が開きます。</p>
+      <div class="r-meta" style="margin-top:12px"><button class="chip spice" data-open="yuzu" type="button">ゆず</button><button class="chip spice" data-open="chili" type="button">チリペッパー（唐辛子）</button></div>
     </div>
   </section>
 
@@ -1431,7 +1581,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
       <span class="no">No.05</span>
       <h2>図鑑のスパイスで作る、簡単レシピ</h2>
       <svg class="squig" width="180" height="10" viewBox="0 0 180 10" fill="none"><path d="M2 6 Q 14 1, 26 6 T 50 6 T 74 6 T 98 6 T 122 6 T 146 6 T 170 6" stroke="var(--green)" stroke-width="3.4" stroke-linecap="round"/></svg>
-      <p>図鑑に載っているスパイスだけで作れる18品。一覧は写真と料理名だけのサムネイルになっていて、タップすると材料と作り方がポップアップで開きます。まず「基本のスパイスカレー」で土台を覚えると、ほかのレシピもぐっと作りやすくなります。「ティムールのポークソテー」もそのひとつです。一覧の最後にはデザート3品（ライスプディング、パンナコッタ、チョコムース）もあります。ページの最後には、今日の料理にひとつまみ足すだけの「ちょい足しミニコーナー」もあります。ポップアップの中のスパイス名のチップをタップすると、そのスパイスの詳細も開きます。</p>
+      <p>図鑑に載っているスパイスとハーブで作れる33品。<br>一覧は写真と料理名だけのサムネイルになっていて、タップすると材料と作り方がポップアップで開きます。<br>まず「基本のスパイスカレー」で土台を覚えると、ほかのレシピもぐっと作りやすくなります。「ティムールのポークソテー」もそのひとつです。<br>主菜、スープ、ごはんもの、パンに、デザート5品（ライスプディング、パンナコッタ、チョコムース、パンダンシフォンケーキ、スパイスパウンドケーキ）もあります。<br>ページの最後には、今日の料理にひとつまみ足すだけの「ちょい足しミニコーナー」もあります。<br>ポップアップの中のスパイス名のチップをタップすると、そのスパイスの詳細も開きます。</p>
     </div>
 
     <div class="recipe-grid thumbs">
@@ -1525,6 +1675,18 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <span class="rt-name">チキンビリヤニ（重ね蒸しごはん）</span>
         <span class="rt-open">レシピを開く →</span>
       </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-gapao" aria-label="鶏ひき肉とバジルのガパオ風ごはんのレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-gapao.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">ハーブ主役 01 ・ 主菜</span>
+        <span class="rt-name">鶏ひき肉とバジルのガパオ風ごはん</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-pakuchisalad" aria-label="パクチーたっぷりのエスニックサラダのレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-pakuchisalad.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">ハーブ主役 02 ・ サラダ</span>
+        <span class="rt-name">パクチーたっぷりのエスニックサラダ</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
       <button type="button" class="recipe-thumb" data-recipe="recipe-kheer" aria-label="カルダモン香るライスプディング（キール風）のレシピを開く">
         <span class="rt-photo"><img src="assets/thumb-kheer.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
         <span class="rt-cat">デザート 01 ・ 甘いもの</span>
@@ -1543,6 +1705,84 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <span class="rt-name">チリとシナモンのチョコムース</span>
         <span class="rt-open">レシピを開く →</span>
       </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-salmoncaper" aria-label="サーモンのレモンバターケッパーソースのレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-salmoncaper.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">Recipe 15 ・ 主菜</span>
+        <span class="rt-name">サーモンのレモンバターケッパーソース</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-greenpepperpork" aria-label="グリーンペッパーソースのポークソテーのレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-greenpepperpork.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">Recipe 16 ・ 主菜</span>
+        <span class="rt-name">グリーンペッパーソースのポークソテー</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-mitsubaohitashi" aria-label="三つ葉のおひたしのレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-mitsubaohitashi.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">Recipe 17 ・ 副菜</span>
+        <span class="rt-name">三つ葉のおひたし</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-dengaku" aria-label="木の芽味噌のなす田楽のレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-dengaku.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">Recipe 18 ・ 副菜</span>
+        <span class="rt-name">木の芽味噌のなす田楽</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-cucumber" aria-label="きゅうりの韓国風和えもの（コチュカル）のレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-cucumber.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">Recipe 19 ・ 副菜</span>
+        <span class="rt-name">きゅうりの韓国風和えもの（コチュカル）</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-hibiscustea" aria-label="ハイビスカスのアイスティーのレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-hibiscustea.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">Recipe 20 ・ ドリンク</span>
+        <span class="rt-name">ハイビスカスのアイスティー</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-pandanchiffon" aria-label="パンダンシフォンケーキのレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-pandanchiffon.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">デザート 04 ・ 甘いもの</span>
+        <span class="rt-name">パンダンシフォンケーキ</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-poundcake" aria-label="スパイスパウンドケーキのレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-poundcake.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">デザート 05 ・ 甘いもの</span>
+        <span class="rt-name">スパイスパウンドケーキ</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-dorowat" aria-label="ドロ・ワット風チキン煮込み（ベルベレ）のレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-dorowat.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">ブレンド主役 01 ・ 主菜</span>
+        <span class="rt-name">ドロ・ワット風チキン煮込み</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-butterchicken" aria-label="バターチキン（カスリメティ仕上げ）のレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-butterchicken.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">カスリメティ主役 ・ 主菜</span>
+        <span class="rt-name">バターチキン（カスリメティ仕上げ）</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-manoushe" aria-label="ザアタルのフラットブレッド（マヌーシェ風）のレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-manoushe.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">ブレンド主役 02 ・ パン</span>
+        <span class="rt-name">ザアタルのフラットブレッド（マヌーシェ風）</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-nihari" aria-label="ニハリ（牛すね肉の長時間煮込み）のレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-nihari.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">ヒハツ主役 ・ 主菜</span>
+        <span class="rt-name">ニハリ（牛すね肉の長時間煮込み）</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-pulao" aria-label="ラムプラオ（ヤフニ式炊き込みごはん）のレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-pulao.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">ホールスパイス ・ ごはん</span>
+        <span class="rt-name">ラムプラオ（ヤフニ式）</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
 
       <article class="recipe wide" id="recipe-basecurry">
         <div class="r-photo">
@@ -1552,7 +1792,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="r-body">
           <h3>基本のスパイスカレー</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約40分</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約40分</span>
             <span class="chip">3〜4人分</span>
             <span class="chip">具は自由</span>
           </div>
@@ -1562,8 +1802,9 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <button class="chip spice" data-open="turmeric" type="button">ターメリック</button>
             <button class="chip spice" data-open="chili" type="button">チリペッパー</button>
             <button class="chip spice" data-open="ginger" type="button">生姜</button>
+            <button class="chip spice" data-open="garlic" type="button">ニンニク</button>
           </div>
-          <p class="intro">すべてのカレーの出発点になる、一番基本のレシピです。ベースは「飴色に炒めた玉ねぎ＋スパイス＋メイン具材（お肉や、エビなどの魚介）」の3点セット。ここまで作ったら、あとは入れる水分を選ぶだけです。トマト、ヨーグルト、ココナッツミルク——水分しだいで、同じベースがまったく違う顔のカレーになります。野菜はベースに固定せず、水分に合わせて後から選ぶのがスパイスカレーの流儀。にんじんとじゃがいもは日本のカレーライスの顔で、このベースには基本的に入りません。</p>
+          <p class="intro">すべてのカレーの出発点になる、一番基本のレシピです。ベースは「飴色に炒めた玉ねぎ＋スパイス＋メイン具材（お肉や、エビなどの魚介）」の3点セット。<br>ここまで作ったら、あとは入れる水分を選ぶだけです。トマト、ヨーグルト、ココナッツミルク——水分しだいで、同じベースがまったく違う顔のカレーになります。<br>野菜はベースに固定せず、水分に合わせて後から選ぶのがスパイスカレーの流儀。にんじんとじゃがいもは日本のカレーライスの顔で、このベースには基本的に入りません。</p>
           <div class="branch">
             <div class="branch-base"><b>共通のベース</b>：玉ねぎを飴色まで炒める ＋ クミン／コリアンダー／ターメリック／チリ ＋ メイン具材（お肉・エビなどの魚介）</div>
             <div class="branch-arrow">▼ 水分をひとつ選ぶ（野菜は分岐ごとに） ▼</div>
@@ -1597,7 +1838,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <li>味を見て塩とチリで調整してできあがり。ごはんにかけてどうぞ。</li>
           </ol>
           <p class="point"><b>使い分けのコツ：</b>ベースさえ覚えれば、水分×メイン具材×野菜の組み合わせで何通りにも広がります。ヨーグルト版は仕上げにカルダモンひとつまみで北インド寄りに、ココナッツ版はレモングラスやこぶみかんの葉を足すとタイ寄りに、それぞれの国の方向へ寄せていけます。</p>
-          <p class="var-note"><b>具は自由：</b>メイン具材は、ひき肉、厚揚げ、豆の缶詰でも成立します。野菜は分岐ごとの「合う野菜」を目安に、冷蔵庫にあるもので置き換えてOK。にんじんとじゃがいもを一口大で加えれば、日本の家庭カレー寄りのほっとする味わいに寄せられます（煮崩れを避けたいときは別ゆでで後入れがおすすめ）。入れないほうが、スパイスの香りはすっときれいに際立ちます。</p>
+          <p class="var-note"><b>具は自由：</b>メイン具材は、ひき肉、厚揚げ、豆の缶詰でも成立します。野菜は分岐ごとの「合う野菜」を目安に、冷蔵庫にあるもので置き換えてOK。<br>にんじんとじゃがいもを一口大で加えれば、日本の家庭カレー寄りのほっとする味わいに寄せられます（煮崩れを避けたいときは別ゆでで後入れがおすすめ）。入れないほうが、スパイスの香りはすっときれいに際立ちます。</p>
         </div>
       </article>
 
@@ -1609,7 +1850,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="r-body">
           <h3>ひよこ豆のスパイスカレー</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約30分</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約30分</span>
             <span class="chip">2〜3人分</span>
             <span class="chip">辛さ調整OK</span>
           </div>
@@ -1621,6 +1862,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <button class="chip spice" data-open="coriander" type="button">コリアンダー</button>
             <button class="chip spice" data-open="amchur" type="button">アムチュール</button>
             <button class="chip spice" data-open="ginger" type="button">生姜</button>
+            <button class="chip spice" data-open="garlic" type="button">ニンニク</button>
           </div>
           <p class="intro">缶詰のひよこ豆を使えば煮込み時間は短くてOK。クミンを「シード」と「パウダー」で二度使いするのが、このレシピ一番のマニアポイントです。</p>
           <h4>材料</h4>
@@ -1653,13 +1895,13 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
 
       <article class="recipe" id="recipe-jeera">
         <div class="r-photo">
-          <img src="assets/dish-jeera.jpg" alt="鍋いっぱいの、できあがりのジーラ・アルー（クミンポテト）" />
+          <img src="assets/dish-jeera.jpg" alt="器いっぱいの、できあがりのジーラ・アルー（クミンポテト）。大きさも形も不ぞろいなラフな乱切りのじゃがいもにクミンシードが絡んでいる" />
           <span class="r-badge">Recipe 02 ・ 副菜</span>
         </div>
         <div class="r-body">
           <h3>ジーラ・アルー（クミンポテト）</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約20分</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約20分</span>
             <span class="chip">2人分</span>
             <span class="chip">お弁当にも</span>
           </div>
@@ -1700,7 +1942,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="r-body">
           <h3>ゴールデンミルク（ターメリックラテ）</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約5分</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約5分</span>
             <span class="chip">1杯分</span>
             <span class="chip">ノンカフェイン</span>
           </div>
@@ -1738,7 +1980,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="r-body">
           <h3>おうちスパイスチャイ</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約10分</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約10分</span>
             <span class="chip">2杯分</span>
             <span class="chip">煮出し式</span>
           </div>
@@ -1782,7 +2024,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="r-body">
           <h3>ベンガル風ミックスベジタブル</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約25分</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約25分</span>
             <span class="chip">2人分</span>
             <span class="chip">ホール5種使い</span>
           </div>
@@ -1795,7 +2037,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <button class="chip spice" data-open="turmeric" type="button">ターメリック</button>
             <button class="chip spice" data-open="chili" type="button">チリペッパー</button>
           </div>
-          <p class="intro">ベンガル地方の「パンチフォロン」＝5種のホールスパイスを丸ごと油で弾けさせる炒め煮です。新顔ニゲラのデビュー戦。じゃがいも、カリフラワー、かぼちゃ、いんげんと、甘みのある野菜がよく合います。</p>
+          <p class="intro">ベンガル地方の「パンチフォロン」＝5種のホールスパイスを丸ごと油で弾けさせる炒め煮です。じゃがいも、カリフラワー、かぼちゃ、いんげんと、甘みのある野菜がよく合います。</p>
           <h4>材料</h4>
           <ul class="ing">
             <li>じゃがいも<b>2個</b></li>
@@ -1832,7 +2074,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="r-body">
           <h3>タマリンドのラッサム風スープ</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約20分</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約20分</span>
             <span class="chip">2人分</span>
             <span class="chip">酸味しっかり</span>
           </div>
@@ -1844,6 +2086,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <button class="chip spice" data-open="cumin" type="button">クミンシード</button>
             <button class="chip spice" data-open="turmeric" type="button">ターメリック</button>
             <button class="chip spice" data-open="chili" type="button">チリペッパー</button>
+            <button class="chip spice" data-open="garlic" type="button">ニンニク</button>
           </div>
           <p class="intro">南インドの胡椒スープ「ラッサム」の家庭版。タマリンドの甘酸っぱさと、挽きたてペッパーの辛さが主役です。さらっと飲めるのに、芯のある味に仕上がります。</p>
           <h4>材料</h4>
@@ -1879,9 +2122,9 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="r-body">
           <h3>トムカー風ココナッツスープ</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約20分</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約20分</span>
             <span class="chip">2人分</span>
-            <span class="chip">新顔デビュー</span>
+            <span class="chip">香りが主役</span>
           </div>
           <div class="r-meta">
             <button class="chip spice" data-open="galangal" type="button">ガランガル</button>
@@ -1890,7 +2133,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <button class="chip spice" data-open="chili" type="button">チリペッパー</button>
             <button class="chip spice" data-open="coriander" type="button">コリアンダー（葉）</button>
           </div>
-          <p class="intro">新顔ガランガルのデビュー戦。タイの「トムカーガイ」を家庭向けにアレンジした、ココナッツミルクの白いスープです。生姜では出ない、爽やかで突き抜ける香りが主役。ガランガルは香りを出すためのもので、スライス自体は食べずに取り出します。</p>
+          <p class="intro">タイの「トムカーガイ」を家庭向けにアレンジした、ココナッツミルクの白いスープです。生姜では出ない、爽やかで突き抜ける香りが主役。ガランガルは香りを出すためのもので、スライス自体は食べずに取り出します。</p>
           <h4>材料</h4>
           <ul class="ing">
             <li>鶏もも肉<b>150g</b></li>
@@ -1926,7 +2169,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="r-body">
           <h3>花椒香る、麻婆豆腐（家庭版）</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約20分</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約20分</span>
             <span class="chip">2人分</span>
             <span class="chip">東アジア編</span>
           </div>
@@ -1936,6 +2179,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <button class="chip spice" data-open="sansho" type="button">山椒</button>
             <button class="chip spice" data-open="chenpi" type="button">陳皮</button>
             <button class="chip spice" data-open="ginger" type="button">生姜</button>
+            <button class="chip spice" data-open="garlic" type="button">ニンニク</button>
           </div>
           <p class="intro">中国・東アジア編の看板レシピ。「辣（チリの辛さ）」と「麻（花椒の痺れ）」の重ねがけが主役です。豆板醤と花椒粉はスーパーで揃うので、意外と身近に作れます。仕上げの粉山椒で柑橘の香りを足すのが、この図鑑流のアレンジ。</p>
           <h4>材料</h4>
@@ -1962,19 +2206,19 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <li>水、醤油、酒、砂糖を加えて煮立て、豆腐と長ねぎを入れて3分ほど煮る。</li>
             <li>水溶き片栗粉でとろみをつけ、ラー油を回しかける。火を止めてから花椒粉と粉山椒を振る。</li>
           </ol>
-          <p class="point"><b>使い分けのコツ：</b>痺れの粉は「火を止めてから」が鉄則。加熱すると痺れも柑橘の香りも飛びます。花椒粉がない家は粉山椒だけでも成立しますし、逆に山椒＋花椒の半々は痺れに奥行きが出ます。隠し味に陳皮粉をひとつまみ入れると、脂の重さがすっと軽くなります。</p>
+          <p class="point"><b>使い分けのコツ：</b>痺れの粉は「火を止めてから」が鉄則。加熱すると痺れも柑橘の香りも飛びます。<br>花椒粉がない家は粉山椒だけでも成立しますし、逆に山椒＋花椒の半々は痺れに奥行きが出ます。隠し味に陳皮粉をひとつまみ入れると、脂の重さがすっと軽くなります。</p>
         </div>
       </article>
 
       <article class="recipe" id="recipe-lurou">
         <div class="r-photo">
-          <img src="assets/dish-lurou.webp" alt="器に盛り付けられた、できあがりのルーローハン風ごはん。小さめの角切りにした豚バラの煮込みと、半分に切った煮卵がごはんの上にのっている" />
+          <img src="assets/dish-lurou.webp" alt="器に盛り付けられた、できあがりのルーローハン風ごはん。形の不ぞろいな豚バラの煮込みにほろほろにほぐれた肉も混ざり、半分に切った煮卵とともにごはんの上にのっている" />
           <span class="r-badge">Recipe 09 ・ ごはん</span>
         </div>
         <div class="r-body">
           <h3>五香粉のルーローハン風ごはん</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約40分</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約40分</span>
             <span class="chip">2〜3人分</span>
             <span class="chip">東アジア編</span>
           </div>
@@ -2021,13 +2265,13 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="r-body">
           <h3>ティムールのポークソテー</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>下味1時間＋揚げ焼き約10分</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>下味1時間＋揚げ焼き約10分</span>
             <span class="chip">2人分</span>
           </div>
           <div class="r-meta">
             <button class="chip spice" data-open="timut" type="button">ティムール</button>
           </div>
-          <p class="intro">ティムールを主役にした一品です。下味はティムールと砂糖だけ。塩コショウは不要、にんにく・しょうがも使わない、シンプルな味付けです。砂糖とスパイスとお肉をビニール袋に入れて馴染ませ、片栗粉か小麦粉を薄くまぶして揚げ焼きに。一枚肉のまま、ポークピカタや竜田揚げのように薄い衣がついた仕上がりで、柑橘のような香りとやさしい痺れが厚切り肉にしっかり移ります。補足として、鶏もも肉でもおいしくできます。</p>
+          <p class="intro">ティムールを主役にした一品です。下味はティムールと砂糖だけ。<br>塩コショウは不要、にんにく・しょうがも使わない、シンプルな味付けです。砂糖とスパイスとお肉をビニール袋に入れて馴染ませ、片栗粉か小麦粉を薄くまぶして揚げ焼きに。<br>一枚肉のまま、ポークピカタや竜田揚げのように薄い衣がついた仕上がりで、柑橘のような香りとやさしい痺れが厚切り肉にしっかり移ります。補足として、鶏もも肉でもおいしくできます。</p>
           <h4>材料</h4>
           <ul class="ing">
             <li><span>豚厚切り肉（一枚のまま使う）</span><b>2枚</b></li>
@@ -2043,7 +2287,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <li>肉を取り出し、表面に片栗粉か小麦粉を薄くまぶす。</li>
             <li>フライパンに少し多めの油を熱し、中火で両面を揚げ焼きにする。薄い衣がこんがり色づき、中まで火が通ったらできあがり。切り分けず、一枚肉のまま盛りつける。</li>
           </ol>
-          <p class="point"><b>ポイント：</b>下味は「ティムール＋砂糖」のシンプルさが命です。塩コショウは不要で、にんにく・しょうがも使いません。砂糖が香りを引き立て、揚げ焼きの香ばしさも手伝います。衣は薄くがコツで、片栗粉なら竜田揚げのように軽くカリッと、小麦粉ならピカタのようにしっとりした薄衣に仕上がります。</p>
+          <p class="point"><b>ポイント：</b>下味は「ティムール＋砂糖」のシンプルさが命です。塩コショウは不要で、にんにく・しょうがも使いません。<br>砂糖が香りを引き立て、揚げ焼きの香ばしさも手伝います。衣は薄くがコツで、片栗粉なら竜田揚げのように軽くカリッと、小麦粉ならピカタのようにしっとりした薄衣に仕上がります。</p>
           <p class="var-note"><b>バリエーション：</b>鶏もも肉でもおいしくできます。また、ティムールの代わりに花山椒で作ってもおいしいです。実際に作っておいしかったのは、この「ティムール」と「花山椒」の2バージョンです。</p>
         </div>
       </article>
@@ -2056,7 +2300,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="r-body">
           <h3>レンズ豆とひき肉の簡単キーマ風</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約25分</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約25分</span>
             <span class="chip">2〜3人分</span>
             <span class="chip">ごはんが進む</span>
           </div>
@@ -2067,6 +2311,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <button class="chip spice" data-open="chili" type="button">チリペッパー</button>
             <button class="chip spice" data-open="cardamom" type="button">カルダモン</button>
             <button class="chip spice" data-open="ginger" type="button">生姜</button>
+            <button class="chip spice" data-open="garlic" type="button">ニンニク</button>
           </div>
           <p class="intro">乾燥レンズ豆は下茹でいらずで、そのまま煮込めるのが便利。ひき肉の旨みに豆のホクホク感が加わる、平日にも作りやすいキーマ風です。材料はどれもスーパーで揃います。</p>
           <h4>材料</h4>
@@ -2106,7 +2351,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="r-body">
           <h3>キャベツのクミン蒸し炒め</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約15分</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約15分</span>
             <span class="chip">2人分</span>
             <span class="chip">あと一品に</span>
           </div>
@@ -2147,7 +2392,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="r-body">
           <h3>グリーンカレー（タイ風）</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約25分</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約25分</span>
             <span class="chip">2〜3人分</span>
             <span class="chip">辛さしっかり</span>
           </div>
@@ -2184,7 +2429,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <li>なすとパプリカを加えてさらに5分、なすが柔らかくなるまで煮る。</li>
             <li>ナンプラーと砂糖で味を整え、火を止めてバジルの葉を散らす。ごはんと一緒にどうぞ。</li>
           </ol>
-          <p class="point"><b>使い分けのコツ：</b>ペーストだけでも作れますが、レモングラスとこぶみかんの葉を「生で追加」すると、香りのフレッシュさが段違いです。辛さはペーストの量で調整を。レモングラスとガランガルは香り付け用なので、食べずによけてOKです。</p>
+          <p class="point"><b>使い分けのコツ：</b>ペーストだけでも作れますが、レモングラスとこぶみかんの葉を「生で追加」すると、香りのフレッシュさが段違いです。辛さはペーストの量で調整を。<br>レモングラスとガランガルは香り付け用なので、食べずによけてOKです。</p>
         </div>
       </article>
 
@@ -2196,7 +2441,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="r-body">
           <h3>チキンビリヤニ（重ね蒸しごはん）</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約60分＋漬け込み30分</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約60分＋漬け込み30分</span>
             <span class="chip">3〜4人分</span>
             <span class="chip">お祝いごはん</span>
           </div>
@@ -2211,6 +2456,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <button class="chip spice" data-open="coriander" type="button">コリアンダー</button>
             <button class="chip spice" data-open="turmeric" type="button">ターメリック</button>
             <button class="chip spice" data-open="ginger" type="button">生姜</button>
+            <button class="chip spice" data-open="garlic" type="button">ニンニク</button>
           </div>
           <p class="intro">スパイスと一緒に炊き上げる、インドのごちそうごはん。ヨーグルトに漬けた鶏肉と、下茹でしたバスマティ米を重ねて蒸す「重ね蒸し」が本場の作り方です。ホールスパイスの総動員っぷりは、この図鑑のオールスター戦のような一品。</p>
           <h4>材料</h4>
@@ -2255,7 +2501,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="r-body">
           <h3>カルダモン香るライスプディング（キール風）</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約35分＋冷やす2時間</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約35分＋冷やす2時間</span>
             <span class="chip">4人分</span>
             <span class="chip">冷やして食べる</span>
           </div>
@@ -2264,7 +2510,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <button class="chip spice" data-open="saffron" type="button">サフラン</button>
             <button class="chip spice" data-open="cinnamon" type="button">シナモン</button>
           </div>
-          <p class="intro">デザート編の最初は、インドのお祝い菓子「キール」。牛乳でお米をゆっくり煮た、やさしい甘さのライスプディングです。カルダモンの華やかな香りが主役で、サフランの金色が少しだけ特別感を足してくれます。温かいままでも、冷やしてもおいしい一品。</p>
+          <p class="intro">デザート編の最初は、インドのお祝い菓子「キール」。牛乳でお米をゆっくり煮た、やさしい甘さのライスプディングです。<br>カルダモンの華やかな香りが主役で、サフランの金色が少しだけ特別感を足してくれます。温かいままでも、冷やしてもおいしい一品。</p>
           <h4>材料</h4>
           <ul class="ing">
             <li>米<b>50g</b></li>
@@ -2282,7 +2528,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <li>カルダモン、サフランの戻し湯、砂糖を加えてさらに5分煮る。冷めると少し締まるので、「ややゆるめかな」くらいで火を止めるのが目安です。</li>
             <li>器に盛り、粗熱が取れたら冷蔵庫で2時間ほど冷やす。食べる直前にピスタチオを散らし、シナモンをひと振りしてどうぞ。</li>
           </ol>
-          <p class="point"><b>使い分けのコツ：</b>カルダモンは鞘ごと入れず、種をつぶして入れると香りがすっと立ちます。サフランはほんのひとつまみで十分で、入れすぎると薬のような香りが前に出るので控えめに。温かいうちはお粥のようにゆるく、冷やすとプリン寄りの食感に変わる、その変化も楽しんでください。</p>
+          <p class="point"><b>使い分けのコツ：</b>カルダモンは鞘ごと入れず、種をつぶして入れると香りがすっと立ちます。サフランはほんのひとつまみで十分で、入れすぎると薬のような香りが前に出るので控えめに。<br>温かいうちはお粥のようにゆるく、冷やすとプリン寄りの食感に変わる、その変化も楽しんでください。</p>
         </div>
       </article>
 
@@ -2294,7 +2540,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="r-body">
           <h3>バニラのパンナコッタ</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約15分＋冷やし固める3時間</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約15分＋冷やし固める3時間</span>
             <span class="chip">4個分</span>
             <span class="chip">型から外すタイプ</span>
           </div>
@@ -2323,7 +2569,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <li>茶こしでこしながら型に流し入れ、粗熱が取れたら冷蔵庫で3時間以上冷やし固める。</li>
             <li>型の外側をさっと温めて皿に返し、シナモンをひと振り。トンカビーンがあれば、仕上げに本当に少しだけすりおろして散らす。</li>
           </ol>
-          <p class="point"><b>使い分けのコツ：</b>トンカビーンは香りがとても強いので、「すりおろしひと呼吸分」くらいの少量から。入れすぎると甘さより香りが勝つので、まずバニラだけの味見をしてから足すのがおすすめです。バニラビーンズの鞘は捨てずに、砂糖の瓶に入れてバニラシュガーにすると次に使えます。</p>
+          <p class="point"><b>使い分けのコツ：</b>トンカビーンは香りがとても強いので、「すりおろしひと呼吸分」くらいの少量から。入れすぎると甘さより香りが勝つので、まずバニラだけの味見をしてから足すのがおすすめです。<br>バニラビーンズの鞘は捨てずに、砂糖の瓶に入れてバニラシュガーにすると次に使えます。</p>
         </div>
       </article>
 
@@ -2335,7 +2581,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="r-body">
           <h3>チリとシナモンのチョコムース</h3>
           <div class="r-meta">
-            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>約20分＋冷やす2時間</span>
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約20分＋冷やす2時間</span>
             <span class="chip">小さめグラス4個分</span>
             <span class="chip">後味ほんのり温かい</span>
           </div>
@@ -2344,7 +2590,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <button class="chip spice" data-open="chili" type="button">チリペッパー</button>
             <button class="chip spice" data-open="vanilla" type="button">バニラ</button>
           </div>
-          <p class="intro">チョコレートにシナモンとチリを合わせるのは、メキシコのチョコドリンクに古くからある組み合わせ。チリは「辛くする」ためではなく、後味をほんのり温かくするためのひとつまみです。濃厚なのに最後がすっと軽く、大人寄りのデザートです。</p>
+          <p class="intro">チョコレートにシナモンとチリを合わせるのは、メキシコのチョコドリンクに古くからある組み合わせ。チリは「辛くする」ためではなく、後味をほんのり温かくするためのひとつまみです。<br>濃厚なのに最後がすっと軽く、大人寄りのデザートです。</p>
           <h4>材料</h4>
           <ul class="ing">
             <li>板チョコレート（カカオ70%目安）<b>100g</b></li>
@@ -2364,7 +2610,717 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <li>残りの生クリーム100mlをゆるく泡立て（ツノがやっと立つくらい）、ガナッシュに2回に分けて、泡をつぶさないように切り混ぜる。</li>
             <li>グラスに流し入れて冷蔵庫で2時間以上冷やす。食べる直前にシナモンをひと振りしてどうぞ。</li>
           </ol>
-          <p class="point"><b>使い分けのコツ：</b>チリの正解は「入っていると分からないけれど、後味が温かい」ライン。辛さが表に出たら入れすぎなので、次回は半分から試してください。シナモンは仕上げにも振ると、最初の一口から香りが立ちます。甘さ控えめのカカオ70%が、このスパイスの組み合わせと一番相性がいいです。</p>
+          <p class="point"><b>使い分けのコツ：</b>チリの正解は「入っていると分からないけれど、後味が温かい」ライン。辛さが表に出たら入れすぎなので、次回は半分から試してください。<br>シナモンは仕上げにも振ると、最初の一口から香りが立ちます。甘さ控えめのカカオ70%が、このスパイスの組み合わせと一番相性がいいです。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-salmoncaper">
+        <div class="r-photo">
+          <img src="assets/dish-salmoncaper.webp" alt="白い皿に盛り付けられた、できあがりのサーモンのレモンバターケッパーソース。焼き色のついた鮭の切り身に、ケッパーの粒が入ったレモンバターソースがかかり、レモンのくし切りとサラダが添えられている" />
+          <span class="r-badge">Recipe 15 ・ 主菜</span>
+        </div>
+        <div class="r-body">
+          <h3>サーモンのレモンバターケッパーソース</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約20分</span>
+            <span class="chip">2人分</span>
+            <span class="chip">フランス家庭料理の定番</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="caper" type="button">ケッパー</button>
+            <button class="chip spice" data-open="parsley" type="button">パセリ（イタリアンパセリ）</button>
+            <button class="chip spice" data-open="pepper" type="button">ブラックペッパー</button>
+          </div>
+          <p class="intro">鮭のムニエルに、ケッパー入りのレモンバターソースをかける、フランスの家庭料理の定番です。ケッパーの酸味と塩味が、バターのコクをキュッと引き締めます。手順は「焼く→同じフライパンでソースを作る」の2段だけ。</p>
+          <h4>材料</h4>
+          <ul class="ing">
+            <li>生鮭<b>2切れ</b></li>
+            <li>塩・ブラックペッパー<b>各少々</b></li>
+            <li>小麦粉<b>薄くまぶす程度</b></li>
+            <li>バター<b>20g（焼く用とソース用に半分ずつ）</b></li>
+            <li>オリーブオイル<b>大さじ1</b></li>
+            <li>白ワイン（または酒）<b>大さじ2</b></li>
+            <li>レモン汁<b>大さじ1</b></li>
+            <li>ケッパー<b>大さじ1〜2（目安）</b></li>
+            <li>パセリ（みじん切り）<b>少々</b></li>
+            <li>レモン（くし切り）<b>2切れ</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>鮭は塩・胡椒をして10分ほど置き、出てきた水気を拭き取り、小麦粉を薄くまぶす。</li>
+            <li>フライパンにオリーブオイルとバター半量を熱し、鮭を皮目から中火で焼く。焼き色がついたら返し、火が通ったら器に取り出す。</li>
+            <li>同じフライパンの余分な油を軽く拭き、白ワインを入れて煮立て、底の旨みをこそぐ。レモン汁とケッパーを加えてひと煮立ちさせる。</li>
+            <li>火を弱め、残りのバターを加えてフライパンを揺すりながら溶かす。とろりとしたら味を見て、塩胡椒で調える（ケッパーの塩気があるので、塩は控えめから）。</li>
+            <li>鮭にソースをたっぷりかけ、パセリを散らし、レモンを添えてできあがり。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>バターは最後に加えて「揺すりながら溶かす」と分離しにくく、艶のあるソースになります。ケッパーは塩気が強いので、漬け液ごと入れすぎないのが目安。白身魚や鶏むね肉でも同じ手順で作れます。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-greenpepperpork">
+        <div class="r-photo">
+          <img src="assets/dish-greenpepperpork.webp" alt="黒い皿に盛り付けられた、できあがりのグリーンペッパーソースのポークソテー。角の丸い自然な形の厚切り豚肉に焼き目と脂の縁があり、塩水漬けグリーンペッパーの粒を煮込んだクリームソースがかかり、インゲンが添えられている" />
+          <span class="r-badge">Recipe 16 ・ 主菜</span>
+        </div>
+        <div class="r-body">
+          <h3>グリーンペッパーソースのポークソテー</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約25分</span>
+            <span class="chip">2人分</span>
+            <span class="chip">切らずに一枚のまま</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="greenpepper" type="button">グリーンペッパー</button>
+            <button class="chip spice" data-open="pepper" type="button">ブラックペッパー</button>
+          </div>
+          <p class="intro">フランスのプワーブル・ベール（緑胡椒ソース）を、家庭で作りやすいクリームベースにした定番ポークソテーです。ティムールのポークソテーとは別系統で、こちらは塩水漬けのグリーンペッパーを軽くつぶしてソースに入れるのが決め手。<br>肉は切らずに一枚のまま盛ります。</p>
+          <h4>材料</h4>
+          <ul class="ing">
+            <li>豚ロース厚切り<b>2枚（各150g目安）</b></li>
+            <li>塩・ブラックペッパー<b>各少々</b></li>
+            <li>小麦粉<b>薄くまぶす程度</b></li>
+            <li>バター<b>15g</b></li>
+            <li>サラダ油<b>大さじ1</b></li>
+            <li>グリーンペッパー（塩水漬け）<b>大さじ1〜1と1/2（目安）</b></li>
+            <li>白ワイン（または酒）<b>大さじ3</b></li>
+            <li>生クリーム<b>100ml</b></li>
+            <li>醤油（隠し味）<b>小さじ1（目安）</b></li>
+            <li>粒マスタード（あれば）<b>小さじ1</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>豚肉は脂身と赤身の境目に切り込みを入れて筋切りし、塩・胡椒をし、小麦粉を薄くまぶす。グリーンペッパーは漬け液を切り、半量ほどをスプーンの背で軽くつぶす。</li>
+            <li>フライパンに油とバター半量を熱し、豚肉を中火で両面に焼き色をつけ、厚みに応じて計8〜10分ほど火を通す。取り出してアルミホイルをかけて休ませる。</li>
+            <li>同じフライパンに白ワインを入れて煮立て、底の焼き汁をこそぎながら半量ほどに煮詰める。</li>
+            <li>生クリームとグリーンペッパーを加え、弱火で少しとろみがつくまで煮る。醤油（と粒マスタード）で味を調える。</li>
+            <li>肉をフライパンに戻してソースをさっとからめ、器に一枚のまま盛ってソースをかける。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>グリーンペッパーは「半分つぶして、半分は粒のまま」が、香りと食感のバランスのよい目安です。乾燥のグリーンペッパーを使うときは、酒少々で戻してから同じように。辛さは粒の量で調整してください。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-mitsubaohitashi">
+        <div class="r-photo">
+          <img src="assets/dish-mitsubaohitashi.webp" alt="陶器の小鉢に盛られた、できあがりの三つ葉のおひたし。茹でてくたっと柔らかくなった三つ葉が器に低くおさまり、器の底にだし醤油が少し溜まる。上にはかつお節がたっぷりかかり、ゆずの皮の千切りが散らしてある" />
+          <span class="r-badge">Recipe 17 ・ 副菜</span>
+        </div>
+        <div class="r-body">
+          <h3>三つ葉のおひたし</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約10分＋浸す10分</span>
+            <span class="chip">2人分</span>
+            <span class="chip">三つ葉が主役</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="mitsuba" type="button">三つ葉🌿</button>
+            <button class="chip spice" data-open="yuzu" type="button">ゆず</button>
+          </div>
+          <p class="intro">三つ葉そのものを主役に味わう、和食の定番おひたしです。さっと茹でて水気をしっかり絞り、だし醤油に浸すだけ。<br>脇役の薬味としてではなく、ひと束まるごと食べるための一品です。仕上げは定番のかつお節に、あればゆずの皮の千切りを散らして、香りを重ねます。</p>
+          <h4>材料</h4>
+          <ul class="ing">
+            <li>三つ葉<b>2束（約100g）</b></li>
+            <li>だし汁<b>100ml</b></li>
+            <li>薄口醤油<b>大さじ1</b></li>
+            <li>みりん<b>大さじ1</b></li>
+            <li>かつお節<b>少々（仕上げ用）</b></li>
+            <li>ゆずの皮の千切り<b>少々（あれば、仕上げ用）</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>浸し地を作る。小鍋にだし汁・薄口醤油・みりんを入れてひと煮立ちさせ、みりんのアルコールを飛ばしたら、火を止めて冷ましておく。</li>
+            <li>三つ葉は根元を落とし、4cmほどの長さに切る。たっぷりの湯を沸かし、茎の方から湯に入れて10〜20秒ほどさっと茹でる（茹ですぎると香りと色が飛びます）。</li>
+            <li>冷水にとって熱を取り、手でぎゅっと絞って水気をしっかり切る。水気が残ると味がぼやけるので、ここが決め手です。</li>
+            <li>冷ました浸し地に三つ葉を浸し、10分ほど置いて味を含ませる。</li>
+            <li>小鉢に盛り、仕上げにかつお節をかけ、あればゆずの皮の千切りを散らしてできあがり。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>三つ葉は「さっと茹でる・しっかり絞る・浸し地は先に冷ます」の3点が基本です。温かい浸し地に浸けると色が悪くなります。<br>根三つ葉や切り三つ葉でも同じ作り方でどうぞ。茎のシャキッとした歯ざわりが残るくらいが、おひたしらしい仕上がりです。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-dengaku">
+        <div class="r-photo">
+          <img src="assets/dish-dengaku.webp" alt="陶器の皿に盛り付けられた、できあがりのなす田楽。半分に切ったなすの切り口に白味噌と赤味噌の田楽味噌が塗られ、それぞれに木の芽の葉がのり、ごまが振られている" />
+          <span class="r-badge">Recipe 18 ・ 副菜</span>
+        </div>
+        <div class="r-body">
+          <h3>木の芽味噌のなす田楽</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約20分</span>
+            <span class="chip">2人分</span>
+            <span class="chip">春の香り</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="konome" type="button">木の芽（山椒の葉）🌿</button>
+            <button class="chip spice" data-open="goma" type="button">ごま</button>
+            <button class="chip spice" data-open="sansho" type="button">山椒</button>
+          </div>
+          <p class="intro">田楽味噌に刻んだ木の芽を混ぜる、春の定番のなす田楽です。木の芽味噌の作り方は「味噌・砂糖・みりん・酒を練って、火を止めてから木の芽」が基本形。豆腐やこんにゃく、筍にも使える万能味噌になります。</p>
+          <h4>材料</h4>
+          <ul class="ing">
+            <li>なす<b>2本</b></li>
+            <li>サラダ油<b>大さじ2</b></li>
+            <li>味噌<b>大さじ2</b></li>
+            <li>砂糖<b>大さじ1（目安）</b></li>
+            <li>みりん<b>大さじ1</b></li>
+            <li>酒<b>大さじ1</b></li>
+            <li>木の芽<b>6〜8枚（目安）</b></li>
+            <li>白ごま<b>少々</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>木の芽味噌を作る。木の芽は半量を細かく刻む。小鍋に味噌・砂糖・みりん・酒を入れて弱火で練り、艶が出たら火を止め、刻んだ木の芽を混ぜる。</li>
+            <li>なすは縦半分に切り、切り口に格子状の切り込みを浅く入れる。</li>
+            <li>フライパンに油を熱し、なすを皮目から焼く。返して蓋をし、中までやわらかくなるまで蒸し焼きにする。</li>
+            <li>切り口に木の芽味噌を塗り、トースターやグリルで表面に軽く焼き色をつける。</li>
+            <li>残りの木の芽をのせ、白ごまを振ってできあがり。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>木の芽は加熱しすぎると香りが飛ぶので、味噌には火を止めてから混ぜ、仕上げにも生の葉をのせるのが基本です。甘さは味噌の塩分で変わるので、砂糖は大さじ1を目安に加減してください。<br>木の芽がない季節は、仕上げに粉山椒をひと振りでも寄せられます。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-cucumber">
+        <div class="r-photo">
+          <img src="assets/dish-cucumber.webp" alt="白い器に盛り付けられた、できあがりのきゅうりの韓国風和えもの。半月切りのきゅうりに赤いコチュカルが絡み、ごまと青ねぎ、にんにくの薄切りがのっている" />
+          <span class="r-badge">Recipe 19 ・ 副菜</span>
+        </div>
+        <div class="r-body">
+          <h3>きゅうりの韓国風和えもの（コチュカル）</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約10分＋置く10分</span>
+            <span class="chip">2人分</span>
+            <span class="chip">オイムチム風</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="gochukaru" type="button">コチュカル</button>
+            <button class="chip spice" data-open="goma" type="button">ごま</button>
+            <button class="chip spice" data-open="garlic" type="button">ニンニク</button>
+          </div>
+          <p class="intro">韓国のオイムチム（きゅうりの和え物）の基本形です。塩もみで水気を絞ったきゅうりを、コチュカル入りの合わせ調味料で和えるだけ。コチュカルの「色と甘みのある辛さ」が映える、作り置きにも向く一品です。</p>
+          <h4>材料</h4>
+          <ul class="ing">
+            <li>きゅうり<b>2本</b></li>
+            <li>塩（塩もみ用）<b>小さじ1/2</b></li>
+            <li>コチュカル（粗挽き）<b>大さじ1（目安）</b></li>
+            <li>醤油<b>小さじ2</b></li>
+            <li>酢<b>小さじ2</b></li>
+            <li>砂糖<b>小さじ1</b></li>
+            <li>ごま油<b>大さじ1</b></li>
+            <li>にんにく（すりおろし）<b>少々</b></li>
+            <li>白ごま<b>大さじ1</b></li>
+            <li>青ねぎ（小口切り）<b>1本分</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>きゅうりは板ずりして洗い、縦半分に切ってから斜めの厚切り（または半月切り）にする。塩をまぶして10分ほど置き、出てきた水気を手でしっかり絞る。</li>
+            <li>ボウルにコチュカル、醤油、酢、砂糖、ごま油、にんにくを入れてよく混ぜる。</li>
+            <li>きゅうりを加えて全体に絡むように和え、白ごまと青ねぎを加えてひと混ぜする。</li>
+            <li>味を見て、辛さはコチュカル、酸味は酢で調整する。10分ほど置くと味がなじみます。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>水気をしっかり絞るのが、水っぽくならない一番のコツです。コチュカルは粗挽きだと見た目と食感が立ち、細挽きだと全体に均一に絡みます。<br>辛さは粉の銘柄でかなり変わるので、大さじ1は目安として、少なめから足すのが安全です。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-hibiscustea">
+        <div class="r-photo">
+          <img src="assets/dish-hibiscustea.webp" alt="グラスに注がれた、できあがりのハイビスカスのアイスティー。ルビー色のお茶に氷が入り、レモンの輪切りとミントが飾られ、そばに乾燥ハイビスカスの小鉢とガラスのティーポットがある" />
+          <span class="r-badge">Recipe 20 ・ ドリンク</span>
+        </div>
+        <div class="r-body">
+          <h3>ハイビスカスのアイスティー</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約10分＋冷やす</span>
+            <span class="chip">2〜3杯分</span>
+            <span class="chip">ルビー色</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="hibiscus" type="button">ハイビスカス（ローゼル）</button>
+            <button class="chip spice" data-open="mint" type="button">ミント🌿</button>
+          </div>
+          <p class="intro">乾燥ハイビスカス（ローゼル）を熱湯で蒸らして冷やすだけの、世界中で愛される定番ティーです。エジプトでは「カルカデ」、メキシコでは「アグア・デ・ハマイカ」と呼ばれるものの家庭版。<br>酸味と甘みのバランスは、砂糖の量で好みに寄せてください。</p>
+          <h4>材料</h4>
+          <ul class="ing">
+            <li>乾燥ハイビスカス（ローゼル）<b>大さじ2〜3（目安）</b></li>
+            <li>熱湯<b>500ml</b></li>
+            <li>砂糖（または蜂蜜）<b>大さじ2〜3（目安）</b></li>
+            <li>レモン汁<b>小さじ2</b></li>
+            <li>氷<b>適量</b></li>
+            <li>ミントの葉・レモンの輪切り<b>各少々</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>ポットにハイビスカスと熱湯を入れ、蓋をして5分ほど蒸らす。</li>
+            <li>茶こしでこし、温かいうちに砂糖（蜂蜜）を溶かす。</li>
+            <li>粗熱が取れたらレモン汁を加え、冷蔵庫でよく冷やす。</li>
+            <li>グラスに氷を入れ、お茶を注いでミントとレモンを飾ってできあがり。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>長く蒸らすと酸味と渋みが強くなるので、5分が目安です。甘さは酸味とのバランスで加減を。炭酸水で割ると爽やかなソーダになり、出し殻の萼は刻んで塩もみすれば、ごはんのお供にもリメイクできます。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-pandanchiffon">
+        <div class="r-photo">
+          <img src="assets/dish-pandanchiffon.webp" alt="白いケーキスタンドにのった、できあがりのパンダンシフォンケーキ。淡い緑色のふわふわの生地が筒状の穴のある姿で焼き上がり、一切れ切り分けて断面が見え、そばにパンダンリーフと小皿のパンダンパウダーが添えられている" />
+          <span class="r-badge">デザート 04 ・ 甘いもの</span>
+        </div>
+        <div class="r-body">
+          <h3>パンダンシフォンケーキ</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約60分（焼き35分＋逆さ冷まし）</span>
+            <span class="chip">17cmシフォン型1台分</span>
+            <span class="chip">東南アジアの定番</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="pandan" type="button">パンダンリーフ🌿</button>
+            <button class="chip spice" data-open="vanilla" type="button">バニラ</button>
+          </div>
+          <p class="intro">シンガポールやマレーシアで愛される、淡い緑色のシフォンケーキ。パンダンの甘い香りと自然な緑色が主役です。<br>日本では生葉が手に入りにくいので、ここではフリーズドライのパンダンパウダーを使う形が基本。葉がある場合は搾り汁、エッセンスでも作れます。<br>手順は通常のシフォンケーキの標準形（卵黄生地＋メレンゲ＋逆さにして冷ます）です。</p>
+          <h4>材料（17cmシフォン型）</h4>
+          <ul class="ing">
+            <li>卵黄<b>4個分</b></li>
+            <li>卵白<b>5個分</b></li>
+            <li>砂糖<b>70g（卵黄用20g＋メレンゲ用50g）</b></li>
+            <li>薄力粉<b>80g</b></li>
+            <li>パンダンパウダー<b>大さじ1（目安）</b></li>
+            <li>ココナッツミルク（または牛乳）<b>60ml</b></li>
+            <li>サラダ油（太白ごま油など無臭のもの）<b>40ml</b></li>
+            <li>塩<b>ひとつまみ</b></li>
+            <li>バニラエッセンス（あれば）<b>少々</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>オーブンを170℃に予熱する。シフォン型には何も塗らない（油を塗ると生地が滑って膨らみません）。パンダンパウダーはココナッツミルクに溶いておく。</li>
+            <li>ボウルに卵黄と砂糖20gを入れ、白っぽくもったりするまで泡立て器で混ぜる。油を少しずつ加えて混ぜ、パンダン入りのココナッツミルクも加えて混ぜる。</li>
+            <li>薄力粉をふるい入れ、粉っぽさがなくなるまで混ぜる（卵黄生地）。</li>
+            <li>別の乾いたボウルで卵白を泡立て、砂糖50gを2〜3回に分けて加え、ツノがピンと立つしっかりしたメレンゲにする。</li>
+            <li>メレンゲの1/3を卵黄生地に入れて泡立て器で混ぜ、残りをゴムベラで泡をつぶさないように切り混ぜる。</li>
+            <li>型に高い位置から生地を流し入れ、竹串でぐるりと回して大きな気泡を消す。型を軽く台に落としてならす。</li>
+            <li>170℃で約35分焼く。表面が割れて、竹串を刺しても生地がついてこなければ焼き上がり。</li>
+            <li>すぐに型を逆さにして瓶などに差し、完全に冷めるまでそのまま置く（逆さにしないと自重でしぼみます）。冷めたらパレットナイフで型から外してできあがり。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>パウダーの代わりに生葉を使う場合は、葉5〜6枚をココナッツミルク60mlとミキサーにかけてこした「搾り汁」をそのまま液体分に。エッセンス／ペーストなら小さじ1〜2を液体に混ぜます（色が濃い製品が多いので少なめから）。<br>パウダーは銘柄で色と香りの濃さが変わるので、大さじ1は目安として、緑が薄ければ次回少し増やしてください。ココナッツミルクを牛乳に替えると、より軽く日本のシフォン寄りの味わいになります。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-poundcake">
+        <div class="r-photo">
+          <img src="assets/dish-poundcake.webp" alt="皿の上のスパイスパウンドケーキ。一切れ切り分けて本体に立てかけ、スパイスの粒が見えるきめ細かい断面が見えている" />
+          <span class="r-badge">デザート 05 ・ 甘いもの</span>
+        </div>
+        <div class="r-body">
+          <h3>スパイスパウンドケーキ</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約60分（焼き約40分）</span>
+            <span class="chip">18cmパウンド型1本分</span>
+            <span class="chip">スパイス主役の焼き菓子</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="cinnamon" type="button">シナモン</button>
+            <button class="chip spice" data-open="cardamom" type="button">カルダモン</button>
+            <button class="chip spice" data-open="nutmeg" type="button">ナツメグ</button>
+            <button class="chip spice" data-open="ginger" type="button">ジンジャー</button>
+          </div>
+          <p class="intro">バター・砂糖・卵・小麦粉が同量の「四同量」が基本のパウンドケーキに、シナモン、カルダモン、ナツメグ、ジンジャーを効かせた、スパイスが主役のシンプルな焼き菓子です。<br>手順は定番のパウンドケーキそのもの。混ぜ方と焼き時間さえ守れば失敗しにくい、確立した作り方です。<br>焼きたてより、ラップで包んで一晩置いた翌日のほうが、スパイスの香りが生地になじんで美味しくなります。</p>
+          <h4>材料（18cmパウンド型1本分）</h4>
+          <ul class="ing">
+            <li>無塩バター<b>100g</b></li>
+            <li>砂糖<b>100g</b></li>
+            <li>卵<b>2個（約100g）</b></li>
+            <li>薄力粉<b>100g</b></li>
+            <li>ベーキングパウダー<b>小さじ1/2</b></li>
+            <li>シナモンパウダー<b>小さじ1</b></li>
+            <li>カルダモンパウダー<b>小さじ1/2</b></li>
+            <li>ジンジャーパウダー<b>小さじ1/2</b></li>
+            <li>ナツメグ（できればホールをすりおろす）<b>小さじ1/4</b></li>
+            <li>塩<b>ひとつまみ</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>バターと卵は室温に戻す。パウンド型にオーブンペーパーを敷き、オーブンを170℃に予熱する。薄力粉、ベーキングパウダー、スパイス類、塩は合わせてふるっておく。</li>
+            <li>ボウルにバターを入れ、泡立て器でクリーム状になるまで混ぜる。砂糖を加え、白っぽくふんわりするまですり混ぜる。</li>
+            <li>溶き卵を4〜5回に分けて加え、そのつどよく混ぜる（一度に加えると分離するので少しずつ。分離しそうになったら粉をひとつまみ先に混ぜると戻ります）。</li>
+            <li>ふるった粉類を加え、ゴムベラで粉っぽさがなくなるまで切り混ぜる。混ぜすぎると固くなるので、ツヤが出たら止める。</li>
+            <li>生地を型に入れ、真ん中を軽くへこませる（焼くと中央が盛り上がるため）。型を台に数回軽く落として空気を抜く。</li>
+            <li>170℃で40〜45分焼く。竹串を刺して生地がついてこなければ焼き上がり。焼き色がつきすぎる場合は途中でアルミホイルをかぶせる。</li>
+            <li>型から外して網で粗熱を取り、温かいうちにラップで包む。そのまま一晩置くとしっとりして、スパイスの香りが生地全体に回ります。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>スパイスの主役は入れ替え自由です。シナモンを増やせば王道の香りに、カルダモンを効かせると北欧の焼き菓子寄りに、クローブをひとつまみ足すとぐっと深い香りになります。<br>ナツメグはホールをすりおろしたほうが香りが段違いなので、この図鑑らしく「使う直前にすりおろす」がおすすめ。切り分けた一切れに生クリームを添えると、スパイスの香りがさらに引き立ちます。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-gapao">
+        <div class="r-photo">
+          <img src="assets/dish-gapao.webp" alt="器に盛り付けられた、できあがりのガパオ風ごはん。バジルたっぷりの鶏ひき肉炒めをごはんにのせ、縁のカリッとした目玉焼きをトッピングしている" />
+          <span class="r-badge">ハーブ主役 01 ・ 主菜</span>
+        </div>
+        <div class="r-body">
+          <h3>鶏ひき肉とバジルのガパオ風ごはん</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約20分</span>
+            <span class="chip">2人分</span>
+            <span class="chip">バジル山盛りOK</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="basil" type="button">バジル 🌿</button>
+            <button class="chip spice" data-open="thaibasil" type="button">タイバジル 🌿（あれば本格派）</button>
+            <button class="chip spice" data-open="chili" type="button">チリペッパー</button>
+            <button class="chip spice" data-open="ginger" type="button">生姜</button>
+            <button class="chip spice" data-open="garlic" type="button">ニンニク</button>
+          </div>
+          <p class="intro">タイの屋台の味、ガパオを、スーパーで手に入るスイートバジルで作る家庭版です。本場はホーリーバジルを使いますが、スイートバジルでも「たっぷりの葉を、火を止めてから入れる」のが守れれば、ちゃんとガパオらしい一皿になります。<br>目玉焼きの縁をカリッとさせるのが、屋台っぽさの仕上げです。</p>
+          <h4>材料</h4>
+          <ul class="ing">
+            <li>鶏ひき肉<b>250g</b></li>
+            <li>バジルの葉<b>たっぷり2つかみ（約30枚）</b></li>
+            <li>玉ねぎ<b>1/2個</b></li>
+            <li>ピーマン（またはパプリカ）<b>1個</b></li>
+            <li>にんにく<b>1片</b></li>
+            <li>生姜（みじん切り）<b>小さじ1/2</b></li>
+            <li>チリパウダー（または鷹の爪1本）<b>小さじ1/4〜</b></li>
+            <li>ナンプラー<b>大さじ1</b></li>
+            <li>しょうゆ<b>小さじ1</b></li>
+            <li>砂糖<b>小さじ1</b></li>
+            <li>オイスターソース<b>小さじ1（あれば）</b></li>
+            <li>油<b>大さじ1＋目玉焼き用大さじ1</b></li>
+            <li>卵<b>2個</b></li>
+            <li>温かいごはん<b>2杯分</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>玉ねぎは薄切り、ピーマンは細切り、にんにくはみじん切りにする。バジルは葉を摘んで水気を拭いておく（水気が残ると油がはねます）。</li>
+            <li>フライパンに油大さじ1を熱し、にんにく・生姜・チリを弱火で炒めて香りを出す。ひき肉を加え、ほぐしながら中火で炒める。</li>
+            <li>肉の色が変わったら玉ねぎとピーマンを加えて2分ほど炒め、ナンプラー、しょうゆ、砂糖、オイスターソースを加えて汁気が少なくなるまで炒める。</li>
+            <li>火を止めてからバジルの葉を一気に入れ、余熱で全体を混ぜる。葉がしんなりしたら炒め上がり（ここが一番のポイント）。</li>
+            <li>別のフライパンに油大さじ1を多めに熱し、卵を割り入れて、白身の縁がカリッと色づくまで焼く。</li>
+            <li>ごはんに炒めた具をのせ、目玉焼きをトッピングしてできあがり。味が濃いめの場合は、仕上げにライムやレモンを絞ると締まります。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>バジルは「加熱」ではなく「余熱でしんなり」が正解。火にかけたまま炒め続けると香りが飛んで色も黒ずみます。辛さはチリを最初に入れるほど全体に回り、最後に足すほど舌に直接きます。</p>
+          <p class="var-note"><b>アレンジ：</b>バジルが手に入らない日は、大葉（しそ）で和風ガパオ風にもできます（同じシソ科の親戚どうし）。ひき肉は豚でも合います。<br>タイバジル（ホラパー・No.H16）が手に入る日は、スイートバジルの代わりに同量をどうぞ。アニスのような甘い香りと紫の茎が特徴で、熱を通しても香りが残りやすく、一気にタイ寄りの顔になります。<br>本場のホーリーバジルとはまた別品種ですが、家庭版としては一番の格上げです。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-pakuchisalad">
+        <div class="r-photo">
+          <img src="assets/dish-pakuchisalad.webp" alt="平らな器に盛り付けられた、できあがりのパクチーたっぷりエスニックサラダ。裂いた鶏肉、紫玉ねぎ、ミニトマト、きゅうりに山盛りのパクチーと砕いたピーナッツがのっている" />
+          <span class="r-badge">ハーブ主役 02 ・ サラダ</span>
+        </div>
+        <div class="r-body">
+          <h3>パクチーたっぷりのエスニックサラダ</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約15分</span>
+            <span class="chip">2人分</span>
+            <span class="chip">火を使わない</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="pakuchi" type="button">パクチー（葉）🌿</button>
+            <button class="chip spice" data-open="chili" type="button">チリペッパー</button>
+            <button class="chip spice" data-open="coriander" type="button">コリアンダー（種）</button>
+          </div>
+          <p class="intro">パクチーを「薬味」ではなく「葉野菜」として山盛り食べるサラダです。タイのヤム（和え物）の考え方で、ライムとナンプラーのドレッシングが、たっぷりの葉と鶏肉をまとめます。茎も刻んで入れると、香りに奥行きが出ます。</p>
+          <h4>材料</h4>
+          <ul class="ing">
+            <li>パクチー<b>2束（葉と茎で約60g）</b></li>
+            <li>鶏むね肉（またはサラダチキン）<b>150g</b></li>
+            <li>紫玉ねぎ（なければ玉ねぎ）<b>1/4個</b></li>
+            <li>ミニトマト<b>6個</b></li>
+            <li>きゅうり<b>1/2本</b></li>
+            <li>ピーナッツ（砕く）<b>大さじ2</b></li>
+            <li>ライム汁（またはレモン汁）<b>大さじ2</b></li>
+            <li>ナンプラー<b>大さじ1</b></li>
+            <li>砂糖<b>小さじ1</b></li>
+            <li>チリパウダー<b>ひとつまみ〜小さじ1/4</b></li>
+            <li>コリアンダーパウダー<b>小さじ1/2</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>鶏むね肉は茹でて粗熱を取り、手で細く裂く（サラダチキンならそのまま裂くだけでOK）。</li>
+            <li>紫玉ねぎは薄切りにして水に5分さらし、水気をしっかり切る。ミニトマトは半分に、きゅうりは斜め薄切りにする。パクチーは葉と茎に分け、茎は細かく刻む。</li>
+            <li>ボウルにライム汁、ナンプラー、砂糖、チリ、コリアンダーパウダーを入れて混ぜ、砂糖を溶かす（味見をして、酸味・塩気・甘みのバランスを好みに調整）。</li>
+            <li>鶏肉、玉ねぎ、トマト、きゅうり、刻んだパクチーの茎をドレッシングで和える。</li>
+            <li>器に盛り、パクチーの葉を山盛りのせ、砕いたピーナッツを散らしてできあがり。葉は食べる直前に全体とさっと混ぜると、香りが一番立ちます。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>同じ植物でも、葉のパクチー（爽やかな青い香り）と種のコリアンダー（柑橘系の土台の香り）は別物。このサラダは両方を重ねて使う、「同一植物のリレー」が楽しい一品です。<br>パクチーが主役なので、量は思い切って多めが正解。</p>
+          <p class="var-note"><b>アレンジ：</b>鶏肉をエビやイカに変えても美味しくなります。パクチーが苦手な家族には、葉を半分にして三つ葉や大葉を足すと穏やかになります。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-dorowat">
+        <div class="r-photo">
+          <img src="assets/dish-dorowat.webp" alt="広い器に盛り付けられた、できあがりのドロ・ワット風チキン煮込み。たっぷりの暗い赤茶色で濃厚なベルベレのソースの中に、皮がかぶったままの鶏肉が少し減って間隔をあけて入り、玉ねぎと、丸のまま表面に浅く1本だけ切り込みを入れたゆで卵が、整列せずランダムに置かれ、ソースに軽く沈んでいる。骨がむき出しのピースはない。そばの小皿に丸めたインジェラが添えられている" />
+          <span class="r-badge">ブレンド主役 01 ・ 主菜</span>
+        </div>
+        <div class="r-body">
+          <h3>ドロ・ワット風チキン煮込み（ベルベレ）</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約70分（玉ねぎをじっくり炒める時間込み）</span>
+            <span class="chip">3〜4人分</span>
+            <span class="chip">エチオピアの定番煮込み</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="chili" type="button">チリペッパー（ベルベレの主役）</button>
+            <button class="chip spice" data-open="fenugreek" type="button">フェヌグリーク</button>
+            <button class="chip spice" data-open="cardamom" type="button">カルダモン</button>
+            <button class="chip spice" data-open="ginger" type="button">生姜</button>
+            <button class="chip spice" data-open="garlic" type="button">ニンニク</button>
+          </div>
+          <p class="intro">エチオピアを代表する鶏の煮込み「ドロ・ワット」を、家庭で再現しやすい形にした一品です。鶏肉は日本で手に入りやすい骨付きの手羽元（ドラメット）で。<br>骨から出る旨みがソースに溶け込み、手で持って食べる本場のスタイルにも合います。決め手は2つ：玉ねぎを油なしでじっくり炒めて甘みと色を引き出すこと、そしてベルベレ（ブレンドのページ参照）を最初に炒めて香りを立てること。<br>本場は発酵バター（ニテル・キベ）を使いますが、ここではバター＋少量の油で寄せます。ゆで卵を一緒に煮込むのがドロ・ワットの顔です。</p>
+          <h4>材料</h4>
+          <ul class="ing">
+            <li>鶏手羽元（骨付きドラメット）<b>600g（10〜12本目安）</b></li>
+            <li>玉ねぎ<b>大3個（約600g）</b></li>
+            <li>ベルベレ（市販品、またはブレンドページの配合）<b>大さじ2〜3（辛さは調整）</b></li>
+            <li>バター<b>40g</b></li>
+            <li>サラダ油<b>大さじ1</b></li>
+            <li>にんにく（すりおろし）<b>2片分</b></li>
+            <li>生姜（すりおろし）<b>大さじ1</b></li>
+            <li>トマトペースト<b>大さじ1（あれば）</b></li>
+            <li>水（または鶏ガラスープ）<b>300〜400ml</b></li>
+            <li>ゆで卵<b>4個</b></li>
+            <li>レモン汁<b>大さじ1</b></li>
+            <li>塩<b>小さじ1〜（味を見て）</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>手羽元は骨に沿って1本浅く切り込みを入れ（火の通りと味の染み込みがよくなります）、レモン汁と塩少々（分量外）をもみ込み、15分ほど置く。玉ねぎはみじん切りにする。ゆで卵は殻をむいておく。</li>
+            <li>厚手の鍋に玉ねぎだけを入れ（油なし）、中弱火で木べらで混ぜながら20〜25分、茶色く甘い香りになるまでじっくり炒める。焦げつきそうになったら水を大さじ1ずつ足す。これがソースの土台なので、ここは急がない。</li>
+            <li>バターと油を加え、にんにく、生姜、トマトペーストを入れて2分ほど炒める。ベルベレを加え、弱火で1〜2分、香りが立つまで炒める（焦がすと苦くなるので注意）。</li>
+            <li>手羽元を加えて表面の色が変わるまで炒め合わせ、水を加えてふたをし、弱火で30分ほど煮込む（骨付きなので、途中1〜2回返してソースをまんべんなく絡める）。</li>
+            <li>ゆで卵は半分に切らず丸のまま、表面に浅く1本だけ切り込みを入れて（1個につき1か所だけ）鍋に加え、さらに10分煮て味をしみ込ませる。塩で味を調え、手羽元の肉が骨からほろっと離れるくらいやわらかくなればできあがり。</li>
+            <li>本場はインジェラ（テフ粉のクレープ状パン。自作する場合は難易度高め）でつまんで食べます。家庭では温かいごはん、ナン、フラットブレッドでも美味しくいただけます。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>ベルベレは「煮込みの最初に油で炒める」のがベルベレの流儀。逆にミトゥミッタ（同じエチオピアの辛いブレンド）は仕上げ専用で、混同しないこと。<br>この煮込みの仕上げにミトゥミッタをひとつまみ足すと、本場の食卓の組み合わせになります。</p>
+          <p class="var-note"><b>辛さ調整：</b>ベルベレ大さじ2でしっかり辛め。初めては大さじ1.5から始めて、仕上げに足す方が失敗がありません。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-butterchicken">
+        <div class="r-photo">
+          <img src="assets/dish-butterchicken.webp" alt="広めの器に盛り付けられた、できあがりのバターチキン。マットでなめらかなオレンジ色のトマトクリームソースに鶏肉が入り、パクチーの葉がたっぷり堂々とのる。そばには画面から見切れるほど大きなナンが添えられている" />
+          <span class="r-badge">カスリメティ主役 ・ 主菜</span>
+        </div>
+        <div class="r-body">
+          <h3>バターチキン（カスリメティ仕上げ）</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約50分＋漬け込み30分〜</span>
+            <span class="chip">2〜3人分</span>
+            <span class="chip">北インドの定番</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="kasurimethi" type="button">カスリメティ（仕上げの主役）🌿</button>
+            <button class="chip spice" data-open="cardamom" type="button">カルダモン</button>
+            <button class="chip spice" data-open="cinnamon" type="button">シナモン</button>
+            <button class="chip spice" data-open="chili" type="button">チリペッパー</button>
+            <button class="chip spice" data-open="turmeric" type="button">ターメリック</button>
+            <button class="chip spice" data-open="garlic" type="button">ニンニク</button>
+          </div>
+          <p class="intro">北インドを代表する、トマトとバターと生クリームのまろやかなカレーです。ヨーグルトとスパイスに漬けた鶏肉を焼いてからソースで煮る、という手順が確立した定番の作り方。<br>そして本場の決め手は、仕上げにカスリメティ（フェヌグリークの乾燥葉）を手で揉んで散らすこと。このひと手間で「お店の香り」になります。</p>
+          <h4>材料</h4>
+          <ul class="ing">
+            <li>鶏もも肉<b>400g（一口大に切る）</b></li>
+            <li>プレーンヨーグルト<b>100g</b></li>
+            <li>にんにく（すりおろし）<b>1片分</b></li>
+            <li>生姜（すりおろし）<b>大さじ1</b></li>
+            <li>ガラムマサラ<b>大さじ1</b></li>
+            <li>ターメリック<b>小さじ1/2</b></li>
+            <li>チリパウダー<b>小さじ1/2〜1（辛さは調整）</b></li>
+            <li>塩<b>小さじ1/2（漬け込み用）</b></li>
+            <li>玉ねぎ<b>1/2個（みじん切り）</b></li>
+            <li>トマト缶（カットまたはホール）<b>1缶（400g）</b></li>
+            <li>バター<b>40g</b></li>
+            <li>生クリーム<b>100ml</b></li>
+            <li>砂糖<b>小さじ1〜2</b></li>
+            <li>カスリメティ<b>大さじ1</b></li>
+            <li>塩<b>適量（仕上げの味付け）</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>鶏肉にヨーグルト、にんにく、生姜、ガラムマサラ、ターメリック、チリパウダー、塩をもみ込み、30分以上（できれば一晩）漬ける。</li>
+            <li>フライパンにバター半量を熱し、漬け汁ごと鶏肉を入れて、表面に焼き色がつくまで焼いて一度取り出す（中まで火が通らなくて大丈夫です）。</li>
+            <li>同じフライパンに残りのバターを足して玉ねぎを炒め、トマト缶を加えて潰しながら約10分、なめらかに煮詰める。あればハンドブレンダーで攪拌すると、よりなめらかになります。</li>
+            <li>鶏肉を戻し入れて弱火で約10分煮る。生クリームと砂糖を加え、塩で味を調える。</li>
+            <li>仕上げにカスリメティを手のひらの上で揉み潰し、全体に散らしてひと混ぜし、火を止める。ここが本場の決め手です。</li>
+            <li>器に盛り、あれば生クリーム少し（分量外）を回しかける。ナンやごはんと一緒にどうぞ。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>カスリメティは煮込むものではなく「仕上げ」専用です。長く煮ると甘い香りが飛んでしまうので、火を止める直前に、揉んで香りを開いてから散らします。<br>入れ忘れると「何かひとつ足りない」味になる、縁の下ではなく表の主役です。</p>
+          <p class="var-note"><b>アレンジ：</b>辛さはチリパウダーの量で調整してください。鶏肉をタンドリー風にしっかり焼き色をつけるほど、香ばしさが増します。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-manoushe">
+        <div class="r-photo">
+          <img src="assets/dish-manoushe.webp" alt="木の板にのった、できあがりのザアタルのフラットブレッド。丸いパン一面にオリーブオイルと混ぜた深緑のザアタルが広がり、そばにトマト、きゅうり、ミントの小鉢が添えられている" />
+          <span class="r-badge">ブレンド主役 02 ・ パン</span>
+        </div>
+        <div class="r-body">
+          <h3>ザアタルのフラットブレッド（マヌーシェ風）</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約90分（発酵60分込み）／生地を買えば約20分</span>
+            <span class="chip">2枚分</span>
+            <span class="chip">レバント地方の朝ごはん</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="sumac" type="button">スマック（ザアタルの酸味）</button>
+            <button class="chip spice" data-open="goma" type="button">ごま</button>
+            <button class="chip spice" data-open="thyme" type="button">タイム</button>
+            <button class="chip spice" data-open="oregano" type="button">オレガノ</button>
+            <button class="chip spice" data-open="mint" type="button">ミント🌿</button>
+          </div>
+          <p class="intro">レバノンなどレバント地方の朝ごはんの定番「マヌーシェ」。薄くのばしたパン生地に、ザアタルをオリーブオイルで溶いたペーストを塗って焼くだけの、驚くほどシンプルな一品です。<br>焼きたてにトマト、きゅうり、ミントをのせて巻いて食べるのが本場流。生地は市販のピザ生地やナンでも代用できます。</p>
+          <h4>材料（直径20cm・2枚分）</h4>
+          <ul class="ing">
+            <li>強力粉<b>200g</b></li>
+            <li>ドライイースト<b>小さじ1（3g）</b></li>
+            <li>砂糖<b>小さじ1</b></li>
+            <li>塩<b>小さじ1/2</b></li>
+            <li>ぬるま湯<b>130ml</b></li>
+            <li>オリーブオイル（生地用）<b>大さじ1</b></li>
+            <li>ザアタル（市販品、またはブレンドページの配合）<b>大さじ3</b></li>
+            <li>オリーブオイル（ザアタル用）<b>大さじ3〜4</b></li>
+            <li>トマト、きゅうり、ミントの葉<b>適量（添え物）</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>ボウルに強力粉、イースト、砂糖、塩を入れ、ぬるま湯と生地用オイルを加えて混ぜ、なめらかになるまで約8分こねる。丸めてボウルに戻し、ラップをして温かい場所で約60分、2倍に膨らむまで発酵させる（一次発酵）。</li>
+            <li>発酵中に、ザアタルとザアタル用オリーブオイルを混ぜて、塗りやすいペースト状にしておく。オーブンを250℃（できるだけ高温）に予熱する。</li>
+            <li>生地を2等分し、打ち粉をした台で直径約20cmの円に薄くのばす。天板にオーブンシートを敷いて生地をのせる。</li>
+            <li>生地の表面を指で軽くくぼませ、ザアタルペーストを縁を少し残して全面に塗り広げる。</li>
+            <li>250℃で約7〜9分、縁がこんがり色づくまで焼く。焼きすぎるとザアタルが苦くなるので、色づいたらすぐ出す。</li>
+            <li>熱いうちにトマトのくし切り、きゅうり、ミントをのせ、半分に折るか巻いていただく。レモンを少し絞っても爽やかです。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>ザアタルは「オイルと混ぜてから焼く」ことで香りが生地になじみます。粉のまま焼くと焦げて苦くなるので、必ずペースト状に。市販のピザ生地やナンを使う場合は、手順3からでOKです。</p>
+          <p class="var-note"><b>アレンジ：</b>ザアタル半量＋シュレッドチーズの「ハーフ＆ハーフ」も現地のパン屋の定番。ザアタルが余ったら、オリーブオイルと混ぜてパンのディップにするだけでも立派な朝ごはんになります。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-nihari">
+        <div class="r-photo">
+          <img src="assets/dish-nihari.webp" alt="深めの器に盛り付けられた、できあがりのニハリ。とろみのついた赤茶色のソースに、ほろほろに煮込んだ牛すね肉の塊が入り、上にジンジャーの千切り、青唐辛子の輪切り、パクチーの葉とレモンのくし切りがのる。そばの小皿にナンが添えられている" />
+          <span class="r-badge">ヒハツ主役 ・ 主菜</span>
+        </div>
+        <div class="r-body">
+          <h3>ニハリ（牛すね肉の長時間煮込み）</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約3時間（ほぼ煮込み時間）</span>
+            <span class="chip">3〜4人分</span>
+            <span class="chip">パキスタンのごちそう煮込み</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="longpepper" type="button">ロングペッパー（ヒハツ）（ニハリマサラの要）</button>
+            <button class="chip spice" data-open="pepper" type="button">ブラックペッパー</button>
+            <button class="chip spice" data-open="cumin" type="button">クミン</button>
+            <button class="chip spice" data-open="coriander" type="button">コリアンダー</button>
+            <button class="chip spice" data-open="chili" type="button">チリペッパー</button>
+            <button class="chip spice" data-open="turmeric" type="button">ターメリック</button>
+            <button class="chip spice" data-open="fennel" type="button">フェンネルシード</button>
+            <button class="chip spice" data-open="cinnamon" type="button">シナモン</button>
+            <button class="chip spice" data-open="cardamom" type="button">カルダモン</button>
+            <button class="chip spice" data-open="clove" type="button">クローブ</button>
+            <button class="chip spice" data-open="bayleaf" type="button">ベイリーフ</button>
+            <button class="chip spice" data-open="ginger" type="button">ジンジャー</button>
+            <button class="chip spice" data-open="garlic" type="button">ガーリック</button>
+            <button class="chip spice" data-open="pakuchi" type="button">パクチー（葉）🌿</button>
+          </div>
+          <p class="intro">パキスタンを代表する、牛すね肉の長時間煮込みです。肉と玉ねぎ、スパイスを炒めてから、弱火で2〜3時間ことこと煮込み、仕上げに小麦粉でとろみをつけるのが本場の定番手順。<br>味の要は「ニハリマサラ」と呼ばれる専用ブレンドで、その中心にいるのがヒハツ（ロングペッパー）。ブラックペッパーより甘く複雑で、長く続く辛さが、煮込みの奥行きを作ります。買ってもなかなか減らないヒハツを、主役級に遣える一品です。<br>手間はかかりませんが、時間だけはたっぷり要る料理。休みの日の、鍋に任せるごちそうです。</p>
+          <h4>材料</h4>
+          <ul class="ing">
+            <li>牛すね肉（煮込み用・大きめの塊）<b>600g</b></li>
+            <li>玉ねぎ<b>2個（薄切り）</b></li>
+            <li>油（またはギー）<b>大さじ4</b></li>
+            <li>にんにく（すりおろし）<b>大さじ1</b></li>
+            <li>生姜（すりおろし）<b>大さじ1</b></li>
+            <li>ロングペッパー（ヒハツ・砕くか粉末）<b>小さじ1</b></li>
+            <li>チリパウダー<b>小さじ1〜2（辛さは調整）</b></li>
+            <li>コリアンダーパウダー<b>大さじ1</b></li>
+            <li>クミンパウダー<b>小さじ2</b></li>
+            <li>ターメリック<b>小さじ1/2</b></li>
+            <li>フェンネルパウダー<b>小さじ1</b></li>
+            <li>ブラックペッパー<b>小さじ1/2</b></li>
+            <li>カルダモン<b>4粒</b></li>
+            <li>シナモンスティック<b>1/2本</b></li>
+            <li>クローブ<b>3粒</b></li>
+            <li>ベイリーフ<b>1枚</b></li>
+            <li>水<b>800ml〜1L</b></li>
+            <li>塩<b>小さじ1〜（味を見て）</b></li>
+            <li>小麦粉<b>大さじ2（とろみ用・水大さじ3で溶く）</b></li>
+            <li>生姜（千切り）・青唐辛子（輪切り）・レモン（くし切り）・パクチーの葉<b>各適量（仕上げ用）</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>牛すね肉は大きめの一口大（煮込むと縮むので、思うより大きめ）に切る。玉ねぎは薄切りにする。ヒハツはミルや乳鉢で砕いておく。</li>
+            <li>厚手の鍋に油を熱し、玉ねぎを中火で炒める。きつね色になってきたら、にんにくと生姜を加えて香りを出す。</li>
+            <li>牛すね肉を加え、表面の色が変わるまで強めの中火で焼き付けるように炒める。パウダースパイス（ヒハツ、チリ、コリアンダー、クミン、ターメリック、フェンネル、ブラックペッパー）とホールスパイス（カルダモン、シナモン、クローブ、ベイリーフ）、塩を加え、1〜2分炒めて香りを立てる。</li>
+            <li>水を加えて沸騰させ、アクを取る。蓋をして、弱火で2〜3時間、肉がほろほろに崩れるくらい柔らかくなるまで煮込む。途中、水が減りすぎたら足す（圧力鍋なら加圧25〜30分でも可）。</li>
+            <li>水溶き小麦粉を少しずつ加えて混ぜ、さらに10分ほど煮て、ソースにとろみをつける。塩で味を調える。</li>
+            <li>器に盛り、仕上げに生姜の千切り、青唐辛子の輪切り、パクチーの葉をのせ、レモンのくし切りを添える。食べるときにレモンを絞るのが本場流。ナンやごはんと一緒にどうぞ。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>ニハリの魂は「弱火で長く」と「最後のとろみ」。小麦粉のとろみは煮込みの途中ではなく仕上げに入れるのが本場の順番で、ソースが肉に絡む独特の質感になります。<br>ヒハツは煮込みの早い段階で入れるほど、甘い複雑さと辛さがソース全体に溶け込みます。</p>
+          <p class="var-note"><b>アレンジ：</b>辛さはチリと青唐辛子で調整してください。翌日は味がさらに馴染むので、多めに作るのもおすすめです。骨付きすね肉で作ると、髄のコクが加わってより本場寄りになります。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-pulao">
+        <div class="r-photo">
+          <img src="assets/dish-pulao.webp" alt="大皿に盛り付けられた、できあがりのラムプラオ。だしで炊き込んだ淡い色のバスマティ米と骨付きラム肉が混ざり合い、肉は大きさも向きもばらばらで、一部は米に半ば埋もれ、一部は米粒をまとって顔を出す。シナモンスティックは1本だけ見え、カルダモン、クローブ、コリアンダーシードなどのホールスパイスが向きも角度もばらばらに散らばる。上に細くカリッと揚がった茶色いフライドオニオンの繊維が散る" />
+          <span class="r-badge">ホールスパイス ・ ごはん</span>
+        </div>
+        <div class="r-body">
+          <h3>ラムプラオ（ヤフニ式炊き込みごはん）</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約60分（だし取り込み）</span>
+            <span class="chip">3〜4人分</span>
+            <span class="chip">パキスタン〜北インドの炊き込み</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="cardamom" type="button">カルダモン</button>
+            <button class="chip spice" data-open="blackcardamom" type="button">ブラックカルダモン</button>
+            <button class="chip spice" data-open="cinnamon" type="button">シナモン</button>
+            <button class="chip spice" data-open="clove" type="button">クローブ</button>
+            <button class="chip spice" data-open="bayleaf" type="button">ベイリーフ</button>
+            <button class="chip spice" data-open="staranise" type="button">スターアニス</button>
+            <button class="chip spice" data-open="cumin" type="button">クミン</button>
+            <button class="chip spice" data-open="coriander" type="button">コリアンダー</button>
+            <button class="chip spice" data-open="pepper" type="button">ブラックペッパー</button>
+            <button class="chip spice" data-open="fennel" type="button">フェンネルシード</button>
+            <button class="chip spice" data-open="ginger" type="button">ジンジャー</button>
+            <button class="chip spice" data-open="garlic" type="button">ガーリック</button>
+            <button class="chip spice" data-open="pakuchi" type="button">パクチー（葉）🌿</button>
+          </div>
+          <p class="intro">ラムとホールスパイスで取っただし（ヤフニ）で、米を炊き込む「ヤフニ式」のラムプラオです。パキスタンから北インドにかけての、家庭の炊き込みごはんの定番。<br>ビリヤニとの違いは、作り方にあります。ビリヤニが「煮た肉と下茹でした米を層に重ねて蒸す」のに対し、プラオは「だしの中で米と具を一緒に炊き込む」一段階の料理。その分、色は全体が淡い茶色にそろい、味も穏やかで、だしの旨みが米の一粒一粒に行き渡ります。<br>ホールスパイスは粉にせず丸ごと使うので、香りは穏やかで上品。スパイス棚のホール組が総動員できる一品です。</p>
+          <h4>材料</h4>
+          <ul class="ing">
+            <li>バスマティ米<b>300g（約2合分）</b></li>
+            <li>ラム肉（骨付き・煮込み用）<b>400g（大きめの塊）</b></li>
+            <li>玉ねぎ<b>1個（薄切り）</b></li>
+            <li>油（またはギー）<b>大さじ3</b></li>
+            <li>にんにく（すりおろし）<b>小さじ2</b></li>
+            <li>生姜（すりおろし）<b>小さじ2</b></li>
+            <li>プレーンヨーグルト<b>大さじ3</b></li>
+            <li>カルダモン<b>5粒</b></li>
+            <li>ブラックカルダモン<b>1粒</b></li>
+            <li>シナモンスティック<b>1本</b></li>
+            <li>クローブ<b>4粒</b></li>
+            <li>ベイリーフ<b>2枚</b></li>
+            <li>スターアニス<b>1個</b></li>
+            <li>クミンシード<b>小さじ1</b></li>
+            <li>コリアンダーシード（軽く砕く）<b>小さじ2</b></li>
+            <li>ブラックペッパー（ホール）<b>小さじ1</b></li>
+            <li>フェンネルシード<b>小さじ1</b></li>
+            <li>青唐辛子<b>1〜2本（あれば）</b></li>
+            <li>水<b>約900ml（だし用＋炊き込みの調整）</b></li>
+            <li>塩<b>小さじ1.5〜（味を見て）</b></li>
+            <li>揚げ玉ねぎ・パクチーの葉<b>各適量（仕上げ・あれば）</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>ヤフニ（だし）を取る。鍋に水900ml、ラム肉、ホールスパイスの半量、玉ねぎの半量、塩小さじ1/2を入れ、沸騰したらアクを取り、弱火で約30分、ラムがやわらかくなるまで煮る。ラム肉を取り出し、だしは漉して600mlほどを取っておく（ホールスパイスは布袋や茶こし袋に入れて煮ると、漉すのが簡単です）。</li>
+            <li>バスマティ米は洗って30分ほど水に浸し、ざるにあげる。</li>
+            <li>厚手の鍋に油を熱し、残りの玉ねぎをきつね色に炒める。残りのホールスパイスを加えて香りを出し、にんにく、生姜、青唐辛子を加えて炒める。</li>
+            <li>取り出したラム肉を戻し入れ、ヨーグルトを加えてさっと炒め合わせる。漉したヤフニ600mlを注ぎ、塩で「少し塩辛い」と感じるくらいに味を調える（米が塩気を吸います）。</li>
+            <li>米を加え、沸騰したら蓋をして弱火で約12〜15分炊く。火を止めて10分蒸らす。</li>
+            <li>蓋を開け、底から大きくふんわり混ぜて器に盛る。あれば揚げ玉ねぎとパクチーを散らす。ホールスパイスは食べずによけてOKです。ライタ（ヨーグルトサラダ）を添えるのが本場流。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>プラオの決め手は「だしの塩加減」。炊く前のヤフニが少し塩辛いくらいが、炊き上がりでちょうどよくなります。<br>ビリヤニと作り比べてみると違いがよく分かります。層にして色をつけるのがビリヤニ、だしで一緒に炊き込んで色を淡くそろえるのがプラオです。</p>
+          <p class="var-note"><b>他の肉でもOK：</b>ラムの代わりに鶏肉や牛肉でも、同じ手順で作れます。鶏ならだし取りは約20分に短く、牛ならラムと同じくらいの時間を目安に、肉がやわらかくなるまで煮てください。辛くしたいときは青唐辛子を増やすのが、色を淡いまま保つコツです。</p>
+          <p class="point"><b>添え物のライタ：</b>ライタにもスパイスを使います。基本はプレーンヨーグルトに、乾煎りしたクミンパウダーと塩を混ぜるだけ。お好みでチリパウダーを少々加えたり、ミントの葉を散らしたりします。プラオのホールスパイスの穏やかな香りに対して、ライタのクミンの香ばしさが良いアクセントになります。</p>
         </div>
       </article>
 
@@ -2404,6 +3360,31 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
           <p>揚げたてに塩、パプリカ、クミンパウダーを混ぜたシーズニングを。色も香りも一気に「お店のポテト」寄りに。</p>
           <div class="r-meta"><button class="chip spice" data-open="paprika" type="button">パプリカ</button><button class="chip spice" data-open="cumin" type="button">クミン</button></div>
         </div>
+        <div class="choi-card">
+          <b>そうめん・冷奴に</b>
+          <p>みょうがの千切りを山盛りに。しそと合わせると「和の薬味」の完成形。つゆに浸しても香りが残ります。</p>
+          <div class="r-meta"><button class="chip spice" data-open="myoga" type="button">みょうが</button><button class="chip spice" data-open="shiso" type="button">しそ</button></div>
+        </div>
+        <div class="choi-card">
+          <b>焼き魚・鍋物に</b>
+          <p>ゆず胡椒を小さじ少し添えるだけ。ゆずの皮の香りと唐辛子のキレで、塩焼きも水炊きも料亭寄りの顔に。仕上げにゆず皮の千切りでも。</p>
+          <div class="r-meta"><button class="chip spice" data-open="yuzu" type="button">ゆず</button><button class="chip spice" data-open="chili" type="button">唐辛子</button></div>
+        </div>
+        <div class="choi-card">
+          <b>おひたし・和え物に</b>
+          <p>すりごまとすりえごまを半々で。ごまの上品な香ばしさに、えごまの素朴な力が重なって、味噌汁の具にもなる万能の衣になります。</p>
+          <div class="r-meta"><button class="chip spice" data-open="goma" type="button">ごま</button><button class="chip spice" data-open="egoma" type="button">えごま</button></div>
+        </div>
+        <div class="choi-card">
+          <b>ホットチョコレートにチリ</b>
+          <p>メキシカンホットチョコの発想で、カップ1杯にチリパウダーをひとつまみ。甘さの奥からじんわり辛さが追いかけてきて、体まで温まります。入れすぎず、まず少しから。</p>
+          <div class="r-meta"><button class="chip spice" data-open="chili" type="button">チリペッパー</button></div>
+        </div>
+        <div class="choi-card">
+          <b>ホットチョコレートにピンクペッパー</b>
+          <p>軽く砕いたピンクペッパーを数粒、仕上げにパラリ。辛さは穏やかで、フルーティーな香りとピンクの色が、チョコの甘さと濃厚さを引き立てます。</p>
+          <div class="r-meta"><button class="chip spice" data-open="pinkpepper" type="button">ピンクペッパー</button></div>
+        </div>
       </div>
     </div>
   </section>
@@ -2421,13 +3402,13 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
 <footer>
   <div class="wrap">
     <span class="en">Thank you for opening this little library.</span>
-    スパイス図鑑 ― サンプル版（全51種・レシピ18品＋ちょい足し6）<br>
+    スパイス図鑑 ― サンプル版（全85種：No.01〜69＋🌿ハーブ枠H1〜H16・ブレンド10種・レシピ33品＋ちょい足し11）<br>
     香りの感じ方には個人差があります。分量は目安として、少しずつ好みに寄せてください。
     <div class="copyright">
       <span class="room cinzel">MIRROR ROOM</span>
       <span class="copy">© 2026 MIRROR ROOM — by Nay + Naya + Omochi</span>
     </div>
-    <p class="sources">画像について：本ページの画像（市場のスパイス・全51種のスパイス・完成料理18品・イラスト3点）はすべて、この図鑑のためにAIで生成したオリジナル画像です。第三者の写真は使用していません。各スパイスの色・形・質感は実物に忠実に作っていますが、実写ではないため、実際の商品や実物とは細部の見え方が異なる場合があります。図解の数値（スコヴィル値・保存期間など）は代表的な目安で、品種や商品によって変わります。</p>
+    <p class="sources">画像について：本ページの画像（市場のスパイス・全85種のスパイス・ハーブ・和スパイス・完成料理33品・イラスト3点）はすべて、この図鑑のためにAIで生成したオリジナル画像です。第三者の写真は使用していません。<br>各スパイスの色・形・質感は実物に忠実に作っていますが、実写ではないため、実際の商品や実物とは細部の見え方が異なる場合があります。図解の数値（スコヴィル値・保存期間など）は代表的な目安で、品種や商品によって変わります。</p>
   </div>
 </footer>
 
@@ -2522,7 +3503,7 @@ var SPICES = [
     storage:"パウダーは香りが抜けやすいので小分け購入がおすすめ。ホールは1年ほど持ちます。",
     access:"◎ スーパーで手に入る：パウダーは定番、シードは大きめの店舗で。",
     sub:"葉のパクチーとは香りが別物なので代用不可。パウダーがなければカレー粉で「量と丸み」の役割だけ借りられます。",
-    mania:"葉のパクチーが「石鹸のような味」に感じる人がいるのは、嗅覚受容体遺伝子OR6A2の個人差が関係するという研究で有名になりました。面白いのは、種のコリアンダーはその香り成分が異なるため、葉が苦手な人でも問題なく楽しめることが多い点です。"
+    mania:"葉のパクチーが「石鹸のような味」に感じる人がいるのは、嗅覚受容体遺伝子OR6A2の個人差が関係するという研究で有名になりました。面白いのは、種のコリアンダーはその香り成分が異なるため、葉が苦手な人でも問題なく楽しめることが多い点です。なお、葉のパクチーそのものは、この図鑑のハーブ枠（No.H2）で別途紹介しています。同じ植物なのに、種と葉でここまで香りが違う——その読み比べも楽しいですよ。"
   },
   {
     id:"cardamom", no:"05", name:"カルダモン", en:"Cardamom", latin:"Elettaria cardamomum（ショウガ科）",
@@ -2594,7 +3575,7 @@ var SPICES = [
     storage:"ホールは密閉で2年ほど。ミルは湿気の少ない場所に置き、湯気の上では挽かない。",
     access:"◎ スーパーで手に入る：ホールも挽きも定番中の定番。",
     sub:"白胡椒で代用可（香りは穏やかに）。ロングペッパーなら甘い複雑さが増します。",
-    mania:"黒胡椒は未熟な緑の実を乾燥させたもの、白胡椒は完熟果を水に浸けて外皮を除いたもの。白の方が香りが穏やかで辛さが前に出るため、中華や白いソースでは白が選ばれます。また、ピペリンはターメリックのクルクミンの吸収を助けることでも有名です。"
+    mania:"黒胡椒は未熟な緑の実を乾燥させたもの、白胡椒は完熟果を水に浸けて外皮を除いたもの。白の方が香りが穏やかで辛さが前に出るため、中華や白いソースでは白が選ばれます。また、ピペリンはターメリックのクルクミンの吸収を助けることでも有名です。未熟果を乾燥させずに加工したグリーンペッパー（No.60）は、同じ実のもうひとつの姿として収録しています。整理すると——ブラックペッパー（No.08）・ホワイトペッパー（No.35）・グリーンペッパー（No.60）は、全部おなじ植物 Piper nigrum の実。違うのは「いつ摘んで、どう加工したか」だけの三兄弟です。辛さの成分も3つとも同じピペリンです。"
   },
   {
     id:"staranise", no:"09", name:"スターアニス", en:"Star Anise", latin:"Illicium verum（マツブサ科）",
@@ -2630,7 +3611,7 @@ var SPICES = [
     storage:"密閉で1年ほど。油で使うため、古い油の匂いがつかないよう清潔なスプーンで。",
     access:"○ 大きめのスーパー・輸入食品店。黄／茶の種で辛さが違います。",
     sub:"テンパリングの役割だけならクミンシードで代用可。和からし粉は風味が別物です。",
-    mania:"ブラウン種とイエロー（ホワイト）種では辛さが違い、ブラウンの方が刺激が強くインド料理向き、イエローは粒マスタードやマイルドな料理向きです。和からしの辛さがツンと鼻に抜けるのは、わさびと同じイソチオシアネート系の成分だからです。"
+    mania:"ブラウン種とイエロー（ホワイト）種では辛さが違い、ブラウンの方が刺激が強くインド料理向き、イエローは粒マスタードやマイルドな料理向きです。和からしの辛さがツンと鼻に抜けるのは、わさびと同じイソチオシアネート系の成分だからです。和からしそのものは、和スパイス編のNo.55で詳しく紹介しています。"
   },
   {
     id:"fenugreek", no:"11", name:"フェヌグリーク", en:"Fenugreek", latin:"Trigonella foenum-graecum（マメ科）",
@@ -2648,7 +3629,7 @@ var SPICES = [
     storage:"香りが移りやすいので密閉をしっかり。乾燥リーフは手で揉んでから使うと香りが開きます。",
     access:"△ 専門店・ネット通販向き：スーパーではあまり見かけません。",
     sub:"料理での代用は難しいスパイス。メープルのような甘い香りが近いと言われますが、カレーでは少量のカレーリーフ＋カラメル感で雰囲気だけ寄せます。",
-    mania:"乾燥リーフの「カスリメティ」は、バターチキンやダル（豆カレー）の仕上げに手で揉み潰して散らすのが本場流。種と葉で香りの方向が違うのもこの植物の面白さで、種は“苦甘い土台”、葉は“甘く広がる余韻”を担当します。"
+    mania:"乾燥リーフの「カスリメティ」は、バターチキンやダル（豆カレー）の仕上げに手で揉み潰して散らすのが本場流。種と葉で香りの方向が違うのもこの植物の面白さで、種は“苦甘い土台”、葉は“甘く広がる余韻”を担当します。乾燥葉だけの詳しい話は、No.66「カスリメティ」の独立エントリにまとめました。"
   },
   {
     id:"paprika", no:"12", name:"パプリカ", en:"Paprika", latin:"Capsicum annuum（ナス科）",
@@ -2761,7 +3742,8 @@ var SPICES = [
   {
     id:"curryleaf", no:"18", name:"カレーリーフ", en:"Curry Leaf", latin:"Murraya koenigii（ミカン科）",
     img:"assets/curryleaf.jpg", alt:"木の板の上に置かれた、枝つきの新鮮なカレーリーフ",
-    cat:["curry"], catLabel:"リーフ（葉）",
+    cat:["curry","herb"], catLabel:"リーフ（葉）",
+    herbNote:"🌿 葉っぱ組：使うのは葉なので、厳密にはスパイスではなくハーブ寄り。この図鑑では香りづけの仲間として一緒に収録しています。",
     flavor:"柑橘とナッツが混ざったような、独特で爽やかな香り。南インド料理の「あの香り」の源泉で、名前に反してカレー粉の材料ではありません。",
     heat:0, aroma:4,
     trivia:"乾燥すると香りがほぼ消えてしまうため、「生で使う」が鉄則の、ちょっと特別なスパイス（ハーブ）。",
@@ -2779,7 +3761,8 @@ var SPICES = [
   {
     id:"bayleaf", no:"19", name:"ベイリーフ", en:"Bay Leaf", latin:"Laurus nobilis（クスノキ科）",
     img:"assets/bayleaf.webp", alt:"木の器に盛られた乾燥ベイリーフ（ローリエ）の葉",
-    cat:["whole","curry"], catLabel:"ホール（葉）",
+    cat:["whole","curry","herb"], catLabel:"ホール（葉）",
+    herbNote:"🌿 葉っぱ組：使うのは葉なので、厳密にはスパイスではなくハーブ寄り。この図鑑では香りづけの仲間として一緒に収録しています。",
     flavor:"すっと抜ける清涼感に、ほのかな苦みと甘み。日本ではフランス語の「ローリエ」の名でもおなじみの、煮込みに欠かせない葉っぱです。",
     heat:0, aroma:3,
     trivia:"月桂樹の葉。古代ギリシャ・ローマでは、勝者や詩人の頭に「月桂冠」として載せられた、栄誉の象徴でした。",
@@ -2972,7 +3955,7 @@ var SPICES = [
     storage:"乾燥剤と一緒に密閉し、湿気を避けて常温。カビやすいので、時々出して風を通すと安心です。",
     access:"○ 漢方食材店・中華食材店で。七味唐辛子用の陳皮はスーパーにもあります。",
     sub:"ゆずやみかんの皮を乾燥させた自家製でも可。フレッシュな皮では深みが弱くなります。",
-    mania:"七味唐辛子に入っている「陳皮」は、実は多くの場合、同じ“乾燥みかん皮”の仲間。日本の陳皮は主に温州みかんの皮で、中国の高級品とは植物の産地も熟成方法も少し違います。「新会陳皮」は収穫してから何年も寝かせて育てるもので、10年物、20年物になると、もはやスパイスというより“年代物の食材”です。"
+    mania:"七味唐辛子に入っている「陳皮」は、実は多くの場合、同じ“乾燥みかん皮”の仲間。日本の陳皮は主に温州みかんの皮で、中国の高級品とは植物の産地も熟成方法も少し違います。「新会陳皮」は収穫してから何年も寝かせて育てるもので、10年物、20年物になると、もはやスパイスというより“年代物の食材”です。日本の七味唐辛子に入る陳皮は主に温州みかんの皮で、熟成させる中国のものとは考え方が少し違います。この図鑑のブレンド「七味唐辛子」でも陳皮が活躍します。"
   },
   {
     id:"dill", no:"30", name:"ディルシード", en:"Dill Seed", latin:"Anethum graveolens（セリ科）",
@@ -2990,7 +3973,7 @@ var SPICES = [
     storage:"密閉・遮光で1年ほど。葉（ディルウィード）とは香りの持ちも使い方も違うので別保存を。",
     access:"○ 輸入食品店・大きめのスーパーで。",
     sub:"フェンネルシードで方向は近づきます。葉のディルウィードとは別物です。",
-    mania:"ディルの葉と種は、英語でも Dill Weed と Dill Seed と呼び分けられるほど別物扱い。北欧の伝統料理グラブラックス（サーモンの塩漬け）で山ほど使うのは葉の方で、種はピクルス帝国の主役。セリ科シードの“そっくり三兄弟”（クミン／キャラウェイ／アジョワン）に、見た目も香りも近いディルを加えると、実は四兄弟になります。"
+    mania:"ディルの葉と種は、英語でも Dill Weed と Dill Seed と呼び分けられるほど別物扱い。北欧の伝統料理グラブラックス（サーモンの塩漬け）で山ほど使うのは葉の方で、種はピクルス帝国の主役。セリ科シードの“そっくり三兄弟”（クミン／キャラウェイ／アジョワン）に、見た目も香りも近いディルを加えると、実は四兄弟になります。葉のディルウィードは、この図鑑のハーブ枠（No.H7）で別途紹介しています。"
   },
   {
     id:"longpepper", no:"31", name:"ロングペッパー（ヒハツ）", en:"Long Pepper", latin:"Piper retrofractum（コショウ科）",
@@ -3001,14 +3984,14 @@ var SPICES = [
     trivia:"ブラックペッパーより先にヨーロッパへ渡った“元祖ペッパー”。丸いコショウに主役を奪われて、長く忘れられていた存在です。",
     origin:"東南アジア（インドネシア・ジャワ）／インド（近縁種）", part:"果穂（乾燥）", form:"ホール（果穂）／パウダー",
     component:"辛み成分はピペリンでブラックペッパーと同系統。そこに甘い香りの成分が重なるため、単なる辛さではなく「甘辛い複雑さ」になります。",
-    uses:["カレーや煮込みにホールを砕いて（ガラムマサラの格上げにも）","胡椒の代わりにステーキや炒め物へ、挽きたてを","沖縄の島こしょう「ピパーチ」として、そばの薬味に"],
+    uses:["カレーや煮込みにホールを砕いて（ガラムマサラの格上げにも）","パキスタンの煮込み「ニハリ」の専用ブレンド、ニハリマサラの要として","胡椒の代わりにステーキや炒め物へ、挽きたてを","近縁種が沖縄の島こしょう「ピパーチ」（No.59）として、そばの薬味に"],
     seedText:"ホールは乾燥すると非常に硬いので、ミルや乳鉢で砕いてから。煮込みには砕いたものを早めに入れると辛みと甘みが溶け出します。",
     powderText:"挽いた粉はブラックペッパーと同じ感覚で使えます。辛さが長く残るので、量はまず“いつものコショウの半分”から調整を。",
     pairing:"ブラックペッパー（半量ずつの食べ比べが楽しい）、シナモン、ジンジャー、肉料理全般",
     storage:"ホールは密閉・遮光で1年ほど。粉は香りが抜けやすいので少量ずつ挽くのが理想。",
     access:"○ 専門店・ネット通販、沖縄では「ピパーチ」として物産店でも。",
     sub:"ブラックペッパーで代用可。甘い複雑さと辛さの持続は弱くなるので、量は少し多めでも大丈夫です。",
-    mania:"古代ローマではこちらのロングペッパーが高級品で、丸いブラックペッパーより高値でした。沖縄では近縁種が「ピパーチ／ヒバーチ」と呼ばれ、沖縄そばの薬味として現役。最近は血行サポートの話題でも注目され、スーパーに並ぶようになった“再ブレイク中の古典スパイス”です。ブラックペッパーの詳細ページと読み比べると、コショウ王朝の交代劇が見えてきます。"
+    mania:"古代ローマではこちらのロングペッパーが高級品で、丸いブラックペッパーより高値でした。沖縄では近縁種のヒハツモドキが「ピパーチ／ヒバーチ」（島こしょう・No.59）と呼ばれ、沖縄そばの薬味として現役。ヒハツとの違いはNo.59で読み比べできます。最近は血行サポートの話題でも注目され、スーパーに並ぶようになった“再ブレイク中の古典スパイス”です。ブラックペッパーの詳細ページと読み比べると、コショウ王朝の交代劇が見えてきます。"
   },
   {
     id:"paradise", no:"32", name:"グレインズ・オブ・パラダイス", en:"Grains of Paradise", latin:"Aframomum melegueta（ショウガ科）",
@@ -3042,9 +4025,9 @@ var SPICES = [
     powderText:"粉山椒は香りが飛びやすいので小さい瓶で買い、仕上げ専用に。加熱しすぎると痺れも香りも弱くなります。",
     pairing:"花椒（痺れ三兄弟）、味噌、柑橘、脂ののった魚、ティムール",
     storage:"密閉・遮光で常温。粉は開封後1〜2か月が香りのピークです。",
-    access:"◎ スーパーで手に入る：粉山椒はどこのスーパーにもあり、ホールも乾物棚で見つかります。今回の東アジア組ではいちばん身近な存在です。",
+    access:"◎ スーパーで手に入る：粉山椒はどこのスーパーにもあり、ホールも乾物棚で見つかります。東アジアの顔ぶれの中ではいちばん身近な存在です。",
     sub:"花椒で代用すると痺れは強く、柑橘感は控えめになります。ティムールなら柑橘感ごと代用可。",
-    mania:"若い葉は「木の芽」、未熟な実は青山椒、完熟した果皮が粉山椒の原料と、成長ごとに名前と使い道が変わる出世魚タイプ。花椒（中国）・ティムール（ネパール）とは同じミカン科サンショウ属の「痺れ三兄弟」で、図解⑥でも食べ比べできます。"
+    mania:"若い葉は「木の芽」、未熟な実は青山椒、完熟した果皮が粉山椒の原料と、成長ごとに名前と使い道が変わる出世魚タイプ。花椒（中国）・ティムール（ネパール）とは同じミカン科サンショウ属の「痺れ三兄弟」で、図解⑥でも食べ比べできます。なお若葉の「木の芽」そのものは、ハーブ枠のNo.H15で葉として別途紹介しています。"
   },
   {
     id:"cassia", no:"34", name:"桂皮（カシア）", en:"Cassia Cinnamon", latin:"Cinnamomum cassia（クスノキ科）",
@@ -3278,7 +4261,7 @@ var SPICES = [
     storage:"密閉・遮光で常温。油分を含むフレークなので、香りが変わったら早めに使い切って。",
     access:"△ 輸入食品店・ネット通販向き：近年はスパイス専門店で見かけることが増えました。",
     sub:"韓国産の粗挽き唐辛子＋パプリカ少量が一番近い方向。辛さだけなら一味唐辛子でも調整できますが、果実味は少し控えめになります。",
-    mania:"内戦の影響でシリアでの生産が大きく揺らいだことでも知られ、いま流通するものの多くはトルコ側で育てられています。「消えゆく味を守る」文脈で語られることも多いスパイスで、食卓の小さなフレークの向こうに、産地の歴史が見える一品です。"
+    mania:"内戦の影響でシリアでの生産が大きく揺らいだことでも知られ、いま流通するものの多くはトルコ側で育てられています。「消えゆく味を守る」文脈で語られることも多いスパイスで、食卓の小さなフレークの向こうに、産地の歴史が見える一品です。なお、同じ中東の唐辛子フレークでも、トルコ南東部のウルファビーバー（No.68）は好対照：あちらは暗い赤紫色で、レーズンのような甘みと燻し感、後からじわりと来る辛さが個性です。明るくフルーティーなアレッポ、暗く甘いウルファ、と覚えると見分けがつきます。"
   },
   {
     id:"tonka", no:"47", name:"トンカビーン", en:"Tonka Bean", latin:"Dipteryx odorata（マメ科）",
@@ -3300,8 +4283,9 @@ var SPICES = [
   },
   {
     id:"kaffirlime", no:"48", name:"こぶみかんの葉（バイマックルー）", en:"Kaffir Lime Leaf / Bai Makrut", latin:"Citrus hystrix（ミカン科）",
-    img:"assets/kaffirlime.webp", alt:"竹ざるに重ねられた、つやのある濃い緑の8の字形のこぶみかんの葉",
-    cat:["whole"], catLabel:"リーフ（生／乾燥／冷凍）",
+    img:"assets/kaffirlime.webp", alt:"竹ざるに無造作に重ねられた、8の字形のこぶみかんの葉",
+    cat:["whole","herb"], catLabel:"リーフ（生／乾燥／冷凍）",
+    herbNote:"🌿 葉っぱ組：使うのは葉なので、厳密にはスパイスではなくハーブ寄り。この図鑑では香りづけの仲間として一緒に収録しています。",
     flavor:"ライムの皮を凝縮したような、強烈に爽やかな柑橘の香り。タイ料理のスープの香りは、この葉が主役です。",
     heat:0, aroma:5,
     trivia:"葉が「8の字」に2枚つながった独特の形。果実の方はデコボコした「こぶ」のあるライムで、葉ほどは料理に使われません。",
@@ -3319,7 +4303,8 @@ var SPICES = [
   {
     id:"lemongrass", no:"49", name:"レモングラス", en:"Lemongrass", latin:"Cymbopogon citratus（イネ科）",
     img:"assets/lemongrass.webp", alt:"木の板に束ねられたレモングラスの茎と、輪切りにした断面",
-    cat:["whole"], catLabel:"茎（生／乾燥）",
+    cat:["whole","herb"], catLabel:"茎（生／乾燥）",
+    herbNote:"🌿 葉っぱ組の仲間：使うのは茎ですが、葉や茎を香りづけに使う「ハーブ寄り」の素材として一緒に収録しています。",
     flavor:"レモンそのものより爽やかで、少し生姜にも似た清涼感。東南アジアのスープとカレーの「香りの骨格」です。",
     heat:0, aroma:4,
     trivia:"名前にレモンとつきますが柑橘ではなく、イネ科の草。香りの主成分シトラールは、レモンの皮の香りとも共通します。",
@@ -3353,7 +4338,7 @@ var SPICES = [
     mania:"見た目は黒胡椒そっくりなのに、噛むとレモンの香りが弾けるギャップが最大の魅力。ティムール（No.39）が「柑橘＋痺れ」なら、マーガオは「柑橘＋胡椒の辛さ」。アジアの柑橘系スパイス食べ比べの、もう一人の実力者です。台湾では近年、シェフたちが再評価を進める注目の食材でもあります。"
   },
   {
-    id:"ginger", no:"51", name:"生姜（ショウガ）", en:"Ginger", latin:"Zingiber officinale（ショウガ科）",
+    id:"ginger", no:"51", name:"ジンジャー", en:"Ginger", alias:"生姜 ショウガ", latin:"Zingiber officinale（ショウガ科）",
     img:"assets/ginger.webp", alt:"陶器の小皿にのった生姜の根茎と薄切り、横に生姜パウダーの小山",
     cat:["whole","curry"], catLabel:"生 ／ パウダー",
     flavor:"爽やかな柑橘にも似た香りと、ピリッと潔い辛み。加熱すると辛みが和らぎ、甘みと温かみのある味わいに変わります。",
@@ -3368,12 +4353,643 @@ var SPICES = [
     storage:"生は軽く湿らせたペーパーで包んで冷蔵、またはすりおろして冷凍が便利。パウダーは密閉・遮光で常温に。",
     access:"◎ スーパーで手に入る：生は野菜売り場の常連で、パウダーもスパイス棚にあります。チューブタイプも手軽です。",
     sub:"生がなければパウダーで代用可（量は1/4ほどに）。ガランガルは同じショウガ科の親戚ですが香りの方向が違うので、代用というより別料理として楽しむのがおすすめです。",
-    mania:"生姜はガランガル（No.28）、ターメリック（No.03）と同じショウガ科の仲間。日本には2〜3世紀頃に伝わったとされ、奈良時代には薬として重宝されていた古参の香辛料です。この図鑑のレシピでも出番が多く、今回ついに正式に仲間入りしました。"
+    mania:"生姜はガランガル（No.28）、ターメリック（No.03）と同じショウガ科の仲間。日本には2〜3世紀頃に伝わったとされ、奈良時代には薬として重宝されていた古参の香辛料です。この図鑑のレシピでも出番が多いスパイスです。"
+  },
+  {
+    id:"basil", no:"H1", name:"バジル", en:"Basil / Sweet Basil", latin:"Ocimum basilicum（シソ科）",
+    img:"assets/basil.webp", alt:"陶器の小鉢に盛られた、摘みたてのバジルの枝葉",
+    cat:["herb"], catLabel:"リーフ（生／乾燥）", herb:true,
+    herbNote:"🌿 ハーブ枠：葉を使うハーブです。厳密にはスパイスとは別物ですが、料理で大活躍する香りづけの仲間として、この図鑑にそっと収録しています。",
+    flavor:"甘く爽やかで、ほんのりクローブにも似た華やかな香り。イタリア料理の顔であり、タイ料理でも欠かせない葉っぱです。",
+    heat:0, aroma:4,
+    trivia:"タイのガパオに使うのは、実はスイートバジルではなく「ホーリーバジル」という別品種。香りも辛みも強めです。",
+    origin:"インド〜東南アジア（のち地中海で発展）", part:"葉", form:"生リーフ／乾燥／ペースト（ペスト）",
+    component:"リナロールとオイゲノールが甘く華やかな香りの中心。品種によってシネオールやカンファーのニュアンスも変わります。",
+    uses:["トマトとモッツァレラのカプレーゼ、パスタの仕上げにちぎって","ジェノベーゼソース（ペスト）の主役","タイ風のバジル炒めやグリーンカレーの香り付け"],
+    boxA:"生の葉", seedText:"生の葉は火を止めてから加えるのが鉄則。長く加熱すると香りが飛び、色も黒ずみます。手でちぎると切り口から香りが立ちます。",
+    boxB:"乾燥（ドライ）", powderText:"乾燥バジルは香りが穏やかで、生とは別物の味わい。トマト煮込みなど、加熱する料理でコク足しに使うのが向いています。",
+    pairing:"トマト、オリーブオイル、にんにく、松の実、モッツァレラ",
+    storage:"生は茎を水に挿すか、湿らせたペーパーで包んで冷蔵。黒ずみやすいので、余ったらオイル漬けやペーストにして冷凍が正解。",
+    access:"◎ スーパーで手に入る：生は野菜売り場、乾燥はスパイス棚の定番です。鉢植えもよく売っています。",
+    sub:"大葉（しそ）で和風に寄せた代用ができます（同じシソ科の親戚）。乾燥バジルで生の代用をするなら、量は3倍を目安に、仕上げではなく煮込みで。",
+    mania:"バジルはシソ科で、日本の大葉（しそ・No.H10）とは親戚同士。学名の basilicum はギリシャ語の「王（バシレウス）」に由来するとされ、「王のハーブ」の名を持ちます。タイ料理のホーリーバジル（ガパオの葉）はさらに別品種で、クローブのような強い香りとほのかな辛みが特徴。スイートバジルでガパオを作ると「なんか違う」のはこのためです。この図鑑のレシピ「鶏ひき肉とバジルのガパオ風ごはん」にも登場します。なお、タイ料理でもうひとつ主役を張る親戚がタイバジル（ホラパー・No.H16）です。スイートバジルが「甘く華やか」なのに対し、タイバジルはアニスのような甘い香りと紫色の茎が特徴で、熱を通しても香りが残りやすいタイプ。2つを並べて嗅ぎ比べると、「同じバジルでも香りの配分がまるで違う」ことがよく分かります。"
+  },
+  {
+    id:"pakuchi", no:"H2", name:"パクチー（葉）", en:"Cilantro / Coriander Leaf", latin:"Coriandrum sativum（セリ科）",
+    img:"assets/pakuchi.webp", alt:"竹ざるにのせられた、新鮮なパクチーの葉と茎の束",
+    cat:["herb"], catLabel:"リーフ（生）", herb:true,
+    herbNote:"🌿 ハーブ枠：葉を使うハーブです。厳密にはスパイスとは別物ですが、料理で大活躍する香りづけの仲間として、この図鑑にそっと収録しています。",
+    flavor:"柑橘と青草が混ざったような、強烈に個性的な香り。好き嫌いが分かれるけれど、エスニック料理の「らしさ」はこの葉が作ります。",
+    heat:0, aroma:4,
+    trivia:"種のコリアンダーシード（No.04）と同じ植物。同じ株から、葉はハーブ、種はスパイスとして使われる二刀流です。",
+    origin:"地中海東部〜南欧", part:"葉（茎・根も使う）", form:"生リーフ",
+    component:"葉の香りの中心はアルデヒド類（デセナールなど）で、種の主成分リナロールとは別物。だから同じ植物なのに、葉と種で香りがまったく違います。",
+    uses:["タイやベトナムのスープ・麺に山盛りのせる","サラダや和え物に刻んでたっぷり（茎も刻んで使える）","タコスの仕上げ、根はスープの香り付けにすりつぶして"],
+    boxA:"生の葉", seedText:"生の葉は加熱に弱いので、仕上げにのせるか和えるのが基本。茎は葉より香りが穏やかで、刻めば火を通す料理にも使えます。",
+    boxB:"乾燥（ドライ）", powderText:"乾燥葉は香りが大きく落ちるため、ほぼ流通しません。パクチーは「生で使う」一択のハーブです。",
+    pairing:"ライム、ナンプラー、チリ、にんにく、ピーナッツ",
+    storage:"茎を水に挿して冷蔵、または湿らせたペーパーで包んで。数日でしおれるので、買ったら早めに使い切るのが吉。",
+    access:"◎ スーパーで手に入る：野菜売り場の定番になりました。根つきのものはアジア食材コーナーに。",
+    sub:"苦手な人・ないときは、三つ葉や大葉の刻んだもので「緑の香り」の役割だけ代用可。ただしパクチーの個性そのものの代わりはありません。",
+    mania:"パクチー（タイ語）、コリアンダー（英語で葉は cilantro とも）、中国語では香菜（シャンツァイ）。世界中で名前を変えながら愛される葉です。「石鹸のような味に感じる」現象は、嗅覚受容体遺伝子OR6A2の個人差が関係するという研究で有名になりました。面白いのは、同じ植物の種（No.04 コリアンダー）は香り成分が違うため、葉が苦手でも種は平気な人が多いこと。タイでは根（ラークパクチー）もスープの香りの土台に使う、捨てるところの少ない植物です。この図鑑のレシピ「パクチーたっぷりのエスニックサラダ」でも主役を張ります。"
+  },
+  {
+    id:"mint", no:"H3", name:"ミント", en:"Mint / Spearmint", latin:"Mentha spicata ほか（シソ科）",
+    img:"assets/mint.webp", alt:"ガラスの器に盛られた、新鮮なスペアミントの葉",
+    cat:["herb"], catLabel:"リーフ（生／乾燥）", herb:true,
+    herbNote:"🌿 ハーブ枠：葉を使うハーブです。厳密にはスパイスとは別物ですが、料理で大活躍する香りづけの仲間として、この図鑑にそっと収録しています。",
+    flavor:"すっと鼻に抜ける清涼感。甘みのある穏やかなタイプ（スペアミント）と、メントールの強いタイプ（ペパーミント）があります。",
+    heat:0, aroma:4,
+    trivia:"スペアミントの主成分はメントールではなくカルボン。ガムの「ミント味」の多くはこちらの香りです。",
+    origin:"地中海沿岸", part:"葉", form:"生リーフ／乾燥",
+    component:"ペパーミントはメントールが清涼感の中心、スペアミントはカルボンが中心。同じミントでも主役の成分が違います。",
+    uses:["モロッコのミントティー（甘くした緑茶と合わせて）","ラム肉やヨーグルトソース（ライタ）の香り付け","デザートやドリンクの仕上げ、チョコレートと合わせて"],
+    boxA:"生の葉", seedText:"生の葉は仕上げに。揉むと香りが立ちますが、刻みすぎるとえぐみが出るので、手でちぎるくらいがちょうどいいです。",
+    boxB:"乾燥（ドライ）", powderText:"乾燥ミントは中東料理で活躍。トマトやヨーグルトに混ぜると、生とは違う落ち着いた清涼感が出ます。",
+    pairing:"ヨーグルト、ラム肉、チョコレート、レモン、きゅうり",
+    storage:"生は茎を水に挿して冷蔵。乾燥は密閉・遮光で常温。繁殖力が強いので、育てるなら鉢植え単独で。",
+    access:"◎ スーパーで手に入る：生は野菜・ハーブ売り場、乾燥はスパイス棚にあります。",
+    sub:"大葉＋レモンの皮で清涼感の方向だけ寄せられますが、ミントのすっとする感じの完全な代用はありません。",
+    mania:"ミントは交雑しやすく、品種がとても多いハーブ。和種ハッカはメントール含有量の高さで、かつて世界的に有名でした。料理で使うのは主にスペアミント系で、ペパーミントはお菓子やオイル向き、と覚えると売り場で迷いません。ベトナム料理の生春巻きやフォーにも欠かせない、意外とアジアでも大活躍の葉です。"
+  },
+  {
+    id:"oregano", no:"H4", name:"オレガノ", en:"Oregano", latin:"Origanum vulgare（シソ科）",
+    img:"assets/oregano.webp", alt:"木のスプーンと小皿に盛られた乾燥オレガノと、生のオレガノの小枝",
+    cat:["herb"], catLabel:"リーフ（乾燥が主役）", herb:true,
+    herbNote:"🌿 ハーブ枠：葉を使うハーブです。厳密にはスパイスとは別物ですが、料理で大活躍する香りづけの仲間として、この図鑑にそっと収録しています。",
+    flavor:"温かくほろ苦い、力強い香り。トマトと油に出会うと本領発揮する、地中海の「ピザの香り」の正体です。",
+    heat:0, aroma:3,
+    trivia:"珍しく「乾燥させた方が香りが立つ」と言われるハーブ。生よりドライが主役の座にいます。",
+    origin:"地中海沿岸", part:"葉（花穂も）", form:"乾燥リーフ／生",
+    component:"カルバクロールとチモールが力強い香りの中心。この2成分はタイムとも共通で、親戚らしい顔ぶれです。",
+    uses:["ピザやトマトソース、ラザニアなどイタリア料理に","豆の煮込みやチリコンカンの香り付け","ギリシャサラダやグリル肉のマリネに"],
+    boxA:"生の葉", seedText:"生の葉は香りが強く、量の調整が難しめ。サラダや仕上げに少量ちぎる使い方が向いています。",
+    boxB:"乾燥（ドライ）", powderText:"乾燥が本領。油と一緒に加熱すると香りが料理になじみます。手のひらで揉んでから入れると香りが一段開きます。",
+    pairing:"トマト、オリーブオイル、にんにく、チリ、豆",
+    storage:"乾燥は密閉・遮光で1年ほど。香りが強いので、移り香防止に単独容器で。",
+    access:"◎ スーパーで手に入る：乾燥リーフはスパイス棚の定番です。生はハーブ売り場に時々。",
+    sub:"タイム＋マジョラム少量で方向は寄せられます。乾燥バジルとも合わせやすいですが、香りの性格は別物です。",
+    mania:"メキシコ料理で使う「メキシカンオレガノ」は、実はクマツヅラ科の別植物。香りは柑橘寄りで、地中海のオレガノとは似て非なるものです。ギリシャでは野生のオレガノを束で乾燥させて売るのが名物で、花穂ごと乾燥させたものが最も香り高いとされます。名前はギリシャ語の「山の喜び（oros＋ganos）」が由来という、素敵な名前のハーブです。"
+  },
+  {
+    id:"thyme", no:"H5", name:"タイム", en:"Thyme", latin:"Thymus vulgaris（シソ科）",
+    img:"assets/thyme.webp", alt:"リネンの布の上に置かれた、小さな葉のついたタイムの小枝",
+    cat:["herb"], catLabel:"リーフ（生／乾燥）", herb:true,
+    herbNote:"🌿 ハーブ枠：葉を使うハーブです。厳密にはスパイスとは別物ですが、料理で大活躍する香りづけの仲間として、この図鑑にそっと収録しています。",
+    flavor:"小さな葉に、清楚でほろ苦い香り。加熱に強く、煮込みの中でじんわりと全体をまとめる名脇役です。",
+    heat:0, aroma:3,
+    trivia:"主成分チモールは、うがい薬や歯みがき粉の香り付け・殺菌成分としても使われてきました。",
+    origin:"地中海沿岸", part:"葉（小枝ごと）", form:"生（枝つき）／乾燥",
+    component:"チモールとカルバクロール。オレガノと成分が重なる親戚同士で、相性がいいのも納得です。",
+    uses:["シチューやスープの煮込みに、枝ごと入れて取り出す","ローストチキンやポテトの香り付け","ブーケガルニの一員として（ベイリーフ、パセリと束ねて）"],
+    boxA:"生の葉", seedText:"生の枝は煮込みにそのまま入れて、仕上げに引き上げるのが基本。葉だけ使うときは、枝をしごいて外します。",
+    boxB:"乾燥（ドライ）", powderText:"乾燥は香りが長持ちする優等生。煮込みの早い段階から入れても香りが残ります。",
+    pairing:"鶏肉、じゃがいも、玉ねぎ、ベイリーフ、ローズマリー",
+    storage:"生は湿らせたペーパーで包んで冷蔵。乾燥は密閉・遮光で1年ほど持ちます。",
+    access:"◎ スーパーで手に入る：生はハーブ売り場、乾燥はスパイス棚の定番です。",
+    sub:"オレガノ少量で方向は近づきます。繊細な香りなので、強いハーブで代用するときは量を控えめに。",
+    mania:"タイムは、古代エジプトでミイラの防腐にも使われたという、殺菌の香りの元祖格。フランスのブーケガルニでは主役級の一員です。小枝ごと入れて取り出すスタイルは「香りは貸すけど身は引く」という、煮込みハーブの作法そのもの。レモンタイムなど柑橘香の品種もあり、魚料理にはそちらが好まれます。"
+  },
+  {
+    id:"rosemary", no:"H6", name:"ローズマリー", en:"Rosemary", latin:"Salvia rosmarinus（シソ科）",
+    img:"assets/rosemary.webp", alt:"木のまな板の上に並べられた、針のような葉のローズマリーの枝",
+    cat:["herb"], catLabel:"リーフ（生／乾燥）", herb:true,
+    herbNote:"🌿 ハーブ枠：葉を使うハーブです。厳密にはスパイスとは別物ですが、料理で大活躍する香りづけの仲間として、この図鑑にそっと収録しています。",
+    flavor:"松のように鋭く清々しい、強い香り。油と熱に出会うと香りが開き、肉の臭みを爽やかに変えます。",
+    heat:0, aroma:4,
+    trivia:"学名はもともと Rosmarinus（海の露）でしたが、近年の分類でセージと同じサルビア属に編入され、名前が変わりました。",
+    origin:"地中海沿岸", part:"葉（針状）", form:"生（枝つき）／乾燥",
+    component:"1,8-シネオール、カンファー、ピネン。清涼感のある構成で、香りの持ちがとても良いハーブです。",
+    uses:["ローストチキンやラム、フォカッチャの香り付け","じゃがいものローストに枝ごと一緒に","オイルや塩に漬けて、香りつき調味料に"],
+    boxA:"生の葉", seedText:"生の枝は焼き物・煮込みにそのまま。葉は硬いので細かく刻むか、枝ごと使って取り出すのが基本です。",
+    boxB:"乾燥（ドライ）", powderText:"乾燥は香りが飛びにくく、肉の下味に最適。量が多いと薬品っぽくなるので、控えめから始めるのがコツ。",
+    pairing:"鶏肉、ラム、じゃがいも、オリーブオイル、レモン、にんにく",
+    storage:"生は湿らせたペーパーで包んで冷蔵、乾燥は密閉・遮光で1年ほど。庭や鉢では常緑で育ち、必要な分だけ切って使えます。",
+    access:"◎ スーパーで手に入る：生はハーブ売り場の定番、乾燥もスパイス棚にあります。",
+    sub:"タイム＋セージ少量で「清々しさ」の方向へ。ただしローズマリーの個性は強く、完全な代用はありません。",
+    mania:"「海の露（ros marinus）」という美しい名は、地中海の海岸の崖に自生し、海風の露で育つ姿から。記憶力にまつわる言い伝えも多いハーブです。枝を串代わりにして肉を焼くと、香りが中まで移るのは地中海の知恵。セージ（No.H9）とはサルビア属の親戚同士です。"
+  },
+  {
+    id:"dillweed", no:"H7", name:"ディル（葉）", en:"Dill Weed", latin:"Anethum graveolens（セリ科）",
+    img:"assets/dillweed.webp", alt:"陶器の器に盛られた、羽毛のように細いディルの葉",
+    cat:["herb"], catLabel:"リーフ（生）", herb:true,
+    herbNote:"🌿 ハーブ枠：葉を使うハーブです。厳密にはスパイスとは別物ですが、料理で大活躍する香りづけの仲間として、この図鑑にそっと収録しています。",
+    flavor:"羽毛のような細い葉に、爽やかでほんのり甘い香り。魚介と合わせると、北欧の風が吹きます。",
+    heat:0, aroma:3,
+    trivia:"種のディルシード（No.30）と同じ植物。葉は繊細な香り、種はスパイシーな香りと、担当が分かれています。",
+    origin:"地中海沿岸〜西アジア", part:"葉", form:"生リーフ／乾燥（少量）",
+    component:"葉の香りはカルボンとフェランドレンが中心で、種とはバランスが違います。葉の方がずっと繊細です。",
+    uses:["サーモンのマリネ（グラブラックス）や魚介のサラダにたっぷり","ヨーグルトソースやポテトサラダの香り付け","ピクルス液の香り付け（葉と茎を一緒に入れる）"],
+    boxA:"生の葉", seedText:"生の葉は熱に弱いので、仕上げにたっぷりのせるのが北欧流。刻むと香りが逃げるので、使う直前にハサミで切るのがおすすめ。",
+    boxB:"乾燥（ドライ）", powderText:"乾燥ディルウィードは香りが大きく落ちます。使うなら量を多めに、ヨーグルトなど油脂のあるものと混ぜて。",
+    pairing:"サーモン、きゅうり、ヨーグルト、レモン、マスタード",
+    storage:"生は茎を水に挿して冷蔵、またはペーパーで包んで。しおれやすいので2〜3日で使い切るのが理想。",
+    access:"◎〜○ スーパーで手に入る：大きめの店舗のハーブ売り場に並ぶことが増えました。",
+    sub:"フェンネルの葉（あれば）や、パセリ＋レモンの皮で爽やかさの方向だけ。種のディルシードでは代用になりません（香りが別物）。",
+    mania:"北欧のグラブラックス（サーモンの塩漬け）は、ディルで覆い尽くして作る保存食でした。葉と種でここまで香りが違うのは、コリアンダー（種 No.04／葉 No.H2）と並ぶ「二面性」コンビ。英語でも Dill Weed（葉）と Dill Seed（種）とはっきり呼び分けられています。ロシアや東欧では、きゅうりのピクルスに葉ごと茎ごと入れるのが夏の風物詩です。"
+  },
+  {
+    id:"parsley", no:"H8", name:"パセリ（イタリアンパセリ）", en:"Flat-leaf Parsley", latin:"Petroselinum crispum（セリ科）",
+    img:"assets/parsley.webp", alt:"木の板の上に広げられた、平たい葉のイタリアンパセリの束",
+    cat:["herb"], catLabel:"リーフ（生）", herb:true,
+    herbNote:"🌿 ハーブ枠：葉を使うハーブです。厳密にはスパイスとは別物ですが、料理で大活躍する香りづけの仲間として、この図鑑にそっと収録しています。",
+    flavor:"青く爽やかで、少しだけ苦みのある香り。平たい葉のイタリアンパセリは、縮れたカーリーパセリより香りが濃厚です。",
+    heat:0, aroma:2,
+    trivia:"日本の「パセリ＝飾り」のイメージはカーリーパセリ。本場で料理に使うのは、平葉のイタリアンパセリが主役です。",
+    origin:"地中海沿岸", part:"葉（茎も）", form:"生リーフ／乾燥（少量）",
+    component:"アピオールやミリスチシンなど。茎にも香りがあるので、ブーケガルニでは茎を使うこともあります。",
+    uses:["タブーレ（中東のパセリたっぷりサラダ）で葉そのものが主役に","パスタやガーリックトーストの仕上げに刻んで散らす","グレモラータ（レモンの皮＋にんにくと刻む）の材料として"],
+    boxA:"生の葉", seedText:"生は刻んで仕上げに。茎は香りが強いので、スープや煮込みの香り出しに束で入れて取り出す使い方もできます。",
+    boxB:"乾燥（ドライ）", powderText:"乾燥パセリは色と青みの補助役。香りは生に遠く及ばないので、あくまで「彩りと下地」と割り切るのが正解。",
+    pairing:"レモン、にんにく、オリーブオイル、トマト、豆",
+    storage:"茎を水に挿して冷蔵すると長持ち。刻んで冷凍しておくと、仕上げの彩りに便利です。",
+    access:"◎ スーパーで手に入る：カーリーパセリは年中、イタリアンパセリも野菜売り場で増えてきました。",
+    sub:"カーリーパセリで代用可（香りは穏やか）。三つ葉やセロリの葉でも「緑の香り」の役割は果たせます。",
+    mania:"中東のタブーレは、パセリが「具」でブルグル（挽き割り小麦）が「つなぎ」という逆転のサラダ。パセリを飾りだと思っていると驚くほど大量に使います。イタリアのグレモラータは、煮込み肉の仕上げに欠かせない「刻みハーブの調味料」。葉だけでなく茎にも価値がある、捨てるところの少ないハーブです。"
+  },
+  {
+    id:"sage", no:"H9", name:"セージ", en:"Sage", latin:"Salvia officinalis（シソ科）",
+    img:"assets/sage.webp", alt:"木の板の上に無造作に置かれたセージの小枝と、小皿に盛られた乾燥セージ",
+    cat:["herb"], catLabel:"リーフ（生／乾燥）", herb:true,
+    herbNote:"🌿 ハーブ枠：葉を使うハーブです。厳密にはスパイスとは別物ですが、料理で大活躍する香りづけの仲間として、この図鑑にそっと収録しています。",
+    flavor:"灰緑色の柔らかな葉に、ほろ苦く清涼感のある強い香り。バターと合わせると一気に「ごちそうの香り」になります。",
+    heat:0, aroma:3,
+    trivia:"サルビアの仲間で、学名の Salvia はラテン語の「救う（salvare）」が語源とされる、薬草の王様格です。",
+    origin:"地中海沿岸（バルカン半島）", part:"葉", form:"生リーフ／乾燥",
+    component:"ツヨンと1,8-シネオール、カンファーが中心。少量でよく効く、個性の強い構成です。",
+    uses:["セージバターソース（焦がしバター＋葉）でパスタやニョッキに","豚肉のサルティンボッカ（生ハムと重ねる）","ソーセージや詰め物の香り付け（セージ＆オニオン）"],
+    boxA:"生の葉", seedText:"生の葉は油で軽く揚げるように加熱すると、香りが開いて食感も楽しいアクセントに。焦がしバターとの相性は抜群です。",
+    boxB:"乾燥（ドライ）", powderText:"乾燥セージは香りが濃縮されて強め。揉みほぐした「ラブドセージ」は詰め物料理の定番。小さじ単位で慎重に。",
+    pairing:"バター、豚肉、玉ねぎ、かぼちゃ、豆",
+    storage:"生はペーパーで包んで冷蔵。乾燥は密閉・遮光で1年ほど。香りが強いので単独容器で。",
+    access:"○ 大きめのスーパー・輸入食品店：生はハーブ売り場、乾燥はスパイス棚にあります。",
+    sub:"ローズマリーやタイムを少量。香りの系統は近いですが、セージのほろ苦さの代わりにはならないので、あくまで方向寄せとして。",
+    mania:"ローズマリー（No.H6）と同じサルビア属の親戚。イギリスの「セージ＆オニオンの詰め物」は、ローストチキンやポークの相棒として長く続く組み合わせです。イタリアでは、セージの葉をバターで揚げただけのものが立派なパスタソースになるほど、香りのポテンシャルが高い葉。強い香りなので「主役にもなれる脇役」という立ち位置が絶妙です。"
+  },
+  {
+    id:"shiso", no:"H10", name:"しそ（大葉）", en:"Shiso / Oba", latin:"Perilla frutescens（シソ科）",
+    img:"assets/shiso.webp", alt:"竹ざるに重ねられた、水滴のついた新鮮な大葉（しそ）の葉",
+    cat:["herb"], catLabel:"リーフ（生）", herb:true,
+    herbNote:"🌿 ハーブ枠：葉を使うハーブです。厳密にはスパイスとは別物ですが、料理で大活躍する香りづけの仲間として、この図鑑にそっと収録しています。",
+    flavor:"日本の食卓のハーブ代表。すっと爽やかで、ほんのりスパイシーな香りは、バジルとミントの親戚らしさを感じさせます。",
+    heat:0, aroma:3,
+    trivia:"バジル・ミント・ローズマリーと同じシソ科。英語では「ビーフステーキプラント」という、意外すぎる別名もあります。",
+    origin:"東アジア（日本・中国など）", part:"葉（花穂・実も）", form:"生リーフ",
+    component:"ペリルアルデヒドが大葉の香りの中心。赤しそは色素アントシアニンも豊富で、梅干しやしそジュースの色のもとです。",
+    uses:["刺身のつま、薬味として刻んで冷奴やそうめんに","刻んで餃子やつくね、パスタに混ぜる和風アレンジ","赤しそはジュースや梅干しの色付けに、穂じそは刺身の彩りに"],
+    boxA:"生の葉", seedText:"生の葉は刻むと香りが立ちますが、空気に触れると色が変わりやすいので使う直前に。包む・のせる・刻むで表情が変わります。",
+    boxB:"乾燥（ドライ）", powderText:"乾燥品はゆかり（赤しそのふりかけ）として。青じその乾燥は香りが落ちるので、生が主役です。",
+    pairing:"梅、生姜、みょうが、魚介、トマト、チーズ",
+    storage:"軸を少し水に浸して冷蔵、または湿らせたペーパーで包んで。乾燥が大敵です。",
+    access:"◎ スーパーで手に入る：大葉は野菜売り場の常連。穂じそ・花穂は旬の時期だけの楽しみ。",
+    sub:"バジルで洋風に寄せた代用ができます（同じシソ科）。みょうが＋三つ葉の刻みでも「和の薬味」の役割は果たせます。",
+    mania:"しそは「紫蘇」の漢字の通り、もとは赤しそが本家で、青じそ（大葉）はその変種。大葉という呼び名は流通上の名前で、植物名ではありません。韓国では近縁のエゴマの葉を焼肉に巻くのが定番で、同じ仲間でも国の数だけ使い方があります。穂じそ、実の漬物まで食べる、日本の「葉っぱを使い尽くす」文化の代表選手です。"
+  },
+  {
+    id:"wasabi", no:"52", name:"わさび（本わさび）", en:"Wasabi / Hon-wasabi", latin:"Eutrema japonicum（アブラナ科）",
+    img:"assets/wasabi.webp", alt:"陶器の皿にのった本わさびの根茎と、鮫皮のおろし金にのったすりおろしたてのわさび",
+    cat:["hot","whole"], catLabel:"根茎（生）",
+    flavor:"すりおろした瞬間に立つ、清らかで鋭い辛さとほのかな甘み。鼻にツーンと抜けて、涙のあとにすっと消える、日本が世界に誇る辛さです。",
+    heat:3, aroma:4,
+    trivia:"辛さの成分は、すりおろして細胞が壊れたときに酵素反応で生まれます。だから「すりたて」が一番辛くて香るんです。",
+    origin:"日本（清流の沢沿い）", part:"根茎", form:"生（根茎）／すりおろし",
+    component:"アリルイソチオシアネートがツーンと鼻に抜ける辛さの中心。揮発性がとても高く、すりおろしてから15分ほどで辛さと香りはピークを過ぎていきます。",
+    uses:["刺身・寿司の薬味に、醤油に溶かず魚の上にのせて","そばの薬味、わさび丼（鰹節ごはんにのせて醤油を少し）","ステーキやローストビーフに添えて、脂をすっと切る"],
+    boxA:"本わさび（生）", seedText:"清流で数年かけて育つ根茎を、鮫皮のおろし金で円を描くようにゆっくりすりおろすのが本流。きめ細かくすれるほど辛さと甘みが引き立ちます。金属のおろし金でも作れますが、口当たりと香りは鮫皮が格上です。",
+    boxB:"チューブ・粉わさび", powderText:"市販チューブの多くは西洋わさび（ホースラディッシュ）が主体で、本わさび入りでも香りの繊細さは別物。粉わさびも多くは西洋わさび＋からし粉が主原料です。手軽さでは優秀ですが、「本わさびのすりたて」とは別ジャンルとして楽しむのがおすすめ。",
+    pairing:"醤油、刺身、そば、山葵菜・葉の漬物、牛肉",
+    storage:"生の根茎は湿らせたペーパーで包んで冷蔵し、1週間ほどで使い切りたいところ。すりおろしたら空気に触れる面積を減らし、ラップで密閉して香りを閉じ込めます。",
+    access:"△ 本わさびは専門店・デパート・産地通販向きで高価。チューブや粉はスーパーで手に入ります（成分表示で本わさび使用かどうか確認できます）。",
+    sub:"西洋わさび（ホースラディッシュ／レフォール）で辛さの方向は代用可。ただし清涼感と甘みの余韻は本わさびならでは。チューブで代用するなら「本わさび入り」表記のものが近づきます。",
+    mania:"西洋わさびは同じアブラナ科の別植物で、大きな白い根が正体。辛さの成分は同じイソチオシアネート系でも、本わさびには甘みと清涼感を運ぶ成分が複数重なり、香りの立体感が違います。マスタード（No.10）や和からし（No.55）も同じ成分の親戚で、日本のツーンは世界と成分でつながっています。なお、わさびは葉や茎も漬物や和え物で食べる、捨てるところの少ない植物です。最後に大事な線引きをひとつ：わさびは「ペッパー」ではありません。ペッパー（黒・白・緑は同じ Piper nigrum の実）の辛さはピペリン、唐辛子はカプサイシン、わさびはアリルイソチオシアネートと、植物も成分も完全に別々。「ゆず胡椒」の胡椒が唐辛子の古称であるように、名前の近さと植物の近さは別のお話です。"
+  },
+  {
+    id:"myoga", no:"53", name:"みょうが", en:"Myoga", latin:"Zingiber mioga（ショウガ科）",
+    img:"assets/myoga.webp", alt:"小皿に盛られた、先が紅色のみょうがの花蕾と千切り",
+    cat:["herb"], catLabel:"花蕾（生）", herb:true,
+    herbNote:"🌿 ハーブ寄り：使うのは花の蕾で、分類上は野菜・薬味ですが、香りの主役として働く点はハーブそのもの。この図鑑では和の香り素材として収録しています。",
+    flavor:"爽やかでほろ苦く、どこか大人っぽい独特の香り。シャキッとした歯触りと一緒に、夏の食卓を涼しくする日本の薬味代表です。",
+    heat:0, aroma:3,
+    trivia:"食べるのは花の蕾（花みょうが）。春に出る若い茎は「みょうがたけ」として、別の旬の楽しみがあります。",
+    origin:"東アジア（日本で発達）", part:"花蕾（若い茎も）", form:"生",
+    component:"α-ピネンなどの清涼感のある香り成分が中心。生姜（No.51）と同じショウガ科ですが、辛さはほとんどなく、香りとほろ苦さが主役です。",
+    uses:["そうめん・冷奴・味噌汁の薬味に、千切りや小口切りで","甘酢漬けや天ぷら、みょうがごはんに","刺身のつまや、きゅうり・なすとの和え物に"],
+    boxA:"花みょうが（蕾）", seedText:"夏から秋に出る蕾を千切りにすると香りが一気に開きます。水にさらしすぎると香りが逃げるので、切ったらそのまま使うか、さらしても短時間で。加熱は天ぷら程度の短時間が向いています。",
+    boxB:"みょうがたけ（茎）", powderText:"春の若い茎を軟白栽培したもので、蕾より穏やかで上品な香り。吸い物や酢の物に。蕾と茎で旬が違う、同じ植物の二度おいしい薬味です。",
+    pairing:"しそ（No.H10）、生姜、味噌、酢、そうめん・冷奴",
+    storage:"乾燥が大敵。湿らせたペーパーで包んで冷蔵し、数日で使い切るのが理想。刻んで冷凍もできますが、香りは生が一番です。",
+    access:"◎ スーパーで手に入る：夏〜秋は野菜売り場の常連です。旬を過ぎると価格が上がります。",
+    sub:"しそ＋生姜の千切りで「和の薬味」の役割は代用可。ただし、みょうがのほろ苦い個性の代わりはありません。",
+    mania:"みょうがを食用にするのは、世界でもほぼ日本だけと言われる、かなり珍しい食文化です。原産は東アジアですが、中国や韓国では薬用が中心で、蕾を日常的に山盛り食べるのは日本の食卓ならでは。「みょうがを食べると物忘れする」という言い伝えは俗説で、科学的根拠はありません。むしろ香り成分にはリラックスの研究も。落語の「目黒のさんま」ならぬ「みょうが宿」の噺でもおなじみの、物語の多い薬味です。"
+  },
+  {
+    id:"yuzu", no:"54", name:"ゆず", en:"Yuzu", latin:"Citrus junos（ミカン科）",
+    img:"assets/yuzu.webp", alt:"黄色く熟したゆずの実と半分に切った断面、細切りのゆず皮",
+    cat:["whole"], catLabel:"果皮 ／ 果汁",
+    flavor:"皮から立ちのぼる、明るく上品な柑橘の香りが主役。果汁は酸味が強く苦みも含むので、主役はあくまで「皮の香り」です。",
+    heat:0, aroma:4,
+    trivia:"冬至のゆず湯でおなじみ。香りの主役は皮の油胞に詰まった精油で、果汁より皮に価値がある果実です。",
+    origin:"中国長江上流（日本へ古代に伝来）", part:"果皮（果汁も）", form:"生 ／ 乾燥皮 ／ ペースト（ゆず胡椒）",
+    component:"リモネンやユズノンなど、ゆず特有の香り成分が皮に集中。加熱すると香りが飛びやすいので、仕上げに使うのが基本です。",
+    uses:["吸い物・茶碗蒸し・ポン酢に、皮を細切りや結びゆずで添える","ゆず胡椒の材料として（青ゆずの皮＋青唐辛子＋塩）","ゆず味噌、ゆず釜、ドレッシングやデザートの香り付けに"],
+    boxA:"皮（生）", seedText:"黄色く熟した完熟ゆずは香りがまろやか、青ゆずはシャープ。白いワタは苦いので、皮は薄く削ぐのがコツ。すりおろしや千切りで、料理の仕上げにのせます。",
+    boxB:"果汁・ゆず胡椒", powderText:"果汁はポン酢やドレッシングの酸味に。ゆず胡椒は、ゆず皮と唐辛子と塩をすり合わせた九州生まれの合わせ調味料で、「胡椒」は唐辛子の古い呼び名。鍋や焼き鳥に少量で劇的に効きます（詳しくはブレンドのページのメモもどうぞ）。",
+    pairing:"味噌、白身魚、鶏肉、唐辛子（ゆず胡椒）、塩",
+    storage:"実は冷蔵で2週間ほど。皮だけ削いで冷凍しておくと、旬の外でも香りが使えて便利です。果汁は製氷皿で冷凍がおすすめ。",
+    access:"◎ スーパーで手に入る：旬（晩秋〜冬）は野菜・果物売り場に。ゆず胡椒は調味料棚の定番です。",
+    sub:"かぼすやスダチで柑橘の方向は代用可（香りの性格は変わります）。レモンの皮でも雰囲気は寄せられますが、ゆずの上品な甘さのある香りの代わりはありません。",
+    mania:"ゆずは種が多くて果汁が少ないため、千年以上も「実生（種から育てる）」では18年近く実がならないと言われ、嫁接ぎで増やされてきた手間のかかる柑橘です。七味唐辛子に入る陳皮（No.29）の日本版は温州みかんの皮が主役ですが、ゆず皮を配合する七味もあり、柑橘の皮を乾かして香りに使う知恵は中国と日本で響き合っています。冬至のゆず湯は、香りの強さが邪気を払うと考えられた名残です。"
+  },
+  {
+    id:"wakarashi", no:"55", name:"和からし", en:"Wa-karashi / Japanese Mustard", latin:"Brassica juncea（アブラナ科・東洋からし種）",
+    img:"assets/wakarashi.webp", alt:"和の小皿に控えめに盛られた練りたての和からしと、からし粉・からし種の小皿",
+    cat:["hot","powder"], catLabel:"パウダー（種子）",
+    flavor:"鼻にツーンと抜ける、潔く鋭い辛さ。酢や砂糖で丸める洋からしと違い、辛さそのものを正面から楽しむ日本のからしです。",
+    heat:3, aroma:3,
+    trivia:"粉のままでは辛くなく、水で練って酵素が働くことで辛さが生まれます。お湯ではなく「ぬるま湯」で練るのが、辛さを立てるコツ。",
+    origin:"中央アジア〜東アジア（日本で品種が発達）", part:"種子（粉末）", form:"パウダー ／ 練り",
+    component:"種子のシニグリンが、練ることで酵素ミロシナーゼと反応してアリルイソチオシアネートに変化。これがわさび（No.52）と同じ「鼻に抜ける辛さ」の正体です。",
+    uses:["おでん、納豆、シュウマイの薬味に練りたてを添えて","からし和え（ほうれん草、なす、イカなど）の味の決め手","からし味噌や、豚の角煮に添える辛みとして"],
+    boxA:"粉からし（練る前）", seedText:"粉をぬるま湯（40度前後）で練り、器を伏せて5〜10分置くと辛さが最大に。熱湯は酵素が失活して辛くならず、冷水では立ち上がりが遅い、という温度の科学が効く調味料です。",
+    boxB:"練りからし（チューブ）", powderText:"チューブの練りからしは手軽で安定した辛さ。粉から練ったものに比べると香りの鮮烈さは穏やかです。辛さを足したいときは、粉を少量練って混ぜる裏技も。",
+    pairing:"味噌、醤油、おでん、納豆、豚肉",
+    storage:"粉は密閉・遮光で常温。練ったものは辛さが飛びやすいので、使う分だけ練るのが理想です。",
+    access:"◎ スーパーで手に入る：粉からしもチューブも調味料棚の定番です。",
+    sub:"洋からし・マスタードで辛さの方向は代用可。ただし洋からしは酢や砂糖で調味されたものが多く、酸味も一緒に付いてきます。わさび少量でも「鼻に抜ける辛さ」だけは寄せられます。",
+    mania:"マスタードシード（No.10）と和からしは、どちらもアブラナ科カラシナの仲間ですが、使い方が正反対に進化しました。インドでは種を油で加熱して「辛さを消して香ばしさに変える」、日本では種を粉にして水で練り「辛さを最大限に立てる」。同じ種子、同じ成分なのに、文化が選んだ方向が真逆なのが面白いところです。洋からし（マスタード）はさらに酢と塩で辛さを落ち着かせた調味料で、三者は立派な三姉妹です。"
+  },
+  {
+    id:"egoma", no:"56", name:"えごま（実）", en:"Egoma / Perilla Seed", latin:"Perilla frutescens var. frutescens（シソ科）",
+    img:"assets/egoma.webp", alt:"木のスプーンと小皿に盛られた灰茶色の丸いえごまの実と、えごまの葉",
+    cat:["seed"], catLabel:"シード（実）",
+    flavor:"小さな丸い実を炒ってすすると、ごまよりも野性的で、ほんのり青みのある香ばしさ。東北では「じゅうねん（十年）」の名で愛されてきました。",
+    heat:0, aroma:2,
+    trivia:"「じゅうねん＝十年生きのびる」という言い伝えが別名の由来。油分が多く、えごま油としても搾られます。",
+    origin:"東アジア（日本でも古くから栽培）", part:"種子（実）", form:"ホール（実）／すり ／ 油",
+    component:"油分の主役はα-リノレン酸（オメガ3系）。香りは実そのものより「炒って、する」ことで立つタイプで、すりたてが一番香ります。",
+    uses:["すりえごまを和え物や餅に（東北のじゅうねん餅・あべかわ風）","味噌と合わせて「えごま味噌」に、ごはんのお供に","えごま油を仕上げに回しかけて、サラダや納豆に"],
+    boxA:"実（ホール）", seedText:"乾煎りするとプチプチ弾けて香ばしさが開きます。そのまますり鉢で半ずりにすると、粒感と香りの両方が楽しめます。",
+    boxB:"すりえごま・えごま油", powderText:"すりえごまはごまの代わりに使えますが、香りはより素朴で力強い方向。えごま油は熱に弱いので、加熱せず仕上げにかけるのが鉄則です。",
+    pairing:"味噌、餅、くるみ、ごま（No.57）、葉野菜",
+    storage:"油分が多く酸化しやすい実。密閉して冷蔵し、炒ったら早めに。油は開封後冷蔵で1か月を目安に。",
+    access:"○ 大きめのスーパー・道の駅・ネットで入手可。えごま油は健康食品コーナーにもあります。",
+    sub:"ごま（No.57）で香ばしさの役割は代用可。ただしα-リノレン酸の豊富さと素朴な風味はえごまならでは。韓国料理のトゥルケ（えごま粉）も同じ実です。",
+    mania:"えごまは、しそ（大葉・No.H10）とまったく同じ植物の仲間（変種違い）です。葉を食べる型がしそ、実を食べる型がえごま、と人に選ばれて分かれました。韓国では葉の方も「トゥルケの葉（ケンニプ）」として焼肉を巻く定番で、葉と実の両方を食べ尽くす文化が国境を越えて広がっています。縄文時代の遺跡からも種子が出土する、日本最古級の油料作物でもあります。"
+  },
+  {
+    id:"goma", no:"57", name:"ごま", en:"Sesame", latin:"Sesamum indicum（ゴマ科）",
+    img:"assets/goma.webp", alt:"小皿に並んだ白ごま・黒ごま・金ごまと、すり鉢で擦ったすりごま",
+    cat:["seed"], catLabel:"シード（実）",
+    flavor:"炒った瞬間に広がる、日本の食卓の香ばしさの基準点。白は上品に、黒は力強く、金は濃厚に、それぞれ少しずつ表情が違います。",
+    heat:0, aroma:3,
+    trivia:"粒のままでは香りも栄養も閉じこもったまま。「炒って、擦って、潰す」ことで初めて香りが立つ、ひと手間が主役の実です。",
+    origin:"アフリカ〜インド（古代に日本へ伝来）", part:"種子", form:"粒（いりごま）／すりごま／ねりごま",
+    component:"香りの中心は、炒ることで生まれるピラジン類などの香ばしい成分と、油分（約半分が脂質）。抗酸化成分セサミン、セサモールもごまの代名詞です。",
+    uses:["ごま和え、胡麻豆腐、担々麺など、日本から中華まで幅広く","七味唐辛子の材料として（香ばしさと粒感担当）","すりごまをごはん、味噌汁、サラダにたっぷりと"],
+    boxA:"色の三兄弟：白・黒・金", seedText:"白ごまはクセがなく上品で和え物の主役、金ごまは油分が多く濃厚で香り最強格、黒ごまは皮の香ばしさとアントシアニンを含む力強さが特徴。料理の色と香りの濃さで選びます。",
+    boxB:"すりごま・ねりごま", powderText:"擦りたてのすりごまは香りが別格で、ごま和えは「擦りながら和える」が本場の作り方。ねりごまは中華の芝麻醤と親戚で、担々麺やドレッシングのコク担当です。",
+    pairing:"醤油、味噌、ほうれん草、えごま（No.56）、唐辛子（七味で共演）",
+    storage:"酸化しやすいので密閉・冷蔵が安心。いりごまは使う直前に炒り直すと香りが復活します。",
+    access:"◎ スーパーで手に入る：白・黒・金、粒・すり・ねりまで揃う、最も身近な実ものです。",
+    sub:"えごま（No.56）で素朴な香ばしさ方向に代用可。砕いたピーナッツやくるみでも「ナッツ感のある実もの」の役割は果たせます。",
+    mania:"「開け、ごま（Open Sesame）」の呪文は、ごまの鞘が熟すと弾けて種が飛ぶ様子が、扉が開くイメージに重ねられたという説が有名です。日本には奈良時代には伝わり、精進料理の胡麻豆腐で「豆腐」と名乗りながら主原料はごま、という料理まで生まれました。七味唐辛子では唐辛子の辛さを粒の油分でまろやかに受ける役回りで、辛さの緩衝材としても働いています。"
+  },
+  {
+    id:"getto", no:"58", name:"月桃（ゲットウ）", en:"Getto / Shell Ginger", latin:"Alpinia zerumbet（ショウガ科）",
+    img:"assets/getto.webp", alt:"大きな月桃の葉と、白に桃色の月桃の花房、小皿に盛られた赤茶色の月桃の実",
+    cat:["herb","whole"], catLabel:"リーフ ／ 実（種子）", herb:true,
+    herbNote:"🌿 ハーブ寄り：大きな葉も香りづけに使う、沖縄の葉っぱ組。葉は包む・蒸す、実は砕いてスパイスにと、二つの顔を持ちます。",
+    flavor:"葉をちぎると広がる、甘く清々しい南国の香り。シナモンと生姜と柑橘を合わせたような複雑さで、実はさらにスパイシーに締まります。",
+    heat:1, aroma:4,
+    trivia:"名の由来は、花の蕾が桃のように膨らみ、月のような形に見えることからという説。沖縄では「サンニン」とも呼ばれます。",
+    origin:"沖縄・奄美〜台湾・東南アジア", part:"葉 ／ 種子", form:"生リーフ ／ 乾燥種子（パウダー）",
+    component:"シネオールやピネンなどの清涼感のある精油が葉の香りの中心。種子は漢方で「白豆蔻」に近い仲間として扱われてきた、温かみのある香りを持ちます。",
+    uses:["ムーチー（鬼餅）：月桃の葉で包んで蒸す沖縄の伝統餅","葉をお茶（月桃茶）や、料理の包み蒸し・香り付けに","実を砕いて、カレーや煮物の隠しスパイスに"],
+    boxA:"葉", seedText:"生の葉は包んで蒸すと香りが餅や食材に移ります。乾燥葉はお茶や入浴の香りづけに。防虫・防腐の知恵として、沖縄では保存食の包みにも使われてきました。",
+    boxB:"実（種子）", powderText:"赤茶色の実の中の種子を乾燥させて砕くと、カルダモンに似た清涼感のあるスパイスに。ショウガ科らしい温かさもあり、少量で南国感が出ます。",
+    pairing:"黒糖、もち米、豚肉、生姜、シナモン",
+    storage:"生葉は冷蔵で数日、冷凍も可。乾燥葉・種子は密閉・遮光で常温に。香りが強いので他の食材と離して。",
+    access:"△ 沖縄物産店・ネット通販向き。本土のスーパーでは月桃茶やコスメコーナーで見かけることがあります。",
+    sub:"葉の包み蒸しは、竹の皮やバナナの葉で形だけ代用可。香りそのものの代用は難しいので、シナモン＋生姜少量で「甘く清々しい」方向だけ寄せるのが現実解です。",
+    mania:"月桃は生姜（No.51）、カルダモン、ガランガル（No.28）と同じショウガ科の大きな一家の一員。沖縄では旧暦12月8日の「ムーチーの日」に、子どもの健康を願って月桃の葉で包んだ餅を食べる風習があり、厄除けの香りとしても親しまれてきました。葉の繊維は紙や織物の材料にもなる、食べて包んで織れる万能植物です。本土では観葉植物として育てる人も増えています。"
+  },
+  {
+    id:"pipachi", no:"59", name:"島こしょう（ピパーチ）", en:"Pipachi / Island Pepper", latin:"Piper kadzura（コショウ科・ヒハツモドキ）",
+    img:"assets/pipachi.webp", alt:"つやのある濃い緑のピパーチの葉と、緑・橙・赤の短い生の果穂、小皿に盛られた赤褐色の乾燥果穂（小さな実が密に並んだ短い円筒形で、茎は根元側にだけつく）",
+    cat:["hot","whole"], catLabel:"ホール（果穂）／パウダー",
+    flavor:"沖縄の風が吹く、島の胡椒。ブラックペッパーより甘くまろやかで、シナモンのような甘い香りと、じんわり続く温かい辛さが特徴です。",
+    heat:3, aroma:4,
+    trivia:"名前は沖縄の言葉で胡椒を意味する「ピパーチ／ヒバーチ」から。沖縄そばの卓上調味料として現役の島スパイスです。",
+    origin:"沖縄（琉球列島）〜台湾", part:"果穂（乾燥）", form:"ホール（果穂）／パウダー",
+    component:"辛み成分はピペリンで、ヒハツ（No.31）やブラックペッパーと同系統。そこに甘い香りが重なるため、辛さは角が取れてまろやかに感じます。",
+    uses:["沖縄そば、ソーキそばの薬味にひと振り（泡盛漬けチリのコーレーグースと名コンビ）","炒め物やスープ、肉料理の胡椒代わりに","島豆腐やチャンプルーの仕上げの香りに"],
+    boxA:"ホール（果穂）", seedText:"果穂はヒハツ（No.31）よりずっと短くコンパクトな3〜4cmほど、太さ直径1.5cmほどの円筒形。表面は小さな実が密に融合した粒々の凸凹で、松ぼっくりのような鱗状にはなりません。生では緑→橙→赤と熟して色づき、未熟果を乾燥させると赤褐色〜暗褐色になります。乾燥穂は茎（軸）がつくのは根元側だけで、先端は茎が出ず、丸みを帯びながら細くなります。使うときはミルや乳鉢で砕きます。ホールは香り持ちがよく、砕きたては甘い香りがはっきり立ちます。",
+    boxB:"パウダー（島こしょう粉）", powderText:"市販の「島こしょう」粉は卓上使いに便利。沖縄そばには食べながら少しずつ足して、香りの変化を楽しむのが島の流儀です。",
+    pairing:"沖縄そば、豚肉、泡盛、島唐辛子、塩",
+    storage:"ホールは密閉・遮光で1年ほど。粉は香りが抜けやすいので、小瓶を早めに使い切って。",
+    access:"○ 沖縄物産店・ネット通販で入手可。本土では沖縄フェアやアンテナショップが狙い目です。",
+    sub:"ヒハツ／ロングペッパー（No.31）が一番近い代用で、ほぼ親戚同士の味。なければブラックペッパー＋シナモンひとつまみで「甘く温かい辛さ」の構造を寄せられます。",
+    mania:"ヒハツ（No.31・Piper retrofractum）とピパーチは、同じコショウ属の近縁種で、味の系統が似た兄弟です。ただし穂の長さはピパーチの方がずっと短くコンパクトで、そこがまず見分けの第一歩。沖縄のピパーチは主に在来のヒハツモドキ（Piper kadzura）を指しますが、市販の島こしょうには沖縄で栽培されたヒハツを使う製品もあり、名前と中身が混ざりやすいのがマニア泣かせのポイント。見分けは産地と表示の学名が手がかりです。ロングペッパーの詳細（No.31）と読み比べると、ジャワから琉球へ渡る「長い胡椒の旅」が見えてきます。"
+  },
+  {
+    id:"greenpepper", no:"60", name:"グリーンペッパー（緑胡椒）", en:"Green Pepper", latin:"Piper nigrum（コショウ科）",
+    img:"assets/greenpepper.webp", alt:"房についたままの鮮やかな緑色のグリーンペッパーの実と、小皿の乾燥グリーンペッパー、塩水漬けの瓶",
+    cat:["whole","hot"], catLabel:"ホール（塩水漬け／乾燥）",
+    flavor:"青々しくフレッシュな香りと、爽やかで軽い辛さ。ブラックペッパーの「若い姿」で、辛さは穏やか、香りは青く清々しいのが個性です。",
+    heat:2, aroma:3,
+    trivia:"ブラックペッパー・ホワイトペッパーとまったく同じ実。未熟な緑の実を乾燥させずに加工したものがグリーンペッパーです。",
+    origin:"インド南西部（マラバール海岸）", part:"果実（未熟果）", form:"塩水漬け／乾燥／フリーズドライ",
+    component:"辛み成分ピペリンは黒胡椒より控えめ。青い香りはピネンなどの揮発成分で、乾燥させない分フレッシュさが残ります。",
+    uses:["フランス料理のグリーンペッパーソースに（ステーキやポークソテー）","塩水漬けを軽くつぶして、サラダやカルパッチョのアクセントに","タイ料理では房ごと炒め物に入れる（プリックタイ・オン）"],
+    boxA:"塩水漬け", seedText:"瓶詰めの塩水漬けはやわらかく、スプーンの背でつぶれるほど。ソースに入れると実ごと楽しめます。開封後は漬け液ごと冷蔵保存を。",
+    boxB:"乾燥", powderText:"乾燥品は淡い緑色で、水や酒で戻してから使うと食感が戻ります。ミルで挽くと青い香りが立ちます。",
+    pairing:"生クリーム、バター、白ワイン、サーモン、豚肉、レモン",
+    storage:"塩水漬けは開封後、漬け液に浸したまま冷蔵で1か月ほど。乾燥は密閉・遮光で常温に。",
+    access:"○ 大きめのスーパーの輸入食品・スパイス棚で瓶詰めが見つかります。乾燥品は専門店・ネット通販向き。",
+    sub:"ブラックペッパーを粗く砕いたもので「辛さと香り」の方向だけ代用可。青い清々しさは未熟果ならでは。ケッパー（No.61）で食感と酸味のアクセントを借りる手もあります。",
+    mania:"黒胡椒（No.08）の詳細にもある通り、黒・白・緑は同じ Piper nigrum の実の「収穫時期と加工違い」の三兄弟。黒は未熟果を乾燥させたもの、白は完熟果の外皮を除いたもの、緑は未熟果を乾燥させず塩水漬けやフリーズドライにしたもの。同じ実が加工だけでここまで表情を変えるのが胡椒の面白さです。フランス料理のプワーブル・ベール（緑胡椒）ソースは、この緑の実の代表作で、この図鑑のレシピ「グリーンペッパーソースのポークソテー」でも紹介しています。"
+  },
+  {
+    id:"caper", no:"61", name:"ケッパー", en:"Capers", latin:"Capparis spinosa（フウチョウソウ科）",
+    img:"assets/caper.webp", alt:"小鉢と瓶に盛られた酢漬けケッパーの蕾と、ケッパーの花と丸い葉、茎付きのケッパーベリー",
+    cat:["whole"], catLabel:"ホール（酢漬け・塩漬け）",
+    flavor:"小さな蕾に詰まった、酸味と塩味と独特の清涼感。ひと粒で料理の輪郭がキュッと締まる、地中海の小さな名脇役です。",
+    heat:0, aroma:3,
+    trivia:"ケッパーは花の「蕾」のピクルス。花が咲いたあとの実はケッパーベリーと呼ばれ、茎付きのまま漬けて食べられます。",
+    origin:"地中海沿岸", part:"花の蕾（ピクルス）", form:"酢漬け／塩漬け（瓶詰め）",
+    component:"ほのかな辛みはマスタードと同じ仲間のグルコカパリン由来。酸味は漬け液の酢によるものです。",
+    uses:["サーモンのムニエルやカルパッチョに散らして","レモンバターソース、プッタネスカなどイタリア料理に","ポテトサラダやタルタルソースのアクセントに"],
+    boxA:"酢漬け", seedText:"そのまま使える手軽さが魅力。塩気が強いときは軽く水にさらすとまろやかになります。",
+    boxB:"塩漬け", powderText:"使う前に塩抜きをします。手間はかかりますが香りは濃いとされ、本場シチリアの定番はこちら。",
+    pairing:"レモン、バター、サーモン、白身魚、オリーブ、トマト",
+    storage:"開封後は漬け液に浸したまま冷蔵。乾燥させないのが長持ちのコツです。",
+    access:"◎ スーパーで手に入る：輸入食品・パスタ材料の棚に瓶詰めが並びます。",
+    sub:"細かく刻んだピクルス（キュウリ）＋レモン汁で「酸味と塩味のアクセント」だけ代用可。独特の清涼感はケッパー特有です。",
+    mania:"大きさで格付けがあり、小さいほど高級とされます（最小サイズの名はフランス語でノンパレイイユ＝「比類なし」）。地中海の岩場に根を張る低木で、パンテレリア島などの塩漬けケッパーは産地表示の保護を受けるほど。この図鑑のレシピ「サーモンのレモンバターケッパーソース」では、ソースの主役として使います。"
+  },
+  {
+    id:"gochukaru", no:"62", name:"コチュカル（韓国唐辛子）", en:"Gochugaru", latin:"Capsicum annuum（ナス科）",
+    img:"assets/gochukaru.webp", alt:"器に盛られた鮮やかな赤の粗挽きコチュカルと細挽きパウダー、乾燥した赤唐辛子",
+    cat:["powder","hot"], catLabel:"フレーク ／ パウダー",
+    flavor:"鮮やかな赤と、ほんのり甘くフルーティーな辛さ。韓国の太陽で干した唐辛子を挽いた、キムチの色と辛さのもとです。",
+    heat:3, aroma:3,
+    trivia:"コチュカルには「粗挽き（フレーク）」と「細挽き（パウダー）」があり、キムチには粗挽き、スープやコチュジャンには細挽きが定番の使い分けです。",
+    origin:"韓国", part:"果実（乾燥）", form:"フレーク（粗挽き）／パウダー（細挽き）",
+    component:"カプサイシンと色素カプサンチン。種を取り除いてから挽くため、辛さのわりに色鮮やかで雑味が少ないのが特徴です。",
+    uses:["キムチ、ナムル、韓国風の和え物に","チゲやユッケジャンなどスープの辛さと色付けに","コチュジャン（唐辛子味噌）の材料として"],
+    boxA:"フレーク（粗挽き）", seedText:"粒の立った赤が料理に映えます。和え物やキムチなど、見た目と食感を残したい料理に。",
+    boxB:"パウダー（細挽き）", powderText:"スープや煮込みに溶け込み、色と辛さを均一に広げます。仕上がりをなめらかにしたいときに。",
+    pairing:"にんにく、ごま油、ごま、魚醤、味噌",
+    storage:"色が褪せやすいので遮光・密閉。韓国では冷蔵・冷凍で保存することも一般的です。",
+    access:"○ 韓国食材店・大きめのスーパーのエスニック棚・ネット通販で。「韓国唐辛子」表示の粉唐辛子も近い存在です。",
+    sub:"一味唐辛子は辛さが鋭く、そのまま置き換えると辛くなりがち。色と甘みを寄せるなら、パプリカ多め＋一味少々を混ぜるのが現実解です。",
+    mania:"日本の一味唐辛子と違い、コチュカルは「辛さだけでなく、色と甘みも担う」のが設計思想。天日干し（太陽椒＝テヤンチョ）が最上とされ、機械乾燥とは香りが違うと言われます。チリペッパー（No.02）と読み比べると、同じ Capsicum annuum が国ごとにどう育て分けられたかが見えてきます。この図鑑のレシピ「きゅうりの韓国風和えもの」でも使います。"
+  },
+  {
+    id:"hibiscus", no:"63", name:"ハイビスカス（ローゼル）", en:"Hibiscus / Roselle", latin:"Hibiscus sabdariffa（アオイ科）",
+    img:"assets/hibiscus.webp", alt:"器に盛られた深紅の乾燥ハイビスカス（ローゼル）の萼と、赤とピンクの花、ルビー色のハイビスカスティー",
+    cat:["whole"], catLabel:"ホール（乾燥・萼）",
+    flavor:"鮮やかなルビーレッドと、ベリーのような甘酸っぱさ。お茶にすると色と酸味が主役になる、「飲むハーブ」です。",
+    heat:0, aroma:3,
+    trivia:"お茶に使うのは花びらではなく、花の付け根の「萼（がく）」。ローゼルという種で、観賞用のハイビスカスの花とは役割が違います。",
+    origin:"西アフリカ〜熱帯アジア", part:"萼（乾燥）", form:"乾燥ホール／カット／ティーバッグ",
+    component:"酸味はハイビスカス酸やクエン酸、赤色はアントシアニン。レモンを足すと色がさらに鮮やかになります。",
+    uses:["ハイビスカスティー（ホット・アイス）、メキシコのアグア・デ・ハマイカに","炭酸割りやゼリー、ジャムの色と酸味付けに","出し殻の塩漬けなど、和のアレンジにも"],
+    boxA:"ホール（乾燥萼）", seedText:"熱湯で5分ほど蒸らすと、色と酸味がしっかり出ます。出し殻は刻んで塩もみすれば、ごはんの友にもなります。",
+    boxB:"ティーバッグ", powderText:"手軽さ重視ならこちら。色はホールに一歩譲りますが、日常のお茶には十分です。",
+    pairing:"ミント、レモン、生姜、ローズヒップ、はちみつ",
+    storage:"湿気と光を避けて密閉・遮光。色素が褪せると酸味も弱く感じます。",
+    access:"○ ハーブティー専門店・輸入食品店・ネット通販で。スーパーではハーブティーのブレンド（ローズヒップ＆ハイビスカス）としてよく見かけます。",
+    sub:"ローズヒップティー＋レモン汁で「赤色と酸味」の方向は代用可。クランベリージュースを薄めて使う手もあります。",
+    mania:"エジプトでは「カルカデ」、メキシコでは「アグア・デ・ハマイカ」と呼ばれ、国ごとに国民的ドリンクの座につく植物。沖縄でもローゼルの栽培があり、塩漬けは梅干し風のお茶請けとして知られます。スマック（No.41）やタマリンド（No.25）と並ぶ「酸味担当」の一角で、この図鑑のレシピ「ハイビスカスのアイスティー」の主役です。"
+  },
+  {
+    id:"tarragon", no:"H11", name:"タラゴン（エストラゴン）", en:"French Tarragon", latin:"Artemisia dracunculus（キク科）",
+    img:"assets/tarragon.webp", alt:"木の板に載せた細長い葉のフレッシュなタラゴンの束と、小皿の乾燥タラゴン、小瓶",
+    cat:["herb"], catLabel:"リーフ（生／乾燥）", herb:true,
+    herbNote:"🌿 ハーブ枠：葉を使うハーブです。厳密にはスパイスとは別物ですが、料理で大活躍する香りづけの仲間として、この図鑑にそっと収録しています。",
+    flavor:"アニスのような甘い香りと、ほのかな爽やかさ。フランス料理を支える「ハーブの名脇役」で、細長い葉が目印です。",
+    heat:0, aroma:4,
+    trivia:"フランス料理の fines herbes（微香草）の一員。香りの弱いロシアンタラゴンと区別され、本物のフランスタラゴンは挿し木で増やすのが定番です。",
+    origin:"中央アジア〜シベリア（フランスで発展）", part:"葉", form:"生リーフ／乾燥／酢漬け",
+    component:"エストラゴールが甘い香りの中心で、アニスシード（No.26）とも香りの系統が通じます。",
+    uses:["ベアルネーズソース、オムレツなど卵料理に","白身魚や鶏肉の香り付け、タラゴンビネガーに","サラダのドレッシングに刻んで"],
+    boxA:"生の葉", seedText:"香りが繊細なので仕上げに加えるのが基本。刻むと甘い香りがふわっと立ちます。",
+    boxB:"乾燥（ドライ）", powderText:"乾燥でも比較的香りが残るハーブ。煮込みやソースの下味に使えます。",
+    pairing:"卵、白身魚、鶏肉、マスタード、白ワイン、チャービル",
+    storage:"生は湿らせたペーパーで包んで冷蔵。乾燥は密閉・遮光で常温に。",
+    access:"△ 大きめのスーパーのハーブ棚（生は季節もの）。乾燥品は専門店・ネット通販向き。",
+    sub:"アニスシードやフェンネルシードをほんの少量で、香りの方向だけ寄せることができます。葉の役割ならチャービル＋ディルの葉でも。",
+    mania:"学名の dracunculus は「小さな龍」の意味。フランスタラゴンとロシアンタラゴンは同じ学名でも香りがまるで違い、「苗の出どころが全て」という、ハーブ界でも有名な落とし穴のある植物です。"
+  },
+  {
+    id:"marjoram", no:"H12", name:"マージョラム（マジョラム）", en:"Sweet Marjoram", latin:"Origanum majorana（シソ科）",
+    img:"assets/marjoram.webp", alt:"麻ひもで束ねた灰緑色の小さい卵形の葉のマージョラムと、小皿の乾燥マージョラム",
+    cat:["herb"], catLabel:"リーフ（生／乾燥）", herb:true,
+    herbNote:"🌿 ハーブ枠：葉を使うハーブです。厳密にはスパイスとは別物ですが、料理で大活躍する香りづけの仲間として、この図鑑にそっと収録しています。",
+    flavor:"オレガノの親戚で、より甘くやさしい香り。フローラルで温かみがあり、肉の臭みをふんわり包んでくれます。",
+    heat:0, aroma:3,
+    trivia:"オレガノ（No.H4）とは同じ属の親戚。乾燥しても香りが残りやすく、ドイツでは「ソーセージハーブ」の異名もあります。",
+    origin:"地中海沿岸", part:"葉", form:"生リーフ／乾燥",
+    component:"テルピネンやサビネンなどが中心。オレガノの主成分カルバクロールは控えめで、その分まろやかに感じます。",
+    uses:["ソーセージやミートローフなど挽き肉料理に","トマトソース、豆の煮込みスープに","じゃがいもやズッキーニなど野菜のローストに"],
+    boxA:"生の葉", seedText:"やさしい香りなので、火を止める直前から仕上げに。ちぎって散らすと見た目も爽やかです。",
+    boxB:"乾燥（ドライ）", powderText:"煮込みの最初から入れても香りが残る働き者。トマト系との相性が抜群です。",
+    pairing:"トマト、挽き肉、豆、じゃがいも、オレガノ",
+    storage:"生は冷蔵で数日。乾燥は密閉・遮光で半年ほど。",
+    access:"○ スーパーのスパイス棚に乾燥品が並ぶことがあります。生はハーブ専門店・ネット通販向き。",
+    sub:"オレガノ（No.H4）を量控えめに使うのが一番近い代用。甘さが足りなければタイムをひとつまみ足すと寄ります。",
+    mania:"ギリシャ神話では、愛と美の女神アプロディーテが育てた草とされます。近縁のオレガノ（No.H4）と読み比べると、同じ属でも「乾燥に強い実用派」と「やさしい甘さ担当」に分かれるのが分かります。"
+  },
+  {
+    id:"pandan", no:"H13", name:"パンダンリーフ", en:"Pandan Leaf", latin:"Pandanus amaryllifolius（タコノキ科）",
+    img:"assets/pandan.webp", alt:"竹ざるの上で結ばれた長い緑のパンダンリーフと、薄緑色のごはん、小皿の刻んだ葉",
+    cat:["herb","whole"], catLabel:"リーフ（生／冷凍／パウダー）", herb:true,
+    herbNote:"🌿 葉っぱ組の仲間：東南アジアでは「東洋のバニラ」とも呼ばれる香り葉として収録しています。葉だけでなく、フリーズドライのパウダーやエッセンス／ペーストの形でも売られていて、お菓子作りではむしろそちらが主役級です。",
+    flavor:"炊きたてごはんやココナッツのような、甘く香ばしい香り。東南アジアの「香りと緑色」の担当で、甘いものとの相性が抜群です。",
+    heat:0, aroma:4,
+    trivia:"香りの主成分は、炊きたての香り米にも含まれるのと同じ系統の成分。だから「ごはんの香り」に感じるのです。東南アジアではお菓子の主役級の素材で、カヤジャムの緑と香りもパンダンです。",
+    origin:"東南アジア", part:"葉", form:"生リーフ／冷凍／フリーズドライパウダー／エッセンス・ペースト",
+    component:"2-アセチル-1-ピロリンが甘く香ばしい香りの中心。葉緑素が鮮やかな緑色のもとです。パウダーは葉をフリーズドライして粉砕したもので、香り成分ごと粉に閉じ込めています。",
+    uses:["ごはんと一緒に炊く（結んで入れるだけ）","パンダンシフォンケーキなど、焼き菓子・ケーキの香りと緑色に（パウダー／葉の搾り汁／エッセンス）","カヤジャム、クレポン（ココナッツとパームシュガーの団子）、ブコパンダン、ダダルグルン（ココナッツ入りの緑のクレープ巻き）、チェンドルなど東南アジアの甘いものに","鶏肉を葉で包んで揚げる、ガイ・ホー・バイトゥーイに"],
+    boxA:"生・冷凍の葉", seedText:"結んで鍋に入れるだけで香りが移ります。食べる葉ではなく、香りを移したら取り出すのが基本です。お菓子では葉を刻んで水やココナッツミルクとミキサーにかけ、搾り汁（パンダンジュース）にして生地やクリームに混ぜます。",
+    boxB:"パウダー／エッセンス・ペースト", powderText:"パウダーはフリーズドライの葉を粉にしたもので、水やココナッツミルクに溶いて使え、保存も利くので日本では一番の現実解。お菓子の生地にそのまま練り込めます。エッセンス／ペーストは色と香りを手軽に足せますが、生葉の清々しさには一歩譲り、人工的に感じやすいので少量から。",
+    pairing:"ココナッツミルク、もち米、鶏肉、タピオカ、卵、パームシュガー",
+    storage:"生は冷蔵で数日、冷凍すれば香り持ちよく数週間。パウダーは密閉・遮光で常温保存ができ、香り持ちも良好です。エッセンスは開封後冷蔵が目安。",
+    access:"△ エスニック食材店・ネット通販向き。日本では生葉より、冷凍葉とフリーズドライパウダーが入手の現実解です（パウダーはお菓子作りにもそのまま使えます）。スーパーではエッセンスを見かけることがあります。",
+    sub:"生葉がなければ、まずパウダー（小さじ単位で水やココナッツミルクに溶く）かエッセンス／ペーストが本命の代用。それもなければバニラで「甘い香り」の方向だけ代用可。緑色は抹茶などで色だけ寄せられますが、香りはパンダン特有です。",
+    mania:"「東洋のバニラ」と呼ばれる甘い香りの代表ですが、バニラ（No.40）とは全く別の植物。東南アジアでは冷蔵庫や車内の香り付けに葉を置くほど生活に溶け込み、お菓子では主役級：シンガポールのカヤジャムとパンダンシフォン、インドネシアのクレポンとダダルグルン、フィリピンのブコパンダン、マレーシアのチェンドルまで、国境を越えて「緑＝パンダンの甘い香り」が通じます。この図鑑のレシピ「パンダンシフォンケーキ」では、パウダーで作る形を紹介しています。レモングラス（No.49）やこぶみかんの葉（No.48）と並ぶ、東南アジアの葉っぱ香りの仲間です。"
+  },
+  {
+    id:"mitsuba", no:"H14", name:"三つ葉", en:"Mitsuba", latin:"Cryptotaenia japonica（セリ科）",
+    img:"assets/mitsuba.webp", alt:"茎を結んだ新鮮な三つ葉の束と、三つ葉の浮かぶお吸い物の椀",
+    cat:["herb"], catLabel:"リーフ（生）", herb:true,
+    herbNote:"🌿 ハーブ枠：日本原産の香り草です。「🌿 ハーブ」の絞り込みで見つかります。",
+    flavor:"すっと清々しい、和のハーブの代表香。セリ科らしい爽やかさで、お吸い物の仕上げに欠かせません。",
+    heat:0, aroma:3,
+    trivia:"名前の通り、葉が3枚セット（三出複葉）なのが最大の特徴。茎を結んだ「結び三つ葉」は、祝いの席の飾りの定番です。",
+    origin:"日本〜東アジア", part:"葉と茎", form:"生リーフ",
+    component:"クリプトテネンなどの清涼感のある香り成分。加熱しすぎると香りが飛ぶのが弱点です。",
+    uses:["お吸い物・茶碗蒸しの仕上げに（結び三つ葉）","親子丼や卵とじの彩りと香りに","おひたし・和え物の香り草として"],
+    boxA:"生の葉と茎", seedText:"火を止めてから加えるのが鉄則。茎は結んで飾りに、葉は刻んで散らして使います。",
+    boxB:"乾燥（ドライ）", powderText:"乾燥品はほぼ流通せず、生が主役です。香りは生でこそ楽しめます。",
+    pairing:"卵、だし、かまぼこ、白身魚、ゆず",
+    storage:"根付きは水に挿して冷蔵。切り三つ葉は湿らせたペーパーで包んで、早めに使い切って。",
+    access:"◎ スーパーで手に入る：野菜売り場の薬味コーナーの常連です。",
+    sub:"パセリ（No.H8）やパクチーの葉で「緑の薬味」の役割は代用可。香りは三つ葉ならではの和の清々しさです。",
+    mania:"英語でもそのまま「mitsuba」と呼ばれ、日本のハーブとして知られる存在。水耕栽培のやわらかい「糸三つ葉」、茎の白い「切り三つ葉」など、育て方で名前が変わります。この図鑑のレシピ「三つ葉のおひたし」では、さっと茹でてだし醤油に浸す、三つ葉そのものを主役にした姿で紹介しています。"
+  },
+  {
+    id:"konome", no:"H15", name:"木の芽（山椒の葉）", en:"Kinome / Sansho Leaf", latin:"Zanthoxylum piperitum（ミカン科）",
+    img:"assets/konome.webp", alt:"濃く深い緑色で薄くやわらかな羽状複葉の木の芽（山椒の若葉）が陶器の皿にのり、そばに小皿の木の芽味噌",
+    cat:["herb"], catLabel:"リーフ（生・若葉）", herb:true,
+    herbNote:"🌿 ハーブ枠：山椒（No.33）の若葉です。同じ木の「葉の姿」として収録しています。",
+    flavor:"春の香りそのもの。山椒らしい柑橘の清々しさに、若葉の青さとやさしい痺れが重なります。",
+    heat:1, aroma:4,
+    trivia:"木の芽は山椒の「若葉」の呼び名。実（粉山椒）とは同じ木の、季節違いの姿です。",
+    origin:"日本", part:"若葉", form:"生リーフ",
+    component:"サンショオールとリモネンなど、実の山椒と同系統。若葉の方が痺れは穏やかで、青い香りが前に出ます。",
+    uses:["筍の木の芽和え、木の芽味噌（田楽・和え物に）","お吸い物や焼き魚に、手のひらで叩いて香りを立たせてのせる","ちらし寿司や椀物の飾りに"],
+    boxA:"生の若葉", seedText:"手のひらにのせてパンと叩く（柏手打ち）と香りがはじけます。加熱は最小限にするのがコツ。",
+    boxB:"木の芽味噌", powderText:"刻んで味噌と合わせた保存版。田楽や和え物に展開できる、春の常備菜です。",
+    pairing:"筍、味噌、白身魚、なす、豆腐",
+    storage:"生は湿らせたペーパーで包んで冷蔵、2〜3日が香りの旬。冷凍もできます。",
+    access:"○ 春先にスーパーの和ハーブ・薬味棚に並びます。通年ではネット通販向き。庭木の山椒から摘む家庭もあります。",
+    sub:"粉山椒をほんの少し＋大葉（しそ）で「柑橘感と青さ」を分けて寄せることができます。若葉の繊細さは旬の生ならでは。",
+    mania:"山椒（No.33）とは同じ木。春の若葉が木の芽、初夏の未熟な実が青山椒、秋の完熟果皮が粉山椒と、ひとつの木が季節ごとに名前と役割を変えます。この図鑑のレシピ「木の芽味噌のなす田楽」では、葉を味噌に練り込む使い方を紹介しています。"
+  },
+  {
+    id:"thaibasil", no:"H16", name:"タイバジル（ホラパー）", en:"Thai Basil / Horapa", latin:"Ocimum basilicum var. thyrsiflora（シソ科）",
+    img:"assets/thaibasil.webp", alt:"木の板にのせた、紫色の茎と紫がかった花穂が特徴のタイバジルの束と、小皿に摘んだ葉（葉は無傷でつやがある）",
+    cat:["herb"], catLabel:"リーフ（生）", herb:true,
+    herbNote:"🌿 ハーブ枠：タイ料理の香り葉です。スイートバジル（No.H1）とは同じ種の変種違いで、香りははっきり別物として収録しています。",
+    flavor:"アニスやリコリス（甘草）のような甘い香りに、ほんのりスパイシーな刺激。紫色の茎と細めでつやのある葉が目印で、熱を通しても香りが残りやすいのが強みです。",
+    heat:1, aroma:4,
+    trivia:"タイ語の名前は「ホラパー」。スイートバジルと比べると、葉は細く先がとがり、茎は紫色、花穂も紫がかります。見分けはまず「茎の色」です。",
+    origin:"東南アジア（タイで発達）", part:"葉（茎・花穂も香る）", form:"生リーフ",
+    component:"アニス様の香りの中心はメチルチャビコール（エストラゴール）など。スイートバジルのリナロール中心の甘さとは配分が違い、より「アニス寄り・スパイス寄り」に感じられます。",
+    uses:["タイのグリーンカレーやレッドカレーの仕上げにたっぷり","フォーや台湾の三杯鶏（サンベイジー）など、熱い料理にのせて","炒め物では火を止める直前〜仕上げに加える"],
+    boxA:"生の葉", seedText:"スイートバジルより熱に強く、スープやカレーに入れても香りが残ります。それでも長く煮込まず、仕上げ寄りに加えるのが香りの正解。茎から葉をしごき取るように摘みます。",
+    boxB:"乾燥（ドライ）", powderText:"乾燥品は香りが大きく落ちるため流通は少なめ。タイバジルは生でこそ、のハーブです。余ったら刻んでオイル漬けにして冷凍がおすすめ。",
+    pairing:"ココナッツミルク、ナンプラー、チリ、ライム、鶏肉、なす",
+    storage:"茎を水に挿して常温〜冷蔵、または湿らせたペーパーで包んで冷蔵。低温が苦手で冷蔵庫の奥だと黒ずみやすいので、ドア側など穏やかな場所に。",
+    access:"○ アジア食材店・大きめのスーパーのエスニック野菜棚で。種や苗は園芸店・ネット通販で手に入り、鉢植え栽培もできます。",
+    sub:"スイートバジル（No.H1）＋アニスシードほんのひとつまみで「甘いアニス感」の方向は寄せられます。香りの輪郭はタイバジルならではです。",
+    mania:"バジルの世界は奥深く、タイには主に3種のバジルがあります：ホラパー（タイバジル／カレーやフォー）、ガパオ葉＝ホーリーバジル（炒め物のガパオの主役）、メーンラック（レモンバジル／種も使う）。日本の店頭で「タイバジル」として売られるのはホラパーの方です。スイートバジル（No.H1）の詳細にある「ガパオの葉は別品種」の話と合わせて読むと、バジル三兄弟の見分けがつきます。この図鑑のレシピ「鶏ひき肉とバジルのガパオ風ごはん」はスイートバジルの家庭版ですが、タイバジルが手に入る日はぜひこちらで——アニス様の香りで一気にタイ寄りになります。"
+  },
+  {
+    id:"mahleb", no:"64", name:"マハレブ", en:"Mahleb / Mahlab", latin:"Prunus mahaleb（バラ科）",
+    img:"assets/mahleb.webp", alt:"木の器に盛られた淡いベージュ色のマハレブの仁と、小皿の粉末、そばに置かれたサワーチェリーの核",
+    cat:["seed","sweet"], catLabel:"仁（ホール）／パウダー",
+    flavor:"アーモンドのような香ばしさに、桜餅やサクランボを思わせる甘い香り。小さな仁（核の中身）に、中東・地中海のお菓子の香りが凝縮されています。",
+    heat:0, aroma:4,
+    trivia:"正体はサワーチェリー（マハレブ桜）の硬い核を割り、中の小さな仁だけを取り出したもの。実を食べるのではなく「種のさらに中身」を使う、珍しいスパイスです。",
+    origin:"地中海東部〜中東（トルコ、ギリシャ、レバノンなど）", part:"仁（核の中の種子）", form:"ホール（仁）／パウダー",
+    component:"香りの中心はクマリン系とベンズアルデヒド系の甘い香り。アーモンドや桜の葉（桜餅の香り）と香りの系統が通じるのは、この成分の重なりです。",
+    uses:["トルコのパン（チョレク）やギリシャの復活祭パン（ツレキ）の香り付けに","クッキーやビスコッティなど焼き菓子の生地に練り込んで","中東の甘いパンやペイストリーの隠し香りに"],
+    boxA:"ホール（仁）", seedText:"淡い色の小さな楕円形の仁。そのままでは硬いので、石臼やすり鉢、スパイスグラインダーで粉にして使います。油分を含むので、挽くときは砂糖や小麦粉少しと一緒に回すとダマになりにくいです。",
+    boxB:"パウダー", powderText:"挽いた粉は焼き菓子の生地に直接練り込みます。香りは油分と一緒に酸化しやすいので、粉買いは少量ずつが鉄則。目安は生地全体に対して小さじ1/2〜1ほど。",
+    pairing:"小麦の焼き菓子、アーモンド、バター、はちみつ、カルダモン、オレンジの皮",
+    storage:"密閉・遮光で冷暗所、できれば冷蔵。油分を含む仁は酸化で香りが痩せるので、ホールで買って使う分だけ挽くのが理想です。",
+    access:"△ 中東食材店・トルコ食材店・ネット通販向き。日本のスーパーではまず見かけません。「マハレプ」「マーラブ」表記で売られることもあります。",
+    sub:"アーモンドパウダー（皮なし）＋桜の葉の塩漬けをほんの少し刻んだもので「アーモンド＋桜の香り」の方向だけ寄せられます。トンカビーン（No.47）も甘いクマリン系の香りの方向は近い仲間です。",
+    mania:"杏仁（あんにん）や桃仁と同じ「バラ科の核の仁」一族。アーモンドも桜も桃も杏も同じバラ科で、だから香りの系統が響き合います。ギリシャのツレキ（復活祭の編みパン）では、マハレブとマスティック樹脂の2つが香りの署名。少量で「あの店の味」になるタイプのスパイスで、入れすぎると香りが勝ちすぎるので、本場でも量は控えめが作法です。"
+  },
+  {
+    id:"anardana", no:"65", name:"アナルダナ", en:"Anardana", latin:"Punica granatum（ミソハギ科）",
+    img:"assets/anardana.webp", alt:"陶器の器に盛られた赤褐色の乾燥アナルダナ（乾燥ザクロの種）と、半分に切った新鮮なザクロの実",
+    cat:["seed"], catLabel:"シード（乾燥）／パウダー",
+    flavor:"ザクロの種を乾燥させた、甘酸っぱくフルーティーな酸味担当。レモンともタマリンドとも違う、「果実のまま」の爽やかな酸味がインド料理の仕上げを引き締めます。",
+    heat:0, aroma:2,
+    trivia:"名前はペルシャ語で「ザクロ（anar）の種（dana）」という、そのまんまの意味。酸味の強い野生種のザクロが原料に選ばれます。",
+    origin:"西アジア〜北インド（ヒマラヤ山麓）", part:"種子（乾燥）", form:"乾燥ホール／パウダー",
+    component:"酸味の中心はクエン酸など果実の有機酸。乾燥させることで酸味が凝縮し、ねっとりした食感の中に甘みも残ります。",
+    uses:["チョレ（ひよこ豆の煮込み）やパコラなど北インド料理の仕上げの酸味に","チャット（屋台おやつ）の酸味付けに、チャットマサラと組で","サラダや豆料理に、粗く砕いて散らして食感ごと"],
+    boxA:"乾燥ホール", seedText:"赤褐色で少しねっとりした小さな種。噛むと甘酸っぱさが広がります。煮込みではそのまま入れて酸味を移し、仕上げでは粗く砕いて散らすと見た目と食感が残ります。",
+    boxB:"パウダー", powderText:"粉は料理全体に酸味を均一に回す担当。色は茶色くくすむので、色をきれいに見せたい料理ではホールを砕いた方が向いています。",
+    pairing:"ひよこ豆、玉ねぎ、ミント、クミン、チャットマサラ、ヨーグルト",
+    storage:"密閉・遮光で常温。糖分を含む乾燥果実なので、湿気を吸うと固まります。乾燥剤と一緒にどうぞ。",
+    access:"△ インド食材店・ネット通販向き。日本のスーパーではほぼ見かけません。「乾燥ザクロ（種）」表示で売られることもあります。",
+    sub:"アムチュール（No.14）が一番近い代用（同じインドの乾燥果実系の酸味）。タマリンド（No.25）やスマック（No.41）でも酸味役は務まりますが、果実感のある甘酸っぱさはアナルダナならでは。レモン汁で酸味だけなら代用可。",
+    mania:"インドの酸味担当は地域で主役が変わります：北はアムチュールとアナルダナ、南はタマリンド、という勢力図が有名です。アナルダナは「乾燥させた果実の種」なので、酸味と一緒に種の食感とほのかな渋みも運ぶのが、粉だけのアムチュールとの違い。ザクロ自体はペルシャから伝わった果実で、料理だけでなく「多産と豊かさ」の象徴として中東から地中海まで愛されてきた実です。ブレンドのページのチャットマサラと組で使うと、屋台の味の酸味が二重になります。"
+  },
+  {
+    id:"kasurimethi", no:"66", name:"カスリメティ", en:"Kasuri Methi", latin:"Trigonella foenum-graecum（マメ科）",
+    img:"assets/kasurimethi.webp", alt:"陶器の皿に盛られたカスリメティ（乾燥したフェヌグリークの葉のフレーク）と、そばの小皿に入ったフェヌグリークシード",
+    cat:["herb"], catLabel:"リーフ（乾燥）", herb:true,
+    herbNote:"🌿 ハーブ枠：フェヌグリーク（No.11）と同じ植物の「葉の乾燥品」です。種とは香りの役回りが違うため、別エントリとして収録しています。",
+    flavor:"手で揉むと広がる、甘くほろ苦い香り。乾燥で葉の香りが凝縮し、種のフェヌグリークとは別物の「仕上げの香り」担当になります。",
+    heat:0, aroma:3,
+    trivia:"名前は「カスール地方のメティ（フェヌグリーク）」が由来とされます。カスールは、良質な乾燥葉の産地として知られた地名です。",
+    origin:"フェヌグリーク自体は地中海東部〜西アジア原産。乾燥葉を使う文化は北インドで発達", part:"葉（乾燥）", form:"乾燥リーフ（フレーク状）",
+    component:"甘い香りの軸は種と同じソトロン系ですが、葉はそこに青さとほろ苦さが同居します。乾燥させ、使う直前に揉み潰すことで香りが開きます。",
+    uses:["バターチキンの仕上げに、手のひらで揉んで散らす（本場の決め手）","ダル（豆カレー）や野菜カレーの仕上げの香りに","パラタなど平たいパンの生地に練り込んで"],
+    boxA:"フレーク（そのまま）", seedText:"乾燥した葉のフレークそのままの姿です。スープや煮込みの仕上げに浮かべると、見た目と食感が少し残ります。",
+    boxB:"揉んで使う", powderText:"本場の基本は、手のひらで揉み潰してから散らすこと。粉状になるまで揉むと香りが一気に開きます。バターチキンの仕上げはこの形が正解。",
+    pairing:"トマト、バター・生クリーム、豆料理、ガラムマサラ、フェヌグリークシード",
+    storage:"湿気が大敵です。密閉・遮光で常温保存し、揉む前のフレークのまま置いておきます。香りが痩せてきたら買い替えどき。",
+    access:"△ インド食材店・ネット通販向き。日本のスーパーではほぼ見かけません。「カスリメティ」「乾燥フェヌグリークリーフ」の表記で探すと見つかります。",
+    sub:"完全な代用はありません。雰囲気だけなら、ごく少量のフェヌグリークシード粉末＋砂糖ひとつまみで「甘くほろ苦い」方向だけ寄せられますが、葉の青い余韻は再現できません。",
+    mania:"種のフェヌグリーク（No.11）が「苦甘い土台」なら、カスリメティは「甘く広がる余韻」。同じ植物なのに、種はテンパリングで料理の最初に、葉は仕上げで最後に、と登場タイミングまで正反対なのが面白いところです。バターチキンの「レストランの香り」の正体はトマトでもバターでもなく、この最後のひと揉みだと言われます。この図鑑のレシピ「バターチキン」では、その仕上げを主役の手順に据えています。"
+  },
+  {
+    id:"garlic", no:"67", name:"ガーリック", en:"Garlic", alias:"ニンニク にんにく", latin:"Allium sativum（ヒガンバナ科）",
+    img:"assets/garlic.webp", alt:"木の台に直置きされたニンニクの球根と、ほぐれた鱗片（小片）、そばの小皿に入ったガーリックパウダー",
+    cat:["whole","powder","curry"], catLabel:"ホール（球根）／パウダー",
+    flavor:"生はツンと刺激的で、切った瞬間に香りが爆発します。火を通すと一転、甘く香ばしいコクに。世界の料理の「土台の香り」の筆頭です。",
+    heat:1, aroma:5,
+    trivia:"あの香りの主役アリシンは、切ったり潰したりして細胞が壊れたときに初めて生まれます。丸のままではほぼ無臭、というのも面白いところ。切ってから少し置くと、アリシンがしっかり増えます。",
+    origin:"中央アジア（キルギス周辺の高原地帯）", part:"鱗茎（球根）", form:"生 ／ 乾燥パウダー・フレーク",
+    component:"アリシン（硫黄化合物）。前駆体のアリインが、切る・潰すことで酵素アリイナーゼと出会い、アリシンに変わります。加熱すると別の硫黄化合物に変化して、刺激が甘いコクに化けます。",
+    uses:["カレーや煮込みの「にんにく・生姜」コンビで土台づくり","炒め物の香り油に（弱火でじっくり、焦がすと苦くなります）","肉の下味と臭み消し、ソース・ドレッシング・ペペロンチーノの香味に"],
+    boxA:"生（鱗片）", seedText:"すりおろし・みじん切り・薄切り・潰しで表情が変わります。芽が出ていたら取り除くと、苦みと焦げやすさを防げます。",
+    boxB:"パウダー／乾燥", powderText:"ガーリックパウダーは手軽で、生より均一に効くのが長所。生1片（すりおろし小さじ1ほど）に対して、パウダー小さじ1/4ほどが目安です。乾燥フレークは水で戻しても使えます。",
+    pairing:"生姜、クミン、チリ、オリーブオイル、ローズマリー、唐辛子",
+    storage:"球根は風通しのよい冷暗所で常温保存、湿気が大敵です。むいた鱗片やすりおろしは冷凍が便利。パウダーは密閉・遮光で常温に。",
+    access:"◎ スーパーで手に入る：球根は野菜売り場の常連で、国産（青森県産など）は香りの強い高級品。パウダーや乾燥フレーク、チューブタイプもスパイス棚・調味料棚に揃っています。",
+    sub:"生がなければガーリックパウダーで代用可（量は控えめに）。あの香りそのものの代用品はありませんが、ヒング（No.22）は加熱するとニンニクに似た香味に変わるため、玉ねぎ・ニンニクを避ける料理では伝統的な代役を務めます。",
+    mania:"分類の揺れが面白い素材です。野菜売り場に並ぶ「野菜」であり、乾燥させればスパイス棚の「香辛料」であり、古くから薬草として扱われてきた歴史から「ハーブ」に数えることもあります。この図鑑では、パウダーが定番でカレーの土台づくりに欠かせない立ち位置から、スパイス側のNo.67に収録しました。生姜（No.51）との「にんにく・生姜」コンビは、この図鑑のレシピでも最多級の出番です。"
+  },
+  {
+    id:"urfa", no:"68", name:"ウルファビーバー", en:"Urfa Biber", alias:"ウルファビベル イソット Isot", latin:"Capsicum annuum（ナス科）",
+    img:"assets/urfa.webp", alt:"陶器の小鉢に盛られた、油分を含んでしっとりした暗い赤紫色のウルファビーバーのフレーク",
+    cat:["powder","hot"], catLabel:"フレーク（粗挽き）",
+    flavor:"レーズンやドライフルーツのような甘みと、穏やかな燻し感。辛さは中辛ほどで、後からじわりと広がります。暗い赤紫〜バーガンディ色の、油分を含んだしっとりフレークです。",
+    heat:3, aroma:3,
+    trivia:"昼は天日で干し、夜は包んで「汗をかかせる」というウルファ地方の伝統製法で仕上げます。この発酵にも似た工程が、深い色と甘み、しっとりした質感を生みます。別名イソット（Isot）。",
+    origin:"トルコ南東部（シャンルウルファ地方）", part:"果実（乾燥・粗挽き）", form:"フレーク",
+    component:"辛味成分はカプサイシン。中辛クラスで、スコヴィル値はおよそ3万前後とも言われますが、甘みと油分のおかげで刺激は穏やかに感じられます。",
+    uses:["ケバブやグリル肉、ロースト野菜の仕上げに","目玉焼きやスクランブルエッグなど卵料理にひとふり","オリーブオイルと合わせてパンにつけるディップに、チョコレート系デザートの隠し味にも"],
+    boxA:"フレーク（そのまま）", seedText:"しっとりしたフレークが製品の姿。仕上げに散らすと、色・甘み・辛さが一度に足せます。テーブル調味料として食卓で使うのが本場流です。",
+    boxB:"オイルに浸して", powderText:"オリーブオイルに浸しておくと、甘みと色が油に移って「ウルファオイル」に。加熱しすぎると甘い香りが飛ぶので、火を止めてから加えるのが基本です。",
+    pairing:"ラム肉、なす、トマト、オリーブオイル、ヨーグルト、ダークチョコレート",
+    storage:"油分を含むフレークなので、密閉・遮光で常温に。香りと色が痩せやすいため、開封後は早めに使い切ります。",
+    access:"△ 輸入食品店・ネット通販向き：日本のスーパーではほぼ見かけません。トルコ食材店やスパイス専門店で、「イソットペッパー」の表記でも探せます。",
+    sub:"一番近い親戚はアレッポペッパー（No.46）。なければ、粗挽きチリ＋パプリカに、ごく少量の燻製パプリカ（ピメントン）を足すと「甘み＋燻し感」の方向に寄せられます。",
+    mania:"同じ中東の唐辛子フレーク、アレッポペッパー（No.46）との違いが見分けるポイントです。色は、アレッポが明るい赤、ウルファは暗い赤紫〜バーガンディ。味は、アレッポがトマトのような爽やかな果実味、ウルファはレーズンのような濃い甘みと燻したような深み。製法も対照的で、アレッポは種を抜いて油と塩で仕上げ、ウルファは夜に包んで汗をかかせる工程で発酵感を育てます。辛さの出方も、アレッポが穏やかに広がるのに対し、ウルファは後からじわりと追いかけてきます。並べて使うと、同じ「中東のチリフレーク」でも個性がはっきり分かります。"
+  },
+  {
+    id:"tasmanian", no:"69", name:"タスマニアペッパー", en:"Tasmanian Pepper", alias:"マウンテンペッパー ペッパーベリー", latin:"Tasmannia lanceolata（シキミモドキ科）",
+    img:"assets/tasmanianpepper.webp", alt:"木の台に直置きされた黒紫色の乾燥タスマニアペッパーベリーと、小皿に入った粗挽きの実、そばに添えた細長い葉",
+    cat:["whole","hot"], catLabel:"ホール（乾燥ベリー）",
+    flavor:"口に入れた最初はハーブのような甘み、そのあと強くホットな辛さが押し寄せ、最後に清涼感が長く残ります。黒紫色の実を乾燥させた、オーストラリアの野生のペッパーです。",
+    heat:4, aroma:4,
+    trivia:"名前に「ペッパー」とつきますが、コショウ科ではありません。シキミモドキ科の常緑樹の実で、辛味成分も胡椒のピペリンではなくポリゴジアール。実だけでなく葉（ペッパーリーフ）も香辛料になる二刀流です。",
+    origin:"オーストラリア南東部〜タスマニアの山地", part:"果実（ベリー）／葉も香辛料に", form:"ホール（乾燥）／粗挽き・パウダー",
+    component:"辛味成分はポリゴジアール。唐辛子のカプサイシンとも胡椒のピペリンとも違う系統で、「甘み→強い熱さ→清涼感」という三段変化の辛さを作ります。",
+    uses:["牛肉やラムの仕上げに、ミルで粗挽きにして黒胡椒の代わりに","チーズや柑橘と合わせて、香りのアクセントに","葉（ペッパーリーフ）は煮込みやソースの香り付けに"],
+    boxA:"ホール（乾燥ベリー）", seedText:"黒紫色の丸い実を乾燥させた姿。黒胡椒より一回り大きく、しわのある質感です。使う直前にミルで挽くか、包丁で粗く刻むと香りが立ちます。",
+    boxB:"粗挽き／パウダー", powderText:"挽くと紫がかった濃い色の粉になります。辛さが強いので、まず少量から。加熱が長いと辛さと香りが落ちるため、仕上げ使いが基本です。",
+    pairing:"牛肉、ラム肉、チーズ、柑橘、ビーツ、ダークチョコレート",
+    storage:"密閉・遮光で常温保存。挽いた後は香りが逃げやすいので、ホールで置いて使うたびに挽くのが正解です。",
+    access:"△ ネット通販・スパイス専門店向き：日本のスーパーではまず見かけません。「マウンテンペッパー」「ペッパーベリー」の表記で探すと見つかります。オーストラリア食材を扱う店が狙い目です。",
+    sub:"完全な代用はありません。応急策として、黒胡椒にごく少量の山椒かチリを足すと「辛さ＋清涼感」の方向だけ寄せられますが、最初のハーブ様の甘みは再現できません。",
+    mania:"胡椒の仲間との違いが面白い一品です。見た目は大きな黒胡椒のようでも、植物学的には別科で、辛さの主役ポリゴジアールは、舌の上で「ハーブ様の甘み→強烈な熱さ→すっと引く清涼感」と表情を変えます。黒胡椒のピペリンがシャープに刺してすぐ消えるのとも、唐辛子のカプサイシンが長く居座るのとも違う、第三の辛さ。オーストラリア先住民が古くから使ってきた「ブッシュフード」の代表格で、葉まで辛いペッパーリーフとして使えるのも、この植物ならではです。"
   }
 ];
 
-var CAT_LABEL = {seed:"シード", powder:"パウダー", whole:"ホール", hot:"辛い系", sweet:"甘い香り", curry:"カレーの主役"};
-var CAT_COLOR = {seed:"var(--yellow-soft)", powder:"var(--red-soft)", whole:"var(--green-soft)", hot:"var(--red-soft)", sweet:"var(--pink-soft)", curry:"var(--brown-soft)"};
+var CAT_LABEL = {seed:"シード", powder:"パウダー", whole:"ホール", hot:"辛い系", sweet:"甘い香り", curry:"カレーの主役", herb:"🌿 ハーブ"};
+var CAT_COLOR = {seed:"var(--yellow-soft)", powder:"var(--red-soft)", whole:"var(--green-soft)", hot:"var(--red-soft)", sweet:"var(--pink-soft)", curry:"var(--brown-soft)", herb:"var(--green-soft)"};
 
 var grid = document.getElementById("grid");
 var emptyEl = document.getElementById("empty");
@@ -3396,13 +5012,14 @@ function render(){
     var okCat = currentCat==="all" || s.cat.indexOf(currentCat) > -1;
     if(!okCat) return false;
     if(!query) return true;
-    var hay = (s.name+" "+s.en+" "+s.flavor+" "+s.trivia+" "+s.uses.join(" ")+" "+s.pairing+" "+(s.access||"")+" "+(s.sub||"")).toLowerCase();
+    var hay = (s.name+" "+(s.alias||"")+" "+s.en+" "+s.flavor+" "+s.trivia+" "+s.uses.join(" ")+" "+s.pairing+" "+(s.access||"")+" "+(s.sub||"")).toLowerCase();
     return hay.indexOf(query.toLowerCase()) > -1;
   });
   grid.innerHTML = list.map(function(s){
     return '<button class="card" type="button" data-id="'+s.id+'" aria-label="'+s.name+'の詳細を開く">'
       + '<span class="photo"><img src="'+s.img+'" alt="'+s.alt+'" loading="lazy" /><span class="num">No.'+s.no+'</span>'
-      + '<span style="position:absolute;bottom:10px;right:10px;display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;max-width:75%">'+catBadges(s)+'</span></span>'
+      + '<span class="name-tag">'+s.name+'</span>'
+      + '<span style="position:absolute;top:10px;right:10px;display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;max-width:62%">'+catBadges(s)+'</span></span>'
       + '<span class="body" style="display:block">'
       + '<h3>'+s.name+'<span class="en">'+s.en+'</span></h3>'
       + '<p class="flavor">'+s.flavor+'</p>'
@@ -3414,7 +5031,7 @@ function render(){
       + '<span class="more">詳細をひらく <span aria-hidden="true">→</span></span>'
       + '</span></button>';
   }).join("");
-  countEl.textContent = list.length + " 種のスパイスが見つかりました";
+  countEl.textContent = list.length + (currentCat === "herb" ? " 種のハーブ" : " 種") + "が見つかりました";
   emptyEl.style.display = list.length ? "none" : "block";
   var cards = grid.querySelectorAll(".card");
   for(var i=0;i<cards.length;i++){
@@ -3439,6 +5056,7 @@ function openModal(id){
   document.getElementById("mBody").innerHTML =
       '<h3>'+s.name+'<span class="en">'+s.en+'</span></h3>'
     + '<p class="latin">'+s.latin+'</p>'
+    + (s.herbNote ? '<p class="herb-note">'+s.herbNote+'</p>' : '')
     + '<div class="meters" style="display:grid">'
     + '<span class="meter heat">辛さ '+dots(s.heat)+'</span>'
     + '<span class="meter aroma">香りの強さ '+dots(s.aroma)+'</span>'
@@ -3452,8 +5070,8 @@ function openModal(id){
     + '<h4>代表的な使いみち</h4><ul>'+uses+'</ul>'
     + '<h4>形で変わる、使い分け</h4>'
     + '<div class="duo">'
-    + '<div class="box seed"><b>ホール／シード</b>'+s.seedText+'</div>'
-    + '<div class="box powder"><b>パウダー</b>'+s.powderText+'</div>'
+    + '<div class="box seed"><b>'+(s.boxA || 'ホール／シード')+'</b>'+s.seedText+'</div>'
+    + '<div class="box powder"><b>'+(s.boxB || 'パウダー')+'</b>'+s.powderText+'</div>'
     + '</div>'
     + '<h4>相性のいい相手</h4><p>'+s.pairing+'</p>'
     + '<h4>保存のコツ</h4><p>'+s.storage+'</p>'
