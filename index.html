@@ -808,6 +808,10 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
   html{scroll-behavior:auto}
   *{transition:none !important; animation:none !important}
 }
+/* Entrance only: hero image directly follows the page menu. */
+#gate{padding-top:18px}
+#gate .gate-banner{margin-top:0}
+#gate .sec-head{margin-top:26px}
 </style>
 </head>
 <body>
@@ -824,25 +828,19 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
     <button class="page-btn" type="button" data-page="blend"><span class="pb-no">No.04</span>ブレンド<span class="pb-count">12種</span></button>
     <button class="page-btn" type="button" data-page="recipes"><span class="pb-no">No.05</span>レシピ<span class="pb-count">39品＋ちょい足し</span></button>
   </nav>
-  <p class="page-hint">1ページ目は入口です。中身はマップの行き先にあります ― 気になる場所をタップしてね。</p>
 
   <!-- ============ 入口マップ ============ -->
   <section id="gate" class="page-section active">
+    <figure class="gate-banner">
+      <img src="assets/banner-spices.webp" width="2048" height="1152" alt="MIRROR SPICE &amp; HERBのタイトルと、木のテーブルに並んだ色とりどりのスパイス・ハーブの器" />
+    </figure>
+
     <div class="sec-head">
       <span class="no">Entrance</span>
       <h2>入口 ― スパイスの国のマップ</h2>
       <svg class="squig" width="180" height="10" viewBox="0 0 180 10" fill="none"><path d="M2 6 Q 14 1, 26 6 T 50 6 T 74 6 T 98 6 T 122 6 T 146 6 T 170 6" stroke="var(--red)" stroke-width="3.4" stroke-linecap="round"/></svg>
-      <p>ここは入口だけのページです。読みものは全部、行き先のページにあります。マップの丸いピンをタップすると、その場所へそのまま飛べます。</p>
+      <p>マップの丸いピンをタップすると、その場所へそのまま飛べます。</p>
     </div>
-
-    <p class="map-title cinzel">MIRROR SPICE</p>
-    <p class="map-andherb cinzel">＆HERB</p>
-    <p class="map-sub">WORLD MAP ― 5つの行き先</p>
-    <p class="font-note" id="fontNote" hidden>お知らせ：この端末ではオンラインの CINZEL フォントを読み込めなかったため、いま「MIRROR SPICE」は明朝系の代替書体で表示されています。CINZEL は英字専用フォントで、通信が回復した状態で開くと本来の彫刻のような大文字で表示されます。</p>
-
-    <figure class="gate-banner">
-      <img src="assets/banner-spices.webp" width="2048" height="1152" alt="木のテーブルの上に、国ごとに違う小さめの器が余白なく並んだスパイスとハーブの物撮り。真鍮の小鉢のターメリック、模様のある陶器に入ったグリーンカルダモン、青白磁の小皿のシナモンスティック、銅の器のクローブ、素焼きの器の八角、木の器や陶器に入ったクミンや胡椒などの種、ローリエの葉、ローズマリー、生成りの布の上に長さの不揃いな細長いポッドを置いたバニラビーンズ、軸つきの乾燥赤唐辛子が入り、器の間にはホールスパイスが少し零れている" />
-    </figure>
 
     <div class="map-frame">
       <svg viewBox="0 0 720 520" role="img" aria-label="MIRROR SPICEの世界マップ。5つの行き先が点線の道でつながっています">
