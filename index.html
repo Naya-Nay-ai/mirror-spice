@@ -12,11 +12,11 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFF6E9" />
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#211511" />
 <title>スパイス図鑑 | MIRROR SPICE</title>
-<meta name="description" content="スパイスとハーブ全94種の図鑑、マニア図解、実験ノート、ブレンド12種、レシピ44品を収めた、ちょっとマニアックなスパイス図鑑。MIRROR ROOM の MIRROR SPICE。" />
+<meta name="description" content="スパイスとハーブ全95種の図鑑、マニア図解、実験ノート、ブレンド13種、レシピ52品を収めた、ちょっとマニアックなスパイス図鑑。MIRROR ROOM の MIRROR SPICE。" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="MIRROR SPICE" />
 <meta property="og:title" content="スパイス図鑑 | MIRROR SPICE" />
-<meta property="og:description" content="スパイスとハーブ全94種の図鑑、マニア図解、実験ノート、ブレンド12種、レシピ44品を収めた、ちょっとマニアックなスパイス図鑑。MIRROR ROOM の MIRROR SPICE。" />
+<meta property="og:description" content="スパイスとハーブ全95種の図鑑、マニア図解、実験ノート、ブレンド13種、レシピ52品を収めた、ちょっとマニアックなスパイス図鑑。MIRROR ROOM の MIRROR SPICE。" />
 <meta property="og:url" content="https://mirror-spice.vercel.app" />
 <meta property="og:image" content="https://mirror-spice.vercel.app/assets/illust-friends.webp" />
 <meta property="og:image:width" content="1920" />
@@ -24,7 +24,7 @@
 <meta property="og:image:alt" content="笑顔のスパイスキャラクターたちが並んだ MIRROR SPICE のイラスト" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="スパイス図鑑 | MIRROR SPICE" />
-<meta name="twitter:description" content="スパイスとハーブ全94種の図鑑、マニア図解、実験ノート、ブレンド12種、レシピ44品を収めた、ちょっとマニアックなスパイス図鑑。MIRROR ROOM の MIRROR SPICE。" />
+<meta name="twitter:description" content="スパイスとハーブ全95種の図鑑、マニア図解、実験ノート、ブレンド13種、レシピ52品を収めた、ちょっとマニアックなスパイス図鑑。MIRROR ROOM の MIRROR SPICE。" />
 <meta name="twitter:image" content="https://mirror-spice.vercel.app/assets/illust-friends.webp" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -364,6 +364,7 @@ section{padding:44px 0 6px}
 .bar i{display:block; height:100%; border-radius:999px}
 .bar-row .amt{text-align:right; color:var(--ink3); font-family:"Caveat",cursive; font-size:16px}
 .blend .tip{margin-top:14px; font-size:12.8px; color:var(--ink2); background:var(--paper2); border-radius:12px; padding:9px 12px}
+.blend-photo{width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:12px; display:block; margin:10px 0 2px}
 .bar-link{
   background:none; border:none; border-bottom:2px dotted var(--line2); padding:0 0 1px;
   font:inherit; font-weight:700; color:inherit; text-align:left; cursor:pointer; justify-self:start;
@@ -940,6 +941,122 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
 @media (max-width: 620px) {
   #gate .gate-intro { margin: 24px 4px 32px; font-size: 12.5px; }
 }
+
+/* ---------- 私の棚（No.06） ---------- */
+#shelf{--wood:#B08148; --wood-dark:#7C4F27; --wood-light:#C99A5F}
+@media (prefers-color-scheme: dark){ #shelf{--wood:#8A5A33; --wood-dark:#54371D; --wood-light:#A9743F} }
+.shelf-toggle-btn,.bm-toggle-btn{
+  display:inline-flex; align-items:center; gap:8px; margin:14px 0 2px;
+  border:1.5px solid var(--ink); background:var(--paper); color:var(--ink);
+  border-radius:999px; padding:9px 18px; font-weight:900; font-size:14px;
+  box-shadow:2.5px 2.5px 0 var(--ink); transition:transform .15s ease, box-shadow .15s ease;
+}
+.shelf-toggle-btn:hover,.bm-toggle-btn:hover{transform:translate(-1px,-1px); box-shadow:3.5px 3.5px 0 var(--ink)}
+.shelf-toggle-btn.on,.bm-toggle-btn.on{background:var(--yellow-soft)}
+.card .shelf-chip{
+  display:flex; align-items:center; justify-content:center; gap:6px; margin-top:10px;
+  border:1.5px solid var(--line2); background:var(--bg); color:var(--ink2);
+  border-radius:999px; padding:6px 12px; font-size:12.5px; font-weight:900; line-height:1.4;
+}
+.card .shelf-chip:hover{border-color:var(--ink); color:var(--ink)}
+.card .shelf-chip.on{background:var(--yellow-soft); border-color:var(--yellow); color:var(--ink)}
+.recipe-thumb{position:relative}
+.recipe-thumb .bm-toggle{
+  position:absolute; top:8px; right:8px; z-index:2; width:38px; height:38px;
+  display:grid; place-items:center; font-size:19px; line-height:1;
+  background:var(--paper); border:1.5px solid var(--ink); border-radius:50%;
+  box-shadow:2px 2px 0 var(--ink); filter:grayscale(1); opacity:.55;
+}
+.recipe-thumb .bm-toggle.on{filter:none; opacity:1; background:var(--yellow-soft)}
+.shelf-filterbar{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:18px}
+.shelf-filter-count{font-size:12.5px; font-weight:900; color:var(--ink3)}
+.shelf-note{font-size:13px; color:var(--ink2); margin:10px 4px 0}
+.shelf-stats{display:flex; flex-wrap:wrap; gap:10px; align-items:stretch; margin-top:18px}
+.shelf-stat{background:var(--paper); border:1.5px solid var(--line2); border-radius:16px; padding:10px 16px; min-width:118px}
+.shelf-stat b{display:block; font-family:"Kaisei Decol",serif; font-size:22px; line-height:1.2}
+.shelf-stat span{font-size:12px; color:var(--ink3); font-weight:700}
+.shelf-progress{flex:1 1 200px; background:var(--paper); border:1.5px solid var(--line2); border-radius:16px; padding:12px 16px}
+.shelf-progress .sp-label{font-size:12px; font-weight:900; color:var(--ink3); display:block; margin-bottom:7px}
+.shelf-progress .sp-track{height:13px; background:var(--bg2); border:1px solid var(--line); border-radius:999px; overflow:hidden}
+.shelf-progress .sp-track i{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--yellow),var(--red)); border-radius:999px; transition:width .4s ease}
+.shelf-cabinet{
+  margin-top:18px; border:3px solid var(--wood-dark); border-radius:16px;
+  background-color:var(--paper2);
+  background-image:linear-gradient(to bottom, rgba(0,0,0,0) 0, rgba(0,0,0,0) 154px, var(--wood-light) 154px, var(--wood) 158px, var(--wood) 166px, var(--wood-dark) 166px, var(--wood-dark) 172px);
+  background-size:100% 172px; background-repeat:repeat;
+  box-shadow:inset 0 0 0 2px rgba(59,36,24,.08), var(--card-shadow);
+  padding:8px 12px 0;
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); grid-auto-rows:172px;
+}
+.bottle-cell{display:flex; align-items:flex-end; justify-content:center; padding-bottom:15px}
+.bottle{position:relative; display:flex; flex-direction:column; align-items:center}
+.bottle .b-hit{background:none; border:none; padding:0; display:flex; flex-direction:column; align-items:center; position:relative}
+.bottle .b-lid{width:34px; height:15px; border-radius:5px 5px 2px 2px; border:1.5px solid rgba(59,36,24,.65); position:relative; z-index:2}
+.bottle.l-cork .b-lid{background:repeating-linear-gradient(90deg,#C9A15F 0 5px,#BE9752 5px 10px)}
+.bottle.l-wood .b-lid{background:repeating-linear-gradient(0deg,#8A5A33 0 3px,#7C4F27 3px 6px)}
+.bottle.l-metal .b-lid{background:repeating-linear-gradient(90deg,#C3C8CE 0 4px,#A9AFB6 4px 8px)}
+.bottle .b-glass{
+  position:relative; overflow:hidden; margin-top:-2px;
+  border:2px solid rgba(59,36,24,.55); background:rgba(255,255,255,.22);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.25);
+}
+@media (prefers-color-scheme: dark){ .bottle .b-glass{border-color:rgba(247,232,215,.5); background:rgba(255,255,255,.07)} }
+.bottle .b-glass::after{content:""; position:absolute; top:6px; bottom:6px; left:7px; width:7px; border-radius:99px; background:rgba(255,255,255,.5)}
+.bottle .b-fill{position:absolute; left:0; right:0; bottom:0; box-shadow:inset 0 3px 0 rgba(255,255,255,.35), inset 0 -8px 12px rgba(0,0,0,.18)}
+.bottle.b-tall .b-glass{width:50px; height:102px; border-radius:9px 9px 13px 13px}
+.bottle.b-jam .b-glass{width:68px; height:72px; border-radius:13px}
+.bottle.b-jam .b-lid{width:56px}
+.bottle.b-round .b-glass{width:62px; height:84px; border-radius:24px}
+.bottle.b-round .b-lid{width:38px}
+.bottle .b-label{
+  position:absolute; left:50%; transform:translateX(-50%); bottom:11px; z-index:2;
+  width:88%; max-width:64px; background:var(--paper); color:var(--ink);
+  border:1.2px solid rgba(59,36,24,.7); border-radius:6px; padding:2px 2px 3px; text-align:center;
+  box-shadow:0 1px 2px rgba(59,36,24,.25);
+}
+.bottle .b-emoji{display:block; font-size:15px; line-height:1.3}
+.bottle .b-name{display:block; font-size:9.5px; font-weight:900; line-height:1.3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.bottle .b-remove{
+  position:absolute; top:-9px; right:-13px; z-index:3; width:21px; height:21px; padding:0;
+  display:grid; place-items:center; border-radius:50%;
+  background:var(--paper); color:var(--ink2); border:1.5px solid var(--line2);
+  font-size:13px; font-weight:900; line-height:1;
+}
+.bottle .b-remove:hover{border-color:var(--red); color:var(--red)}
+.bottle:hover .b-glass{border-color:var(--ink)}
+.shelf-block{margin-top:34px}
+.shelf-sub{font-size:21px; margin-bottom:4px}
+.sr-list{display:grid; gap:10px; margin-top:12px}
+.sr-item{
+  display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+  background:var(--paper); border:1.5px solid var(--line2); border-radius:16px;
+  padding:10px 12px; box-shadow:var(--card-shadow);
+}
+.sr-main{display:flex; gap:12px; align-items:center; flex:1 1 240px; background:none; border:none; padding:0; text-align:left; color:var(--ink); min-width:0}
+.sr-main img{width:74px; height:52px; object-fit:cover; border-radius:10px; flex:none; background:var(--paper2)}
+.sr-name{font-family:"Kaisei Decol",serif; font-weight:700; font-size:15.5px; line-height:1.4}
+.sr-badge{flex:none; font-size:11.5px; font-weight:900; border-radius:999px; padding:3px 11px; border:1.5px solid var(--ink)}
+.sr-badge.ready{background:var(--green-soft); color:var(--green); border-color:var(--green)}
+.sr-badge.near{background:var(--yellow-soft); color:var(--brown); border-color:var(--yellow)}
+.sr-miss{display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:12px; font-weight:900; color:var(--ink3)}
+.miss-chip{border:1.5px dashed var(--line2); background:var(--bg); color:var(--ink); border-radius:999px; padding:3px 10px; font-size:12px; font-weight:900}
+.miss-chip:hover{border-color:var(--red); color:var(--red)}
+.shelf-bm-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:12px}
+.sbm-card{
+  display:block; width:100%; padding:0; text-align:left; color:var(--ink);
+  background:var(--paper); border:1.5px solid var(--line2); border-radius:18px;
+  overflow:hidden; box-shadow:var(--card-shadow); transition:transform .16s ease, border-color .16s ease;
+}
+.sbm-card:hover{transform:translateY(-3px); border-color:var(--ink)}
+.sbm-card img{display:block; width:100%; aspect-ratio:16/9; object-fit:cover; background:var(--paper2)}
+.sbm-card .sbm-name{display:block; padding:9px 13px 12px; font-family:"Kaisei Decol",serif; font-size:14.5px; font-weight:700; line-height:1.45}
+@media (max-width:900px){.shelf-bm-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){
+  .shelf-cabinet{grid-template-columns:repeat(auto-fill,minmax(84px,1fr))}
+  .shelf-bm-grid{grid-template-columns:repeat(2,1fr); gap:11px}
+  .sr-main img{width:62px; height:46px}
+}
+
 </style>
 </head>
 <body>
@@ -950,11 +1067,12 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
   <nav class="page-nav" aria-label="ページを選ぶ">
     <span class="page-nav-label">まずは入口マップから ― 行きたい場所をタップすると、そのページに飛びます</span>
     <button class="page-btn on" type="button" data-page="gate" aria-current="page"><span class="pb-no">MAP</span>入口マップ</button>
-    <button class="page-btn" type="button" data-page="zukan"><span class="pb-no">No.01</span>スパイス図鑑<span class="pb-count">全94種</span></button>
+    <button class="page-btn" type="button" data-page="zukan"><span class="pb-no">No.01</span>スパイス図鑑<span class="pb-count">全95種</span></button>
     <button class="page-btn" type="button" data-page="charts"><span class="pb-no">No.02</span>マニア図解<span class="pb-count">8点</span></button>
     <button class="page-btn" type="button" data-page="lab"><span class="pb-no">No.03</span>実験ノート</button>
-    <button class="page-btn" type="button" data-page="blend"><span class="pb-no">No.04</span>ブレンド<span class="pb-count">12種</span></button>
-    <button class="page-btn" type="button" data-page="recipes"><span class="pb-no">No.05</span>レシピ<span class="pb-count">44品＋ちょい足し</span></button>
+    <button class="page-btn" type="button" data-page="blend"><span class="pb-no">No.04</span>ブレンド<span class="pb-count">13種</span></button>
+    <button class="page-btn" type="button" data-page="recipes"><span class="pb-no">No.05</span>レシピ<span class="pb-count">52品＋ちょい足し</span></button>
+    <button class="page-btn" type="button" data-page="shelf"><span class="pb-no">No.06</span>私の棚<span class="pb-count" id="shelfNavCount">0/95</span></button>
     <button class="page-btn" type="button" data-page="winter"><span class="pb-no">Special</span>❄️ 冬のスパイス特集</button>
     <button class="page-btn" type="button" data-page="shindan"><span class="pb-no">Game</span>🔮 スパイス診断</button>
   </nav>
@@ -1013,7 +1131,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
           <circle class="pin" cx="150" cy="138" r="33" fill="var(--yellow-soft)" stroke="var(--ink)" stroke-width="1.8"/>
           <text class="pin-emoji" x="150" y="151" text-anchor="middle" aria-hidden="true">📖</text>
           <text x="150" y="204" text-anchor="middle" font-size="16" font-weight="900" fill="var(--ink)">スパイス図鑑の森</text>
-          <text x="150" y="222" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink2)">全94種 ・ No.01</text>
+          <text x="150" y="222" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink2)">全95種 ・ No.01</text>
         </g>
         <!-- Charts -->
         <g class="map-node" data-goto="charts" tabindex="0" role="link" aria-label="マニア図解へ行く">
@@ -1046,7 +1164,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
           <circle class="pin" cx="150" cy="392" r="33" fill="var(--teal-soft)" stroke="var(--ink)" stroke-width="1.8"/>
           <text class="pin-emoji" x="150" y="405" text-anchor="middle" aria-hidden="true">🥣</text>
           <text x="150" y="458" text-anchor="middle" font-size="16" font-weight="900" fill="var(--ink)">ブレンド市場</text>
-          <text x="150" y="476" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink2)">黄金比 12種 ・ No.04</text>
+          <text x="150" y="476" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink2)">黄金比 13種 ・ No.04</text>
         </g>
         <!-- Recipes -->
         <g class="map-node" data-goto="recipes" tabindex="0" role="link" aria-label="レシピへ行く">
@@ -1054,7 +1172,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
           <circle class="pin" cx="566" cy="392" r="33" fill="var(--green-soft)" stroke="var(--ink)" stroke-width="1.8"/>
           <text class="pin-emoji" x="566" y="405" text-anchor="middle" aria-hidden="true">🍛</text>
           <text x="566" y="458" text-anchor="middle" font-size="16" font-weight="900" fill="var(--ink)">レシピ食堂</text>
-          <text x="566" y="476" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink2)">完成料理 44品 ・ No.05</text>
+          <text x="566" y="476" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink2)">完成料理 52品 ・ No.05</text>
         </g>
       </svg>
       <div class="map-legend"><span>点線はおすすめの歩き方：</span><span>入口 → 図鑑の森 → 実験キッチン → 図解の丘／市場／食堂へ</span></div>
@@ -1066,7 +1184,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <span class="d-icon" style="background:var(--yellow-soft)" aria-hidden="true">📖</span>
         <h3>スパイス図鑑<span class="en">Library</span></h3>
         <p>スパイス、🌿ハーブ、和スパイスを1種ずつ観察。検索とカテゴリ絞り込み、カードタップで学名・成分・使い分けまで開けます。</p>
-        <span class="d-count">94種収録（No.01〜78＋🌿H1〜H16）</span><span class="d-go">図鑑の森へ行く →</span>
+        <span class="d-count">95種収録（No.01〜78＋🌿H1〜H17）</span><span class="d-go">図鑑の森へ行く →</span>
       </button>
       <button class="dest-card" type="button" data-goto="charts">
         <span class="d-no">No.02 ― Hill</span>
@@ -1086,15 +1204,22 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <span class="d-no">No.04 ― Market</span>
         <span class="d-icon" style="background:var(--teal-soft)" aria-hidden="true">🥣</span>
         <h3>ブレンド<span class="en">Blends</span></h3>
-        <p>ガラムマサラ、カレー粉ベース、チャイマサラ、五香粉、七味唐辛子、ベルベレ、ミトゥミッタ、ザアタル、デュカ、チャットマサラ、ケイジャンスパイス、トゥナパハの12種。自家製ブレンドの黄金比をバーで一目で。</p>
-        <span class="d-count">ブレンド 12種</span><span class="d-go">ブレンド市場へ行く →</span>
+        <p>ガラムマサラ、カレー粉ベース、チャイマサラ、五香粉、七味唐辛子、ベルベレ、ミトゥミッタ、ザアタル、デュカ、チャットマサラ、ケイジャンスパイス、トゥナパハ、ハリッサの13種。自家製ブレンドの黄金比をバーで一目で。</p>
+        <span class="d-count">ブレンド 13種</span><span class="d-go">ブレンド市場へ行く →</span>
       </button>
       <button class="dest-card" type="button" data-goto="recipes">
         <span class="d-no">No.05 ― Diner</span>
         <span class="d-icon" style="background:var(--green-soft)" aria-hidden="true">🍛</span>
         <h3>レシピ<span class="en">Recipes</span></h3>
-        <p>ひよこ豆カレー、麻婆豆腐、ルーローハン風、グリーンカレー、ビリヤニ、ガンボ、ルンダン、チャイ、フルーツチャート、ツレキなど。図鑑のスパイスで作る完成料理44品と、ちょい足しミニコーナー。<br>主菜、スープ、ごはんもの、パン、デザートまでそろいます。「ティムールのポークソテー」も収録。</p>
-        <span class="d-count">レシピ 44品 ＋ ちょい足し11</span><span class="d-go">レシピ食堂へ行く →</span>
+        <p>ひよこ豆カレー、麻婆豆腐、ルーローハン風、グリーンカレー、ビリヤニ、ガンボ、ルンダン、チャイ、フルーツチャート、ツレキなど。図鑑のスパイスで作る完成料理52品と、ちょい足しミニコーナー。<br>主菜、スープ、ごはんもの、パン、デザートまでそろいます。「ティムールのポークソテー」も収録。</p>
+        <span class="d-count">レシピ 52品 ＋ ちょい足し11</span><span class="d-go">レシピ食堂へ行く →</span>
+      </button>
+      <button class="dest-card" type="button" data-goto="shelf">
+        <span class="d-no">No.06 ― Shelf</span>
+        <span class="d-icon" style="background:var(--brown-soft)" aria-hidden="true">🫙</span>
+        <h3>私の棚<span class="en">My Shelf</span></h3>
+        <p>図鑑で「棚に入れる」を押したスパイスが、木の棚に小瓶で並ぶあなた専用の棚。棚のスパイスで作れるレシピの逆引きと、レシピのしおり置き場もここです。</p>
+        <span class="d-count">棚 ＋ しおり（この端末に保存）</span><span class="d-go">私の棚へ行く →</span>
       </button>
             <button class="dest-card" type="button" data-goto="winter">
         <span class="d-no">Special ― Cabin</span>
@@ -1115,7 +1240,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <span class="d-icon" style="background:var(--red-soft)" aria-hidden="true">✨</span>
         <h3>今日のスパイス<span class="en">Random</span></h3>
         <p>行き先に迷ったら、ランダムで1種引くおみくじ。知らないスパイスとの出会いがここから始まります。</p>
-        <span class="d-count">94種から1種</span><span class="d-go">今日のスパイスを引く →</span>
+        <span class="d-count">95種から1種</span><span class="d-go">今日のスパイスを引く →</span>
       </button>
     </div>
   </section>
@@ -1174,7 +1299,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
 
       <article class="fig-card wide">
         <h3>① 辛さ × 香り ポジショニングマップ <span class="en">Heat × Aroma Map</span></h3>
-        <svg class="chart" viewBox="0 0 720 470" role="img" aria-label="スパイス・ハーブ・和スパイス全94種を辛さと香りの強さで配置した散布図">
+        <svg class="chart" viewBox="0 0 720 470" role="img" aria-label="スパイス・ハーブ・和スパイス全95種を辛さと香りの強さで配置した散布図">
           <rect x="90" y="30" width="550" height="185" fill="var(--pink-soft)" opacity=".55"/>
           <rect x="90" y="215" width="275" height="185" fill="var(--yellow-soft)" opacity=".5"/>
           <text class="quadrant" x="628" y="52" text-anchor="end">辛くて、香りも主役級</text>
@@ -1274,6 +1399,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
           <g class="plot-dot" data-plot="mitsuba"><circle cx="330" cy="300" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="330" y="304" text-anchor="middle" font-size="9.5" font-weight="900" fill="#FFFDF8">H14</text><text x="343" y="290" font-size="11" aria-hidden="true">🌿</text></g>
           <g class="plot-dot" data-plot="konome"><circle cx="272" cy="160" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="272" y="164" text-anchor="middle" font-size="9.5" font-weight="900" fill="#FFFDF8">H15</text><text x="285" y="150" font-size="11" aria-hidden="true">🌿</text></g>
           <g class="plot-dot" data-plot="thaibasil"><circle cx="132" cy="118" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="132" y="122" text-anchor="middle" font-size="9.5" font-weight="900" fill="#FFFDF8">H16</text><text x="145" y="108" font-size="11" aria-hidden="true">🌿</text></g>
+          <g class="plot-dot" data-plot="rosepetal"><circle cx="100" cy="168" r="14" fill="var(--green)" stroke="#FFFDF8" stroke-width="2"/><text x="100" y="172" text-anchor="middle" font-size="9.5" font-weight="900" fill="#FFFDF8">H17</text><text x="113" y="158" font-size="11" aria-hidden="true">🌿</text></g>
           <g class="plot-dot" data-plot="mahleb"><circle cx="238" cy="76" r="15" fill="var(--pink)"/><text x="238" y="81" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">64</text></g>
           <g class="plot-dot" data-plot="anardana"><circle cx="132" cy="300" r="15" fill="var(--red)"/><text x="132" y="305" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">65</text></g>
           <g class="plot-dot" data-plot="kasurimethi"><circle cx="135" cy="270" r="15" fill="var(--green)"/><text x="135" y="275" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">66</text></g>
@@ -1290,7 +1416,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
           <g class="plot-dot" data-plot="mastic"><circle cx="135" cy="152" r="15" fill="var(--teal)"/><text x="135" y="157" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">77</text></g>
           <g class="plot-dot" data-plot="blackcumin"><circle cx="178" cy="128" r="15" fill="var(--brown)"/><text x="178" y="133" text-anchor="middle" font-size="10.5" font-weight="900" fill="#FFFDF8">78</text></g>
         </svg>
-        <p class="fig-note">番号は図鑑カードの No. と同じ。点の位置は目安です。<br>左上に集まるのは「辛くないけど香りで主役を張る」組、右端の 02 チリだけが辛さ突出型です。<br>40 バニラと 47 トンカビーンは左上の「甘い香り最強」ゾーン、41 スマックと 44 アナトーは辛さゼロの色・酸味チーム、46 アレッポペッパーは中辛ゾーン、50 マーガオは 39 ティムールの近くで柑橘組にいます。51 生姜は、辛さ控えめ・香りしっかりの真ん中あたりです。<br>🌿マークのハーブ（H1〜H16）はどれも辛さゼロなので左側に集まり、H1 バジルと H2 パクチーは香りの主役ゾーン、H8 パセリは控えめな土台ゾーンにいます。<br>52 わさびと55 和からしは「鼻に抜ける辛さ」組として右寄り、59 ピパーチは31 ヒハツの近く、54 ゆずと58 月桃は柑橘と清涼感の香り組にいます。60 グリーンペッパーは08 ブラックペッパーと同系の中段に、62 コチュカルは中辛ゾーンに、61 ケッパーと63 ハイビスカスは辛さゼロの酸味組にいます。H16 タイバジルは H1 スイートバジルの近くでアニス系の香り組に、64 マハレブは甘い香りのゾーンに、65 アナルダナは 41 スマックや 25 タマリンドと並ぶ酸味組にいます。66 カスリメティは 11 フェヌグリーク（種）と同じ植物の葉の乾燥品で、辛さゼロ・香り中くらいの左側にいます。70 青花椒は 17 花椒・39 ティムールのそばの「痺れ＋柑橘」組に、71 ピメントンは 12 パプリカの親戚として中段の燻製ゾーンにいます。72 青ゆずは 54 ゆずの隣の柑橘ゾーンに、73 青唐辛子は 02 チリへ続く「生の辛さ」ゾーンにいます。<br>なお、ペッパーの話をひとつ：08 ブラックペッパー／35 ホワイトペッパー／60 グリーンペッパーは、全部おなじ植物 Piper nigrum の実で、収穫時期と加工の違いだけの三兄弟です（マップでも中段に並んでいます）。一方 52 わさびはアブラナ科の別植物で、辛さの成分もピペリンではなくアリルイソチオシアネート——「ペッパー」ではありません。</p>
+        <p class="fig-note">番号は図鑑カードの No. と同じ。点の位置は目安です。<br>左上に集まるのは「辛くないけど香りで主役を張る」組、右端の 02 チリだけが辛さ突出型です。<br>40 バニラと 47 トンカビーンは左上の「甘い香り最強」ゾーン、41 スマックと 44 アナトーは辛さゼロの色・酸味チーム、46 アレッポペッパーは中辛ゾーン、50 マーガオは 39 ティムールの近くで柑橘組にいます。51 生姜は、辛さ控えめ・香りしっかりの真ん中あたりです。<br>🌿マークのハーブ（H1〜H17）はどれも辛さゼロなので左側に集まり、H1 バジルと H2 パクチーは香りの主役ゾーン、H8 パセリは控えめな土台ゾーンにいます。<br>52 わさびと55 和からしは「鼻に抜ける辛さ」組として右寄り、59 ピパーチは31 ヒハツの近く、54 ゆずと58 月桃は柑橘と清涼感の香り組にいます。60 グリーンペッパーは08 ブラックペッパーと同系の中段に、62 コチュカルは中辛ゾーンに、61 ケッパーと63 ハイビスカスは辛さゼロの酸味組にいます。H16 タイバジルは H1 スイートバジルの近くでアニス系の香り組に、H17 ローズペタルは甘いフローラルの香り組に、64 マハレブは甘い香りのゾーンに、65 アナルダナは 41 スマックや 25 タマリンドと並ぶ酸味組にいます。66 カスリメティは 11 フェヌグリーク（種）と同じ植物の葉の乾燥品で、辛さゼロ・香り中くらいの左側にいます。70 青花椒は 17 花椒・39 ティムールのそばの「痺れ＋柑橘」組に、71 ピメントンは 12 パプリカの親戚として中段の燻製ゾーンにいます。72 青ゆずは 54 ゆずの隣の柑橘ゾーンに、73 青唐辛子は 02 チリへ続く「生の辛さ」ゾーンにいます。<br>なお、ペッパーの話をひとつ：08 ブラックペッパー／35 ホワイトペッパー／60 グリーンペッパーは、全部おなじ植物 Piper nigrum の実で、収穫時期と加工の違いだけの三兄弟です（マップでも中段に並んでいます）。一方 52 わさびはアブラナ科の別植物で、辛さの成分もピペリンではなくアリルイソチオシアネート——「ペッパー」ではありません。</p>
       </article>
 
       <article class="fig-card wide">
@@ -1338,9 +1464,9 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
           <g class="node" data-plot="tonka"><circle cx="462" cy="402" r="26" fill="var(--yellow-soft)" stroke="var(--ink)" stroke-width="1.6"/><text x="462" y="406" text-anchor="middle" font-size="9.5" font-weight="900" fill="var(--ink)">トンカビーン</text></g>
           <g class="node" data-plot="sumac"><circle cx="82" cy="318" r="25" fill="var(--red-soft)" stroke="var(--ink)" stroke-width="1.6"/><text x="82" y="323" text-anchor="middle" font-size="11" font-weight="900" fill="var(--ink)">スマック</text></g>
           <g class="node" data-plot="tamarind"><circle cx="48" cy="130" r="25" fill="var(--pink-soft)" stroke="var(--ink)" stroke-width="1.6"/><text x="48" y="134" text-anchor="middle" font-size="10.5" font-weight="900" fill="var(--ink)">タマリンド</text></g>
-          <text x="14" y="422" font-size="11" font-weight="700" fill="var(--ink3)">※代表的な相性の抜粋です（全94種の全組み合わせではありません）</text>
+          <text x="14" y="422" font-size="11" font-weight="700" fill="var(--ink3)">※代表的な相性の抜粋です（全95種の全組み合わせではありません）</text>
         </svg>
-        <p class="fig-note">実線はクミンを中心とした定番の組み合わせ、ピンクの破線は特別な関係：ターメリック×ペッパーは吸収率の相乗効果コンビ、チリ×スターアニスとスターアニス×カルダモンは煮込みとチャイで重なる甘い香りのライン、カルダモン×シナモンは甘い香り同士の鉄板ペアです。緑の細線は、痺れ・甘い香り・酸味の相性です：花椒・ティムール・山椒の「痺れ三兄弟」はチリと組んで麻×辣に、バニラとトンカビーンはカルダモンやシナモンと重なる甘い香りのライン、スマックとタマリンドはクミンにつながる酸味のラインです。<br>このマップは94種すべての組み合わせではなく、代表的な相性を抜粋したものです。丸をタップすると、そのスパイスの図鑑詳細が開きます。</p>
+        <p class="fig-note">実線はクミンを中心とした定番の組み合わせ、ピンクの破線は特別な関係：ターメリック×ペッパーは吸収率の相乗効果コンビ、チリ×スターアニスとスターアニス×カルダモンは煮込みとチャイで重なる甘い香りのライン、カルダモン×シナモンは甘い香り同士の鉄板ペアです。緑の細線は、痺れ・甘い香り・酸味の相性です：花椒・ティムール・山椒の「痺れ三兄弟」はチリと組んで麻×辣に、バニラとトンカビーンはカルダモンやシナモンと重なる甘い香りのライン、スマックとタマリンドはクミンにつながる酸味のラインです。<br>このマップは95種すべての組み合わせではなく、代表的な相性を抜粋したものです。丸をタップすると、そのスパイスの図鑑詳細が開きます。</p>
       </article>
 
       <article class="fig-card wide">
@@ -1815,7 +1941,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
       <span class="no">No.04</span>
       <h2>自家製ブレンドの黄金比</h2>
       <svg class="squig" width="180" height="10" viewBox="0 0 180 10" fill="none"><path d="M2 6 Q 14 1, 26 6 T 50 6 T 74 6 T 98 6 T 122 6 T 146 6 T 170 6" stroke="var(--teal)" stroke-width="3.4" stroke-linecap="round"/></svg>
-      <p>市販品も便利ですが、自分で合わせると香りの鮮度が段違い。まずはこの比率から始めて、好みに寄せていくのがおすすめです（小さじ換算）。<br>スパイス名をタップすると、そのスパイスの詳細が開きます。ベルベレ、ミトゥミッタ、ザアタル、デュカ、チャットマサラ、ケイジャンスパイス、トゥナパハは、単体ではなく「ブレンド」として収録しています。<br>各カードには入手のしやすさと、ないときの再現ヒントも添えました。</p>
+      <p>市販品も便利ですが、自分で合わせると香りの鮮度が段違い。まずはこの比率から始めて、好みに寄せていくのがおすすめです（小さじ換算）。<br>スパイス名をタップすると、そのスパイスの詳細が開きます。ベルベレ、ミトゥミッタ、ザアタル、デュカ、チャットマサラ、ケイジャンスパイス、トゥナパハ、ハリッサは、単体ではなく「ブレンド」として収録しています。<br>各カードには入手のしやすさと、ないときの再現ヒントも添えました。</p>
     </div>
 
     <div class="blend-grid">
@@ -1965,6 +2091,19 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <div class="bar-row"><button class="bar-link" type="button" data-open="clove">クローブ</button><span class="bar"><i style="width:10%;background:var(--purple)"></i></span><span class="amt">0.3</span></div>
         <p class="tip">2つの顔：ホールを炒らずに挽いた「アム・トゥナパハ（未焙煎）」は色が明るく香りが軽やかで、野菜・豆・ココナッツミルク系のカレー向き。ホールを乾煎りしてから挽いた「バダプ・トゥナパハ（焙煎）」は色が深く香ばしく、肉・魚のカレー向きです。同じ配合で、炒るかどうかだけで使い分けます。<br>入手：スリランカ食材店・ネット通販で「トゥナパハ」「スリランカカレーパウダー」として市販品あり。再現のヒント：フェンネルの甘い香りが核のひとつなので、ここだけは省かないのがおすすめ。インドのガラムマサラより軽く、クミンとフェンネルが前に出るのがスリランカらしい輪郭です。</p>
       </article>
+      <article class="blend" id="blend-harissa">
+        <span class="en">Harissa</span>
+        <h3>ハリッサ（チュニジア）</h3>
+        <img class="blend-photo" loading="lazy" decoding="async" src="assets/harissa.webp" alt="陶器の器に盛られた深紅のハリッサ（唐辛子ペースト）。表面にオリーブオイルが光り、そばに乾燥した赤唐辛子が2本添えられている" />
+        <p class="desc">北アフリカ・チュニジア生まれの、唐辛子をすり潰したペースト。唐辛子の辛さに、コリアンダーの爽やかさ、クミンとキャラウェイの土っぽい香り、にんにくのコク、オリーブオイルのまろやかさが重なります。<br>このページの他のブレンドが「粉」なのに対して、ハリッサはペースト状なのが一番の違い。そのまま料理に溶かしたり、食卓で少しずつ足したりできる「辛い調味料」として働きます。配合は家庭とメーカーで幅があるので、これは目安の比率です。</p>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="chili">唐辛子（チリ）</button><span class="bar"><i style="width:100%;background:var(--red)"></i></span><span class="amt">4</span></div>
+        <div class="bar-row"><span>オリーブオイル</span><span class="bar"><i style="width:50%;background:var(--yellow)"></i></span><span class="amt">2</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="coriander">コリアンダー</button><span class="bar"><i style="width:38%;background:var(--yellow)"></i></span><span class="amt">1.5</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="cumin">クミン＋キャラウェイ</button><span class="bar"><i style="width:25%;background:var(--brown)"></i></span><span class="amt">1</span></div>
+        <div class="bar-row"><button class="bar-link" type="button" data-open="garlic">にんにく</button><span class="bar"><i style="width:25%;background:var(--teal)"></i></span><span class="amt">1</span></div>
+        <div class="bar-row"><span>塩</span><span class="bar"><i style="width:13%;background:var(--ink3)"></i></span><span class="amt">0.5</span></div>
+        <p class="tip">使いみち：クスクスにかけるスープに溶かすのが本場の定番。タジンなど煮込みの下味、スープの辛さ足し、卵料理（トマトと煮るシャクシュカ風）にも。サンドイッチやピザの辛いアクセントにも使えます。<br>手作りの基本：乾燥唐辛子を湯で戻し、煎ったコリアンダー、クミン、キャラウェイ、にんにく、塩と一緒にすり潰し、オリーブオイルでのばします。辛さは唐辛子の品種と種を抜くかどうかで調整を。<br>市販品の扱い：チューブ入りや瓶入りが輸入食品店・ネット通販で買えます。開封後は表面をオリーブオイルで覆って冷蔵すると、香りと色が長持ちします。辛さは製品差が大きいので、最初は小さじ1/2から。</p>
+      </article>
     </div>
     <div class="choi" id="yuzukosho-note">
       <h3>日本の合わせ調味料メモ：ゆず胡椒（青と赤） <span class="en">Yuzu Kosho</span> <span class="yk-badge">🟢 青柚子胡椒</span> <span class="yk-badge aka">🔴 赤柚子胡椒</span></h3>
@@ -1994,8 +2133,15 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
       <span class="no">No.05</span>
       <h2>図鑑のスパイスで作る、簡単レシピ</h2>
       <svg class="squig" width="180" height="10" viewBox="0 0 180 10" fill="none"><path d="M2 6 Q 14 1, 26 6 T 50 6 T 74 6 T 98 6 T 122 6 T 146 6 T 170 6" stroke="var(--green)" stroke-width="3.4" stroke-linecap="round"/></svg>
-      <p>図鑑に載っているスパイスとハーブで作れる44品。<br>一覧は写真と料理名だけのサムネイルになっていて、タップすると材料と作り方がポップアップで開きます。<br>まず「基本のスパイスカレー」で土台を覚えると、ほかのレシピもぐっと作りやすくなります。「ティムールのポークソテー」もそのひとつです。<br>主菜（ガンボ、ルンダン、ファラフェル＋タヒーナなど）、スープ、ごはんもの（ケイジャンジャンバラヤなど）、パン（ツレキ、アジョワンのパラタ）、軽食のフルーツチャートに、デザート7品（ライスプディング、パンナコッタ、チョコムース、パンダンシフォンケーキ、スパイスパウンドケーキ、クレームブリュレ、レモンポピーシードケーキ）もあります。<br>ページの最後には、今日の料理にひとつまみ足すだけの「ちょい足しミニコーナー」もあります。<br>ポップアップの中のスパイス名のチップをタップすると、そのスパイスの詳細も開きます。</p>
+      <p>図鑑に載っているスパイスとハーブで作れる52品。<br>一覧は写真と料理名だけのサムネイルになっていて、タップすると材料と作り方がポップアップで開きます。<br>まず「基本のスパイスカレー」で土台を覚えると、ほかのレシピもぐっと作りやすくなります。「ティムールのポークソテー」もそのひとつです。<br>主菜（ガンボ、ルンダン、ファラフェル＋タヒーナなど）、スープ、ごはんもの（ケイジャンジャンバラヤなど）、パン（ツレキ、アジョワンのパラタ）、軽食のフルーツチャートに、デザート9品（ライスプディング、パンナコッタ、チョコムース、パンダンシフォンケーキ、スパイスパウンドケーキ、クレームブリュレ、レモンポピーシードケーキ、型抜きジンジャークッキー、スパイスアイス）もあります。<br>ページの最後には、今日の料理にひとつまみ足すだけの「ちょい足しミニコーナー」もあります。<br>ポップアップの中のスパイス名のチップをタップすると、そのスパイスの詳細も開きます。</p>
     </div>
+
+    <div class="shelf-filterbar" role="group" aria-label="レシピの表示切り替え">
+      <button class="pill on" type="button" id="bmFilterAll">ぜんぶ（52品）</button>
+      <button class="pill" type="button" id="bmFilterOnly">🔖 しおりだけ</button>
+      <span class="shelf-filter-count" id="bmFilterCount"></span>
+    </div>
+    <p class="shelf-note" id="bmEmptyNote" hidden>まだしおりしたレシピがありません。各レシピの右上の 🔖 や、レシピ詳細のボタンでしおりを付けられます。</p>
 
     <div class="recipe-grid thumbs">
       <button type="button" class="recipe-thumb" data-recipe="recipe-basecurry" aria-label="基本のスパイスカレーのレシピを開く">
@@ -2260,6 +2406,54 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         <span class="rt-photo"><img src="assets/thumb-sumaconion.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
         <span class="rt-cat">スマック主役 ・ サラダ</span>
         <span class="rt-name">スマックのオニオンサラダ</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-vindaloo" aria-label="ポークビンダルー（ゴア風）のレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-vindaloo.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">ゴア風 ・ 主菜</span>
+        <span class="rt-name">ポークビンダルー（ゴア風）</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-powderchai" aria-label="パウダーだけで作るチャイのレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-powderchai.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">パウダーだけ ・ ドリンク</span>
+        <span class="rt-name">パウダーだけで作るチャイ</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-craftcola" aria-label="クラフトコーラシロップのレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-craftcola.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">手作りシロップ ・ ドリンク</span>
+        <span class="rt-name">クラフトコーラシロップ</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-gingercookie" aria-label="型抜きジンジャークッキーのレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-gingercookie.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">デザート 08 ・ 甘いもの</span>
+        <span class="rt-name">型抜きジンジャークッキー</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-mole" aria-label="モレ・ポブラーノのレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-mole.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">メキシコ ・ 主菜</span>
+        <span class="rt-name">モレ・ポブラーノ</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-spiceice" aria-label="スパイスアイスのレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-spiceice.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">デザート 09 ・ 甘いもの</span>
+        <span class="rt-name">スパイスアイス</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-watermelon" aria-label="タヒン風スイカサラダのレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-watermelon.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">メキシコ ・ サラダ</span>
+        <span class="rt-name">タヒン風スイカサラダ</span>
+        <span class="rt-open">レシピを開く →</span>
+      </button>
+      <button type="button" class="recipe-thumb" data-recipe="recipe-popcorn" aria-label="スパイスポップコーンのレシピを開く">
+        <span class="rt-photo"><img src="assets/thumb-popcorn.jpg" alt="" width="800" height="533" loading="lazy" decoding="async" /></span>
+        <span class="rt-cat">おやつ ・ 軽食</span>
+        <span class="rt-name">スパイスポップコーン</span>
         <span class="rt-open">レシピを開く →</span>
       </button>
 
@@ -4326,6 +4520,426 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
         </div>
       </article>
 
+      <article class="recipe" id="recipe-vindaloo">
+        <div class="r-photo">
+          <img loading="lazy" decoding="async" src="assets/dish-vindaloo.webp" alt="深い色の器に盛り付けられた、できあがりのポークビンダルー。赤茶色の濃いグレイビーの中に大きめの豚肉の塊が見え、シナモンスティックが1本のっている。そばの小皿に白いごはんが添えられている" />
+          <span class="r-badge">ゴア風 ・ 主菜</span>
+        </div>
+        <div class="r-body">
+          <h3>ポークビンダルー（ゴア風）</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約60分＋漬け込み3時間〜一晩</span>
+            <span class="chip">3〜4人分</span>
+            <span class="chip">西インド・ゴアの代表料理</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="chili" type="button">チリペッパー</button>
+            <button class="chip spice" data-open="cinnamon" type="button">シナモン</button>
+            <button class="chip spice" data-open="clove" type="button">クローブ</button>
+            <button class="chip spice" data-open="mustard" type="button">マスタードシード</button>
+            <button class="chip spice" data-open="cumin" type="button">クミン</button>
+            <button class="chip spice" data-open="coriander" type="button">コリアンダー</button>
+            <button class="chip spice" data-open="turmeric" type="button">ターメリック</button>
+            <button class="chip spice" data-open="pepper" type="button">ブラックペッパー</button>
+            <button class="chip spice" data-open="cardamom" type="button">カルダモン</button>
+            <button class="chip spice" data-open="garlic" type="button">ニンニク</button>
+            <button class="chip spice" data-open="ginger" type="button">生姜</button>
+          </div>
+          <p class="intro">西インド・ゴアを代表する、豚肉のお酢煮込みカレーです。ポルトガルの食文化がインドに根づいた一品で、名前は「ビネガーとにんにくのマリネ」に由来するともいわれます。<br>ビンダルーでよくある失敗が、「酸っぱいだけで深みがない」こと。原因はたいてい、お酢を仕上げに後入れしていることと、漬け込みと炒めが足りないことです。このレシピはその逆を行きます。お酢はマリネと煮込みの最初から使い、玉ねぎはしっかり色づけ、スパイスは油で開かせ、シナモンやクローブの温かみで土台を作る。守るのはこの3点だけです。</p>
+          <h4>材料</h4>
+          <ul class="ing">
+            <li>豚肩ロース肉（ブロック）<b>500g（大きめに切る）</b></li>
+            <li>玉ねぎ<b>2個（薄切り）</b></li>
+            <li>油<b>大さじ3</b></li>
+            <li>お酢（ワインビネガー）<b>大さじ5（マリネに大さじ4、煮込みに大さじ1）</b></li>
+            <li><button class="ing-link" type="button" data-open="garlic">にんにく</button>（すりおろし）<b>大さじ1</b></li>
+            <li><button class="ing-link" type="button" data-open="ginger">生姜</button>（すりおろし）<b>大さじ1</b></li>
+            <li><button class="ing-link" type="button" data-open="chili">チリパウダー</button><b>小さじ2（辛さは調整）</b></li>
+            <li><button class="ing-link" type="button" data-open="coriander">コリアンダーパウダー</button><b>大さじ1</b></li>
+            <li><button class="ing-link" type="button" data-open="cumin">クミンパウダー</button><b>小さじ1</b></li>
+            <li><button class="ing-link" type="button" data-open="turmeric">ターメリック</button><b>小さじ1/2</b></li>
+            <li><button class="ing-link" type="button" data-open="cinnamon">シナモンパウダー</button><b>小さじ1/2</b></li>
+            <li><button class="ing-link" type="button" data-open="pepper">ブラックペッパー</button>（粗挽き）<b>小さじ1/2</b></li>
+            <li>塩<b>小さじ1（マリネ用）</b></li>
+            <li>砂糖<b>小さじ1（マリネ用）＋小さじ1〜2（仕上げの調整用）</b></li>
+            <li><button class="ing-link" type="button" data-open="mustard">マスタードシード</button><b>小さじ1</b></li>
+            <li><button class="ing-link" type="button" data-open="cinnamon">シナモンスティック</button><b>1本</b></li>
+            <li><button class="ing-link" type="button" data-open="clove">クローブ</button><b>4粒</b></li>
+            <li><button class="ing-link" type="button" data-open="cardamom">カルダモン</button><b>3粒</b></li>
+            <li>水<b>200ml</b></li>
+            <li>じゃがいも<b>2個（あれば・大きめに切る）</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>マリネする。豚肉は4〜5cm角の大きめに切る。ボウルにお酢大さじ4、にんにく、生姜、チリパウダー、コリアンダー、クミン、ターメリック、シナモンパウダー、ブラックペッパー、塩、砂糖小さじ1を混ぜ合わせ、豚肉をよくもみ込む。ラップをして冷蔵庫で最低3〜4時間、できれば一晩漬ける（深みはこの時間から生まれます）。作る30分前に冷蔵庫から出しておく。</li>
+            <li>厚手の鍋に油を熱し、マスタードシードを入れる。はじけてきたらシナモンスティック、クローブ、カルダモンを加え、弱火で香りが立つまで炒める。スパイスを油で開かせる工程です。</li>
+            <li>玉ねぎを加え、中火で15分ほど、濃い茶色になるまでしっかり炒める。色が浅いと深みが出ないので、きつね色で止めずにもう一歩進めること。焦げつきそうになったら水を少々差す。</li>
+            <li>漬けた豚肉を、漬け汁ごとすべて加える。強めの中火で、肉の表面に焼き色がつき、漬け汁が煮詰まって油がにじんでくるまで炒める。</li>
+            <li>残りのお酢大さじ1と水200mlを加え、沸騰したらアクを取り、蓋をして弱火で50〜60分煮込む。途中2〜3回混ぜ、水が減りすぎたら少し足す。じゃがいもを入れる場合は、残り25分ほどのところで加える。</li>
+            <li>煮込みの途中について：煮込み始めはお酢の酸味が立って感じられますが、これは失敗ではありません。煮込むほどにお酢の角が取れて、酸味がまろやかになり、旨みと馴染んでいきます。途中で酸っぱさを消そうとせず、最後まで煮切るのがコツです。</li>
+            <li>豚肉がほろっと柔らかくなり、グレイビーが濃い赤茶色にとろりとしたら、塩と砂糖で味を調える（酸味の輪郭は残りつつ、角が取れた状態が正解です）。火を止めて10分置くと、味が落ち着きます。</li>
+            <li>器に盛り、ごはんを添えてどうぞ。ホールスパイスは食べずによけてOKです。粗熱を取って冷蔵庫で一晩置くと、翌日は味がさらに馴染んでおいしくなります。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>ビンダルーのお酢は「仕上げに酸味を足すもの」ではなく、「漬けて、煮る」ためのものです。後入れでは酸だけが浮いて、深みが出ません。最初から火を入れることで、煮込むほどにお酢の角が取れて、酸味がまろやかになり、旨みと馴染んでいきます。<br>深みのもう半分は、玉ねぎの炒め色と、油で開かせた温かみ系スパイス（シナモン、クローブ、マスタードシード）が作る土台です。この土台があるから、酸と辛さが浮かずにまとまります。</p>
+          <p class="var-note"><b>アレンジ：</b>辛さはチリパウダーの量で調整してください。本場ゴアでは乾燥赤唐辛子をペーストにして使いますが、パウダーでも十分に再現できます。お酢について。本場ゴアでは椰子酢（トディ酢）を使います。日本では手に入りにくいので、このレシピでは代用としてワインビネガーを使っています（原型のポルトガルではワインのお酢だった流れです）。赤でも白でも作れます。赤は色とコクが出て、この料理の深い色のソースに寄ります。白は軽くすっきりした仕上がりになります。椰子酢にはほのかな甘みがあるので、代用のときは材料の砂糖を小さじ1/2ほど増やすと、本場のまろやかさに近づきます。穀物酢や米酢でも作れます。穀物酢は酸が鋭いので、まず同量で作り、仕上がりを見て調整してください。量そのものは減らさないのがコツで、最初から煮込む分まで計算に入った量です。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-powderchai">
+        <div class="r-photo">
+          <img loading="lazy" decoding="async" src="assets/dish-powderchai.webp" alt="白いマグに注がれた、できあがりのパウダーだけで作るチャイ。ミルク色の表面にシナモンパウダーがふんわりとのり、そばに作り置きミックス粉の入った小さなガラス瓶と、小皿にのせたスプーンが添えられている" />
+          <span class="r-badge">パウダーだけ ・ ドリンク</span>
+        </div>
+        <div class="r-body">
+          <h3>パウダーだけで作るチャイ</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約10分（ミックス作り込み）</span>
+            <span class="chip">1杯分（ミックス粉は約10杯分）</span>
+            <span class="chip">ホールスパイス不要</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="cinnamon" type="button">シナモン</button>
+            <button class="chip spice" data-open="ginger" type="button">生姜</button>
+            <button class="chip spice" data-open="cardamom" type="button">カルダモン</button>
+            <button class="chip spice" data-open="clove" type="button">クローブ</button>
+            <button class="chip spice" data-open="pepper" type="button">ブラックペッパー</button>
+            <button class="chip spice" data-open="nutmeg" type="button">ナツメグ</button>
+          </div>
+          <p class="intro">ホールスパイスを砕かず、粉スパイスだけで作るチャイです。最初に「作り置きミックス粉」を瓶に仕込んでおけば、あとは紅茶と牛乳に小さじ1を溶かすだけ。<br>ホールを煮出す「おうちスパイスチャイ」に比べると香りは穏やかですが、その分、思い立った日にすぐ作れて、粉のざらつきも茶こしで漉げば気になりません。ミルクティーが好きな人の、平日仕様のチャイです。</p>
+          <h4>材料（作り置きミックス粉）</h4>
+          <ul class="ing">
+            <li><button class="ing-link" type="button" data-open="cinnamon">シナモンパウダー</button><b>小さじ4</b></li>
+            <li><button class="ing-link" type="button" data-open="ginger">ジンジャーパウダー</button><b>小さじ3</b></li>
+            <li><button class="ing-link" type="button" data-open="cardamom">カルダモンパウダー</button><b>小さじ2</b></li>
+            <li><button class="ing-link" type="button" data-open="clove">クローブパウダー</button><b>小さじ1</b></li>
+            <li><button class="ing-link" type="button" data-open="pepper">ブラックペッパー</button>（パウダー）<b>小さじ1/2</b></li>
+            <li><button class="ing-link" type="button" data-open="nutmeg">ナツメグ</button>（パウダー）<b>少々</b></li>
+          </ul>
+          <h4>材料（1杯分）</h4>
+          <ul class="ing">
+            <li>水<b>100ml</b></li>
+            <li>紅茶ティーバッグ<b>1つ</b></li>
+            <li>牛乳<b>150ml</b></li>
+            <li>作り置きミックス粉（上記）<b>小さじ1</b></li>
+            <li>砂糖<b>小さじ2</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>ミックス粉を作る。小さなボウルに粉スパイスをすべて入れ、スプーンでよく混ぜ合わせる。清潔で乾いた瓶に移して蓋をし、冷暗所で保存する。合計は小さじ10と1/2＋少々で、1杯に小さじ1ずつ使って約10杯分になります。</li>
+            <li>小鍋に水100mlを入れて火にかけ、沸いたらティーバッグを入れて煮出し、紅茶を濃いめに抽出する。ティーバッグを取り出す。</li>
+            <li>牛乳150ml、ミックス粉小さじ1、砂糖小さじ2を加え、混ぜながら沸く直前まで温める。沸騰させると牛乳の風味が飛ぶので、縁がふつふつしてきたら火を止める。</li>
+            <li>茶こしで漉ぎながらカップに注ぐ。粉の細かいざらつきが取れて、なめらかな口当たりになります。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>粉だけだと香りが飛びやすいので、ミックスは少なめに作って早めに使い切るのが大切です。この分量（約10杯分）が、香りのいいうちに飲み切れるちょうどいいサイズ。作りすぎて余らせるより、なくなったらまた小さじ比で混ぜ直すほうが、毎回香りの立つチャイになります。</p>
+          <p class="var-note"><b>アレンジ（簡易版）：</b>もっと手軽に作るなら、普通に淹れたミルクティーにミックス粉小さじ1を溶かすだけでも大丈夫です。粉が溶け残る場合は、最初に少量のお湯（分量外）で粉を練ってから注ぐとダマになりません。甘さは砂糖の量で、辛みのキレはブラックペッパーの量で調整してください。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-craftcola">
+        <div class="r-photo">
+          <img loading="lazy" decoding="async" src="assets/dish-craftcola.webp" alt="コルク栓のガラス瓶に入った濃い茶色のクラフトコーラシロップと、氷とレモンを入れて炭酸で割ったグラス1杯。小皿にシナモン、スターアニス、クローブ、カルダモンを添えている" />
+          <span class="r-badge">手作りシロップ ・ ドリンク</span>
+        </div>
+        <div class="r-body">
+          <h3>クラフトコーラシロップ</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約30分＋冷ます時間</span>
+            <span class="chip">シロップ約300〜400ml分</span>
+            <span class="chip">冷蔵で約2週間</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="cinnamon" type="button">シナモン</button>
+            <button class="chip spice" data-open="clove" type="button">クローブ</button>
+            <button class="chip spice" data-open="cardamom" type="button">カルダモン</button>
+            <button class="chip spice" data-open="staranise" type="button">スターアニス</button>
+            <button class="chip spice" data-open="vanilla" type="button">バニラ</button>
+            <button class="chip spice" data-open="juniper" type="button">ジュニパーベリー</button>
+          </div>
+          <p class="intro">温かみのあるスパイスと柑橘を黒糖で煮出して作る、手作りコーラの素です。コーラの「あの味」の正体は、実はシナモンやクローブ、柑橘の皮とバニラの重なり。市販のコーラとは別物の、香りが主役のシロップができあがります。<br>材料はスーパーでそろう顔ぶれだけ。本来のコーラの材料とされるコーラナッツや、ジュニパーベリーは「あれば」の枠に置いてあるので、気軽に始めて、物足りなくなったら足していく作りです。できあがったシロップは割り方ひとつで3通りに楽しめます。</p>
+          <h4>材料（シロップ約300〜400ml分）</h4>
+          <ul class="ing">
+            <li>水<b>400ml</b></li>
+            <li>黒糖（なければ きび砂糖）<b>200g</b></li>
+            <li><button class="ing-link" type="button" data-open="cinnamon">シナモンスティック</button><b>2本</b></li>
+            <li><button class="ing-link" type="button" data-open="clove">クローブ</button><b>6粒</b></li>
+            <li><button class="ing-link" type="button" data-open="cardamom">カルダモン</button><b>6粒（軽く割る）</b></li>
+            <li><button class="ing-link" type="button" data-open="staranise">スターアニス</button><b>1個</b></li>
+            <li>レモン<b>1個（皮はむいて使い、果汁は大さじ2ほど）</b></li>
+            <li><button class="ing-link" type="button" data-open="vanilla">バニラビーンズ</button><b>1/2本（なければバニラエッセンス小さじ1/2でも可）</b></li>
+            <li><button class="ing-link" type="button" data-open="juniper">ジュニパーベリー</button><b>小さじ1（あれば・軽く潰す）</b></li>
+            <li>コーラナッツ<b>小さじ1（あれば・粉末）</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>下ごしらえをする。レモンはよく洗い、ピーラーや包丁で皮を薄くむく（白い部分が多いと苦みが出るので薄く）。果汁は大さじ2ほど搾っておく。カルダモンは包丁の腹で軽く潰して割れ目を入れ、バニラビーンズは縦に裂いて中身をこそげ、さやごと使う。</li>
+            <li>鍋に水400mlと黒糖200gを入れて中火にかけ、かき混ぜながら黒糖を溶かす。</li>
+            <li>沸騰したら弱火に落とし、シナモンスティック、クローブ、カルダモン、スターアニス、レモンの皮、バニラを加える。ジュニパーベリーやコーラナッツがあればここで一緒に入れる。</li>
+            <li>弱火で15分ほど、ふつふつと静かに煮出す。ぐらぐら沸かすと香りが飛ぶので、表面が小さく動く程度の火加減を保つこと。</li>
+            <li>火を止めてレモン果汁を加え、そのまま粗熱が取れるまで置く。時間に余裕があれば蓋をして30分ほど置くと、香りがさらに馴染みます。</li>
+            <li>清潔な茶こしやキッチンペーパーで漉し、熱湯消毒したガラス瓶に移す。完全に冷めたら冷蔵庫へ。冷蔵で約2週間を目安に使い切ってください。</li>
+          </ol>
+          <h4>飲み方3種（1杯分：シロップ大さじ3が目安）</h4>
+          <ol class="steps">
+            <li><b>炭酸割り（定番）：</b>グラスに氷を入れ、シロップ大さじ3に炭酸水150mlを注いで軽く混ぜる。レモンの輪切りを添えると香りが締まります。割合の目安はシロップ1：炭酸3〜4です。</li>
+            <li><b>ラテ割り：</b>温めた牛乳150mlにシロップ大さじ3を溶かす。チャイに近い飲み方で、スパイスの角がまろやかになり、バニラと黒糖のコクが前に出ます。冷たい牛乳で割るアイスラテ割りもおいしいです。</li>
+            <li><b>お湯割り：</b>カップにシロップ大さじ3とお湯150mlを注ぐ。甘い香りがふわりと立ち上る、夜にちょうどいいホットドリンク。体の芯から温まります。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>レモンの皮は「香りの層」を作る大事な材料です。果汁だけでは酸味が立つだけですが、皮の精油分が入るとコーラらしい柑橘の厚みが出ます。逆に白い部分まで厚くむくと苦みが出るので、黄色い表面だけを薄くむくのがコツ。黒糖はコク担当、きび砂糖に替えると少しすっきりした仕上がりになります。</p>
+          <p class="var-note"><b>アレンジ（ジュニパー多め）：</b>ジュニパーベリーを多めに（小さじ2〜大さじ1）入れるアレンジもおすすめです。ジュニパーを増やすと、ジンのボタニカルを思わせる森っぽい清涼感が出て、いつものコーラがぐっと大人びた顔に。まろやかなラテ割りともよく合います。スパイスの主役を入れ替える感覚で、量は少しずつ増やして好みのバランスを探してみてください。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-gingercookie">
+        <div class="r-photo">
+          <img loading="lazy" decoding="async" src="assets/dish-gingercookie.webp" alt="白い皿と木のボードに並んだ、できあがりの型抜きジンジャークッキー。白いアイシングで顔や輪郭を描いた人型のクッキーが皿にのり、星型のクッキーがボードに並んでいる" />
+          <span class="r-badge">デザート 08 ・ 甘いもの</span>
+        </div>
+        <div class="r-body">
+          <h3>型抜きジンジャークッキー</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約60分＋冷やす1時間〜</span>
+            <span class="chip">約20枚分（7cm型の目安）</span>
+            <span class="chip">冬の焼き菓子</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="ginger" type="button">ジンジャー</button>
+            <button class="chip spice" data-open="cinnamon" type="button">シナモン</button>
+            <button class="chip spice" data-open="clove" type="button">クローブ</button>
+            <button class="chip spice" data-open="nutmeg" type="button">ナツメグ</button>
+          </div>
+          <p class="intro">ジンジャーを主役に、シナモン、クローブ、ナツメグの温かみ系を重ねた、冬の王道の型抜きクッキーです。香りの組み立ては、冬のスパイス特集「ジンジャーブレッドの香りの解剖」と同じ4役（ジンジャー4：シナモン3：クローブ1：ナツメグ1）。深みは黒糖とはちみつが担当します。<br>人型や星型に抜いて、白いアイシングで顔や輪郭を描くまでがこのクッキーの楽しさ。型抜きで失敗しやすいのは「生地がゆるい」「厚さがばらばら」「焼きすぎ」の3つなので、このレシピは冷やす工程と厚さの目安を少し丁寧に書いてあります。</p>
+          <h4>材料（約20枚分・7cm型の目安）</h4>
+          <ul class="ing">
+            <li>薄力粉<b>300g</b></li>
+            <li>重曹（ベーキングソーダ）<b>小さじ1</b></li>
+            <li><button class="ing-link" type="button" data-open="ginger">ジンジャーパウダー</button><b>小さじ2</b></li>
+            <li><button class="ing-link" type="button" data-open="cinnamon">シナモンパウダー</button><b>小さじ1と1/2</b></li>
+            <li><button class="ing-link" type="button" data-open="clove">クローブパウダー</button><b>小さじ1/2</b></li>
+            <li><button class="ing-link" type="button" data-open="nutmeg">ナツメグ</button>（パウダー）<b>小さじ1/2</b></li>
+            <li>塩<b>ひとつまみ</b></li>
+            <li>無塩バター<b>100g（室温に戻す）</b></li>
+            <li>黒糖（粉末タイプ）<b>80g</b></li>
+            <li>卵<b>1個（室温に戻す）</b></li>
+            <li>はちみつ<b>大さじ3</b></li>
+            <li>薄力粉（打ち粉用）<b>適量</b></li>
+            <li>粉砂糖（アイシング用）<b>50g</b></li>
+            <li>水またはレモン汁（アイシング用）<b>小さじ2ほど</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>粉類を合わせる。薄力粉、重曹、ジンジャーパウダー、シナモン、クローブ、ナツメグ、塩をボウルに入れ、泡立て器でよく混ぜてふるい代わりにする（ダマが消えて、スパイスが均一に回ります）。</li>
+            <li>別のボウルにバターと黒糖を入れ、白っぽくふんわりするまですり混ぜる。溶き卵を少しずつ加えてそのつどよく混ぜ、はちみつも加えて混ぜる。モラセスがあれば、はちみつの代わりに大さじ3で置き換えると、より本場寄りの深い色とコクになります。</li>
+            <li>粉類を加え、ゴムベラで切り混ぜる。粉っぽさがほぼ消えたら手で軽く押さえるようにしてひとまとめにし、ラップの上に厚さ2cmほどの平たい四角に整えて包む。平たくしておくと冷えやすく、あとで伸ばすのも楽です。捏ねすぎると焼き上がりが固くなるので、まとまれば止めること。</li>
+            <li><b>しっかり冷やす（ここが一番の分かれ目）。</b>冷蔵庫で最低1時間、できれば2時間〜一晩休ませる。生地がゆるいまま伸ばすと型の輪郭がだれて、抜いても形が崩れるのが型抜きの失敗の筆頭です。指で押して跡がすぐ戻らず、包丁で切れるくらいの固さが目安。</li>
+            <li>伸ばす。台と麺棒に打ち粉を薄く振り、生地を厚さ5mmに均一に伸ばす。3mmだと固く焼けすぎやすく、7mmだと中が生っぽく膨らみやすいので、5mm前後が形も食感も安定します。伸ばしている途中で生地が柔らかくなってきたら、無理をせずラップごと冷蔵庫に10分戻すこと。伸ばした生地をそのまま天板にのせて10分冷やすと、さらに抜きやすくなります。</li>
+            <li>型抜きする。型にも打ち粉を薄くつけ、生地の端から間を詰めて真上からぎゅっと押し、まっすぐ持ち上げる。抜いた生地はオーブンシートを敷いた天板に、焼くと少し膨らむので2cmほど間隔をあけて並べる。残った生地は集めてまとめ直し、ラップに包んで冷蔵庫で15分冷やしてから伸ばし直す（温かいまま繰り返すとだれて形が決まりません。伸ばし直しは2回までが目安）。</li>
+            <li><b>焼く前にもう一度冷やす。</b>並べた天板ごと冷蔵庫で10分冷やすと、焼いている間に輪郭が流れず、人型も星型もくっきり仕上がります。その間にオーブンを170℃に予熱する。</li>
+            <li>焼く。170℃で10〜12分。縁の色がほんの少し濃くなり、表面を指で軽く押すとわずかに戻るくらいが焼き上がりです。<b>焼きたては柔らかく感じるのが正解</b>で、冷めるにつれて締まってサクッとします。ここで「まだ柔らかい」と焼き足すと、冷めたときに固くなりすぎるので焼きすぎないこと。焼き色が濃くなりすぎる前に取り出すのがコツです。</li>
+            <li>網の上で完全に冷ます。アイシングは粉砂糖に水（またはレモン汁）を少しずつ加え、つまようじの先から垂らして線がすぐ消えないくらいの固さに練り、小さな絞り袋やつまようじで顔や輪郭、星の模様を描く。乾くまで平らな場所で30分ほど置いて、できあがり。アイシングなしの素顔のままでも、スパイスの香りは十分に楽しめます。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>型抜きを安定させる合言葉は「冷やすを惜しまない」です。作る前、伸ばす前、焼く前——3回冷やすと失敗がぐっと減ります。厚さは5mmで統一し、焼き時間は「冷めると締まる」分を見込んで短めに。<br>香りの配合は冬の特集の解剖どおり、ジンジャー4：シナモン3：クローブ1：ナツメグ1が骨格です。クローブは深み担当で、増やすと薬っぽく勝ってしまうので、物足りなければシナモンを足すほうが甘い香りのまま厚みが出ます。黒糖とはちみつ（またはモラセス）の深みが、温かみ系スパイスの下に土台を作ってくれます。</p>
+          <p class="var-note"><b>アレンジメモ（ドロップタイプ）：</b>型抜きしない日は、同じ香りのままドロップクッキーにもできます。生地の粉を大さじ1〜2減らし（または牛乳大さじ1を足し）、冷やすのは30分ほどで済ませて、スプーンですくって天板に間隔をあけて落とすだけ。焼き広がるので間隔は広めに取り、170℃で12〜14分、縁が固まって中央が少し柔らかいうちに取り出すと、中のしっとりしたソフトな食感になります。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-mole">
+        <div class="r-photo">
+          <img loading="lazy" decoding="async" src="assets/dish-mole.webp" alt="素朴な陶器の皿に盛り付けられた、できあがりのモレ・ポブラーノ。濃いチョコレート色のソースが鶏肉にたっぷりかかり、ソースの上に白ごまがのっている。そばに白いごはんが添えられている" />
+          <span class="r-badge">メキシコ ・ 主菜</span>
+        </div>
+        <div class="r-body">
+          <h3>モレ・ポブラーノ</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約70分</span>
+            <span class="chip">3〜4人分</span>
+            <span class="chip">プエブラ発祥の祝いの料理</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="chili" type="button">チリペッパー</button>
+            <button class="chip spice" data-open="cinnamon" type="button">シナモン</button>
+            <button class="chip spice" data-open="clove" type="button">クローブ</button>
+            <button class="chip spice" data-open="cumin" type="button">クミン</button>
+            <button class="chip spice" data-open="coriander" type="button">コリアンダー</button>
+            <button class="chip spice" data-open="goma" type="button">ごま</button>
+            <button class="chip spice" data-open="pepper" type="button">ブラックペッパー</button>
+            <button class="chip spice" data-open="garlic" type="button">ニンニク</button>
+          </div>
+          <p class="intro">メキシコ・プエブラ発祥の、鶏肉に濃いチョコレート色のソースをかけた主菜です。モレは「ソース」という意味の言葉で、プエブラのモレはお祝いの席のごちそうとして知られています。<br>先に誤解をほどいておくと、これは甘いチョコソースの料理ではありません。チョコレート（カカオ）の担当は甘さではなく、コクと苦み。唐辛子が作る深い色を、さらに落ち着かせる手伝いをします。主役はむしろ、唐辛子の辛さと香り、シナモンとクローブの温かみ、炒ったナッツとゴマの香ばしさが重なったソースそのものです。チョコの甘さはほとんど感じず、辛さとコクがごはんを呼ぶ味に仕上がります。</p>
+          <h4>材料（鶏肉とゆで汁）</h4>
+          <ul class="ing">
+            <li>鶏もも肉<b>600g（大きめに切る。骨つきでも可）</b></li>
+            <li>水<b>800ml</b></li>
+            <li>玉ねぎ<b>1/4個</b></li>
+            <li><button class="ing-link" type="button" data-open="garlic">にんにく</button><b>1かけ</b></li>
+            <li>塩<b>小さじ1</b></li>
+          </ul>
+          <h4>材料（モレソース）</h4>
+          <ul class="ing">
+            <li>玉ねぎ<b>1個（粗みじん切り）</b></li>
+            <li><button class="ing-link" type="button" data-open="garlic">にんにく</button><b>2かけ</b></li>
+            <li>トマト<b>1個（またはホールトマト缶100g）</b></li>
+            <li><button class="ing-link" type="button" data-open="chili">乾燥唐辛子</button>（アンチョ、グアヒージョなど甘みのある種類）<b>4〜5本</b></li>
+            <li>油<b>大さじ3</b></li>
+            <li>アーモンド（またはピーナッツ、カシューナッツ）<b>30g</b></li>
+            <li><button class="ing-link" type="button" data-open="goma">白ごま</button><b>大さじ2＋仕上げ用少々</b></li>
+            <li>板チョコレート（カカオ70%目安）<b>30g</b>、または無糖カカオパウダー<b>大さじ2</b></li>
+            <li><button class="ing-link" type="button" data-open="cinnamon">シナモンパウダー</button><b>小さじ1/2</b></li>
+            <li><button class="ing-link" type="button" data-open="clove">クローブ</button><b>3粒（またはパウダー小さじ1/4）</b></li>
+            <li><button class="ing-link" type="button" data-open="cumin">クミンパウダー</button><b>小さじ1/2</b></li>
+            <li><button class="ing-link" type="button" data-open="coriander">コリアンダーパウダー</button><b>小さじ1</b></li>
+            <li><button class="ing-link" type="button" data-open="pepper">ブラックペッパー</button><b>小さじ1/4</b></li>
+            <li>鶏のゆで汁（手順1のもの）<b>400ml</b></li>
+            <li>塩<b>小さじ1（目安）</b></li>
+            <li>砂糖<b>小さじ1</b></li>
+            <li>温かいごはん<b>人数分</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>鶏肉をゆでる。鍋に鶏肉、水800ml、玉ねぎ1/4個、にんにく1かけ、塩小さじ1を入れ、沸いたらアクを取って弱火で25〜30分、中心まで火が通るまでゆでます（厚い部分が白く、汁が透明になるのが目安。温度計があれば中心74℃以上）。骨つきは5分ほど長めに。肉を取り出し、ゆで汁は400ml取っておく（ソースの命になるので捨てないこと）。</li>
+            <li>乾燥唐辛子はヘタと種を取り、熱湯（分量外）に15分ほど浸けて柔らかく戻す。戻し汁は、ひと口味見して苦くなければ、ゆで汁が足りないときの足し水に使えます。苦いときは無理に使わないでください。</li>
+            <li>乾いたフライパンで白ごま大さじ2を弱火で炒り、香ばしく色づいたら取り出す。続けてアーモンドも軽く炒る。この「炒った香ばしさ」がモレの土台の半分です。</li>
+            <li>フライパンに油大さじ1を熱し、玉ねぎ、にんにく、ざく切りのトマトを炒める。玉ねぎが透き通ってトマトが崩れてきたら火を止める。</li>
+            <li>ミキサー（またはブレンダー）に、戻した唐辛子、手順3のごまとアーモンド、手順4の炒め野菜、シナモン、クローブ、クミン、コリアンダー、ブラックペッパー、ゆで汁300mlを入れ、なめらかになるまでしっかり回す。粒が残ると口当たりに出るので、ここは時間をかけてよい工程です。</li>
+            <li>鍋に残りの油大さじ2を熱し、手順5のペーストを入れて中火で5〜6分炒める。色が一段深くなり、油が縁ににじんできたら「炒めモレ」の合図。残りのゆで汁100mlを加えて10〜15分、とろみがつくまで煮詰める。</li>
+            <li>火を弱め、細かく刻んだチョコレート（またはカカオパウダー）を加えて溶かし混ぜる。塩と砂糖で味を調える。砂糖は甘くするためではなく、辛さとカカオの苦みの角を丸めるための小さじ1です。チョコを入れてからは沸騰させすぎないこと。</li>
+            <li>ゆでた鶏肉をソースに戻し入れ、弱火で5分ほど温めて味をなじませる。皿にごはんと一緒に盛り、鶏肉にソースをたっぷりかけ、仕上げに白ごま少々を散らして、できあがり。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>モレのチョコレートは「甘さ担当」ではなく、コクと苦み担当。味の印象は、唐辛子の辛さ、温かみ系スパイスの香り、ナッツとゴマの香ばしさが先に立ち、カカオはその後ろで苦みを支え、唐辛子が作る深い色をさらに落ち着かせる手伝いをします。<br>甘いチョコソースにならないための分かれ目は2つ。チョコはカカオ分の高いもの（70%目安）を少量だけ使うことと、砂糖は角取りの小さじ1までで止めることです。「チョコの味がする」と感じたら多すぎのサインで、正解は「何でこんなにコクがあるのか分からない」くらいです。</p>
+          <p class="var-note"><b>アレンジ（日本で作りやすい置き換え）：</b>チョコは、製菓用のカカオ70%前後の板チョコが手に入りやすくおすすめ。無糖の純カカオパウダー大さじ2でも作れます（その場合、砂糖を小さじ2に増やすと苦みが丸くなります）。本場の乾燥唐辛子（アンチョなど）が手に入らない場合は、チリパウダー大さじ1〜2と一味唐辛子小さじ1/2で代用できます。チリパウダーにはクミンなどが混ざっているものも多く、その場合はクミンとコリアンダーを半量に減らすと味が重なりません。ナッツはピーナッツバター（無糖）大さじ2でも代わりになります。ソースだけ多めに作って冷凍しておくと、鶏肉だけでなく、ごはんやトルティーヤ、ゆで卵にかけても楽しめます。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-spiceice">
+        <div class="r-photo">
+          <img loading="lazy" decoding="async" src="assets/dish-spiceice.webp" alt="素朴な陶器の器に盛り付けられた、できあがりのスパイスアイス。シナモンの色味がほんのりマーブル状に混ざったバニラアイスが2スクープ盛られ、シナモンスティックが添えられている" />
+          <span class="r-badge">デザート 09 ・ 甘いもの</span>
+        </div>
+        <div class="r-body">
+          <h3>スパイスアイス</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約10分＋冷やし固める2時間〜</span>
+            <span class="chip">2〜3人分（アイス200ml分）</span>
+            <span class="chip">混ぜて冷やすだけ</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="cinnamon" type="button">シナモン</button>
+            <button class="chip spice" data-open="cardamom" type="button">カルダモン</button>
+            <button class="chip spice" data-open="vanilla" type="button">バニラ</button>
+            <button class="chip spice" data-open="ginger" type="button">ジンジャー</button>
+            <button class="chip spice" data-open="nutmeg" type="button">ナツメグ</button>
+          </div>
+          <p class="intro">市販のバニラアイスを土台に、シナモンとカルダモンを効かせたアイスです。作り方は、アイスを少し柔らかくしてスパイスを混ぜ、冷凍庫で固め直すだけ。焼く工程も、卵や生クリームを別に用意する工程もありません。<br>面白いのは、冷たいのに香りは「温かい」ところです。シナモンの甘い温かみと、カルダモンの華やかな清涼感が、バニラのミルクの甘さの上に重なって、ひと口ごとに冬の飲み物のような香りが広がります。主役はあくまでスパイスで、バニラアイスはその香りを受け止める土台、という組み立てです。</p>
+          <h4>材料（2〜3人分）</h4>
+          <ul class="ing">
+            <li>バニラアイスクリーム<b>200ml（カップ1個分）</b></li>
+            <li><button class="ing-link" type="button" data-open="cinnamon">シナモンパウダー</button><b>小さじ1/2</b></li>
+            <li><button class="ing-link" type="button" data-open="cardamom">カルダモンパウダー</button><b>小さじ1/4</b></li>
+            <li>砂糖<b>小さじ1（アイスの甘さによってはなしでも可）</b></li>
+            <li>塩<b>ひとつまみ</b></li>
+            <li><button class="ing-link" type="button" data-open="cinnamon">シナモンスティック</button><b>1本（仕上げの飾り用・あれば）</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>スパイスを合わせておく。小さな器にシナモンパウダー、カルダモンパウダー、砂糖、塩を入れ、混ぜておきます。先にスパイス同士を合わせておくと、アイスの中でダマにならず、色も香りも均一に回ります。カルダモンはパウダーが手軽ですが、鞘入りの場合は種を取り出してすりつぶしたほうが香りは鮮やかです。</li>
+            <li>アイスを少し柔らかくする。バニラアイスを冷凍庫から出し、室温で10分ほど置きます（室温が高い日は5〜6分で様子見を）。スプーンで押すとへこみ、すくうとねっとり伸びるくらいが目安。完全に溶かして液体にしないこと。食感のためでもありますが、安全のためにも、室温に置くのは10分ほどまでで、作業したらすぐ冷凍庫へ戻してください。溶け切ってしまったら、再冷凍せず、その場で食べてください。</li>
+            <li>アイスをボウルに移し、手順1のスパイスを一度に加える。ゴムベラで、底からすくって切るように大きく混ぜます。数回で全体にほんのり茶色の色味が回れば十分。混ぜすぎると溶けて空気が抜け、固め直したときに固く締まってしまうので、手早く済ませます。</li>
+            <li>味見をする。ここが配合を決める最後のタイミングです。香りが弱ければシナモンを小さじ1/4ずつ足します（カルダモンは香りが強いので、足すのは慎重に）。よければ、元のカップか保存容器に戻し入れ、表面を平らにならしてラップをぴたりと貼り、冷凍庫で2時間〜半日、しっかり固め直します。</li>
+            <li>盛りつける。固め直したアイスはカチカチになりやすいので、食べる5〜10分前に冷蔵庫へ移すか室温に置くと、すくいやすくなります。器にスクープして盛り、あればシナモンスティックを添えて、できあがり。</li>
+          </ol>
+          <p class="point"><b>配合の目安：</b>基本は「バニラアイス200mlに対して、シナモン小さじ1/2＋カルダモン小さじ1/4＋砂糖小さじ1＋塩ひとつまみ」。100mlのミニカップで試すなら、スパイスはすべて半量から始めてください。<br>比率の考え方は、シナモン2：カルダモン1です。シナモンが甘い温かみの土台、カルダモンはその上に立つ華やかな香り担当。カルダモンを先に増やすと薬っぽく勝ちやすいので、物足りないときはまずシナモンを足し、それでも香りの「顔」がぼやける場合だけカルダモンをひとつまみ追加するのが安全です。塩ひとつまみは、甘さを引き締めてスパイスの輪郭を立てるためのものです。</p>
+          <p class="var-note"><b>ほかのスパイスでの応用：</b>同じやり方で、スパイスの組み替えが楽しめます。ジンジャーパウダー小さじ1/2を加えると、後味にピリッとしたキレが出て大人寄りに。ナツメグはすりおろし（またはパウダー）ひとつまみで、ミルクの甘さが引き締まります。クローブは香りが非常に強いので小さじ1/8まで、スターアニスなら粉を小さじ1/4ほどでエキゾチックな甘い香りに。逆に、ティムールのような柑橘系の痺れスパイスをひとつまみ散らすと、冷たさと痺れが重なってまた違う顔になります。どの組み合わせでも、土台は「アイス200mlに合計小さじ3/4前後」から始めると大きく外しません。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-watermelon">
+        <div class="r-photo">
+          <img loading="lazy" decoding="async" src="assets/dish-watermelon.webp" alt="陶器の皿に盛り付けられた、できあがりのタヒン風スイカサラダ。一口大に切った赤いスイカに赤い唐辛子粉がふりかかり、ライムのくし切りとミントの葉が添えられている" />
+          <span class="r-badge">メキシコ ・ サラダ</span>
+        </div>
+        <div class="r-body">
+          <h3>タヒン風スイカサラダ</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約10分</span>
+            <span class="chip">2人分</span>
+            <span class="chip">火を使わない</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="chili" type="button">チリペッパー</button>
+            <button class="chip spice" data-open="mint" type="button">ミント</button>
+          </div>
+          <p class="intro">スイカに唐辛子と塩をふり、ライムをぎゅっと絞って食べる、メキシコの屋台や市場でおなじみの食べ方です。甘いはずの果物に、辛い、酸っぱい、しょっぱいを重ねるのが現地流。ひと口の中で甘い×辛い×酸っぱい×塩味が同時に弾けて、甘さそのものも塩と酸で輪郭がくっきり立ちます。<br>この組み合わせの主役は「タヒン（Tajín）」と呼ばれる、市販のチリライム塩シーズニングです。乾燥唐辛子と塩に、干したライムの酸味を合わせた赤い粉で、メキシコでは果物や野菜にかける定番として親しまれています。名前は、メキシコ・ベラクルス州にある古代都市の遺跡「エル・タヒン」にちなむとされます。このレシピは、そのタヒンの味を唐辛子粉とライムと塩で組み立てる「タヒン風」の配合にしたもの。市販品が手元になくても、家にあるものでそのまま作れます。</p>
+          <h4>材料（2人分）</h4>
+          <ul class="ing">
+            <li>スイカ<b>1/8個（正味400g目安）</b></li>
+            <li>ライム<b>1個（なければレモン1/2個でも可）</b></li>
+            <li><button class="ing-link" type="button" data-open="mint">ミントの葉</button>（仕上げ用・あれば）<b>適量</b></li>
+          </ul>
+          <h4>材料（タヒン風ミックス）</h4>
+          <ul class="ing">
+            <li><button class="ing-link" type="button" data-open="chili">チリパウダー</button><b>小さじ2</b></li>
+            <li>塩<b>小さじ1</b></li>
+            <li>ライム果汁（上のライムから）<b>大さじ1</b></li>
+          </ul>
+          <p class="intro">タヒン風ミックスの配合の目安は、チリパウダー2：塩1。ここにライム果汁大さじ1の酸味が加わって、市販のタヒンの「辛い・しょっぱい・酸っぱい」の骨格になります。辛さはチリの量で調整してください。本場寄りの香りにしたい場合は、チリパウダーの半量を一味唐辛子に替えると辛さのキレが増します。</p>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>タヒン風ミックスを作る。小さな器にチリパウダー小さじ2と塩小さじ1を入れ、よく混ぜておく。先に粉同士を合わせておくと、スイカにふったときに辛さと塩気がむらになりません。</li>
+            <li>スイカを切る。皮と種を取り除き、3〜4cm角の一口大に切る。大きすぎると調味料の回りが薄くなり、小さすぎると水っぽくなるので、一口で頬ばれる大きさが目安。切ったスイカは器に盛り、食べる直前まで冷蔵庫でよく冷やしておくと味の対比が際立ちます。</li>
+            <li>ライムを絞る。ライムは半分に切り、1/2個分（大さじ1目安）をスイカ全体に回しかける。残りの1/2個はくし切りにして、盛りつけの添えものと食べる直前の追いライム用に取っておく。順番は「ライムが先、粉があと」がおすすめで、果汁の水分が粉を果肉に留める接着剤になります。</li>
+            <li>タヒン風ミックスをふる。手順1のミックスを、高い位置から全体にまんべんなくふりかける。全部を一度に使い切らなくて大丈夫で、まず2/3量ほどをふって味見をし、足りなければ残りを足すと失敗がありません。</li>
+            <li>仕上げて、すぐ食べる。ミントの葉を散らし、ライムのくし切りを添えて、できあがり。粉をふってから置くとスイカから水分が出て味がぼやけるので、食べる直前に仕上げて、そのまま食卓へ出すのが一番のごちそうです。</li>
+          </ol>
+          <p class="point"><b>使い分けのコツ：</b>味の決め手は「かける順番」と「食べるタイミング」です。ライム→粉の順だと粉が果肉に留まり、ひと口ごとの辛さと塩気が安定します。逆に粉→ライムの順だと粉が流れて薄まるので、その場合は食べながら少しずつふる「追いタヒン」スタイルにすると現地の屋台らしくなります。<br>塩は甘さの引き立て役でもあります。塩気が弱いとただ辛い果物になり、強すぎると辛さより塩が前に出るので、まず配合どおりで作り、次回に好みへ寄せるのが安全です。</p>
+          <p class="var-note"><b>アレンジ：</b>同じタヒン風ミックスは、マンゴーやパイナップルを短冊に切ったもの、きゅうりのスティックにも現地では定番の組み合わせです。市販のタヒンがある場合はミックスを作らず、大さじ1を目安にふればそのままで本場の味に。辛いのが苦手な場合はチリを半量に減らし、ライムと塩の骨格だけでも「甘い×酸っぱい×塩味」の面白さは十分に楽しめます。</p>
+        </div>
+      </article>
+
+      <article class="recipe" id="recipe-popcorn">
+        <div class="r-photo">
+          <img loading="lazy" decoding="async" src="assets/dish-popcorn.webp" alt="素朴な陶器のボウルに盛り付けられた、できあがりのスパイスポップコーン。弾けた粒に黄金色のスパイスがまぶされ、ほんのりカレー色に色づいている" />
+          <span class="r-badge">おやつ ・ 軽食</span>
+        </div>
+        <div class="r-body">
+          <h3>スパイスポップコーン</h3>
+          <div class="r-meta">
+            <span class="chip"><span class="time-emoji" aria-hidden="true">⏰</span>約10分</span>
+            <span class="chip">2人分（大きめボウル1杯分）</span>
+            <span class="chip">味変自在のおやつ</span>
+          </div>
+          <div class="r-meta">
+            <button class="chip spice" data-open="sumac" type="button">スマック</button>
+            <button class="chip spice" data-open="chili" type="button">チリペッパー</button>
+            <button class="chip spice" data-open="cumin" type="button">クミン</button>
+            <button class="chip spice" data-open="paprika" type="button">パプリカ</button>
+          </div>
+          <p class="intro">ポップコーンは、味変の実験場として最高のおやつです。土台は塩と油のシンプルな一皿。そこにスパイスをひとつ差し替えるだけで、香りの方向ががらりと変わります。<br>作り方の骨格はひとつだけです。実を弾けさせて、熱いうちに油分と一緒にスパイスを絡める。冷めてからふると粉がつきにくく、底に落ちやすくなるので、弾けたての熱いうちに絡めるのがコツです。あとは下のバリエーションから、その日の気分の主役スパイスを選ぶだけです。</p>
+          <h4>材料（基本のポップコーン・2人分）</h4>
+          <ul class="ing">
+            <li>ポップコーンの実（乾燥とうもろこし）<b>50g</b></li>
+            <li>サラダ油<b>大さじ2</b></li>
+            <li>バター<b>10g（仕上げ用・あれば）</b></li>
+            <li>塩<b>小さじ1/2</b></li>
+            <li>好みのスパイス（下のバリエーションから1種）<b>小さじ1〜2</b></li>
+          </ul>
+          <h4>作り方</h4>
+          <ol class="steps">
+            <li>スパイス塩を先に合わせておく。小さな器に塩小さじ1/2と、選んだスパイス小さじ1〜2を入れて混ぜておきます。弾けた直後は一刻を争うので、この準備がむらのない仕上がりの分かれ目です。</li>
+            <li>実を弾けさせる。蓋つきの鍋（直径20cm以上、できれば厚手）にサラダ油大さじ2とポップコーンの実50gを入れ、実が重ならず一面に広がるようにして中火にかける。まず2〜3粒が弾けたら本番の合図で、そこからは時々鍋をゆすりながら、弾ける音の間隔が2〜3秒に広がるまで加熱します。</li>
+            <li>火を止め、蓋をしたまま30秒置く。余熱で残りの実が弾けきります。すぐに蓋を開けると、遅れて弾けた実が飛び出すことがあるので少し待つのが安全です。</li>
+            <li>熱いうちに絡める。弾けたポップコーンを大きめのボウルに移し、溶かしたバター10g（あれば）を全体に回しかけ、手順1のスパイス塩をふって、ボウルをあおるように大きく混ぜます。油分が粉の接着剤になり、熱でスパイスの香りがふわっと立ちます。<b>ここが一番の見せ場で、冷めると粉がつきにくくなります。</b></li>
+            <li>味見をして、塩気が足りなければ塩をひとつまみ、香りが弱ければスパイスを小さじ1/2ずつ足して混ぜ直す。温かいうちに食卓へ。できあがり。</li>
+          </ol>
+          <p class="point"><b>絡めるタイミングのコツ：</b>ポップコーンの表面の油分と熱が残っている間だけ、粉スパイスは粒に留まります。目安は「弾け終わってから、なるべく1分以内」。ボウルは先に手の届く場所へ出しておき、鍋→ボウル→バター→スパイス塩の順に迷わず動ける段取りにしておくと、毎回むらなく仕上がります。<br>バターなしでも作れます。その場合は、手順2の油を大さじ2と1/2に少し増やすと粉のつきがよくなります。</p>
+          <p class="var-note"><b>味変バリエーション（実50g・塩小さじ1/2に対して）：</b><br>
+          <b>カレー粉</b>（<button class="ing-link" type="button" data-jump-page="blend" data-jump-target="blend-curry">カレー粉</button>小さじ2）—— 王道のカレー味。ターメリックの黄金色が粒に移って、見た目から食欲を呼ぶ一皿になります。<br>
+          <b>ガラムマサラ</b>（<button class="ing-link" type="button" data-jump-page="blend" data-jump-target="blend-garam">ガラムマサラ</button>小さじ1と1/2）—— 辛さより香りで押すタイプ。シナモンやカルダモンの甘い香りがふわっと立って、大人寄りの上品な味変に。<br>
+          <b>スマック</b>（<button class="ing-link" type="button" data-open="sumac">スマック</button>小さじ2）—— 酸味系の代表選手。レモンのようなキュッとした酸味が油の重さを消して、爽やかで手が止まらなくなります。<br>
+          <b>チリ＋パプリカ</b>（<button class="ing-link" type="button" data-open="chili">チリパウダー</button>小さじ1＋<button class="ing-link" type="button" data-open="paprika">パプリカ</button>小さじ1）—— じんわり辛い辛味系。パプリカの赤で色づきもきれいで、ピメントンに替えると燻製の香りが加わります。<br>
+          <b>クミン</b>（<button class="ing-link" type="button" data-open="cumin">クミンパウダー</button>小さじ1と1/2）—— 土っぽい香ばしさが立つ、渋めの一手。塩との相性が抜群で、おつまみ寄りの仕上がりです。<br>
+          どのバリエーションも、まず量の半分を絡めて味見をし、残りで調整すると濃くなりすぎません。2種を半量ずつ混ぜる「合わせ技」も楽しく、カレー粉＋ガラムマサラのカレー寄りブレンドや、スマック＋チリの酸っぱ辛い組み合わせもおすすめです。</p>
+        </div>
+      </article>
+
     </div>
 
     <div class="choi" id="choi-tashi">
@@ -4388,6 +5002,43 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
           <div class="r-meta"><button class="chip spice" data-open="pinkpepper" type="button">ピンクペッパー</button></div>
         </div>
       </div>
+    </div>
+  </section>
+
+
+  <!-- ============ 私の棚 ============ -->
+  <section id="shelf" class="page-section">
+    <div class="sec-head">
+      <span class="no">No.06</span>
+      <h2>私の棚</h2>
+      <svg class="squig" width="180" height="10" viewBox="0 0 180 10" fill="none"><path d="M2 6 Q 14 1, 26 6 T 50 6 T 74 6 T 98 6 T 122 6 T 146 6 T 170 6" stroke="var(--brown)" stroke-width="3.4" stroke-linecap="round"/></svg>
+      <p>図鑑のカードや詳細で「私の棚に入れる」を押したスパイスが、台所の棚みたいに小瓶で並びます。瓶をタップすると、そのスパイスの詳細が開きます（長い名前もそこで全文読めます）。瓶の × で棚から外せます。<br>棚に入れたスパイスからは「今すぐ作れるレシピ」と「あと少しで作れるレシピ」も逆引きできます。レシピのしおり（ブックマーク）もこのページに集まります。<br>棚としおりは、この端末のブラウザに保存されるので、スマホとPCでは別々の棚になります。</p>
+    </div>
+
+    <div class="shelf-stats">
+      <div class="shelf-stat"><b><span id="shelfCount">0</span> / 95</b><span>棚のスパイス</span></div>
+      <div class="shelf-stat"><b id="shelfBmStat">0 / 52</b><span>しおりしたレシピ</span></div>
+      <div class="shelf-progress"><span class="sp-label">コレクションの進み具合</span><span class="sp-track"><i id="shelfProgressBar"></i></span></div>
+    </div>
+
+    <div class="shelf-cabinet" id="shelfCabinet" aria-label="棚に並んだスパイスの小瓶"></div>
+    <div class="empty" id="shelfEmpty">
+      <p style="font-family:'Kaisei Decol',serif; font-size:19px; color:var(--ink)">まだ棚は空っぽです</p>
+      <p>スパイス図鑑のカードや詳細にある「私の棚に入れる」を押すと、ここに小瓶が並び始めます。</p>
+      <p style="margin-top:14px"><button class="btn" type="button" data-goto="zukan">スパイス図鑑へ行く →</button></p>
+    </div>
+
+    <div class="shelf-block">
+      <h3 class="shelf-sub">🍳 棚から作れるレシピ</h3>
+      <p class="shelf-note" id="shelfRecipeNote">棚にスパイスが入ると、ここに逆引き結果が出ます。</p>
+      <div class="sr-list" id="shelfReady"></div>
+      <div class="sr-list" id="shelfNear"></div>
+    </div>
+
+    <div class="shelf-block">
+      <h3 class="shelf-sub">🔖 しおりしたレシピ</h3>
+      <div class="shelf-bm-grid" id="shelfBmGrid"></div>
+      <p class="shelf-note" id="shelfBmEmpty">まだしおりしたレシピはありません。レシピ一覧の 🔖 や、レシピ詳細の「しおりする」ボタンで付けられます。</p>
     </div>
   </section>
 
@@ -4518,6 +5169,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
           <div class="gb-note"><b>☕ ラテでは</b>同じ4役をミルクに移したものが、カフェのジンジャーブレッドラテの骨格です。甘みのあるミルクが土台になるぶん、ジンジャーを少し強めに、仕上げのナツメグはすりたてを表面に。苦みのあるエスプレッソが、甘い香りを引き締めます。</div>
           <div class="gb-note"><b>🫖 チャイとの違い</b>材料はかなり重なりますが、チャイはカルダモンが前に出て紅茶と煮出す「飲み物の香り」。ジンジャーブレッドはジンジャーとシナモンが前に出る「焼き菓子の香り」。主役の座が違うだけ、と覚えると見分けがつきます。</div>
         </div>
+        <div class="dk-link" style="margin-top:14px"><button type="button" data-jump-page="recipes" data-jump-target="recipe-gingercookie">この香りで焼く「型抜きジンジャークッキー」のレシピを開く →</button></div>
       </div>
     </div>
 
@@ -4674,13 +5326,13 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
 <footer>
   <div class="wrap">
     <span class="en">Thank you for opening this little library.</span>
-    スパイス図鑑（全94種：No.01〜78＋🌿ハーブ枠H1〜H16・ブレンド12種・レシピ44品＋ちょい足し11）<br>
+    スパイス図鑑（全95種：No.01〜78＋🌿ハーブ枠H1〜H17・ブレンド13種・レシピ52品＋ちょい足し11）<br>
     香りの感じ方には個人差があります。分量は目安として、少しずつ好みに寄せてください。
     <div class="copyright">
       <span class="room cinzel">MIRROR ROOM</span>
       <span class="copy">© 2026 MIRROR ROOM — by Naya × Nay × Omochi</span>
     </div>
-    <p class="sources">画像について：本ページの画像（市場のスパイス・全94種のスパイス・ハーブ・和スパイス・完成料理44品・イラスト3点）はすべて、この図鑑のためにAIで生成したオリジナル画像です。第三者の写真は使用していません。<br>各スパイスの色・形・質感は実物に忠実に作っていますが、実写ではないため、実際の商品や実物とは細部の見え方が異なる場合があります。図解の数値（スコヴィル値・保存期間など）は代表的な目安で、品種や商品によって変わります。</p>
+    <p class="sources">画像について：本ページの画像（市場のスパイス・全95種のスパイス・ハーブ・和スパイス・完成料理52品・イラスト3点）はすべて、この図鑑のためにAIで生成したオリジナル画像です。第三者の写真は使用していません。<br>各スパイスの色・形・質感は実物に忠実に作っていますが、実写ではないため、実際の商品や実物とは細部の見え方が異なる場合があります。図解の数値（スコヴィル値・保存期間など）は代表的な目安で、品種や商品によって変わります。</p>
   </div>
 </footer>
 
@@ -6150,6 +6802,25 @@ var SPICES = [
     mania:"バジルの世界は奥深く、タイには主に3種のバジルがあります：ホラパー（タイバジル／カレーやフォー）、ガパオ葉＝ホーリーバジル（炒め物のガパオの主役）、メーンラック（レモンバジル／種も使う）。日本の店頭で「タイバジル」として売られるのはホラパーの方です。スイートバジル（No.H1）の詳細にある「ガパオの葉は別品種」の話と合わせて読むと、バジル三兄弟の見分けがつきます。この図鑑のレシピ「鶏ひき肉とバジルのガパオ風ごはん」はスイートバジルの家庭版ですが、タイバジルが手に入る日はぜひこちらで——アニス様の香りで一気にタイ寄りになります。"
   },
   {
+    id:"rosepetal", no:"H17", name:"ローズペタル", en:"Rose Petals", latin:"Rosa × damascena（ダマスクローズ）ほか食用品種（バラ科）", alias:"バラ ばら 薔薇 ローズバッド ローズウォーター",
+    img:"assets/rosepetal.webp", alt:"陶器の小皿に盛られた、深紅とピンクの乾燥ローズペタルとローズバッド（花びらは無傷で、器の中だけに盛られている）",
+    cat:["herb","sweet"], catLabel:"フラワー（乾燥花びら）", herb:true,
+    herbNote:"🌿 ハーブ枠：花びらを使う素材です。葉や種ではなく「花」を香りづけに使う仲間として、この図鑑に収録しています。",
+    flavor:"バラそのものの、華やかで甘いフローラルな香り。乾燥させると香りが凝縮し、ほんの数枚で料理やお茶が一気に「中東の食卓」の顔になります。",
+    heat:0, aroma:4,
+    trivia:"料理に使うのは、香りの強い食用品種（ダマスクローズなど）が中心。花びらだけでなく、つぼみごと乾燥させた「ローズバッド」の形でも売られます。",
+    origin:"中東〜中央アジア（ペルシャで発展）", part:"花びら（乾燥）", form:"乾燥ペタル／ローズバッド（つぼみ）／ローズウォーター",
+    component:"ゲラニオールやシトロネロールなど、バラの香りを形づくる芳香成分が中心。熱に弱く揮発しやすいので、仕上げに使うのが香りを活かすコツです。",
+    uses:["ペルシャ料理のごはん（ポロウ）や煮込みに散らして、花の香りの仕上げに","モロッコのラス・エル・ハヌートなど、複合スパイスに花の要素として入ることがある","ローズティー（紅茶やハーブとのブレンド）に","ロクム（ターキッシュデライト）などローズ風味のお菓子や、シロップの香り付けに"],
+    boxA:"乾燥ペタル", seedText:"乾燥した花びら、そのままの姿です。ごはんや煮込みの仕上げに散らしたり、乳鉢で軽く砕いてブレンドに混ぜたり。加熱しすぎると香りが飛ぶので、最後に加えるのが基本です。",
+    boxB:"ローズウォーター", powderText:"花びらを蒸留した香りの水。お菓子や飲み物に数滴で一気にバラの香りになります。ペタルより手軽ですが香りの質は別物として使い分けを。入れすぎると香水のようになるので、数滴から調整してください。",
+    pairing:"カルダモン、サフラン、ピスタチオ、バスマティライス、はちみつ、レモン",
+    storage:"香りが命なので密閉・遮光で常温に。湿気を吸うと色も香りも痩せるので、乾燥剤と一緒にどうぞ。半年ほどで使い切るのが目安です。",
+    access:"△ 中東食材店・ハーブティー専門店・製菓材料店・ネット通販で。「食用ローズペタル」「ドライローズ」の表示で探すと見つかります。スーパーでは、ハーブティーのブレンドの一員として見かけることがあります。",
+    sub:"完全な代用はありません。方向性だけなら、ローズウォーター数滴で香りの輪郭は寄せられます。オレンジフラワーウォーターも同じ「花の蒸留水」の仲間で、別物として楽しむ分には代役になります。",
+    mania:"いちばん大事なマニアメモは「食用グレード」の話です。観賞用として売られるバラは食用を前提としていないため、農薬などの心配があり、そのまま料理には使えません。買うときは「食用」「食品用」として販売されているものを選んでください。家庭で育てる場合は、食用品種を最初から農薬なしで育て、薬剤履歴がはっきりしているものだけにしてください。ペルシャではバラは香りの格付けの頂点にいる素材で、ローズウォーターはお菓子だけでなく、もてなしの席で手を清める水にも使われてきたほど。モロッコのラス・エル・ハヌートにバラのつぼみが入ることがあるのも、この「花までスパイスにする」中東〜北アフリカの感覚の表れです。同じバラ科の仲間には、マハレブ（No.64）もいます。"
+  },
+  {
     id:"mahleb", no:"64", name:"マハレブ", en:"Mahleb / Mahlab", latin:"Prunus mahaleb（バラ科）",
     img:"assets/mahleb.webp", alt:"木の器に盛られた淡いベージュ色のマハレブの仁と、小皿の粉末、そばに置かれたサワーチェリーの核",
     cat:["seed","sweet"], catLabel:"仁（ホール）／パウダー",
@@ -6616,8 +7287,8 @@ var _gb=document.getElementById("gachaBtn"); if(_gb) _gb.addEventListener("click
 })();
 
 /* ---------- ページ分け：1ページ目＝入口マップ、リンクで行き先へ ---------- */
-var PAGE_ORDER = ["gate","zukan","charts","lab","blend","recipes","winter","shindan"];
-var PAGE_NAMES = {gate:"入口マップ", zukan:"スパイス図鑑", charts:"マニア図解", lab:"使い分け実験ノート", blend:"自家製ブレンドの黄金比", recipes:"簡単レシピ", winter:"冬のスパイス特集", shindan:"スパイス診断"};
+var PAGE_ORDER = ["gate","zukan","charts","lab","blend","recipes","shelf","winter","shindan"];
+var PAGE_NAMES = {gate:"入口マップ", zukan:"スパイス図鑑", charts:"マニア図解", lab:"使い分け実験ノート", blend:"自家製ブレンドの黄金比", recipes:"簡単レシピ", shelf:"私の棚", winter:"冬のスパイス特集", shindan:"スパイス診断"};
 var currentPage = "gate";
 var pageBtns = document.querySelectorAll(".page-btn");
 function showPage(id, doScroll){
@@ -6864,6 +7535,376 @@ if(quizShareBtn) quizShareBtn.addEventListener("click", function(){
 var initialPage = (window.location.hash || "").replace("#","");
 showPage(PAGE_ORDER.indexOf(initialPage) > -1 ? initialPage : "gate", false);
 render();
+
+/* ================= 私の棚（No.06）＝端末保存の棚＋レシピのしおり =================
+   棚としおりは localStorage に保存する（この端末のブラウザ内だけ・端末ごとに別）。
+   スパイス詳細モーダル／図鑑カード／レシピ詳細／レシピ一覧の各ボタンと連動する。 */
+var SHELF_KEY = "mirrorSpiceShelfV1";
+var BM_KEY = "mirrorSpiceBookmarksV1";
+
+/* 小瓶の中身の色（スパイスの実際の色に寄せた固定マップ） */
+var BOTTLE_COLOR = {
+  cumin:"#B98A4E", chili:"#C22E1F", turmeric:"#E8A812", coriander:"#C9A86A",
+  cardamom:"#7A9A52", cinnamon:"#A66A35", clove:"#4A2C1A", pepper:"#2E2622",
+  staranise:"#7A4A26", mustard:"#D9B84A", fenugreek:"#C89B4E", paprika:"#C4451F",
+  ajwain:"#8A8F5C", amchur:"#D9C49A", blackcardamom:"#4E3423", fennel:"#9DBE6A",
+  sichuan:"#B4452F", curryleaf:"#4E7A3A", bayleaf:"#6B8F57", saffron:"#C1440E",
+  nutmeg:"#8A5A33", hing:"#D8B25C", caraway:"#6E4F30", allspice:"#5C3D24",
+  tamarind:"#6E4526", anise:"#A9B06A", nigella:"#26221F", galangal:"#D9BE96",
+  chenpi:"#C96A2B", dill:"#7C6A35", longpepper:"#5A4632", paradise:"#7A5230",
+  sansho:"#7A9A3F", cassia:"#96603A", whitepepper:"#E3D6B8", tsaoko:"#3E2C1E",
+  sandginger:"#D6C096", licorice:"#B08D57", timut:"#8A4A2E", vanilla:"#33231A",
+  sumac:"#8E2432", juniper:"#2F3A4A", pinkpepper:"#E2728A", annatto:"#D1541E",
+  poppyseed:"#5A6270", aleppo:"#B93A24", tonka:"#3A2A1C", kaffirlime:"#4E7D33",
+  lemongrass:"#B9C46A", magao:"#4C3A28", ginger:"#D9A94F",
+  basil:"#4E8F3F", pakuchi:"#57A047", mint:"#5FA860", oregano:"#7A9A58",
+  thyme:"#8A9A6A", rosemary:"#4F7A4A", dillweed:"#6FA055", parsley:"#4E9A4E",
+  sage:"#93A98A", shiso:"#5E9A4E",
+  wasabi:"#A8C686", myoga:"#E39BB0", yuzu:"#F2C230", wakarashi:"#E3C33A",
+  egoma:"#6E5A44", goma:"#D9C9A3", getto:"#7FA35C", pipachi:"#6E4A2E",
+  greenpepper:"#7FA653", caper:"#5F7048", gochukaru:"#C9331F", hibiscus:"#9E2A44",
+  tarragon:"#6E9A58", marjoram:"#8FA873", pandan:"#3F8F4F", mitsuba:"#63A856",
+  konome:"#6FA855", thaibasil:"#5E7A45", rosepetal:"#E58AA5",
+  mahleb:"#C9B18A", anardana:"#7A2E35", kasurimethi:"#7C9A4E", garlic:"#EFE6D8",
+  urfa:"#5E2320", tasmanian:"#3A3040", qinghuajiao:"#7A9A3F", pimenton:"#B23A1F",
+  aoyuzu:"#9DBE4E", aotogarashi:"#58A83C", cubeb:"#4A3A2C", lemonmyrtle:"#8FA86B",
+  wattleseed:"#6B4A2A", mastic:"#EFE3C2", blackcumin:"#3A3230"
+};
+/* 瓶ラベル用の絵文字マップ（全95種） */
+var SPICE_EMOJI = {
+  cumin:"🫘", chili:"🌶️", turmeric:"🟠", coriander:"🌱", cardamom:"🫛",
+  cinnamon:"🪵", clove:"🌰", pepper:"⚫", staranise:"⭐", mustard:"🌻",
+  fenugreek:"🌾", paprika:"🔴", ajwain:"🌼", amchur:"🥭", blackcardamom:"🟤",
+  fennel:"🍀", sichuan:"⚡", curryleaf:"🌿", bayleaf:"🍃", saffron:"🌸",
+  nutmeg:"🌰", hing:"💛", caraway:"🌙", allspice:"🟤", tamarind:"🍂",
+  anise:"⭐", nigella:"🖤", galangal:"🫚", chenpi:"🍊", dill:"🌿",
+  longpepper:"🍃", paradise:"🟤", sansho:"🟢", cassia:"🌳", whitepepper:"⚪",
+  tsaoko:"🟤", sandginger:"🟨", licorice:"🍬", timut:"🍋", vanilla:"🍦",
+  sumac:"🍇", juniper:"🌲", pinkpepper:"💗", annatto:"🧡", poppyseed:"🔵",
+  aleppo:"🌶️", tonka:"🍫", kaffirlime:"🍃", lemongrass:"🎋", magao:"🟢",
+  ginger:"🫚", basil:"🌿", pakuchi:"🍀", mint:"🌱", oregano:"🍃",
+  thyme:"🪴", rosemary:"🌿", dillweed:"🍃", parsley:"🌿", sage:"🌿",
+  shiso:"🍃", wasabi:"💚", myoga:"🌷", yuzu:"🍋", wakarashi:"🟡",
+  egoma:"🌱", goma:"✨", getto:"🌺", pipachi:"🌿", greenpepper:"🟢",
+  caper:"🫒", gochukaru:"🌶️", hibiscus:"🍷", tarragon:"🌿", marjoram:"🍃",
+  pandan:"🌴", mitsuba:"☘️", konome:"🌱", thaibasil:"🌿", rosepetal:"🌹",
+  mahleb:"🍒", anardana:"🫐", kasurimethi:"🍃", garlic:"🧄", urfa:"🟣",
+  tasmanian:"🏔️", qinghuajiao:"🟢", pimenton:"🔥", aoyuzu:"🍋", aotogarashi:"🌶️",
+  cubeb:"⚫", lemonmyrtle:"🌿", wattleseed:"☕", mastic:"💧", blackcumin:"🖤"
+};
+
+function loadIdSet(key){
+  try{
+    var raw = localStorage.getItem(key);
+    if(!raw) return {};
+    var arr = JSON.parse(raw), o = {};
+    if(arr && typeof arr.length === "number"){ for(var i=0;i<arr.length;i++) o[arr[i]] = 1; }
+    return o;
+  }catch(e){ return {}; }
+}
+function saveIdSet(key, set){
+  try{
+    var arr = [];
+    for(var k in set){ if(Object.prototype.hasOwnProperty.call(set,k) && set[k]) arr.push(k); }
+    localStorage.setItem(key, JSON.stringify(arr));
+  }catch(e){}
+}
+var shelfSet = loadIdSet(SHELF_KEY);
+var bmSet = loadIdSet(BM_KEY);
+var currentModalSpice = null;
+var bmOnly = false;
+
+function spiceById(id){ for(var i=0;i<SPICES.length;i++){ if(SPICES[i].id===id) return SPICES[i]; } return null; }
+function hashStr(str){ var h=0; for(var i=0;i<str.length;i++){ h=(h*31 + str.charCodeAt(i))|0; } return Math.abs(h); }
+function bottleSpec(s){
+  var h = hashStr(s.id);
+  var isPowder = s.cat.indexOf("powder") > -1 && s.cat.indexOf("seed") === -1 && s.cat.indexOf("whole") === -1;
+  var isHerb = s.no.indexOf("H") === 0 || s.cat.indexOf("herb") > -1;
+  var shape = isPowder ? "jam" : (isHerb ? "jam" : (h % 3 === 0 ? "round" : "tall"));
+  var lid = ["cork","wood","metal"][h % 3];
+  var fill = 52 + (h % 40);
+  return { shape:shape, lid:lid, fill:fill, color:BOTTLE_COLOR[s.id] || "#B08348", emoji:SPICE_EMOJI[s.id] || "🌿" };
+}
+function escShelf(str){ return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;"); }
+
+function toggleShelf(id){
+  if(shelfSet[id]){ delete shelfSet[id]; } else { shelfSet[id] = 1; }
+  saveIdSet(SHELF_KEY, shelfSet);
+  refreshShelfUI();
+}
+function toggleBm(rid){
+  if(bmSet[rid]){ delete bmSet[rid]; } else { bmSet[rid] = 1; }
+  saveIdSet(BM_KEY, bmSet);
+  refreshShelfUI();
+}
+
+/* ---------- レシピのメタ情報（サムネイル＋材料スパイス）をDOMから構築 ---------- */
+var RECIPES_META = [];
+(function buildRecipesMeta(){
+  var thumbs = document.querySelectorAll(".recipe-thumb");
+  for(var i=0;i<thumbs.length;i++){
+    var rid = thumbs[i].getAttribute("data-recipe");
+    var nameEl = thumbs[i].querySelector(".rt-name");
+    var imgEl = thumbs[i].querySelector(".rt-photo img");
+    var spiceIds = [], seen = {};
+    var art = document.getElementById(rid);
+    if(art){
+      var chips = art.querySelectorAll("[data-open]");
+      for(var c=0;c<chips.length;c++){
+        var sid = chips[c].getAttribute("data-open");
+        if(sid && !seen[sid] && spiceById(sid)){ seen[sid] = 1; spiceIds.push(sid); }
+      }
+    }
+    RECIPES_META.push({ rid:rid, name:nameEl ? nameEl.textContent : rid, img:imgEl ? imgEl.getAttribute("src") : "", spiceIds:spiceIds });
+  }
+})();
+
+/* ---------- 棚ページの描画 ---------- */
+function bottleHtml(s){
+  var spec = bottleSpec(s);
+  return '<div class="bottle-cell"><div class="bottle b-'+spec.shape+' l-'+spec.lid+'">'
+    + '<button class="b-hit" type="button" data-bottle="'+s.id+'" aria-label="'+escShelf(s.name)+'の詳細を開く">'
+    + '<span class="b-lid"></span>'
+    + '<span class="b-glass"><span class="b-fill" style="height:'+spec.fill+'%;background:'+spec.color+'"></span></span>'
+    + '<span class="b-label"><span class="b-emoji" aria-hidden="true">'+spec.emoji+'</span><span class="b-name">'+escShelf(s.name)+'</span></span>'
+    + '</button>'
+    + '<button class="b-remove" type="button" data-remove="'+s.id+'" aria-label="'+escShelf(s.name)+'を棚から外す">×</button>'
+    + '</div></div>';
+}
+function renderShelfPage(){
+  var ids = [];
+  for(var i=0;i<SPICES.length;i++){ if(shelfSet[SPICES[i].id]) ids.push(SPICES[i].id); }
+  var countEl = document.getElementById("shelfCount");
+  if(countEl) countEl.textContent = ids.length;
+  var bar = document.getElementById("shelfProgressBar");
+  if(bar) bar.style.width = Math.round(ids.length / SPICES.length * 100) + "%";
+  var bmCount = 0; for(var b in bmSet){ if(Object.prototype.hasOwnProperty.call(bmSet,b)) bmCount++; }
+  var bmStat = document.getElementById("shelfBmStat");
+  if(bmStat) bmStat.textContent = bmCount + " / " + RECIPES_META.length;
+
+  var cab = document.getElementById("shelfCabinet");
+  var empty = document.getElementById("shelfEmpty");
+  if(cab && empty){
+    if(!ids.length){ cab.style.display = "none"; empty.style.display = "block"; }
+    else{
+      cab.style.display = ""; empty.style.display = "none";
+      cab.innerHTML = ids.map(function(id){ return bottleHtml(spiceById(id)); }).join("");
+      var hits = cab.querySelectorAll("[data-bottle]");
+      for(var h=0;h<hits.length;h++){ hits[h].addEventListener("click", function(){ openModal(this.getAttribute("data-bottle")); }); }
+      var rems = cab.querySelectorAll("[data-remove]");
+      for(var r=0;r<rems.length;r++){ rems[r].addEventListener("click", function(){ toggleShelf(this.getAttribute("data-remove")); }); }
+    }
+  }
+
+  /* 逆引き：棚のスパイスで作れるレシピ */
+  var note = document.getElementById("shelfRecipeNote");
+  var readyEl = document.getElementById("shelfReady");
+  var nearEl = document.getElementById("shelfNear");
+  if(note && readyEl && nearEl){
+    if(!ids.length){
+      note.textContent = "棚にスパイスが入ると、ここに逆引き結果が出ます。";
+      readyEl.innerHTML = ""; nearEl.innerHTML = "";
+    } else {
+      var ready = [], near = [];
+      for(var m=0;m<RECIPES_META.length;m++){
+        var meta = RECIPES_META[m];
+        if(!meta.spiceIds.length) continue;
+        var missing = meta.spiceIds.filter(function(sid){ return !shelfSet[sid]; });
+        if(missing.length === 0) ready.push({meta:meta, missing:missing});
+        else if(missing.length <= 2) near.push({meta:meta, missing:missing});
+      }
+      near.sort(function(a,b){ return a.missing.length - b.missing.length; });
+      note.textContent = "棚の " + ids.length + " 種で判定中。今すぐ作れる " + ready.length + " 品、あと少しで作れる " + near.length + " 品です。足りないスパイスのチップをタップすると詳細が開きます。";
+      var itemHtml = function(item, isReady){
+        var badge = isReady ? '<span class="sr-badge ready">今すぐ作れる</span>'
+          : '<span class="sr-badge near">あと ' + item.missing.length + ' つ</span>';
+        var miss = "";
+        if(!isReady){
+          miss = '<span class="sr-miss">あと：' + item.missing.map(function(sid){
+            var sp = spiceById(sid);
+            return '<button class="miss-chip" type="button" data-miss="'+sid+'">'+escShelf(sp ? sp.name : sid)+'</button>';
+          }).join("") + '</span>';
+        }
+        return '<div class="sr-item"><button class="sr-main" type="button" data-goto-recipe="'+item.meta.rid+'" aria-label="'+escShelf(item.meta.name)+'のレシピを開く">'
+          + '<img src="'+item.meta.img+'" alt="" loading="lazy" /><span class="sr-name">'+escShelf(item.meta.name)+'</span></button>'
+          + badge + miss + '</div>';
+      };
+      readyEl.innerHTML = ready.map(function(it){ return itemHtml(it, true); }).join("");
+      nearEl.innerHTML = near.map(function(it){ return itemHtml(it, false); }).join("");
+      var mains = readyEl.querySelectorAll("[data-goto-recipe]");
+      var mains2 = nearEl.querySelectorAll("[data-goto-recipe]");
+      var wireMain = function(list){ for(var w=0;w<list.length;w++){ list[w].addEventListener("click", function(){ jumpToPageEl("recipes", this.getAttribute("data-goto-recipe")); }); } };
+      wireMain(mains); wireMain(mains2);
+      var missBtns = nearEl.querySelectorAll("[data-miss]");
+      for(var mb=0;mb<missBtns.length;mb++){ missBtns[mb].addEventListener("click", function(){ openModal(this.getAttribute("data-miss")); }); }
+    }
+  }
+
+  /* しおりしたレシピ */
+  var bmGrid = document.getElementById("shelfBmGrid");
+  var bmEmpty = document.getElementById("shelfBmEmpty");
+  if(bmGrid && bmEmpty){
+    var bmList = RECIPES_META.filter(function(meta){ return bmSet[meta.rid]; });
+    bmEmpty.style.display = bmList.length ? "none" : "";
+    bmGrid.innerHTML = bmList.map(function(meta){
+      return '<button class="sbm-card" type="button" data-goto-recipe="'+meta.rid+'" aria-label="'+escShelf(meta.name)+'のレシピを開く">'
+        + '<img src="'+meta.img+'" alt="" loading="lazy" /><span class="sbm-name">🔖 '+escShelf(meta.name)+'</span></button>';
+    }).join("");
+    var cards = bmGrid.querySelectorAll("[data-goto-recipe]");
+    for(var bc=0;bc<cards.length;bc++){ cards[bc].addEventListener("click", function(){ jumpToPageEl("recipes", this.getAttribute("data-goto-recipe")); }); }
+  }
+}
+
+/* ---------- 各画面のボタン状態をまとめて同期 ---------- */
+function refreshShelfUI(){
+  var n = 0; for(var k in shelfSet){ if(Object.prototype.hasOwnProperty.call(shelfSet,k)) n++; }
+  var navCount = document.getElementById("shelfNavCount");
+  if(navCount) navCount.textContent = n + "/" + SPICES.length;
+
+  var chips = document.querySelectorAll("[data-shelf-toggle]");
+  for(var i=0;i<chips.length;i++){
+    var id = chips[i].getAttribute("data-shelf-toggle");
+    var on = !!shelfSet[id];
+    chips[i].classList.toggle("on", on);
+    chips[i].textContent = on ? "🫙 棚に入ってる ✓" : "🫙 ＋ 私の棚に入れる";
+    chips[i].setAttribute("aria-label", on ? "棚から外す" : "私の棚に入れる");
+  }
+  var mBtn = document.getElementById("mShelfBtn");
+  if(mBtn && currentModalSpice){
+    var mon = !!shelfSet[currentModalSpice];
+    mBtn.classList.toggle("on", mon);
+    mBtn.textContent = mon ? "🫙 私の棚に入っています（タップで外す）" : "🫙 私の棚に入れる";
+  }
+  var toggles = document.querySelectorAll(".recipe-thumb .bm-toggle");
+  for(var t=0;t<toggles.length;t++){
+    toggles[t].classList.toggle("on", !!bmSet[toggles[t].getAttribute("data-bm-toggle")]);
+  }
+  var rBtns = document.querySelectorAll(".bm-toggle-btn");
+  for(var rb=0;rb<rBtns.length;rb++){
+    var rid2 = rBtns[rb].getAttribute("data-bm-for");
+    var bon = !!bmSet[rid2];
+    rBtns[rb].classList.toggle("on", bon);
+    rBtns[rb].textContent = bon ? "🔖 しおり中（タップで外す）" : "🔖 このレシピをしおりする";
+  }
+  applyRecipeFilter();
+  renderShelfPage();
+}
+
+/* ---------- レシピ一覧：しおりだけ表示 ---------- */
+function applyRecipeFilter(){
+  var thumbs = document.querySelectorAll(".recipe-thumb");
+  var bmCount = 0, visible = 0;
+  for(var i=0;i<thumbs.length;i++){
+    var rid = thumbs[i].getAttribute("data-recipe");
+    var has = !!bmSet[rid];
+    if(has) bmCount++;
+    var show = !bmOnly || has;
+    thumbs[i].style.display = show ? "" : "none";
+    if(show) visible++;
+  }
+  var cnt = document.getElementById("bmFilterCount");
+  if(cnt) cnt.textContent = "しおり " + bmCount + " 品";
+  var note = document.getElementById("bmEmptyNote");
+  if(note) note.hidden = !(bmOnly && visible === 0);
+}
+var bmAllBtn = document.getElementById("bmFilterAll");
+var bmOnlyBtn = document.getElementById("bmFilterOnly");
+if(bmAllBtn && bmOnlyBtn){
+  bmAllBtn.addEventListener("click", function(){ bmOnly = false; bmAllBtn.classList.add("on"); bmOnlyBtn.classList.remove("on"); applyRecipeFilter(); });
+  bmOnlyBtn.addEventListener("click", function(){ bmOnly = true; bmOnlyBtn.classList.add("on"); bmAllBtn.classList.remove("on"); applyRecipeFilter(); });
+}
+
+/* ---------- 図鑑カードへの棚ボタン（render を包む） ---------- */
+var _shelfOrigRender = render;
+render = function(){
+  _shelfOrigRender();
+  var cards = grid.querySelectorAll(".card");
+  for(var i=0;i<cards.length;i++){
+    (function(card){
+      var id = card.getAttribute("data-id");
+      var body = card.querySelector(".body");
+      if(!body || !id) return;
+      var chip = document.createElement("span");
+      chip.className = "shelf-chip" + (shelfSet[id] ? " on" : "");
+      chip.setAttribute("role", "button");
+      chip.setAttribute("tabindex", "0");
+      chip.setAttribute("data-shelf-toggle", id);
+      chip.setAttribute("aria-label", shelfSet[id] ? "棚から外す" : "私の棚に入れる");
+      chip.textContent = shelfSet[id] ? "🫙 棚に入ってる ✓" : "🫙 ＋ 私の棚に入れる";
+      chip.addEventListener("click", function(e){ e.stopPropagation(); toggleShelf(id); });
+      chip.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " "){ e.preventDefault(); e.stopPropagation(); toggleShelf(id); } });
+      body.appendChild(chip);
+    })(cards[i]);
+  }
+};
+
+/* ---------- スパイス詳細モーダルへの棚ボタン（openModal を包む） ---------- */
+var _shelfOrigOpenModal = openModal;
+openModal = function(id){
+  _shelfOrigOpenModal(id);
+  currentModalSpice = id;
+  var body = document.getElementById("mBody");
+  if(!body || !spiceById(id)) return;
+  var old = document.getElementById("mShelfBtn");
+  if(old) old.parentNode.removeChild(old);
+  var btn = document.createElement("button");
+  btn.type = "button";
+  btn.id = "mShelfBtn";
+  btn.className = "shelf-toggle-btn" + (shelfSet[id] ? " on" : "");
+  btn.textContent = shelfSet[id] ? "🫙 私の棚に入っています（タップで外す）" : "🫙 私の棚に入れる";
+  btn.addEventListener("click", function(){ toggleShelf(id); });
+  var latin = body.querySelector(".latin");
+  if(latin && latin.nextSibling){ body.insertBefore(btn, latin.nextSibling); }
+  else if(body.firstChild){ body.insertBefore(btn, body.firstChild); }
+  else { body.appendChild(btn); }
+};
+
+/* ---------- レシピ詳細ポップアップへのしおりボタン（openRecipe を包む） ---------- */
+var _shelfOrigOpenRecipe = openRecipe;
+openRecipe = function(id){
+  _shelfOrigOpenRecipe(id);
+  var el = document.getElementById(id);
+  if(!el) return;
+  var rbody = el.querySelector(".r-body");
+  if(!rbody) return;
+  var btn = rbody.querySelector(".bm-toggle-btn");
+  if(!btn){
+    btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "bm-toggle-btn";
+    btn.setAttribute("data-bm-for", id);
+    btn.addEventListener("click", function(){ toggleBm(id); });
+    var h3 = rbody.querySelector("h3");
+    if(h3 && h3.nextSibling){ rbody.insertBefore(btn, h3.nextSibling); } else { rbody.appendChild(btn); }
+  }
+  btn.classList.toggle("on", !!bmSet[id]);
+  btn.textContent = bmSet[id] ? "🔖 しおり中（タップで外す）" : "🔖 このレシピをしおりする";
+};
+
+/* ---------- レシピ一覧サムネイルへのしおりトグル ---------- */
+(function setupThumbBookmarks(){
+  var thumbs = document.querySelectorAll(".recipe-thumb");
+  for(var i=0;i<thumbs.length;i++){
+    (function(thumb){
+      var rid = thumb.getAttribute("data-recipe");
+      if(!rid) return;
+      var tg = document.createElement("span");
+      tg.className = "bm-toggle" + (bmSet[rid] ? " on" : "");
+      tg.setAttribute("role", "button");
+      tg.setAttribute("tabindex", "0");
+      tg.setAttribute("data-bm-toggle", rid);
+      tg.setAttribute("aria-label", "このレシピをしおりする／外す");
+      tg.textContent = "🔖";
+      tg.addEventListener("click", function(e){ e.stopPropagation(); toggleBm(rid); });
+      tg.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " "){ e.preventDefault(); e.stopPropagation(); toggleBm(rid); } });
+      thumb.appendChild(tg);
+    })(thumbs[i]);
+  }
+})();
+
+render();
+refreshShelfUI();
+
 </script>
 </body>
 </html>
