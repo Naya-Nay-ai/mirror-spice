@@ -865,7 +865,9 @@ footer .copyright .room{
 }
 footer .copyright .copy{font-size:12.5px; font-weight:700; color:var(--ink3); letter-spacing:.04em}
 
-.recipe-info-links{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;margin:6px 0 14px}
+.recipe-info-links{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;margin:6px 0 6px}
+.recipe-safety-short{font-size:12px;line-height:1.6;color:var(--ink2);margin:2px 4px 13px}
+.recipe-safety-short strong{color:var(--ink)}
 .recipe-info-link{font:inherit;font-size:13px;font-weight:700;color:var(--ink2);background:var(--paper);border:1.5px solid var(--line2);border-radius:999px;padding:8px 13px;line-height:1.4;text-align:left;cursor:pointer}
 .recipe-info-link:hover,.recipe-info-link:focus-visible{border-color:var(--ink);outline-offset:3px}
 .recipe-help-dialog .modal{position:relative;padding:22px 22px 24px;max-height:min(85dvh,720px)}
@@ -2149,6 +2151,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
       <button type="button" class="recipe-info-link" data-recipe-info="about">ⓘ このページについて</button>
       <button type="button" class="recipe-info-link" data-recipe-info="safety">♧ アレルギー・衛生について</button>
     </div>
+    <p class="recipe-safety-short"><strong>アレルギーに注意：</strong>食材・調味料の表示と、各レシピの材料をご確認ください。詳しくは上の「アレルギー・衛生について」から。</p>
 
     <div class="shelf-filterbar" role="group" aria-label="レシピの表示切り替え">
       <button class="pill on" type="button" id="bmFilterAll">ぜんぶ（52品）</button>
@@ -3234,9 +3237,8 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
           <div class="r-meta">
             <button class="chip spice" data-open="vanilla" type="button">バニラ</button>
             <button class="chip spice" data-open="cinnamon" type="button">シナモン</button>
-            <button class="chip spice" data-open="tonka" type="button">トンカビーン</button>
           </div>
-          <p class="intro">バニラの種の粒々が見える、つやつやのパンナコッタ。材料は少なく、手順も「温めて、冷やす」だけ。仕上げにトンカビーンをごく少量すりおろすと杏仁のような甘い香りが重なりますが、バニラとシナモンだけでも十分ごちそうです。</p>
+          <p class="intro">バニラの種の粒々が見える、つやつやのパンナコッタ。材料は少なく、手順も「温めて、冷やす」だけ。バニラとシナモンの甘く穏やかな香りで、十分ごちそうになります。</p>
           <h4>材料</h4>
           <ul class="ing">
             <li>生クリーム<b>200ml</b></li>
@@ -3246,7 +3248,6 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <li>粉ゼラチン<b>5g</b></li>
             <li>水（ゼラチン用）<b>大さじ2</b></li>
             <li><button class="ing-link" type="button" data-open="cinnamon">シナモンパウダー</button><b>仕上げに少々</b></li>
-            <li><button class="ing-link" type="button" data-open="tonka">トンカビーン</button>（あれば・仕上げにごく少量）<b>少々</b></li>
           </ul>
           <h4>作り方</h4>
           <ol class="steps">
@@ -3254,9 +3255,9 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <li>鍋に生クリーム、牛乳、砂糖、バニラの種と鞘を入れ、中火で温める。沸騰直前（鍋の縁がふつふつする程度）で火を止め、鞘を取り出す。</li>
             <li>ふやかしたゼラチンを加えてよく溶かす。ゼラチンはぐらぐら沸かすと固まりにくくなるので、ここからは沸騰させないのがコツです。</li>
             <li>茶こしでこしながら型に流し入れ、粗熱が取れたら冷蔵庫で3時間以上冷やし固める。</li>
-            <li>型の外側をさっと温めて皿に返し、シナモンをひと振り。トンカビーンがあれば、仕上げに本当に少しだけすりおろして散らす。</li>
+            <li>型の外側をさっと温めて皿に返し、シナモンをひと振りして仕上げる。</li>
           </ol>
-          <p class="point"><b>使い分けのコツ：</b>トンカビーンは香りがとても強いので、「すりおろしひと呼吸分」くらいの少量から。入れすぎると甘さより香りが勝つので、まずバニラだけの味見をしてから足すのがおすすめです。<br>バニラビーンズの鞘は捨てずに、砂糖の瓶に入れてバニラシュガーにすると次に使えます。</p>
+          <p class="point"><b>使い分けのコツ：</b>バニラビーンズの種と鞘を温めたミルクに浸し、香りを十分に移すのがコツ。鞘は取り出してから冷やします。使った鞘は、よく乾燥させてから砂糖に入れるとバニラシュガーにもできます。</p>
         </div>
       </article>
 
@@ -6107,7 +6108,7 @@ var SPICES = [
     pairing:"チョコレート、コーヒー、乳製品、トンカビーン（甘い香りの相方）",
     storage:"密閉して冷暗所。乾燥すると香りが痩せるので、使う前に指で揉んで柔らかさと香りをチェック。",
     access:"◎ スーパーで手に入る：鞘入りチューブやエッセンスは製菓コーナーの定番です。",
-    sub:"バニラエッセンス／オイルで代用可（香りの厚みは鞘に軍配）。トンカビーン少量でも、似た甘い方向に寄せられます（クマリンを含むため、使う量はごく少量に留めてください。詳しくは No.47 トンカビーン参照）。",
+    sub:"バニラエッセンス／オイル、バニラペーストで代用可（香りの厚みは鞘に軍配）。トンカビーンは香りが似る別素材ですが、クマリンの安全上の懸念があるため家庭向けの代用品としては勧めません。詳しくは No.47 トンカビーン参照。",
     mania:"バニラの花は一日しか咲かず、本来はメキシコの特定のハチが受粉していました。いま世界のバニラの多くは人の手でひとつずつ受粉させて育てたもの。サフランと並ぶ「高価なスパイス」の筆頭で、価格が国際ニュースになることもあります。"
   },
   {
@@ -6227,14 +6228,14 @@ var SPICES = [
     trivia:"香りの主成分クマリンは、桜の葉やシナモンの仲間にも含まれる成分。あの「桜餅のような甘さ」の親戚です。",
     origin:"南米北部（ベネズエラ、ブラジルなど）", part:"種子", form:"ホール（乾燥）",
     component:"クマリンが香りの中心。バニラのバニリンとは別成分なのに似て感じるのは、甘い香りの「骨格」が近いためです。",
-    uses:["クレームブリュレやガナッシュに、すりおろして少量","ホットチョコレートやカスタードの香り付け","バニラの相方として、デザートの奥行き作りに"],
-    seedText:"ホールをおろし金で少量すりおろして使うのが基本。1品につき豆の1/4個分もあれば十分すぎるほど香ります。",
+    uses:["海外の製菓でガナッシュやカスタードなどに香り付けとして使われてきた例がある（食品利用の規制に注意）","香水や香料で、バニラや桜餅を思わせる甘い香りの素材として","伝統的な食品利用は、国・地域の規制やクマリンの含有量に注意して調べる"],
+    seedText:"ホールの種子は強い甘い香りを持ちますが、クマリンの含有量は個体差が大きく、豆の個数や小さじで安全な使用量を決めることはできません。食品に使う際は、各国・地域の規制を確認してください。",
     powderText:"粉にすると香りが逃げやすく、量の調整も難しくなるので、使う直前にすりおろすのが正解です。",
     pairing:"バニラ、チョコレート、カスタード、コーヒー、さくらんぼ",
     storage:"密閉・遮光で常温。香りが非常に強いので、他のスパイスとは別の容器・場所で。",
     access:"△ 製菓材料の専門店・ネット通販向き：スーパーではまず見かけません。",
     sub:"バニラ＋シナモンひとつまみで甘い方向に寄せられます。桜の葉の塩漬けの香りも、クマリン仲間として近い世界です。",
-    mania:"クマリンは摂りすぎに注意が必要な成分としても知られ、食品への使い方に基準がある国もあります。家庭では「すりおろして少量」が鉄則。香水の原料としても愛され、名香のベースノートに名を連ねる、スパイスと香料の境界にいる存在です。"
+    mania:"トンカビーンの香りの中心となるクマリンは、摂りすぎると肝臓への影響が問題になります。米国ではクマリンを含むトンカ豆を食品に添加することは禁止され、EUでも食品中のクマリン量に上限が設けられています。豆の大きさやクマリン含量には差があるため、「何分の1個なら安全」とは言い切れません。香水の原料としても愛される、スパイスと香料の境界にいる存在です。",
   },
   {
     id:"kaffirlime", no:"48", name:"こぶみかんの葉（バイマックルー）", en:"Kaffir Lime Leaf / Bai Makrut", latin:"Citrus hystrix（ミカン科）",
