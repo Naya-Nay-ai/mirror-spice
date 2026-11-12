@@ -865,6 +865,15 @@ footer .copyright .room{
 }
 footer .copyright .copy{font-size:12.5px; font-weight:700; color:var(--ink3); letter-spacing:.04em}
 
+.recipe-info-links{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;margin:6px 0 14px}
+.recipe-info-link{font:inherit;font-size:13px;font-weight:700;color:var(--ink2);background:var(--paper);border:1.5px solid var(--line2);border-radius:999px;padding:8px 13px;line-height:1.4;text-align:left;cursor:pointer}
+.recipe-info-link:hover,.recipe-info-link:focus-visible{border-color:var(--ink);outline-offset:3px}
+.recipe-help-dialog .modal{position:relative;padding:22px 22px 24px;max-height:min(85dvh,720px)}
+.recipe-help-dialog h3{font-family:"Kaisei Decol",serif;font-size:20px;margin:0 38px 14px 0;color:var(--ink)}
+.recipe-help-dialog p{font-size:14px;line-height:1.85;margin:0 0 12px;color:var(--ink2)}
+.recipe-help-dialog .m-close{position:absolute;right:12px;top:12px}
+@media(max-width:520px){.recipe-info-link{font-size:12px;padding:7px 10px}.recipe-help-dialog .modal{padding:20px 17px}}
+
 /* ---------- MODAL ---------- */
 dialog{
   border:none; padding:0; background:transparent; max-width:min(680px,94vw); width:100%;
@@ -2133,10 +2142,13 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
       <span class="no">No.05</span>
       <h2>図鑑のスパイスで作る、簡単レシピ</h2>
       <svg class="squig" width="180" height="10" viewBox="0 0 180 10" fill="none"><path d="M2 6 Q 14 1, 26 6 T 50 6 T 74 6 T 98 6 T 122 6 T 146 6 T 170 6" stroke="var(--green)" stroke-width="3.4" stroke-linecap="round"/></svg>
-      <p>図鑑に載っているスパイスとハーブで作れる52品。<br>一覧は写真と料理名だけのサムネイルになっていて、タップすると材料と作り方がポップアップで開きます。<br>まず「基本のスパイスカレー」で土台を覚えると、ほかのレシピもぐっと作りやすくなります。「ティムールのポークソテー」もそのひとつです。<br>主菜（ガンボ、ルンダン、ファラフェル＋タヒーナなど）、スープ、ごはんもの（ケイジャンジャンバラヤなど）、パン（ツレキ、アジョワンのパラタ）、軽食のフルーツチャートに、デザート9品（ライスプディング、パンナコッタ、チョコムース、パンダンシフォンケーキ、スパイスパウンドケーキ、クレームブリュレ、レモンポピーシードケーキ、型抜きジンジャークッキー、スパイスアイス）もあります。<br>ページの最後には、今日の料理にひとつまみ足すだけの「ちょい足しミニコーナー」もあります。<br>ポップアップの中のスパイス名のチップをタップすると、そのスパイスの詳細も開きます。</p>
+      <p>図鑑に載っているスパイスとハーブで作れる52品。<br>写真をタップすると、材料と作り方がポップアップで開きます。</p>
     </div>
 
-    <p class="shelf-note"><b>アレルギー・衛生について：</b>材料や市販の調味料・ペーストには、卵・乳・小麦・えび・落花生・くるみ・カシューナッツ・ごま・大豆・魚などが含まれることがあります。醤油・味噌・豆板醤・マヨネーズ・ナンプラーなども、製品によってアレルゲンが異なります。代用案は味や食感のための提案で、アレルギー対応を保証するものではありません。食物アレルギーがある場合はすべての材料・調味料の表示を確認し、調理器具や油からの混入にも注意してください。生肉・魚介を扱った後は手や器具を洗い、中心まで十分に加熱してください。作り置きは小分けして速やかに冷蔵・冷凍してください。</p>
+    <div class="recipe-info-links" role="group" aria-label="レシピの案内">
+      <button type="button" class="recipe-info-link" data-recipe-info="about">ⓘ このページについて</button>
+      <button type="button" class="recipe-info-link" data-recipe-info="safety">♧ アレルギー・衛生について</button>
+    </div>
 
     <div class="shelf-filterbar" role="group" aria-label="レシピの表示切り替え">
       <button class="pill on" type="button" id="bmFilterAll">ぜんぶ（52品）</button>
@@ -5337,6 +5349,24 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
   </div>
 </footer>
 
+<!-- ============ レシピページの案内 ============ -->
+<dialog class="recipe-help-dialog" id="recipeAboutDialog" aria-labelledby="recipeAboutTitle">
+  <div class="modal">
+    <form method="dialog"><button class="m-close" type="submit" aria-label="閉じる">✕</button></form>
+    <h3 id="recipeAboutTitle">このページについて</h3>
+    <p>まず「基本のスパイスカレー」で土台を覚えると、ほかのレシピも作りやすくなります。「ティムールのポークソテー」もそのひとつです。</p>
+    <p>主菜（ガンボ、ルンダン、ファラフェル＋タヒーナなど）、スープ、ごはんもの（ケイジャンジャンバラヤなど）、パン（ツレキ、アジョワンのパラタ）、軽食のフルーツチャート、デザート9品（ライスプディング、パンナコッタ、チョコムース、パンダンシフォンケーキ、スパイスパウンドケーキ、クレームブリュレ、レモンポピーシードケーキ、型抜きジンジャークッキー、スパイスアイス）があります。</p>
+    <p>ページの最後には「ちょい足しミニコーナー」もあります。レシピ詳細のスパイス名のチップをタップすると、そのスパイスの図鑑も開きます。</p>
+  </div>
+</dialog>
+<dialog class="recipe-help-dialog" id="recipeSafetyDialog" aria-labelledby="recipeSafetyTitle">
+  <div class="modal">
+    <form method="dialog"><button class="m-close" type="submit" aria-label="閉じる">✕</button></form>
+    <h3 id="recipeSafetyTitle">アレルギー・衛生について</h3>
+    <p>材料や市販の調味料・ペーストには、卵・乳・小麦・えび・落花生・くるみ・カシューナッツ・ごま・大豆・魚などが含まれることがあります。醤油・味噌・豆板醤・マヨネーズ・ナンプラーなども、製品によってアレルゲンが異なります。代用案は味や食感のための提案で、アレルギー対応を保証するものではありません。食物アレルギーがある場合はすべての材料・調味料の表示を確認し、調理器具や油からの混入にも注意してください。生肉・魚介を扱った後は手や器具を洗い、中心まで十分に加熱してください。作り置きは小分けして速やかに冷蔵・冷凍してください。</p>
+  </div>
+</dialog>
+
 <!-- ============ 詳細モーダル ============ -->
 <dialog id="modal" aria-label="スパイスの詳細">
   <div class="modal">
@@ -7901,6 +7931,21 @@ openRecipe = function(id){
       thumb.appendChild(tg);
     })(thumbs[i]);
   }
+})();
+
+(function(){
+  var ids={about:"recipeAboutDialog",safety:"recipeSafetyDialog"};
+  document.querySelectorAll("[data-recipe-info]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var id=ids[btn.getAttribute("data-recipe-info")];
+      var dialog=id && document.getElementById(id);
+      if(dialog && !dialog.open) dialog.showModal();
+    });
+  });
+  ["recipeAboutDialog","recipeSafetyDialog"].forEach(function(id){
+    var dialog=document.getElementById(id);
+    if(dialog) dialog.addEventListener("click",function(e){if(e.target===dialog) dialog.close();});
+  });
 })();
 
 render();
