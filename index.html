@@ -415,8 +415,8 @@ section{padding:44px 0 6px}
 .recipe p.intro{color:var(--ink2); font-size:14px; margin:0 0 6px}
 .recipe h4{font-family:"Kaisei Decol",serif; font-size:15px; margin:16px 0 6px; color:var(--red)}
 .ing{display:grid; grid-template-columns:1fr; gap:2px 18px; font-size:13.5px; color:var(--ink2); margin:0; padding:0; list-style:none}
-.ing li{border-bottom:1px dotted var(--line); padding:4px 0; display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:12px; align-items:baseline}
-.ing li b{color:var(--ink); font-weight:700; white-space:nowrap; text-align:right}
+.ing li{border-bottom:1px dotted var(--line); padding:4px 0; display:flow-root; overflow-wrap:anywhere; line-height:1.7}
+.ing li b{color:var(--ink); font-weight:700; float:right; max-width:100%; margin-left:12px; white-space:normal; overflow-wrap:anywhere; text-align:right}
 .steps{margin:0; padding-left:1.35em; font-size:14px; color:var(--ink2)}
 .steps li{margin:6px 0}
 .steps li::marker{color:var(--red); font-weight:900}
@@ -458,8 +458,7 @@ section{padding:44px 0 6px}
   .recipe.wide .ing{grid-template-columns:1fr}
   .branch-row{grid-template-columns:1fr}
 }
-/* 材料名が縦に細切れに改行されないよう、材料名には最低限の幅を確保する */
-.ing li > :first-child{min-width:0}
+/* 材料名・注記・分量を同じ文章の流れで配置し、長い分量は自然に折り返す。 */
 /* ---------- レシピ一覧：サムネイル＋料理名だけ（詳細はポップアップ） ---------- */
 .recipe-grid.thumbs{grid-template-columns:repeat(3,1fr); gap:16px}
 .recipe-thumb{
