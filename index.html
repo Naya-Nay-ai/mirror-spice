@@ -3606,6 +3606,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <button class="chip spice" data-open="cardamom" type="button">カルダモン</button>
             <button class="chip spice" data-open="nutmeg" type="button">ナツメグ</button>
             <button class="chip spice" data-open="ginger" type="button">ジンジャー</button>
+            <button class="chip spice" data-open="allspice" type="button">オールスパイス（代用）</button>
           </div>
           <p class="intro">バター・砂糖・卵・小麦粉が同量の「四同量」が基本のパウンドケーキに、シナモン、カルダモン、ナツメグ、ジンジャーを効かせた、スパイスが主役のシンプルな焼き菓子です。<br>手順は定番のパウンドケーキそのもの。混ぜ方と焼き時間さえ守れば失敗しにくい、確立した作り方です。<br>焼きたてより、ラップで包んで一晩置いた翌日のほうが、スパイスの香りが生地になじんで美味しくなります。</p>
           <h4>材料（18cmパウンド型1本分）</h4>
@@ -3631,7 +3632,7 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
             <li>170℃で40〜45分焼く。竹串を刺して生地がついてこなければ焼き上がり。焼き色がつきすぎる場合は途中でアルミホイルをかぶせる。</li>
             <li>型から外して網で粗熱を取り、温かいうちにラップで包む。そのまま一晩置くとしっとりして、スパイスの香りが生地全体に回ります。</li>
           </ol>
-          <p class="point"><b>使い分けのコツ：</b>スパイスの主役は入れ替え自由です。シナモンを増やせば王道の香りに、カルダモンを効かせると北欧の焼き菓子寄りに、クローブをひとつまみ足すとぐっと深い香りになります。<br>ナツメグはホールをすりおろしたほうが香りが段違いなので、この図鑑らしく「使う直前にすりおろす」がおすすめ。切り分けた一切れに生クリームを添えると、スパイスの香りがさらに引き立ちます。</p>
+          <p class="point"><b>使い分けのコツ：</b>4種を混ぜる代わりに、オールスパイスパウダー小さじ1½〜2でも作れます。香りの重なり感は減りますが、まろやかで温かい香りにすっきりまとまります。<br>スパイスの主役は入れ替え自由です。シナモンを増やせば王道の香りに、カルダモンを効かせると北欧の焼き菓子寄りに、クローブをひとつまみ足すとぐっと深い香りになります。<br>ナツメグはホールをすりおろしたほうが香りが段違いなので、この図鑑らしく「使う直前にすりおろす」がおすすめ。切り分けた一切れに生クリームを添えると、スパイスの香りがさらに引き立ちます。</p>
         </div>
       </article>
 
@@ -7687,7 +7688,7 @@ var RECIPES_META = [];
         if(sid && !seen[sid] && spiceById(sid)){ seen[sid] = 1; spiceIds.push(sid); }
       }
     }
-    RECIPES_META.push({ rid:rid, name:nameEl ? nameEl.textContent : rid, img:imgEl ? imgEl.getAttribute("src") : "", spiceIds:spiceIds });
+    RECIPES_META.push({ rid:rid, name:nameEl ? nameEl.textContent : rid, img:imgEl ? imgEl.getAttribute("src") : "", spiceIds:spiceIds, spiceOptions: rid === "recipe-poundcake" ? [["cinnamon","cardamom","ginger","nutmeg"],["allspice"]] : null });
   }
 })();
 
@@ -7742,6 +7743,11 @@ function renderShelfPage(){
         var meta = RECIPES_META[m];
         if(!meta.spiceIds.length) continue;
         var missing = meta.spiceIds.filter(function(sid){ return !shelfSet[sid]; });
+        if(meta.spiceOptions){
+          var options = meta.spiceOptions.map(function(group){ return group.filter(function(sid){ return !shelfSet[sid]; }); });
+          options.sort(function(a,b){ return a.length - b.length; });
+          missing = options[0];
+        }
         if(missing.length === 0) ready.push({meta:meta, missing:missing});
         else if(missing.length <= 2) near.push({meta:meta, missing:missing});
       }
