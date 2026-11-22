@@ -1067,6 +1067,14 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
   .sr-main img{width:62px; height:46px}
 }
 
+
+/* ===== 2026-11-22 recipe search: compatible with bookmarks ===== */
+.recipe-searchbar{display:flex;gap:8px;align-items:center;margin:12px 0 8px;max-width:760px}
+.recipe-searchbar input{flex:1;min-width:0;border:1px solid var(--line2);background:var(--paper);color:var(--ink);border-radius:10px;padding:12px 14px;font:inherit}
+.recipe-searchbar input:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.recipe-searchbar button{border:1px solid var(--line2);border-radius:9px;background:var(--paper2);color:var(--ink);padding:10px 12px;cursor:pointer;font:inherit}
+.recipe-search-count{margin:2px 0 12px;color:var(--ink2);font-size:.9rem}
+.recipe-search-empty{padding:14px 2px;color:var(--ink2)}
 </style>
 </head>
 <body>
@@ -2152,6 +2160,14 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
       <button type="button" class="recipe-info-link" data-recipe-info="safety">♧ アレルギー・衛生について</button>
     </div>
     <p class="recipe-safety-short"><strong>アレルギーに注意：</strong>食材・調味料の表示と、各レシピの材料をご確認ください。詳しくは上の「アレルギー・衛生について」から。</p>
+
+    <div class="recipe-searchbar" role="search" aria-label="レシピを探す">
+      <input id="recipeSearch" type="search" autocomplete="off" spellcheck="false"
+        placeholder="料理名・スパイス・材料で探す" aria-label="レシピ検索" />
+      <button id="recipeSearchClear" type="button" aria-label="検索をクリア">クリア</button>
+    </div>
+    <p class="recipe-search-count" id="recipeSearchCount" role="status" aria-live="polite"></p>
+    <p class="recipe-search-empty" id="recipeSearchEmpty" hidden>条件に合うレシピがありません。</p>
 
     <div class="shelf-filterbar" role="group" aria-label="レシピの表示切り替え">
       <button class="pill on" type="button" id="bmFilterAll">ぜんぶ（52品）</button>
@@ -7828,23 +7844,73 @@ function refreshShelfUI(){
   renderShelfPage();
 }
 
-/* ---------- レシピ一覧：しおりだけ表示 ---------- */
+/* ---------- レシピ一覧：検索×しおり絞り込み ---------- */
+var recipeSearchInput = document.getElementById("recipeSearch");
+var recipeSearchClear = document.getElementById("recipeSearchClear");
+var recipeSearchCache = null;
+function normalizeRecipeSearch(v){
+  return (v || "").normalize("NFKC").toLowerCase()
+    .replace(/[\u30a1-\u30f6]/g, function(c){ return String.fromCharCode(c.charCodeAt(0)-96); })
+    .replace(/\s+/g, " ").trim();
+}
+function recipeSearchData(){
+  if(recipeSearchCache) return recipeSearchCache;
+  recipeSearchCache = {};
+  var thumbs = document.querySelectorAll(".recipe-thumb");
+  for(var i=0;i<thumbs.length;i++){
+    var rid = thumbs[i].getAttribute("data-recipe");
+    var article = rid ? document.getElementById(rid) : null;
+    var terms = [thumbs[i].textContent || ""];
+    if(article){
+      terms.push(article.textContent || "");
+      var chips = article.querySelectorAll("[data-open]");
+      for(var j=0;j<chips.length;j++){
+        var sid = chips[j].getAttribute("data-open");
+        var sp = SPICES.find(function(item){return item.id === sid;});
+        if(sp) terms.push([sp.name,sp.en,sp.alias || "",sp.latin || ""].join(" "));
+      }
+    }
+    /* English dish-name aliases used by the new Indonesian recipes. */
+    var recipeAliases = {
+      "recipe-opor":"opor ayam opor ayam chicken coconut curry",
+      "recipe-soto":"soto ayam golden chicken soup",
+      "recipe-jerkchicken":"jerk chicken jamaican jerk"
+    };
+    if(recipeAliases[rid]) terms.push(recipeAliases[rid]);
+    recipeSearchCache[rid] = normalizeRecipeSearch(terms.join(" "));
+  }
+  return recipeSearchCache;
+}
 function applyRecipeFilter(){
   var thumbs = document.querySelectorAll(".recipe-thumb");
+  var query = normalizeRecipeSearch(recipeSearchInput ? recipeSearchInput.value : "");
+  var words = query ? query.split(/\s+/).filter(Boolean) : [];
+  var entries = recipeSearchData();
   var bmCount = 0, visible = 0;
   for(var i=0;i<thumbs.length;i++){
     var rid = thumbs[i].getAttribute("data-recipe");
     var has = !!bmSet[rid];
     if(has) bmCount++;
-    var show = !bmOnly || has;
+    var haystack = entries[rid] || "";
+    var matches = words.every(function(word){return haystack.indexOf(word)!==-1;});
+    var show = (!bmOnly || has) && matches;
     thumbs[i].style.display = show ? "" : "none";
     if(show) visible++;
   }
   var cnt = document.getElementById("bmFilterCount");
   if(cnt) cnt.textContent = "しおり " + bmCount + " 品";
   var note = document.getElementById("bmEmptyNote");
-  if(note) note.hidden = !(bmOnly && visible === 0);
+  if(note) note.hidden = !(bmOnly && bmCount === 0);
+  var searchCount = document.getElementById("recipeSearchCount");
+  if(searchCount) searchCount.textContent = (words.length || bmOnly) ? "該当 " + visible + " 品" : "";
+  var searchEmpty = document.getElementById("recipeSearchEmpty");
+  if(searchEmpty) searchEmpty.hidden = !(visible === 0 && !(bmOnly && bmCount === 0));
 }
+if(recipeSearchInput) recipeSearchInput.addEventListener("input", applyRecipeFilter);
+if(recipeSearchClear) recipeSearchClear.addEventListener("click", function(){
+  if(recipeSearchInput){ recipeSearchInput.value = ""; recipeSearchInput.focus(); }
+  applyRecipeFilter();
+});
 var bmAllBtn = document.getElementById("bmFilterAll");
 var bmOnlyBtn = document.getElementById("bmFilterOnly");
 if(bmAllBtn && bmOnlyBtn){
