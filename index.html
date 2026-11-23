@@ -4,6 +4,14 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="color-scheme" content="light dark" />
+<script>
+/* 図鑑の写真OFF設定を、描画前に<html>へ復元する（再訪問時に写真が一瞬見えないように） */
+try{
+  if(localStorage.getItem("mirrorSpiceImagePrefV1")==="off"){
+    document.documentElement.setAttribute("data-spice-photos","off");
+  }
+}catch(e){}
+</script>
 <link rel="icon" href="assets/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
@@ -1075,6 +1083,36 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
 .recipe-searchbar button{border:1px solid var(--line2);border-radius:9px;background:var(--paper2);color:var(--ink);padding:10px 12px;cursor:pointer;font:inherit}
 .recipe-search-count{margin:2px 0 12px;color:var(--ink2);font-size:.9rem}
 .recipe-search-empty{padding:14px 2px;color:var(--ink2)}
+
+/* ---------- 図鑑の写真 表示ON/OFF ---------- */
+.photo-pref-bar{
+  display:flex; align-items:center; gap:14px; justify-content:space-between; flex-wrap:wrap;
+  background:var(--paper); border:1.5px solid var(--line2); border-radius:16px;
+  padding:12px 16px; box-shadow:var(--card-shadow);
+}
+#gate .photo-pref-bar{margin:2px 0 16px}
+footer .photo-pref-bar{margin:0 0 18px; box-shadow:none}
+.photo-pref-note{margin:0; font-size:12.5px; line-height:1.7; color:var(--ink2); flex:1 1 260px}
+.photo-pref-btn{
+  flex:none; border:1.5px solid var(--ink); background:var(--paper); color:var(--ink);
+  border-radius:999px; padding:8px 18px; font-size:13.5px; font-weight:900;
+  box-shadow:2.5px 2.5px 0 var(--ink); transition:transform .15s ease, box-shadow .15s ease;
+}
+.photo-pref-btn:hover{transform:translate(-1px,-1px); box-shadow:3.5px 3.5px 0 var(--ink)}
+.photo-pref-btn:active{transform:translate(1px,1px); box-shadow:1px 1px 0 var(--ink)}
+.photo-pref-btn[aria-pressed="false"]{background:var(--ink); color:var(--bg)}
+/* OFF時：図鑑の写真と、特集などにあるスパイス素材そのものの写真だけを隠し、場所を詰める。
+   料理の完成写真・レシピのサムネイル・イラスト・図解（SVG）はそのまま表示する */
+html[data-spice-photos="off"] .gate-banner{display:none}
+html[data-spice-photos="off"] .card .photo{aspect-ratio:auto; height:52px}
+html[data-spice-photos="off"] .card .photo img,
+html[data-spice-photos="off"] .card .name-tag{display:none}
+html[data-spice-photos="off"] .modal .m-photo{aspect-ratio:auto; height:64px}
+html[data-spice-photos="off"] .modal .m-photo img{display:none}
+html[data-spice-photos="off"] .winter-star .ws-photo{display:none}
+html[data-spice-photos="off"] #winter .fig-banner img{display:none}
+html[data-spice-photos="off"] .quiz-result .qr-photo{display:none}
+html[data-spice-photos="off"] .blend-photo{display:none}
 </style>
 </head>
 <body>
@@ -1097,6 +1135,11 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
 
   <!-- ============ 入口マップ ============ -->
   <section id="gate" class="page-section active">
+
+    <div class="photo-pref-bar">
+      <p class="photo-pref-note">種子や果実の断面など、小さな粒や模様が密集した写真が苦手な方のために、図鑑の写真を非表示にできます。</p>
+      <button class="photo-pref-btn" type="button" data-photo-pref aria-pressed="true">図鑑の写真：ON</button>
+    </div>
     <figure class="gate-banner">
       <img src="assets/banner-spices.webp" width="2048" height="1152" alt="MIRROR SPICE &amp; HERBのタイトルと、木のテーブルに並んだ色とりどりのスパイス・ハーブの器" />
     </figure>
@@ -5356,6 +5399,11 @@ dialog::backdrop{background:rgba(43,24,14,.55); backdrop-filter:blur(3px)}
 
 <footer>
   <div class="wrap">
+
+    <div class="photo-pref-bar">
+      <p class="photo-pref-note">種子や果実の断面など、小さな粒や模様が密集した写真が苦手な方のために、図鑑の写真を非表示にできます。</p>
+      <button class="photo-pref-btn" type="button" data-photo-pref aria-pressed="true">図鑑の写真：ON</button>
+    </div>
     <span class="en">Thank you for opening this little library.</span>
     スパイス図鑑（全95種：No.01〜78＋🌿ハーブ枠H1〜H17・ブレンド13種・レシピ52品＋ちょい足し11）<br>
     香りの感じ方には個人差があります。分量は目安として、少しずつ好みに寄せてください。
@@ -8021,6 +8069,31 @@ openRecipe = function(id){
   });
 })();
 
+
+/* ---------- 図鑑の写真 表示ON/OFF（設定はこの端末に保存） ---------- */
+(function(){
+  var PHOTO_PREF_KEY = "mirrorSpiceImagePrefV1";
+  function photosOff(){ return document.documentElement.getAttribute("data-spice-photos") === "off"; }
+  function syncPhotoPrefBtns(){
+    var off = photosOff();
+    var btns = document.querySelectorAll("[data-photo-pref]");
+    for(var i=0;i<btns.length;i++){
+      btns[i].textContent = off ? "図鑑の写真：OFF" : "図鑑の写真：ON";
+      btns[i].setAttribute("aria-pressed", off ? "false" : "true");
+      btns[i].setAttribute("aria-label", off ? "図鑑の写真は非表示中です。押すと表示します" : "図鑑の写真は表示中です。押すと非表示にします");
+    }
+  }
+  function togglePhotoPref(){
+    var off = !photosOff();
+    if(off){ document.documentElement.setAttribute("data-spice-photos", "off"); }
+    else{ document.documentElement.removeAttribute("data-spice-photos"); }
+    try{ localStorage.setItem(PHOTO_PREF_KEY, off ? "off" : "on"); }catch(e){}
+    syncPhotoPrefBtns();
+  }
+  var prefBtns = document.querySelectorAll("[data-photo-pref]");
+  for(var i=0;i<prefBtns.length;i++){ prefBtns[i].addEventListener("click", togglePhotoPref); }
+  syncPhotoPrefBtns();
+})();
 render();
 refreshShelfUI();
 
