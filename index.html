@@ -618,8 +618,8 @@ section{padding:44px 0 6px}
   transition:transform .16s ease, border-color .16s ease;
 }
 .winter-star:hover{transform:translateY(-3px); border-color:var(--ink)}
-.winter-star .ws-photo{display:block; aspect-ratio:16/9.5; overflow:hidden; background:var(--paper2)}
-.winter-star .ws-photo img{width:100%; height:100%; object-fit:cover}
+.winter-star .ws-photo{display:block; position:relative; aspect-ratio:16/9.5; overflow:hidden; background:var(--paper2)}
+.winter-star .ws-photo img{position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover; object-position:center}
 .winter-star .ws-body{display:block; padding:12px 14px 14px}
 .winter-star .ws-no{font-family:"Caveat",cursive; font-size:15px; color:var(--pink); line-height:1}
 .winter-star h4{font-family:"Kaisei Decol",serif; font-size:17px; margin:3px 0 0; line-height:1.4}
